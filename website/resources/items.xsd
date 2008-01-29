@@ -1,0 +1,504 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:complexType name="atomictypeType">
+		<xs:annotation>
+			<xs:documentation>A AtomicType represents a 'simple java object'. (The name 'atomic' just means 'non-composed' objects.)</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="class" type="classType" use="required" />
+		<xs:attribute name="autocreate" type="xs:boolean" use="required">
+			<xs:annotation>
+				<xs:documentation>if 'true', the item will be created during initialization.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="generate" type="xs:boolean" use="required">
+			<xs:annotation>
+				<xs:documentation>if 'true', the sourcecode for this item will be created.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="extends" type="classType">
+			<xs:annotation>
+				<xs:documentation>Defines the class, which will be extended</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="atomictypesType">
+		<xs:sequence>
+			<xs:element name="atomictype" type="atomictypeType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>A AtomicType represents a 'simple java object'. (The name 'atomic' just means 'non-composed' objects.)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="collectiontypeType">
+		<xs:annotation>
+			<xs:documentation>A CollectionType defines a collection of typed elements.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="code" type="codeType" use="required">
+			<xs:annotation>
+				<xs:documentation>The typecode.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="elementtype" type="codeType" use="required" />
+		<xs:attribute name="autocreate" type="xs:boolean" use="required">
+			<xs:annotation>
+				<xs:documentation>if 'true', the item will be created during initialization.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="generate" type="xs:boolean" use="required">
+			<xs:annotation>
+				<xs:documentation>if 'true', the sourcecode for this item will be created.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="type" use="optional">
+			<xs:simpleType>
+				<xs:restriction base="xs:NMTOKEN">
+					<xs:enumeration value="set" />
+					<xs:enumeration value="list" />
+					<xs:enumeration value="collection" />
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="collectiontypesType">
+		<xs:sequence>
+			<xs:element name="collectiontype" type="collectiontypeType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>A CollectionType defines a collection of typed elements.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="deploymentType">
+		<xs:annotation>
+			<xs:documentation>A deployment type defines how a (generic) item or relation has to be mapped onto database.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="table" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>The mapped database table. Must be globally unique.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="typecode" type="xs:int" use="required">
+			<xs:annotation>
+				<xs:documentation>The mapped item type code. Must be globally unique</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="propertytable" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>The mapped dump property database table to be used for this item.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+
+	<xs:complexType name="relationType">
+		<xs:annotation>
+			<xs:documentation>A RelationType defines a n-m-relation between types.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="deployment" type="deploymentType" minOccurs="0" maxOccurs="1" />
+			<xs:element name="sourceElement" type="relationElementType" minOccurs="1" maxOccurs="1" />
+			<xs:element name="targetElement" type="relationElementType" minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+		<xs:attribute name="code" type="codeType" use="required">
+			<xs:annotation>
+				<xs:documentation>The typecode.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="localized" type="xs:boolean" use="required" />
+		<xs:attribute name="deployment" type="deploymentRefType" use="optional">
+			<xs:annotation>
+				<xs:documentation>All instances of this type will be stored in a separated database table. The value of this attribute represents a reference to the specified deployment in the corresponding 'advanced-deployment.xml'.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="autocreate" type="xs:boolean" use="required">
+			<xs:annotation>
+				<xs:documentation>if 'true', the item will be created during initialization.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="generate" type="xs:boolean" use="required">
+			<xs:annotation>
+				<xs:documentation>if 'true', the sourcecode for this item will be created.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="relationsType">
+		<xs:sequence>
+			<xs:element name="relation" type="relationType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>A RelationType defines a n-m-relation between types.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="relationElementType">
+		<xs:sequence>
+			<xs:element name="description" type="xs:string" minOccurs="0" maxOccurs="1" />
+			<xs:element name="modifiers" type="modifiersType" minOccurs="0" />
+			<xs:element name="custom-properties" type="customPropertiesType" minOccurs="0" maxOccurs="1" />
+		</xs:sequence>
+		<xs:attribute name="type" type="codeType" use="required" />
+		<xs:attribute name="qualifier" type="xs:string" use="required" />
+		<xs:attribute name="metatype" type="xs:string" use="optional" />
+		<xs:attribute name="cardinality" use="optional">
+			<xs:simpleType>
+				<xs:restriction base="xs:NMTOKEN">
+					<xs:enumeration value="one" />
+					<xs:enumeration value="many" />
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="collectiontype" use="optional">
+			<xs:simpleType>
+				<xs:restriction base="xs:NMTOKEN">
+					<xs:enumeration value="set" />
+					<xs:enumeration value="list" />
+					<xs:enumeration value="collection" />
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="ordered" type="xs:boolean" use="optional"/>
+	</xs:complexType>
+
+	<xs:complexType name="enumtypeType">
+		<xs:annotation>
+			<xs:documentation>A EnumerationType defines fixed value types. (The typesystem provides item enumeration only)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="value" type="valueType" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+		<xs:attribute name="code" type="codeType" use="required">
+			<xs:annotation>
+				<xs:documentation>The typecode.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="autocreate" type="xs:boolean" use="required">
+			<xs:annotation>
+				<xs:documentation>if 'true', the item will be created during initialization.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="generate" type="xs:boolean" use="required">
+			<xs:annotation>
+				<xs:documentation>if 'true', the item sourcecode for this item will be created.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="jaloclass" type="classType" use="optional">
+			<xs:annotation>
+				<xs:documentation>Specifies the name of the associated jalo class</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="enumtypesType">
+		<xs:sequence>
+			<xs:element name="enumtype" type="enumtypeType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>A EnumerationType defines fixed value types. (The typesystem provides item enumeration only)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="indexType">
+		<xs:sequence>
+			<xs:element name="key" type="indexKeyType" minOccurs="1" maxOccurs="unbounded" />
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" use="required" />
+		<xs:attribute name="unique" type="xs:boolean">
+			<xs:annotation>
+				<xs:documentation>If 'true', the value of this attribute has to be unique within all instances of this itemtype</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="indexKeyType">
+		<xs:attribute name="attribute" type="xs:string" use="required" />
+		<xs:attribute name="lower" type="xs:boolean" />
+	</xs:complexType>
+	<xs:complexType name="attributeType">
+		<xs:all>
+			<xs:element name="defaultvalue" type="defaultValueType" minOccurs="0" maxOccurs="1" />
+			<xs:element name="description" type="xs:string" minOccurs="0" maxOccurs="1" />
+			<xs:element name="persistence" type="persistenceType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Defines in which way the value of the attribute will be stored. Supported modes are: 'cmp','jalo' and 'property'</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="modifiers" type="modifiersType" minOccurs="0" maxOccurs="1" />
+			<xs:element name="custom-properties" type="customPropertiesType" minOccurs="0" maxOccurs="1" />
+		</xs:all>
+
+		<xs:attribute name="redeclare" type="xs:boolean">
+			<xs:annotation>
+				<xs:documentation>By using 'redeclare', you are able to reuse the specified attribute of the inherited type.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="qualifier" type="xs:string" use="required" />
+		<xs:attribute name="type" type="xs:string" use="required" />
+		<xs:attribute name="metatype" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>The (meta)type which describes the assigned type.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="autocreate" type="xs:boolean">
+			<xs:annotation>
+				<xs:documentation>if 'true', the item will be created during initialization.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="generate" type="xs:boolean">
+			<xs:annotation>
+				<xs:documentation>if 'true', the sourcecode for this item will be created.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="isSelectionOf" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>A attribute having a 'selectionOf' reference to another attribute of the specified type is stored as any other attribute except that only values of the referenced attribute are allowed to be set.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="customPropertiesType">
+		<xs:sequence>
+			<xs:element name="property" type="customPropertyType" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="customPropertyType">
+		<xs:sequence>
+			<xs:element name="value" type="defaultValueType" minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" use="required" />
+	</xs:complexType>
+	<xs:complexType name="attributesType">
+		<xs:sequence>
+			<xs:element name="attribute" type="attributeType" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="indexesType">
+		<xs:sequence>
+			<xs:element name="index" type="indexType" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="itemtypeType" mixed="true">
+		<xs:sequence>
+			<xs:element name="deployment" type="deploymentType" minOccurs="0" maxOccurs="1" />
+			<xs:element name="custom-properties" type="customPropertiesType" minOccurs="0" maxOccurs="1" />
+			<xs:element name="attributes" type="attributesType" minOccurs="0" maxOccurs="1" />
+			<xs:element name="indexes" type="indexesType" minOccurs="0" maxOccurs="1" />
+		</xs:sequence>
+		<xs:attribute name="code" type="codeType" use="required">
+			<xs:annotation>
+				<xs:documentation>The typecode.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="extends" type="classType" use="optional">
+			<xs:annotation>
+				<xs:documentation>Defines the class, which will be extended</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="jaloclass" type="classType" use="optional">
+			<xs:annotation>
+				<xs:documentation>Specifies the name of the associated jalo class</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="deployment" type="deploymentRefType" use="optional">
+			<xs:annotation>
+				<xs:documentation>All instances of this type will be stored in a separated database table. The value of this attribute represents a reference to the specified deployment in the corresponding 'advanced-deployment.xml'.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="singleton" type="xs:boolean" use="optional">
+			<xs:annotation>
+				<xs:documentation>Just a 'hmc-marker'. If 'true', the hmc allows only one instance of this type.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="jaloonly" type="xs:boolean" use="optional">
+			<xs:annotation>
+				<xs:documentation>DEPRECATED. Use 'implements JaloOnlyItem' in your bean. If 'true', the item will only exists in the jalo layer and isn't backed by an entity bean.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="autocreate" type="xs:boolean" use="required">
+			<xs:annotation>
+				<xs:documentation>If 'true', the item will be created during initialization.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="generate" type="xs:boolean" use="required">
+			<xs:annotation>
+				<xs:documentation>If 'true', the sourcecode for this item will be created.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="abstract" type="xs:boolean" use="optional">
+			<xs:annotation>
+				<xs:documentation>DEPRECATED. Mark your jalo class as abstract. Just a 'hmc-marker' If 'true', the hmc won't allow creating an instance of this type.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="metatype" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>The (meta)type which describes the assigned type.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="itemtypesType">
+		<xs:sequence>
+			<xs:element name="itemtype" type="itemtypeType" minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="typegroup" type="typeGroupType" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="typeGroupType">
+		<xs:sequence>
+			<xs:element name="itemtype" type="itemtypeType" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" use="optional" />
+	</xs:complexType>
+	<xs:element name="items">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="requires-extension" type="requires-extensionType" minOccurs="0" maxOccurs="unbounded" />
+				<xs:element name="atomictypes" type="atomictypesType" minOccurs="0" />
+				<xs:element name="collectiontypes" type="collectiontypesType" minOccurs="0" />
+				<xs:element name="enumtypes" type="enumtypesType" minOccurs="0" />
+				<xs:element name="maptypes" type="maptypesType" minOccurs="0" />
+				<xs:element name="relations" type="relationsType" minOccurs="0" />
+				<xs:element name="itemtypes" type="itemtypesType" minOccurs="0" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="requires-extensionType">
+		<xs:attribute name="types" type="xs:string" use="required" />
+	</xs:complexType>
+	<xs:complexType name="maptypeType">
+		<xs:annotation>
+			<xs:documentation>Like the java collection framework, a type, which defines map objects.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="code" type="codeType" use="required">
+			<xs:annotation>
+				<xs:documentation>The typecode.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="argumenttype" type="classType" use="required" />
+		<xs:attribute name="returntype" type="classType" use="required" />
+		<xs:attribute name="autocreate" type="xs:boolean" use="required">
+			<xs:annotation>
+				<xs:documentation>If 'true', the item will be created during initialization.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="generate" type="xs:boolean" use="required">
+			<xs:annotation>
+				<xs:documentation>If 'true', the sourcecode for this item will be created.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="redeclare" type="xs:boolean" />
+	</xs:complexType>
+	<xs:complexType name="maptypesType">
+		<xs:sequence>
+			<xs:element name="maptype" type="maptypeType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Like the java collection framework, a type, which defines map objects.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="modifiersType">
+		<xs:attribute name="read" type="xs:boolean">
+			<xs:annotation>
+				<xs:documentation>Defines if this attribute is readable (public getter will be generated). Default is 'true'.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="write" type="xs:boolean">
+			<xs:annotation>
+				<xs:documentation>Defines if this attribute is changeable (public writer will be generated). Default is 'true'.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="search" type="xs:boolean">
+			<xs:annotation>
+				<xs:documentation>Defines if this attribute is searchable. default is 'true'.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="optional" type="xs:boolean">
+			<xs:annotation>
+				<xs:documentation>Defines if this attribute represents a mandatory field. Default is 'true'.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="private" type="xs:boolean">
+			<xs:annotation>
+				<xs:documentation>If 'true', the attribute will only be writable during the item creation. (Caution: only usefull in combination with the setting: write=false).
+			</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="initial" type="xs:boolean">
+			<xs:annotation>
+				<xs:documentation>Defines if this attribute has to be defined at creation time. Default is 'false'.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="removable" type="xs:boolean">
+			<xs:annotation>
+				<xs:documentation>Defines if this attribute is removable.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="partof" type="xs:boolean">
+			<xs:annotation>
+				<xs:documentation>Defines if the assigned attribute value only belongs to the current instance of this type</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="unique" type="xs:boolean">
+			<xs:annotation>
+				<xs:documentation>If 'true', the value of this attribute has to be unique within all instances of this itemtype</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="dontOptimize" type="xs:boolean">
+			<xs:annotation>
+				<xs:documentation>If 'true' the attribute value will be stored in the 'global' property table, otherwise a separate column (inside the table of the associated type)will be created for storing its values</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="encrypted" type="xs:boolean">
+			<xs:annotation>
+				<xs:documentation>If 'true' the attribute value will be stored in an encrypted way</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="persistenceType">
+		<xs:annotation>
+			<xs:documentation>Defines in which way the value of the attribute will be stored. Supported modes are: 'cmp','jalo' and 'property'</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="columntype" type="columntypeType" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+		<xs:attribute name="type" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:NMTOKEN">
+					<xs:enumeration value="property" />
+					<xs:enumeration value="jalo" />
+					<xs:enumeration value="cmp" />
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="qualifier" type="xs:string" use="optional" />
+	</xs:complexType>
+
+	<xs:complexType name="columntypeType">
+		<xs:sequence>
+			<xs:element name="value" minOccurs="1" maxOccurs="1">
+				<xs:simpleType>
+					<xs:restriction base="xs:string" />
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="database" type="xs:string" use="optional" />
+	</xs:complexType>
+
+	<xs:simpleType name="defaultValueType">
+		<xs:restriction base="xs:string" />
+	</xs:simpleType>
+
+	<xs:complexType name="valueType">
+		<xs:attribute name="code" type="codeType" use="required">
+			<xs:annotation>
+				<xs:documentation>The typecode.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:simpleType name="codeType">
+		<xs:restriction base="xs:normalizedString" />
+	</xs:simpleType>
+	<xs:simpleType name="deploymentRefType">
+		<xs:restriction base="xs:normalizedString" />
+	</xs:simpleType>
+	<xs:simpleType name="classType">
+		<xs:restriction base="xs:normalizedString" />
+	</xs:simpleType>
+</xs:schema>

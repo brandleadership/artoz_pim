@@ -1,0 +1,7 @@
+
+#add all your unittest classes into this directory.
+#after 'ant unittest' you can go to http://localhost:9001/test
+#and execute your test
+
+ch.screenconcept.artoz.website.jalo.WebsiteTest
+
