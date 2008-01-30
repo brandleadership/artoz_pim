@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE facelet-taglib PUBLIC
+  "-//Sun Microsystems, Inc.//DTD Facelet Taglib 1.0//EN"
+  "http://java.sun.com/dtd/facelet-taglib_1_0.dtd">
+
+<facelet-taglib>
+	<namespace>http://hybris.com/jsf</namespace>
+	<function>
+		<function-name>path</function-name>
+		<function-class>ystorefoundationpackage.faces.util.ELFunctions</function-class>
+		<function-signature>
+	  		java.lang.String getApplicationPath()
+	  	</function-signature>
+	</function>
+	
+	<function>
+		<function-name>setProperty</function-name>
+		<function-class>ystorefoundationpackage.faces.util.ELFunctions</function-class>
+		<function-signature>
+			void setProperty(java.lang.Object, java.lang.Object, java.lang.Object)
+		</function-signature>
+	</function>
+	
+	<function>
+		<function-name>getAttributeName</function-name>
+		<function-class>ystorefoundationpackage.faces.util.ELFunctions</function-class>
+		<function-signature>
+			java.lang.CharSequence getAttributeName(de.hybris.platform.jalo.Item, java.lang.String)
+		</function-signature>
+	</function>
+	
+
+	<!-- DataTable; support for generic tables-->
+	<function>
+		<function-name>dataTable</function-name>
+		<function-class>ystorefoundationpackage.faces.util.ELFunctions</function-class>
+		<function-signature>
+			hybris.faces.model.datatable.DataTableAxisModel getDataTableModel(java.util.Collection, int, int, boolean)
+		</function-signature>
+	</function>
+	
+	<!-- Prints an Address-->
+	<tag>
+		<tag-name>addr</tag-name>
+		<source>../../tags/addressTag.xhtml</source>
+	</tag>
+	
+	<!-- Displays a SSL checkbox; must be nested inside a form -->
+	<tag>
+		<tag-name>sslCheckbox</tag-name>
+		<source>../../tags/sslCheckboxTag.xhtml</source>
+	</tag>
+	
+	<!-- Visualize ProductReferences -->
+	<tag>
+		<tag-name>referencedProducts</tag-name>
+		<source>../../tags/referencedProductsTag.xhtml</source>
+	</tag>
+
+	<!-- Show attributes-based products selector -->
+	<tag>
+		<tag-name>classAttributesSelector</tag-name>
+		<source>../../tags/classAttributesSelectorTag.xhtml</source>
+	</tag>
+
+	<tag>
+		<tag-name>productFeatures</tag-name>
+		<source>../../tags/classificationAttributesTag.xhtml</source>
+	</tag>
+	
+	<!-- Displays a Price -->
+	<tag>
+		<tag-name>price</tag-name>
+		<source>../../tags/priceTag.xhtml</source>
+	</tag>
+
+	<!-- Visualize a DataTable -->
+	<tag>
+		<tag-name>dataTable</tag-name>
+		<source>../../tags/dataTableTag.xhtml</source>
+	</tag>
+
+	<tag>
+		<tag-name>attributeSelectionFilter</tag-name>
+		<source>../../tags/productAttributesFilterTag.xhtml</source>
+	</tag>
+
+	
+	<!-- Extends outputLink to handle an item as value -->
+	<tag>
+		<tag-name>outputLink</tag-name>
+		<component>
+			<component-type>javax.faces.hybris.HtmlOutputLink</component-type>
+		</component>
+	</tag>
+
+	<tag>
+		<tag-name>graphicImage</tag-name>
+		<component>
+			<component-type>javax.faces.hybris.HtmlGraphicImage</component-type>
+		</component>
+	</tag>
+
+
+</facelet-taglib>	
