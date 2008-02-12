@@ -7,6 +7,12 @@ http://tuckey.org/urlrewrite/
 -->
 <urlrewrite>
 
+<!-- URLSHORTCUTS START_ARTOZ --><!-- URLSHORTCUTS END_ARTOZ -->
+
+
+<!-- RULES START_ARTOZ --><!-- RULES END_ARTOZ -->
+
+
 	<!-- Inbound Strategy 3
 	     
 	     Direct requests to xhtml files are mapped to the startpage.

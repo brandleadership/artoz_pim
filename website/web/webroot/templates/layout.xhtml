@@ -6,19 +6,42 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:t="http://myfaces.apache.org/tomahawk"
 	xmlns:c="http://java.sun.com/jstl/core"
-	xmlns:cms="http://hybris.com/cms" xmlns:hy="http://hybris.com/jsf">
+	xmlns:cms="http://hybris.com/cms">
 
 	<head profile="http://www.w3.org/2000/08/w3c-synd/#">
 		<title><ui:insert name="title">Artoz Papier AG, CH-Lenzburg</ui:insert></title>
 		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
 		<meta http-equiv="Content-Style-Type" content="text/css" />
+		<link rel="stylesheet" href="/css/template.css" />
 	</head>
 
 	<body>
+		
+		<div id="body">
+		
+			<div id="head">
+		
+			</div>
 
-		<div id="head">
-			<ui:insert name="content" />
-		</div>
+			<div id="top_nav">
+				<!-- meta menu from CMS (pages)-->
+				<c:if test="#{!empty cmsJSFBean.mainNav}">
+<!-- 				<cms:editable item="#{cmsJSFBean.mainNav}" template="#{cmsJSFBean.mainNav.template.code}" id="navItem_#{cmsJSFBean.mainNav.PK}"> -->
+						<ui:include src="#{cmsJSFBean.mainNav.template.code}">
+							<ui:param name="mainNav" value="#{cmsJSFBean.mainNav}"/>
+						</ui:include>
+<!-- 				</cms:editable>  -->
+				</c:if>
+			</div>
+		
+			<div id="content">
+				<ui:insert name="content" />
+			</div>
 	
+			<div id="2nd_nav">
+		
+			</div>
+		</div>
+		
 	</body>
 </html>

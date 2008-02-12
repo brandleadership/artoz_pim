@@ -15,7 +15,6 @@
                 /WEB-INF/config/jstl-fn.taglib.xml;
                 /WEB-INF/config/tomahawk.taglib.xml;
                 /WEB-INF/config/cms.xml;
-                /WEB-INF/config/jsf-hybris.taglib.xml
             </param-value>
     </context-param>
 
@@ -48,14 +47,39 @@
     <listener>
    <listener-class>org.apache.myfaces.webapp.StartupServletContextListener</listener-class>
     </listener>
-    
+
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- shale					   -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~ -->	
+	<filter>
+		<filter-name>shale</filter-name>
+		<filter-class>org.apache.shale.application.faces.ShaleApplicationFilter</filter-class>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>shale</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+ 
+   <listener>
+      <listener-class>
+        org.apache.commons.chain.web.ChainListener
+      </listener-class>
+   </listener>
+
+	<!-- listener for initializing shale-view -->
+	<listener>
+		<listener-class>org.apache.shale.view.faces.LifecycleListener</listener-class>
+	</listener>
+	       
+
     <!-- Faces Servlet -->
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
         <!--<load-on-startup>1</load-on-startup>-->
     </servlet>
-
 
     <!-- Faces Servlet Mapping -->
     <servlet-mapping>
@@ -64,7 +88,6 @@
     </servlet-mapping>
 
     <!--  Session config and welcome files -->
-
     <session-config>
       <session-timeout>30</session-timeout>
     </session-config>   
