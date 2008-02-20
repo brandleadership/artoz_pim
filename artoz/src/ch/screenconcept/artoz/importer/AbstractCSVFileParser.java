@@ -36,6 +36,11 @@ public abstract class AbstractCSVFileParser
 		this( inputStream, columnCount, '\t', false, "CP1252" );
 	}
 
+	public AbstractCSVFileParser( final InputStream inputStream, final char columnChar, final int columnCount ) throws IOException
+	{
+		this( inputStream, columnCount, columnChar, false, "CP1252" );
+	}
+
 	public final boolean isClosed()
 	{
 		return isClosed;

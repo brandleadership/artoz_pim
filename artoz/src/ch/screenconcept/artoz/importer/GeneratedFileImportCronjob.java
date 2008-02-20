@@ -12,6 +12,7 @@ import java.lang.String;
 
 public abstract class GeneratedFileImportCronjob extends CronJob
 {
+	public static final String FILENAME = "fileName".intern();
 	public static final String FILEDIRECTORY = "fileDirectory".intern();
 	public String getFileDirectory(final SessionContext ctx)
 	{
@@ -31,6 +32,26 @@ public abstract class GeneratedFileImportCronjob extends CronJob
 	public void setFileDirectory(final String value)
 	{
 		setFileDirectory( getSession().getSessionContext(), value );
+	}
+	
+	public String getFileName(final SessionContext ctx)
+	{
+		return (String)getProperty( ctx, FILENAME);
+	}
+	
+	public String getFileName()
+	{
+		return getFileName( getSession().getSessionContext() );
+	}
+	
+	public void setFileName(final SessionContext ctx, final String value)
+	{
+		setProperty(ctx, FILENAME,value);
+	}
+	
+	public void setFileName(final String value)
+	{
+		setFileName( getSession().getSessionContext(), value );
 	}
 	
 }

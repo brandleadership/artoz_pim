@@ -6,9 +6,9 @@ import java.io.InputStream;
 public class NewsletterCustomerCSVFileParser extends AbstractCSVFileParser
 {
 
-	public NewsletterCustomerCSVFileParser(InputStream inputStream, int columnCount) throws IOException
+	public NewsletterCustomerCSVFileParser(InputStream inputStream, final char columnChar, int columnCount) throws IOException
 	{
-		super(inputStream, columnCount);
+		super(inputStream, columnChar, columnCount);
 	}
 
 	@Override
