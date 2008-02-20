@@ -94,7 +94,9 @@
         <!-- *** Screenconcept Extensions                                 *** -->
         <!-- **************************************************************** -->
 
+        <extension dir="../artoz"/>
         <extension dir="../website"/>
+        <extension dir="../campaign"/>
         
 	</extensions>
 

@@ -87,6 +87,26 @@
                 <delete dir="${tmp.dir}" />
             </else>
         </if>
+        
+        <!--Commerce Extension -->
+        <if>
+            <available file="${hybris.home}/campaign/" />
+            <then>
+                <echo message="campaign installed." />
+            </then>
+            <else>
+                <mkdir dir="${tmp.dir}" />
+                <unzip dest="${tmp.dir}">
+                    <fileset dir="${hybris.software.dir}">
+                        <include name="hybrisplatform_campaign*.zip" />
+                    </fileset>
+                </unzip>
+                <move todir="${hybris.home}">
+                    <fileset dir="${tmp.dir}/" />
+                </move>
+                <delete dir="${tmp.dir}" />
+            </else>
+        </if>    
     </target>
 
     <!-- 
