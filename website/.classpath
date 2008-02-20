@@ -6,6 +6,11 @@
 	<classpathentry kind="src" path="web/src"/>
 	<classpathentry kind="src" path="hmc/src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/hybrisplatform"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/platform"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/ext-commerce"/>
+	<classpathentry kind="lib" path="web/webroot/WEB-INF/lib/shale-application-1.0.4.jar"/>
+	<classpathentry kind="lib" path="web/webroot/WEB-INF/lib/shale-core-1.0.4.jar"/>
+	<classpathentry kind="lib" path="web/webroot/WEB-INF/lib/shale-tiger-1.0.4.jar"/>
+	<classpathentry kind="lib" path="web/webroot/WEB-INF/lib/shale-view-1.0.4.jar"/>
 	<classpathentry kind="output" path="eclipsebin"/>
 </classpath>
