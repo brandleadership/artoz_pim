@@ -3,5 +3,5 @@
 #after 'ant unittest' you can go to http://localhost:9001/test
 #and execute your test
 
-ch.screenconcept.artoz.jalo.ArtozTest
-
+ch.screenconcept.artoz.importer.ProductImportJobTest
+ch.screenconcept.artoz.product.ArtozProductTest

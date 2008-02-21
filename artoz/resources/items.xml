@@ -20,6 +20,15 @@
 			xsi:noNamespaceSchemaLocation="items.xsd">
 
 	<itemtypes>
+		<!-- Product -->
+		<itemtype generate="true"
+		   code="ArtozProduct"
+		   jaloclass="ch.screenconcept.artoz.product.ArtozProduct"
+		   extends="Product"
+		   autocreate="true"
+	   />		
+	
+		<!-- Job -->
 		<itemtype generate="true"
 		   code="FileImportCronjob"
 		   jaloclass="ch.screenconcept.artoz.importer.FileImportCronjob"
@@ -46,6 +55,13 @@
 		   extends="Job"
 		   autocreate="true"
 	   />
-	   		
+
+		<itemtype generate="true"
+		   code="ProductImportJob"
+		   jaloclass="ch.screenconcept.artoz.importer.ProductImportJob"
+		   extends="Job"
+		   autocreate="true"
+	   />
+	   	   		
 	</itemtypes>
 </items>
