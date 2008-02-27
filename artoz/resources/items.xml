@@ -26,8 +26,92 @@
 		   jaloclass="ch.screenconcept.artoz.product.ArtozProduct"
 		   extends="Product"
 		   autocreate="true"
-	   />		
+	   >
+	   <attributes>
+				<attribute qualifier="din" type="java.lang.String">
+					<description>DIN Format</description>
+					<modifiers read="true" write="true" search="true" initial="true"/>
+					<persistence type="property"/>
+				</attribute>
+				<attribute qualifier="dimensions" type="java.lang.String">
+					<description>Dimensions</description>
+					<modifiers read="true" write="true" search="true" initial="true"/>
+					<persistence type="property"/>
+				</attribute>
+				<attribute qualifier="grammage" type="java.lang.String">
+					<description>Grammage</description>
+					<modifiers read="true" write="true" search="true" initial="true"/>
+					<persistence type="property"/>
+				</attribute>
+				<attribute qualifier="itemTypeGroup" type="java.lang.String">
+					<description>item type gropu</description>
+					<modifiers read="true" write="true" search="true" initial="true"/>
+					<persistence type="property"/>
+				</attribute>				
+				<attribute qualifier="materialGroup" type="java.lang.Integer">
+					<description>material group</description>
+					<modifiers read="true" write="true" search="true" initial="true"/>
+					<persistence type="property"/>
+				</attribute>
+				<attribute qualifier="newnessCode" type="java.lang.Integer">
+					<description>newness code</description>
+					<modifiers read="true" write="true" search="true" initial="true"/>
+					<persistence type="property"/>
+				</attribute>
+				<attribute qualifier="salesUnit" type="java.lang.Integer">
+					<description>SalesUnit</description>
+					<modifiers read="true" write="true" search="true" initial="true"/>
+					<persistence type="property"/>
+				</attribute>
+				<attribute qualifier="distributionStatus" type="java.lang.String">
+					<description>Distribution status</description>
+					<modifiers read="true" write="true" search="true" initial="true"/>
+					<persistence type="property"/>
+				</attribute>
+				<attribute qualifier="mdaView" type="java.lang.String">
+					<description>mda view</description>
+					<modifiers read="true" write="true" search="true" initial="true"/>
+					<persistence type="property"/>
+				</attribute>								
+				<attribute qualifier="artist" type="java.lang.String">
+					<description>artist name</description>
+					<modifiers read="true" write="true" search="true" initial="true"/>
+					<persistence type="property"/>
+				</attribute>
+				<attribute qualifier="longText" type="java.lang.String">
+					<description>the long product description</description>
+					<modifiers read="true" write="true" search="true" initial="true"/>
+					<persistence type="property"/>
+				</attribute>				
+				<attribute qualifier="iconCode" type="java.lang.String">
+					<description>the icon code</description>
+					<modifiers read="true" write="true" search="true" initial="true"/>
+					<persistence type="property"/>
+				</attribute>			
+				<attribute qualifier="updateCounter" type="java.lang.Integer">
+					<description>update counter</description>
+					<modifiers read="true" write="true" search="true" initial="true"/>
+					<persistence type="property"/>
+				</attribute>						
+			</attributes>
+		</itemtype>		
 	
+		<!-- PriceRow -->
+		<itemtype generate="true"
+		   code="ArtozPriceRow"
+		   jaloclass="ch.screenconcept.artoz.prices.ArtozPriceRow"
+		   extends="PriceRow"
+		   autocreate="true"
+	   >
+			<attributes>
+				<attribute qualifier="updateCounter" type="java.lang.Integer">
+					<description>update counter</description>
+					<modifiers read="true" write="true" search="true" initial="true"/>
+					<persistence type="property"/>
+				</attribute>
+			</attributes>
+		</itemtype>
+		
 		<!-- Job -->
 		<itemtype generate="true"
 		   code="FileImportCronjob"
@@ -45,13 +129,20 @@
 					<description>the name of the import file</description>
 					<modifiers read="true" write="true" search="true" initial="true"/>
 					<persistence type="property"/>
-				</attribute>
+				</attribute>			
 			</attributes>
 		</itemtype>
 
 		<itemtype generate="true"
-		   code="NewsletterCustomerJob"
-		   jaloclass="ch.screenconcept.artoz.importer.NewsletterCustomerJob"
+		   code="CustomerImportJob"
+		   jaloclass="ch.screenconcept.artoz.importer.CustomerImportJob"
+		   extends="Job"
+		   autocreate="true"
+	   />
+	   
+		<itemtype generate="true"
+		   code="NewsletterCustomerImportJob"
+		   jaloclass="ch.screenconcept.artoz.importer.NewsletterCustomerImportJob"
 		   extends="Job"
 		   autocreate="true"
 	   />
