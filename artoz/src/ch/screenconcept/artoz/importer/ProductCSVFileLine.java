@@ -1,11 +1,25 @@
 package ch.screenconcept.artoz.importer;
 
+import ch.screenconcept.artoz.exceptions.CSVFormatException;
+
 public class ProductCSVFileLine extends AbstractCSVFileLine
 {
 
-	public ProductCSVFileLine(String[] line)
+	public ProductCSVFileLine(String[] line) throws CSVFormatException
 	{
 		super(line);
+
+		if (getCode() == null)
+			throw new CSVFormatException("Code is empty");
+		if (getPlchf01() != null)
+			if (getPlCHFUnit() == null)
+				throw new CSVFormatException("PlCHFUnit is empty and a CHF price is set");
+		if (getPleur01() != null)
+			if (getPlEURUnit() == null)
+				throw new CSVFormatException("PlEURUnit is empty and a EUR price is set");
+		if (getPlgbp01() != null)
+			if (getPlGBPUnit() == null)
+				throw new CSVFormatException("PlGBPUnit is empty and a GBP price is set");
 	}
 
 	public String getCode()
@@ -13,32 +27,32 @@ public class ProductCSVFileLine extends AbstractCSVFileLine
 		return getColumn(0);
 	}
 
-	public String getWarengruppe()
+	public String getCategory()
 	{
 		return getColumn(1);
 	}
 
-	public String getDIN()
+	public String getCategoryName()
 	{
 		return getColumn(2);
 	}
 
-	public String getDimensions()
+	public String getDIN()
 	{
 		return getColumn(3);
 	}
 
-	public String getGrammage()
+	public String getDimensions()
 	{
 		return getColumn(4);
 	}
 
-	public String getEAN()
+	public String getGrammage()
 	{
 		return getColumn(5);
 	}
 
-	public String getEANType()
+	public String getEAN()
 	{
 		return getColumn(6);
 	}
@@ -48,9 +62,9 @@ public class ProductCSVFileLine extends AbstractCSVFileLine
 		return getColumn(7);
 	}
 
-	public Integer getSalesUnit()
+	public Double getSalesUnit()
 	{
-		return getInteger(8);
+		return getDouble(8);
 	}
 
 	public String getItemTypeGroup()
@@ -68,9 +82,11 @@ public class ProductCSVFileLine extends AbstractCSVFileLine
 		return getInteger(11);
 	}
 
-	public Integer getMdaView()
+	public boolean getMdaView()
 	{
-		return getInteger(16);
+		if (getColumn(16) != null)
+			return true;
+		return false;
 	}
 
 	public String getShortTextDE()
@@ -102,244 +118,319 @@ public class ProductCSVFileLine extends AbstractCSVFileLine
 	{
 		return getColumn(22);
 	}
-	
-	public Long getPlstchf01(){
-		return getLong(23);
-	}
-	
-	public Double getPlchf01(){
-		return getDouble(24);
-	}
-	
-	public Long getPlstchf02(){
-		return getLong(25);
-	}
-	
-	public Double getPlchf02(){
-		return getDouble(26);
-	}
-	
-	public Long getPlstchf03(){
-		return getLong(27);
-	}
-	
-	public Double getPlchf03(){
-		return getDouble(28);
-	}
-	
-	public Long getPlstchf04(){
-		return getLong(29);
-	}
-	
-	public Double getPlchf04(){
-		return getDouble(30);
-	}
-	
-	public Long getPlstchf05(){
-		return getLong(31);
-	}
-	
-	public Double getPlchf05(){
-		return getDouble(32);
-	}
-	
-	public Long getPlstchf06(){
-		return getLong(3);
-	}
-	
-	public Double getPlchf06(){
-		return getDouble(34);
-	}
-	
-	public Long getPlstchf07(){
-		return getLong(35);
-	}
-	
-	public Double getPlchf07(){
-		return getDouble(36);
-	}	
-	
-	public Long getPlstchf08(){
-		return getLong(37);
-	}
-	
-	public Double getPlchf08(){
-		return getDouble(38);
-	}
-	
-	public Long getPlstchf09(){
-		return getLong(39);
-	}
-	
-	public Double getPlchf09(){
-		return getDouble(40);
-	}
-	
-	public Long getPlstchf10(){
-		return getLong(41);
-	}
-	
-	public Double getPlchf10(){
-		return getDouble(42);
+
+	public Integer getPlCHFUnit()
+	{
+		return getInteger(23);
 	}
 
-	public Long getPlsteur01(){
-		return getLong(43);
-	}
-	
-	public Double getPleur01(){
-		return getDouble(44);
+	public Long getPlstchf01()
+	{
+		return getLong(24);
 	}
 
-	public Long getPlsteur02(){
+	public Double getPlchf01()
+	{
+		return getDouble(25);
+	}
+
+	public Long getPlstchf02()
+	{
+		return getLong(26);
+	}
+
+	public Double getPlchf02()
+	{
+		return getDouble(27);
+	}
+
+	public Long getPlstchf03()
+	{
+		return getLong(28);
+	}
+
+	public Double getPlchf03()
+	{
+		return getDouble(29);
+	}
+
+	public Long getPlstchf04()
+	{
+		return getLong(30);
+	}
+
+	public Double getPlchf04()
+	{
+		return getDouble(31);
+	}
+
+	public Long getPlstchf05()
+	{
+		return getLong(32);
+	}
+
+	public Double getPlchf05()
+	{
+		return getDouble(33);
+	}
+
+	public Long getPlstchf06()
+	{
+		return getLong(34);
+	}
+
+	public Double getPlchf06()
+	{
+		return getDouble(35);
+	}
+
+	public Long getPlstchf07()
+	{
+		return getLong(36);
+	}
+
+	public Double getPlchf07()
+	{
+		return getDouble(37);
+	}
+
+	public Long getPlstchf08()
+	{
+		return getLong(38);
+	}
+
+	public Double getPlchf08()
+	{
+		return getDouble(39);
+	}
+
+	public Long getPlstchf09()
+	{
+		return getLong(40);
+	}
+
+	public Double getPlchf09()
+	{
+		return getDouble(41);
+	}
+
+	public Long getPlstchf10()
+	{
+		return getLong(42);
+	}
+
+	public Double getPlchf10()
+	{
+		return getDouble(43);
+	}
+
+	public Integer getPlEURUnit()
+	{
+		return getInteger(44);
+	}
+
+	public Long getPlsteur01()
+	{
 		return getLong(45);
 	}
-	
-	public Double getPleur02(){
+
+	public Double getPleur01()
+	{
 		return getDouble(46);
 	}
 
-	public Long getPlsteur03(){
+	public Long getPlsteur02()
+	{
 		return getLong(47);
 	}
-	
-	public Double getPleur03(){
+
+	public Double getPleur02()
+	{
 		return getDouble(48);
 	}
 
-	public Long getPlsteur04(){
+	public Long getPlsteur03()
+	{
 		return getLong(49);
 	}
-	
-	public Double getPleur04(){
+
+	public Double getPleur03()
+	{
 		return getDouble(50);
 	}
 
-	public Long getPlsteur05(){
+	public Long getPlsteur04()
+	{
 		return getLong(51);
 	}
-	
-	public Double getPleur05(){
+
+	public Double getPleur04()
+	{
 		return getDouble(52);
 	}
 
-	public Long getPlsteur06(){
+	public Long getPlsteur05()
+	{
 		return getLong(53);
 	}
-	
-	public Double getPleur06(){
+
+	public Double getPleur05()
+	{
 		return getDouble(54);
 	}
 
-	public Long getPlsteur07(){
+	public Long getPlsteur06()
+	{
 		return getLong(55);
 	}
-	
-	public Double getPleur07(){
+
+	public Double getPleur06()
+	{
 		return getDouble(56);
 	}
 
-	public Long getPlsteur08(){
+	public Long getPlsteur07()
+	{
 		return getLong(57);
 	}
-	
-	public Double getPleur08(){
+
+	public Double getPleur07()
+	{
 		return getDouble(58);
 	}
 
-	public Long getPlsteur09(){
+	public Long getPlsteur08()
+	{
 		return getLong(59);
 	}
-	
-	public Double getPleur09(){
+
+	public Double getPleur08()
+	{
 		return getDouble(60);
 	}
 
-	public Long getPlsteur10(){
+	public Long getPlsteur09()
+	{
 		return getLong(61);
 	}
-	
-	public Double getPleur10(){
+
+	public Double getPleur09()
+	{
 		return getDouble(62);
 	}
 
-	public Long getPlstgbp01(){
+	public Long getPlsteur10()
+	{
 		return getLong(63);
 	}
-	
-	public Double getPlgbp01(){
+
+	public Double getPleur10()
+	{
 		return getDouble(64);
 	}
-	
-	public Long getPlstgbp02(){
-		return getLong(65);
+
+	public Integer getPlGBPUnit()
+	{
+		return getInteger(65);
 	}
-	
-	public Double getPlgbp02(){
-		return getDouble(65);
+
+	public Long getPlstgbp01()
+	{
+		return getLong(66);
 	}
-	
-	public Long getPlstgbp03(){
-		return getLong(67);
+
+	public Double getPlgbp01()
+	{
+		return getDouble(67);
 	}
-	
-	public Double getPlgbp03(){
-		return getDouble(68);
+
+	public Long getPlstgbp02()
+	{
+		return getLong(68);
 	}
-	
-	public Long getPlstgbp04(){
-		return getLong(69);
+
+	public Double getPlgbp02()
+	{
+		return getDouble(69);
 	}
-	
-	public Double getPlgbp04(){
-		return getDouble(70);
+
+	public Long getPlstgbp03()
+	{
+		return getLong(70);
 	}
-	
-	public Long getPlstgbp05(){
-		return getLong(71);
+
+	public Double getPlgbp03()
+	{
+		return getDouble(71);
 	}
-	
-	public Double getPlgbp05(){
-		return getDouble(72);
+
+	public Long getPlstgbp04()
+	{
+		return getLong(72);
 	}
-	
-	public Long getPlstgbp06(){
-		return getLong(73);
+
+	public Double getPlgbp04()
+	{
+		return getDouble(73);
 	}
-	
-	public Double getPlgbp06(){
-		return getDouble(74);
+
+	public Long getPlstgbp05()
+	{
+		return getLong(74);
 	}
-	
-	public Long getPlstgbp07(){
-		return getLong(75);
+
+	public Double getPlgbp05()
+	{
+		return getDouble(75);
 	}
-	
-	public Double getPlgbp07(){
-		return getDouble(76);
+
+	public Long getPlstgbp06()
+	{
+		return getLong(76);
 	}
-	
-	public Long getPlstgbp08(){
-		return getLong(77);
+
+	public Double getPlgbp06()
+	{
+		return getDouble(77);
 	}
-	
-	public Double getPlgbp08(){
-		return getDouble(78);
+
+	public Long getPlstgbp07()
+	{
+		return getLong(78);
 	}
-	
-	public Long getPlstgbp09(){
-		return getLong(79);
+
+	public Double getPlgbp07()
+	{
+		return getDouble(79);
 	}
-	
-	public Double getPlgbp09(){
-		return getDouble(80);
+
+	public Long getPlstgbp08()
+	{
+		return getLong(80);
 	}
-	
-	public Long getPlstgbp10(){
-		return getLong(81);
+
+	public Double getPlgbp08()
+	{
+		return getDouble(81);
 	}
-	
-	public Double getPlgbp10(){
-		return getDouble(82);
+
+	public Long getPlstgbp09()
+	{
+		return getLong(82);
+	}
+
+	public Double getPlgbp09()
+	{
+		return getDouble(83);
+	}
+
+	public Long getPlstgbp10()
+	{
+		return getLong(84);
+	}
+
+	public Double getPlgbp10()
+	{
+		return getDouble(85);
 	}
 }

@@ -8,24 +8,23 @@ package ch.screenconcept.artoz.product;
 import ch.screenconcept.artoz.constants.ArtozConstants;
 import de.hybris.platform.jalo.SessionContext;
 import de.hybris.platform.jalo.product.Product;
+import java.lang.Boolean;
 import java.lang.Integer;
 import java.lang.String;
 
 public abstract class GeneratedArtozProduct extends Product
 {
-	public static final String GRAMMAGE = "grammage".intern();
-	public static final String DIN = "din".intern();
-	public static final String DISTRIBUTIONSTATUS = "distributionStatus".intern();
-	public static final String ARTIST = "artist".intern();
 	public static final String DIMENSIONS = "dimensions".intern();
-	public static final String SALESUNIT = "salesUnit".intern();
-	public static final String ICONCODE = "iconCode".intern();
-	public static final String LONGTEXT = "longText".intern();
-	public static final String UPDATECOUNTER = "updateCounter".intern();
 	public static final String MATERIALGROUP = "materialGroup".intern();
-	public static final String MDAVIEW = "mdaView".intern();
+	public static final String ARTIST = "artist".intern();
+	public static final String DIN = "din".intern();
+	public static final String GRAMMAGE = "grammage".intern();
+	public static final String UPDATECOUNTER = "updateCounter".intern();
 	public static final String ITEMTYPEGROUP = "itemTypeGroup".intern();
+	public static final String MDAVIEW = "mdaView".intern();
+	public static final String DISTRIBUTIONSTATUS = "distributionStatus".intern();
 	public static final String NEWNESSCODE = "newnessCode".intern();
+	public static final String ICONCODE = "iconCode".intern();
 	public String getArtist(final SessionContext ctx)
 	{
 		return (String)getProperty( ctx, ARTIST);
@@ -166,26 +165,6 @@ public abstract class GeneratedArtozProduct extends Product
 		setItemTypeGroup( getSession().getSessionContext(), value );
 	}
 	
-	public String getLongText(final SessionContext ctx)
-	{
-		return (String)getProperty( ctx, LONGTEXT);
-	}
-	
-	public String getLongText()
-	{
-		return getLongText( getSession().getSessionContext() );
-	}
-	
-	public void setLongText(final SessionContext ctx, final String value)
-	{
-		setProperty(ctx, LONGTEXT,value);
-	}
-	
-	public void setLongText(final String value)
-	{
-		setLongText( getSession().getSessionContext(), value );
-	}
-	
 	public Integer getMaterialGroup(final SessionContext ctx)
 	{
 		return (Integer)getProperty( ctx, MATERIALGROUP);
@@ -227,22 +206,43 @@ public abstract class GeneratedArtozProduct extends Product
 		setMaterialGroup( getSession().getSessionContext(), value );
 	}
 	
-	public String getMdaView(final SessionContext ctx)
+	public Boolean isMdaView(final SessionContext ctx)
 	{
-		return (String)getProperty( ctx, MDAVIEW);
+		return (Boolean)getProperty( ctx, MDAVIEW);
 	}
 	
-	public String getMdaView()
+	public Boolean isMdaView()
 	{
-		return getMdaView( getSession().getSessionContext() );
+		return isMdaView( getSession().getSessionContext() );
 	}
 	
-	public void setMdaView(final SessionContext ctx, final String value)
+	public boolean isMdaViewAsPrimitive(final SessionContext ctx)
+	{
+		Boolean value = isMdaView( ctx );
+		return value != null ? value.booleanValue() : false;
+	}
+	
+	public boolean isMdaViewAsPrimitive()
+	{
+		return isMdaViewAsPrimitive( getSession().getSessionContext() );
+	}
+	
+	public void setMdaView(final SessionContext ctx, final Boolean value)
 	{
 		setProperty(ctx, MDAVIEW,value);
 	}
 	
-	public void setMdaView(final String value)
+	public void setMdaView(final Boolean value)
+	{
+		setMdaView( getSession().getSessionContext(), value );
+	}
+	
+	public void setMdaView(final SessionContext ctx, final boolean value)
+	{
+		setMdaView( ctx,Boolean.valueOf( value ) );
+	}
+	
+	public void setMdaView(final boolean value)
 	{
 		setMdaView( getSession().getSessionContext(), value );
 	}
@@ -286,47 +286,6 @@ public abstract class GeneratedArtozProduct extends Product
 	public void setNewnessCode(final int value)
 	{
 		setNewnessCode( getSession().getSessionContext(), value );
-	}
-	
-	public Integer getSalesUnit(final SessionContext ctx)
-	{
-		return (Integer)getProperty( ctx, SALESUNIT);
-	}
-	
-	public Integer getSalesUnit()
-	{
-		return getSalesUnit( getSession().getSessionContext() );
-	}
-	
-	public int getSalesUnitAsPrimitive(final SessionContext ctx)
-	{
-		Integer value = getSalesUnit( ctx );
-		return value != null ? value.intValue() : 0;
-	}
-	
-	public int getSalesUnitAsPrimitive()
-	{
-		return getSalesUnitAsPrimitive( getSession().getSessionContext() );
-	}
-	
-	public void setSalesUnit(final SessionContext ctx, final Integer value)
-	{
-		setProperty(ctx, SALESUNIT,value);
-	}
-	
-	public void setSalesUnit(final Integer value)
-	{
-		setSalesUnit( getSession().getSessionContext(), value );
-	}
-	
-	public void setSalesUnit(final SessionContext ctx, final int value)
-	{
-		setSalesUnit( ctx,Integer.valueOf( value ) );
-	}
-	
-	public void setSalesUnit(final int value)
-	{
-		setSalesUnit( getSession().getSessionContext(), value );
 	}
 	
 	public Integer getUpdateCounter(final SessionContext ctx)

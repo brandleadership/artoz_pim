@@ -1,9 +1,11 @@
 package ch.screenconcept.artoz.importer;
 
+import ch.screenconcept.artoz.exceptions.CSVFormatException;
+
 public class NewsletterCustomerCSVFileLine extends AbstractCSVFileLine
 {
 
-	public NewsletterCustomerCSVFileLine(String[] line)
+	public NewsletterCustomerCSVFileLine(String[] line) throws CSVFormatException
 	{
 		super(line);
 	}

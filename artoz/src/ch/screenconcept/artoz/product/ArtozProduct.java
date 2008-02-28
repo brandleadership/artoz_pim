@@ -38,7 +38,7 @@ public class ArtozProduct extends GeneratedArtozProduct
 	 * @throws JaloBusinessException
 	 * @throws JaloSecurityException
 	 */
-	public static ArtozProduct createArtozProduct(Map<String, Object> params, Map<Language, String> descriptions,
+	public static ArtozProduct createArtozProduct(Map<String, Object> params, Map<Language, String> names,
 				List<PriceRowValues> priceRowValues) throws JaloInvalidParameterException, JaloSecurityException,
 				JaloBusinessException
 	{
@@ -48,7 +48,7 @@ public class ArtozProduct extends GeneratedArtozProduct
 		// Create Descriptions
 		final SessionContext ctx = JaloSession.getCurrentSession().createSessionContext();
 		ctx.setLanguage(null);
-		product.setAttribute(ctx, ArtozProduct.DESCRIPTION, descriptions);
+		product.setAttribute(ctx, ArtozProduct.NAME, names);
 
 		// Create PriceRows
 		for (PriceRowValues priceRowValue : priceRowValues)
@@ -67,7 +67,7 @@ public class ArtozProduct extends GeneratedArtozProduct
 	 * @throws JaloSecurityException
 	 * @throws JaloInvalidParameterException
 	 */
-	public void update(Map<String, Object> params, Map<Language, String> descriptions,
+	public void update(Map<String, Object> params, Map<Language, String> names,
 				List<PriceRowValues> priceRowValues) throws JaloInvalidParameterException, JaloSecurityException,
 				JaloBusinessException
 	{
@@ -75,7 +75,7 @@ public class ArtozProduct extends GeneratedArtozProduct
 
 		final SessionContext ctx = JaloSession.getCurrentSession().createSessionContext();
 		ctx.setLanguage(null);
-		setAttribute(ctx, ArtozProduct.DESCRIPTION, descriptions);
+		setAttribute(ctx, ArtozProduct.NAME, names);
 
 		// Create PriceRows
 		for (PriceRowValues priceRowValue : priceRowValues)

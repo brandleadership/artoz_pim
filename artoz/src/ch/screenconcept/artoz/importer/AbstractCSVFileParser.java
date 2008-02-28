@@ -8,6 +8,8 @@ import java.util.Arrays;
 
 import org.apache.log4j.Logger;
 
+import ch.screenconcept.artoz.exceptions.CSVFormatException;
+
 public abstract class AbstractCSVFileParser
 {
 	private static final Logger log = Logger.getLogger( AbstractCSVFileParser.class );
@@ -61,9 +63,9 @@ public abstract class AbstractCSVFileParser
 		}
 	}
 	
-	protected abstract AbstractCSVFileLine create( final String[] content );
+	protected abstract AbstractCSVFileLine create( final String[] content ) throws CSVFormatException;
 	
-	public final AbstractCSVFileLine readLine() throws IOException
+	public final AbstractCSVFileLine readLine() throws IOException, CSVFormatException
 	{
 		final String[] content = new String[columnCount];
 		if ( !isClosed() && fill( content ) )

@@ -3,6 +3,8 @@ package ch.screenconcept.artoz.importer;
 import java.io.IOException;
 import java.io.InputStream;
 
+import ch.screenconcept.artoz.exceptions.CSVFormatException;
+
 public class NewsletterCustomerCSVFileParser extends AbstractCSVFileParser
 {
 
@@ -12,7 +14,7 @@ public class NewsletterCustomerCSVFileParser extends AbstractCSVFileParser
 	}
 
 	@Override
-	protected AbstractCSVFileLine create(String[] content)
+	protected AbstractCSVFileLine create(String[] content) throws CSVFormatException
 	{
 		return new NewsletterCustomerCSVFileLine(content);
 	}

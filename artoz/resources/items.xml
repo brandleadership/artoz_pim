@@ -58,17 +58,12 @@
 					<modifiers read="true" write="true" search="true" initial="true"/>
 					<persistence type="property"/>
 				</attribute>
-				<attribute qualifier="salesUnit" type="java.lang.Integer">
-					<description>SalesUnit</description>
-					<modifiers read="true" write="true" search="true" initial="true"/>
-					<persistence type="property"/>
-				</attribute>
 				<attribute qualifier="distributionStatus" type="java.lang.String">
 					<description>Distribution status</description>
 					<modifiers read="true" write="true" search="true" initial="true"/>
 					<persistence type="property"/>
 				</attribute>
-				<attribute qualifier="mdaView" type="java.lang.String">
+				<attribute qualifier="mdaView" type="java.lang.Boolean">
 					<description>mda view</description>
 					<modifiers read="true" write="true" search="true" initial="true"/>
 					<persistence type="property"/>
@@ -77,12 +72,7 @@
 					<description>artist name</description>
 					<modifiers read="true" write="true" search="true" initial="true"/>
 					<persistence type="property"/>
-				</attribute>
-				<attribute qualifier="longText" type="java.lang.String">
-					<description>the long product description</description>
-					<modifiers read="true" write="true" search="true" initial="true"/>
-					<persistence type="property"/>
-				</attribute>				
+				</attribute>		
 				<attribute qualifier="iconCode" type="java.lang.String">
 					<description>the icon code</description>
 					<modifiers read="true" write="true" search="true" initial="true"/>
