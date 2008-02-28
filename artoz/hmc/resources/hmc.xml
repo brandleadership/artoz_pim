@@ -19,12 +19,86 @@
 
 	<!-- Configuration for extension artoz -->
 
-<!--
 	<explorertree>
-		<group name="artozgroup">
-			<externalnode classname="ch.screenconcept.artoz.hmc.ArtozTreeLeafChip"/>		
-		</group>
+      <group name="catalog" >
+         <typeref type="Product" mode="delete"/>
+         <typeref type="ArtozProduct" mode="append" position="3"/>
+      </group>
 	</explorertree>
--->
+
+   <type name="ArtozProduct" icon="images/icons/e_product.gif" mode="append">
+      <organizer>
+         <editor>
+            <essentials>
+               <columnlayout mode="replace">
+                  <row>
+                     <attribute name="code" editable="false" />
+                     <attribute name="name" editable="false" />
+                  </row>
+                  <row>
+                     <attribute name="catalogVersion" editable="false" />
+                     <attribute name="approvalStatus" editable="false" />                     
+                  </row>
+               </columnlayout>
+            </essentials>
+            <tab name="tab.product.variants" mode="delete" />
+            <tab name="tab.product.technicalattributes" mode="delete" />
+            <tab name="tab.product.versions" mode="delete" />
+            <tab name="tab.product.bmecat" mode="delete" />
+            <tab name="tab.product.extendedattributes" mode="delete" />
+            <tab name="tab.product.properties">
+               <section name="section.catalog_and_validity" mode="delete" />
+               <section name="section.product.ids" mode="append">
+                  <columnlayout>
+                     <row>
+                        <attribute name="ean"/>
+                     </row>
+                     <row>
+                        <attribute name="contentunit"/>
+                        <attribute name="numbercontentunits"/>
+                     </row>
+                  </columnlayout>
+               </section>
+               <section name="product.general">
+            		<listlayout>
+            			<attribute name="din" editable="false"/>
+            			<attribute name="dimensions" editable="false"/>
+            			<attribute name="grammage" editable="false"/>
+            			<attribute name="itemTypeGroup" editable="false"/>
+            			<attribute name="materialGroup" editable="false"/>
+            			<attribute name="newnessCode" editable="false"/>
+            			<attribute name="distributionStatus" editable="false"/>
+            			<attribute name="mdaView" editable="false"/>
+            			<attribute name="artist"/>
+            			<attribute name="iconCode"/>
+            		</listlayout>
+            	</section>
+            	<section name="product.descriptions">
+            		<listlayout>
+            			<attribute name="unit" mode="delete"/>
+            		</listlayout>
+            	</section>
+            </tab>
+            <tab name="tab.product.prices">
+            <section name="section.product.pricesdiscounts">
+                  <listlayout>
+                  	<attribute name="europe1Discounts" mode="delete"/>
+                  	<text name="text.product.pg" mode="delete"/>
+                     <attribute name="Europe1PriceFactory_PPG" mode="delete"/>
+                     <attribute name="Europe1PriceFactory_PDG" mode="delete"/>
+                     <text name="text.product.dg" mode="delete"/>
+                     <attribute name="Europe1PriceFactory_PTG" mode="delete"/>
+                  </listlayout>
+                  <columnlayout mode="delete">
+                     <row>
+                        <attribute name="minorderquantity" mode="delete"/>
+                        <attribute name="maxorderquantity" mode="delete"/>
+                     </row>
+                  </columnlayout>
+               </section>            
+            </tab>
+         </editor>
+      </organizer>
+   </type>
 
 </configuration>
