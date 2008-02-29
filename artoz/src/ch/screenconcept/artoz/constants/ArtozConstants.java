@@ -199,6 +199,11 @@ public final class ArtozConstants extends GeneratedArtozConstants
 	
 	public static final class Units{
 		
+		public static final class IDs
+		{
+			public static final String PIECES = "pieces";
+		}
+				
 		public static final Unit getPieces()
 		{
 			return ProductManager.getInstance().getUnit("pieces");

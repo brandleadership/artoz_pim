@@ -60,7 +60,7 @@ public class ProductImportJob extends GeneratedProductImportJob
 		}
 		catch (Exception e)
 		{
-			//e.printStackTrace();
+			e.printStackTrace();
 			throw new AbortCronJobException(e.getMessage());
 		}
 
@@ -73,6 +73,7 @@ public class ProductImportJob extends GeneratedProductImportJob
 
 		if (line != null)
 		{
+			//Get the active catalog version
 			CatalogManager catalogManager = CatalogManager.getInstance();
 			CatalogVersion catalogVersion = catalogManager.getCatalog(ArtozConstants.STANDARDCATALOG)
 						.getActiveCatalogVersion();
@@ -94,6 +95,7 @@ public class ProductImportJob extends GeneratedProductImportJob
 			params.put(ArtozProduct.DIMENSIONS, line.getDimensions());
 			params.put(ArtozProduct.UPDATECOUNTER, ArtozConstants.NumberSeries.getCurrentProductImportNumber());
 
+			//Create name array with text in all 6 languages
 			final Map<Language, String> names = new HashMap<Language, String>();
 			names.put(ArtozConstants.Languages.getGerman(), line.getShortTextDE());
 			names.put(ArtozConstants.Languages.getEnglish(), line.getShortTextEN());
@@ -128,6 +130,7 @@ public class ProductImportJob extends GeneratedProductImportJob
 
 			Collection<Category> productCategories = catalogManager.getCategoriesByProduct(catalogVersion, product);
 
+			//Update categories; Delete old once.
 			boolean hasCategory = false;
 			for (Category productCategory : productCategories)
 				if (productCategory.getCode().equals(category.getCode()))

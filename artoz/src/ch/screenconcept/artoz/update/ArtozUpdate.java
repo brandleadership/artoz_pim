@@ -11,6 +11,7 @@ import de.hybris.platform.jalo.JaloItemNotFoundException;
 import de.hybris.platform.jalo.c2l.C2LManager;
 import de.hybris.platform.jalo.c2l.Currency;
 import de.hybris.platform.jalo.c2l.Language;
+import de.hybris.platform.jalo.product.ProductManager;
 
 public class ArtozUpdate
 {
@@ -81,5 +82,10 @@ public class ArtozUpdate
 			languages.add(ArtozConstants.Languages.getPortuguese());
 			version.setLanguages(languages);
 		}
+	}
+	
+	public static void creatUnits(){
+		if (ProductManager.getInstance().getUnit(ArtozConstants.Units.IDs.PIECES) == null)
+			ProductManager.getInstance().createUnit( "p" ,ArtozConstants.Units.IDs.PIECES);
 	}
 }
