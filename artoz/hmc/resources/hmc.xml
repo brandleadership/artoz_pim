@@ -100,5 +100,22 @@
          </editor>
       </organizer>
    </type>
-
+   
+   <type name="EMailFaxCampaign" icon="images/icons/e_product.gif" mode="append">
+      <organizer>
+         <editor>
+           <tab name="tab.fax.properties">
+            <section name="section.fax.properties">
+                  <listlayout>
+                  	<attribute name="faxUserName" />
+                  	<attribute name="faxPassword" />
+                  	<attribute name="faxFaxNumber" />
+                  	<attribute name="faxServiceAdresse" />
+                  	<attribute name="faxFaxOnly" />
+                  </listlayout>
+               </section>            
+            </tab>
+         </editor>
+      </organizer>
+   </type>
 </configuration>
