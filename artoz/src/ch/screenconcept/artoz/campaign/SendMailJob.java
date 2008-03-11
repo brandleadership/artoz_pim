@@ -1,6 +1,19 @@
 package ch.screenconcept.artoz.campaign;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.util.Collection;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
+import javax.activation.DataHandler;
+import javax.activation.FileDataSource;
+
 import org.apache.log4j.Logger;
+
+import ch.screenconcept.artoz.campaign.interfax.InterFaxStub;
+import ch.screenconcept.artoz.campaign.interfax.InterFaxStub.SendfaxEx_2;
+import ch.screenconcept.artoz.campaign.interfax.InterFaxStub.SendfaxEx_2Response;
 
 import com.exedio.sendmail.MailSender;
 
@@ -10,35 +23,62 @@ import de.hybris.platform.cronjob.jalo.CronJob.CronJobResult;
 
 public class SendMailJob extends GeneratedSendMailJob
 {
-	private static Logger log = Logger.getLogger( SendMailJob.class.getName() );
+	private static Logger log = Logger.getLogger(SendMailJob.class.getName());
 
 	@Override
 	protected CronJobResult performCronJob(CronJob c) throws AbortCronJobException
 	{
-		final SendMailCronJob cronJob = (SendMailCronJob)c;
-        MailSender.sendMails( cronJob.getMailSource(), cronJob.getSmtpServer(), false, cronJob.getCountPerRun() );
-        return cronJob.getFinishedResult(true);
+		final SendMailCronJob cronJob = (SendMailCronJob) c;
+
+		MailSender.sendMails(cronJob.getMailSource(), cronJob.getSmtpServer(), false, cronJob.getCountPerRun());
+		try
+		{
+			sendFax(cronJob.getMailSource(), cronJob.getCountPerRun());
+		}
+		catch (Exception e)
+		{
+			new AbortCronJobException(e.getMessage());
+		}
+		return cronJob.getFinishedResult(true);
 	}
-	
-	
-//	public void sendFax() throws Exception
-//	{
-//		Sendfax sendfax = new Sendfax();
-//		sendfax.setUsername(getFaxUserName());
-//		sendfax.setPassword(getFaxPassword());
-//		sendfax.setFaxNumber(getFaxFaxNumber());
-//
-//		File toSend = new File("/home/pascal/workspace/artoz/import/", "hello.doc");
-//		FileDataSource fdh = new FileDataSource(toSend);
-//		if (!toSend.exists())
-//			throw new Exception("No file available");
-//
-//		DataHandler dh = new DataHandler(fdh);
-//		sendfax.setFileData(dh);
-//		sendfax.setFileType("DOC");
-//
-//		InterFaxStub theBinding = new InterFaxStub(getFaxServiceAdresse());
-//		SendfaxResponse response = theBinding.Sendfax(sendfax);
-//		System.out.println("sendFax() call returned with code: " + response.getSendfaxResult());
-//	}
+
+	public void sendFax(MailFaxSource source, int countPerRun) throws Exception
+	{
+		SendfaxEx_2 sendfax = new SendfaxEx_2();
+		Collection<EMailFax> faxList = source.getFaxesToSend(countPerRun);
+
+		for (EMailFax fax : faxList)
+		{
+			sendfax.setUsername(fax.getFaxServiceUser());
+			sendfax.setPassword(fax.getFaxServicePassword());
+			sendfax.setFaxNumbers(fax.getRecipient());
+			sendfax.setSubject(fax.getSubject());
+			sendfax.setPageHeader("To: {To} From: {From} Pages: {TotalPages}");
+			sendfax.setPostpone(new GregorianCalendar());
+
+			File fileToSend = new File("/home/pascal/workspace/artoz/import/", "tmp.txt");
+			FileWriter fw = new FileWriter(fileToSend);
+
+			final boolean isHTML = !fax.getTextAsHtml().equals("");
+			if (isHTML)
+				fw.write(fax.getTextAsHtml());
+			else
+				fw.write(fax.getText());
+			fw.close();
+
+			sendfax.setFileSizes("" + fileToSend.length());
+			FileDataSource fdh = new FileDataSource(fileToSend);
+
+			DataHandler dh = new DataHandler(fdh);
+			sendfax.setFilesData(dh);
+			if (isHTML)
+				sendfax.setFileTypes("HTML");
+			else
+				sendfax.setFileTypes("TXT");
+
+			InterFaxStub theBinding = new InterFaxStub(fax.getFaxServiceAdresse());
+			SendfaxEx_2Response response = theBinding.SendfaxEx_2(sendfax);
+			log.info("sendFax() call returned with code: " + response.getSendfaxEx_2Result());
+		}
+	}
 }

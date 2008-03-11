@@ -1,0 +1,7 @@
+Sehr geehreter
+
+
+Artoz bietet Ihnen neue Produkte an:
+
+
+${optOutInfo}

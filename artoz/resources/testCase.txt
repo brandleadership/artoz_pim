@@ -4,4 +4,5 @@
 #and execute your test
 
 ch.screenconcept.artoz.importer.ProductImportJobTest
+ch.screenconcept.artoz.importer.NewsletterCustomerImportJobTest
 ch.screenconcept.artoz.product.ArtozProductTest

@@ -1,26 +1,38 @@
 package ch.screenconcept.artoz.importer;
 
-import java.io.FileInputStream;
-import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 
-import com.exedio.campaign.constants.CampaignConstants;
-
 import ch.screenconcept.artoz.constants.ArtozConstants;
+
+import com.exedio.campaign.constants.CampaignConstants;
+import com.exedio.campaign.jalo.Newsletter;
+
 import de.hybris.platform.cronjob.jalo.AbortCronJobException;
 import de.hybris.platform.cronjob.jalo.CronJob;
 import de.hybris.platform.cronjob.jalo.CronJob.CronJobResult;
 import de.hybris.platform.jalo.JaloBusinessException;
 import de.hybris.platform.jalo.JaloInvalidParameterException;
-import de.hybris.platform.jalo.JaloItemNotFoundException;
+import de.hybris.platform.jalo.JaloSession;
+import de.hybris.platform.jalo.SearchResult;
+import de.hybris.platform.jalo.c2l.C2LManager;
 import de.hybris.platform.jalo.security.JaloSecurityException;
+import de.hybris.platform.jalo.type.TypeManager;
+import de.hybris.platform.jalo.user.Address;
 import de.hybris.platform.jalo.user.Customer;
+import de.hybris.platform.jalo.user.User;
 import de.hybris.platform.jalo.user.UserGroup;
 import de.hybris.platform.jalo.user.UserManager;
 
 /**
- * Imports the customers for the newsletter extension. 
+ * Imports the customers for the newsletter extension.
+ * 
  * @author Pascal Naef
  */
 public class NewsletterCustomerImportJob extends GeneratedNewsletterCustomerImportJob
@@ -30,16 +42,17 @@ public class NewsletterCustomerImportJob extends GeneratedNewsletterCustomerImpo
 	@Override
 	protected CronJobResult performCronJob(CronJob cronjob) throws AbortCronJobException
 	{
-		final FileImportCronjob fileImportCronjob = (FileImportCronjob) cronjob;
-		final FileInputStream fis;
+		final MediaNewsletterImportCronjob importCronjob = (MediaNewsletterImportCronjob) cronjob;
+
 		final NewsletterCustomerCSVFileParser newsletterParser;
+		final Newsletter newsletter = importCronjob.getNewsletter();
 		try
 		{
-			fis = new FileInputStream(fileImportCronjob.getFile());
-			newsletterParser = new NewsletterCustomerCSVFileParser(fis, ';', 5);
+			newsletterParser = new NewsletterCustomerCSVFileParser(importCronjob.getMedia().getDataFromStream(), ';', 6);
 			while (!newsletterParser.isClosed())
 			{
-				createOrUpdateNewsletterCustomer((NewsletterCustomerCSVFileLine) newsletterParser.readLine());
+				createOrUpdateNewsletterCustomer((NewsletterCustomerCSVFileLine) newsletterParser.readLine(),
+							newsletter);
 			}
 		}
 		catch (Exception e)
@@ -47,39 +60,98 @@ public class NewsletterCustomerImportJob extends GeneratedNewsletterCustomerImpo
 			throw new AbortCronJobException(e.getMessage());
 		}
 
-		return fileImportCronjob.getFinishedResult(true);
+		return importCronjob.getFinishedResult(true);
+
 	}
 
-	private void createOrUpdateNewsletterCustomer(NewsletterCustomerCSVFileLine line)
+	private void createOrUpdateNewsletterCustomer(NewsletterCustomerCSVFileLine line, Newsletter newsletter)
 				throws JaloInvalidParameterException, JaloSecurityException, JaloBusinessException
 	{
 		log.info("line: " + line.getColumn(0) + " " + line.getColumn(1) + " " + line.getColumn(2) + " "
 					+ line.getColumn(3) + " " + line.getColumn(4));
 
-		final String login = line.getName() + "_" + line.getFirstname();
-		Customer customer;
-		try {
-			customer = (Customer) UserManager.getInstance().getUserByLogin(login);
-		}
-		catch ( JaloItemNotFoundException je){
-			customer = UserManager.getInstance().createCustomer(login);
-		}
+		// Don't check fax because the email address identifies the customer
+		Customer customer = findCustomerByMailOrFax(line.getEMail(), null);
+		if (customer == null)
+			customer = UserManager.getInstance().createCustomer(
+						"nlc_" + ArtozConstants.NumberSeries.getNewsletterCustomerNumber());
 
-		updateCustomer(customer, line);
+		log.info("UID " + customer.getUID());
+		updateCustomer(customer, line, newsletter);
 	}
 
-	private void updateCustomer(Customer cus, NewsletterCustomerCSVFileLine line) throws JaloSecurityException, JaloBusinessException
+	private void updateCustomer(Customer cus, NewsletterCustomerCSVFileLine line, Newsletter newsletter)
+				throws JaloSecurityException, JaloBusinessException
 	{
 		final String email = line.getEMail();
 		cus.setAttribute(Customer.LOGIN_DISABLED, true);
+		cus.setAttribute(Customer.NAME, line.getName() + "_" + line.getFirstname());
+		cus.setAttribute(Customer.SESSION_LANGUAGE, C2LManager.getInstance().getLanguageByIsoCode(
+					line.getLanguageIsoCode()));
 		cus.setAttribute(CampaignConstants.Attributes.User.EMAILADDRESS, email);
-		Collection<UserGroup> userGroups = UserManager.getInstance().getAllUserGroups();
-		
-		for (UserGroup group : userGroups){
-			if (group.getUID().equals(ArtozConstants.NEWSLETTERGROUP)){
-				cus.addToGroup(group);
-				break;
+		cus.setAttribute(CampaignConstants.Attributes.Customer.NEWSLETTERS, Collections.singletonList(newsletter));
+
+		Map<String, String> params = new HashMap<String, String>();
+		params.put(Address.LASTNAME, line.getName());
+		params.put(Address.FIRSTNAME, line.getFirstname());
+		params.put(Address.COMPANY, line.getCompany());
+		params.put(Address.FAX, line.getFax());
+
+		Iterator<Address> iterator = cus.getAllAddresses().iterator();
+		if (iterator.hasNext())
+			iterator.next().setAllAttributes(params);
+		else
+			cus.createAddress(params);
+
+		//Replace all user groups and add the newsletter one
+		UserGroup userGroup = UserManager.getInstance().getUserGroupByGroupID(ArtozConstants.NEWSLETTERGROUP);
+		Set<UserGroup> usergroups = new HashSet<UserGroup>();
+		usergroups.add(userGroup);
+		cus.setGroups(usergroups);
+	}
+
+	public Customer findCustomerByMailOrFax(String mail, String fax)
+	{
+		boolean emptyMail = mail == null || mail.equals("");
+		boolean emptyFax = fax == null || fax.equals("");
+
+		if (!emptyMail || !emptyFax)
+		{
+			Map<String, Object> value = new HashMap<String, Object>();
+			if (!emptyMail)
+				value.put("email", mail);
+			if (!emptyFax)
+				value.put("fax", fax);
+
+			StringBuffer query = new StringBuffer();
+			query.append("SELECT {u." + User.PK + "} FROM {"
+						+ TypeManager.getInstance().getComposedType(User.class).getCode() + " as u} ");
+			if (!emptyFax)
+				query.append(", {" + TypeManager.getInstance().getComposedType(Address.class).getCode() + " as a} ");
+			query.append("WHERE ");
+			if (!emptyFax)
+			{
+				query.append("{a." + Address.USER + "} = {u." + User.PK + "} AND ");
+				if (!emptyMail)
+					query.append("(");
+				query.append("{a." + Address.FAX + "} = ?fax");
+				if (!emptyMail)
+					query.append(" OR ");
 			}
+			if (!emptyMail)
+			{
+				query.append("{u." + CampaignConstants.Attributes.User.EMAILADDRESS + "} = ?email");
+				if (!emptyFax)
+					query.append(")");
+			}
+
+			final SearchResult res = JaloSession.getCurrentSession().getFlexibleSearch().search(query.toString(),
+						value, Collections.singletonList(User.class), true, true, 0, -1);
+			if (res.getResult().isEmpty())
+				return null;
+			return (Customer) res.getResult().get(0);
 		}
+		return null;
+
 	}
 }

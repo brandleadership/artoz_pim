@@ -10,10 +10,7 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-import com.exedio.campaign.constants.CampaignConstants;
-import com.exedio.campaign.jalo.EMail;
-import com.exedio.sendmail.MailSource;
-
+import ch.screenconcept.artoz.constants.ArtozConstants;
 import de.hybris.platform.jalo.Item;
 import de.hybris.platform.jalo.JaloSession;
 import de.hybris.platform.jalo.flexiblesearch.FlexibleSearch;
@@ -23,15 +20,25 @@ public class SendMailCronJob extends GeneratedSendMailCronJob
 	@SuppressWarnings("unused")
 	private static final Logger log = Logger.getLogger(SendMailCronJob.class);
 
-	public MailSource getMailSource()
+	public MailFaxSource getMailSource()
 	{
 		return new InternalMailSource();
 	}
 
-	private static class InternalMailSource implements MailSource
+	private static class InternalMailSource implements MailFaxSource
 	{
 
 		public Collection getMailsToSend(final int maximumResultSize)
+		{
+			return getMailsToSend(maximumResultSize, false);
+		}
+
+		public Collection<EMailFax> getFaxesToSend(final int maximumResultSize)
+		{
+			return getMailsToSend(maximumResultSize, true);
+		}
+
+		private Collection<EMailFax> getMailsToSend(final int maximumResultSize, boolean isFax)
 		{
 			final Calendar calendar = new GregorianCalendar();
 			calendar.add(Calendar.MINUTE, -1);
@@ -42,17 +49,22 @@ public class SendMailCronJob extends GeneratedSendMailCronJob
 			final StringBuffer query = new StringBuffer();
 
 			query.append("SELECT {" + Item.PK + "} ");
-			query.append("FROM {" + CampaignConstants.TC.EMAIL + "} ");
-			query.append("WHERE {" + EMail.LASTSENTDATE + "} IS NULL ");
+			query.append("FROM {" + ArtozConstants.TC.EMAILFAX + "} ");
+			query.append("WHERE {" + EMailFax.LASTSENTDATE + "} IS NULL ");
 			query.append("AND {" + Item.CREATION_TIME + "} < ?creationTime ");
-			query.append("AND {" + EMail.FAILURE + "} IS NULL ");
+			query.append("AND {" + EMailFax.FAILURE + "} IS NULL ");
+			if (isFax)
+				query.append("AND {" + EMailFax.FAX + "} is true ");
+			else
+				query.append("AND {" + EMailFax.FAX + "} is false ");
 			query.append("ORDER BY {" + Item.CREATION_TIME + "}");
 
 			final FlexibleSearch flexibleSearch = JaloSession.getCurrentSession().getFlexibleSearch();
-			List<EMail> list = flexibleSearch.search(query.toString(), values, Collections.singletonList(EMail.class), true, true,
-						0, maximumResultSize).getResult();
-			
-			for (EMail mail : list)
+			List<EMailFax> list = flexibleSearch.search(query.toString(), values,
+						Collections.singletonList(EMailFax.class), true, true, 0, maximumResultSize).getResult();
+
+			log.info("did query");
+			for (EMailFax mail : list)
 				log.info(mail.getRecipient() + " " + mail.getText());
 			return list;
 		}

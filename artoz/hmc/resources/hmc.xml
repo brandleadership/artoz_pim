@@ -1,121 +1,250 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
- [y] hybris Platform
-
- Copyright (c) 2000-2008 hybris AG
- All rights reserved.
-
- This software is the confidential and proprietary information of hybris
- ("Confidential Information"). You shall not disclose such Confidential
- Information and shall use it only in accordance with the terms of the
- license agreement you entered into with hybris.
-
-  
+	[y] hybris Platform
+	
+	Copyright (c) 2000-2008 hybris AG
+	All rights reserved.
+	
+	This software is the confidential and proprietary information of hybris
+	("Confidential Information"). You shall not disclose such Confidential
+	Information and shall use it only in accordance with the terms of the
+	license agreement you entered into with hybris.
+	
+	
 -->
 <configuration xmlns="hybris.de/schemas/hmc/generic"
-               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-               xsi:schemaLocation="hybris.de/schemas/hmc/generic hmc.xsd">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="hybris.de/schemas/hmc/generic hmc.xsd">
 
 
 	<!-- Configuration for extension artoz -->
 
 	<explorertree>
-      <group name="catalog" >
-         <typeref type="Product" mode="delete"/>
-         <typeref type="ArtozProduct" mode="append" position="3"/>
-      </group>
+		<group name="catalog">
+			<typeref type="Product" mode="delete" />
+			<typeref type="ArtozProduct" mode="append" position="3" />
+		</group>
+		<group name="campaigngroup">
+			<typeref type="CreateEMailFaxCampaignWizard"
+				description="typeref.CreateEMailFaxCampaignWizard.description" />
+		</group>
 	</explorertree>
 
-   <type name="ArtozProduct" icon="images/icons/e_product.gif" mode="append">
-      <organizer>
-         <editor>
-            <essentials>
-               <columnlayout mode="replace">
-                  <row>
-                     <attribute name="code" editable="false" />
-                     <attribute name="name" editable="false" />
-                  </row>
-                  <row>
-                     <attribute name="catalogVersion" editable="false" />
-                     <attribute name="approvalStatus" editable="false" />                     
-                  </row>
-               </columnlayout>
-            </essentials>
-            <tab name="tab.product.variants" mode="delete" />
-            <tab name="tab.product.technicalattributes" mode="delete" />
-            <tab name="tab.product.versions" mode="delete" />
-            <tab name="tab.product.bmecat" mode="delete" />
-            <tab name="tab.product.extendedattributes" mode="delete" />
-            <tab name="tab.product.properties">
-               <section name="section.catalog_and_validity" mode="delete" />
-               <section name="section.product.ids" mode="append">
-                  <columnlayout>
-                     <row>
-                        <attribute name="ean"/>
-                     </row>
-                     <row>
-                        <attribute name="contentunit"/>
-                        <attribute name="numbercontentunits"/>
-                     </row>
-                  </columnlayout>
-               </section>
-               <section name="product.general">
-            		<listlayout>
-            			<attribute name="din" editable="false"/>
-            			<attribute name="dimensions" editable="false"/>
-            			<attribute name="grammage" editable="false"/>
-            			<attribute name="itemTypeGroup" editable="false"/>
-            			<attribute name="materialGroup" editable="false"/>
-            			<attribute name="newnessCode" editable="false"/>
-            			<attribute name="distributionStatus" editable="false"/>
-            			<attribute name="mdaView" editable="false"/>
-            			<attribute name="artist"/>
-            			<attribute name="iconCode"/>
-            		</listlayout>
-            	</section>
-            	<section name="product.descriptions">
-            		<listlayout>
-            			<attribute name="unit" mode="delete"/>
-            		</listlayout>
-            	</section>
-            </tab>
-            <tab name="tab.product.prices">
-            <section name="section.product.pricesdiscounts">
-                  <listlayout>
-                  	<attribute name="europe1Discounts" mode="delete"/>
-                  	<text name="text.product.pg" mode="delete"/>
-                     <attribute name="Europe1PriceFactory_PPG" mode="delete"/>
-                     <attribute name="Europe1PriceFactory_PDG" mode="delete"/>
-                     <text name="text.product.dg" mode="delete"/>
-                     <attribute name="Europe1PriceFactory_PTG" mode="delete"/>
-                  </listlayout>
-                  <columnlayout mode="delete">
-                     <row>
-                        <attribute name="minorderquantity" mode="delete"/>
-                        <attribute name="maxorderquantity" mode="delete"/>
-                     </row>
-                  </columnlayout>
-               </section>            
-            </tab>
-         </editor>
-      </organizer>
-   </type>
-   
-   <type name="EMailFaxCampaign" icon="images/icons/e_product.gif" mode="append">
-      <organizer>
-         <editor>
-           <tab name="tab.fax.properties">
-            <section name="section.fax.properties">
-                  <listlayout>
-                  	<attribute name="faxUserName" />
-                  	<attribute name="faxPassword" />
-                  	<attribute name="faxFaxNumber" />
-                  	<attribute name="faxServiceAdresse" />
-                  	<attribute name="faxFaxOnly" />
-                  </listlayout>
-               </section>            
-            </tab>
-         </editor>
-      </organizer>
-   </type>
+	<type name="ArtozProduct" icon="images/icons/e_product.gif"
+		mode="append">
+		<organizer>
+			<editor>
+				<essentials>
+					<columnlayout mode="replace">
+						<row>
+							<attribute name="code" editable="false" />
+							<attribute name="name" editable="false" />
+						</row>
+						<row>
+							<attribute name="catalogVersion"
+								editable="false" />
+							<attribute name="approvalStatus"
+								editable="false" />
+						</row>
+					</columnlayout>
+				</essentials>
+				<tab name="tab.product.variants" mode="delete" />
+				<tab name="tab.product.technicalattributes"
+					mode="delete" />
+				<tab name="tab.product.versions" mode="delete" />
+				<tab name="tab.product.bmecat" mode="delete" />
+				<tab name="tab.product.extendedattributes"
+					mode="delete" />
+				<tab name="tab.product.properties">
+					<section name="section.catalog_and_validity"
+						mode="delete" />
+					<section name="section.product.ids" mode="append">
+						<columnlayout>
+							<row>
+								<attribute name="ean" />
+							</row>
+							<row>
+								<attribute name="contentunit" />
+								<attribute name="numbercontentunits" />
+							</row>
+						</columnlayout>
+					</section>
+					<section name="product.general">
+						<listlayout>
+							<attribute name="din" editable="false" />
+							<attribute name="dimensions"
+								editable="false" />
+							<attribute name="grammage" editable="false" />
+							<attribute name="itemTypeGroup"
+								editable="false" />
+							<attribute name="materialGroup"
+								editable="false" />
+							<attribute name="newnessCode"
+								editable="false" />
+							<attribute name="distributionStatus"
+								editable="false" />
+							<attribute name="mdaView" editable="false" />
+							<attribute name="artist" />
+							<attribute name="iconCode" />
+						</listlayout>
+					</section>
+					<section name="product.descriptions">
+						<listlayout>
+							<attribute name="unit" mode="delete" />
+						</listlayout>
+					</section>
+				</tab>
+				<tab name="tab.product.prices">
+					<section name="section.product.pricesdiscounts">
+						<listlayout>
+							<attribute name="europe1Discounts"
+								mode="delete" />
+							<text name="text.product.pg" mode="delete" />
+							<attribute name="Europe1PriceFactory_PPG"
+								mode="delete" />
+							<attribute name="Europe1PriceFactory_PDG"
+								mode="delete" />
+							<text name="text.product.dg" mode="delete" />
+							<attribute name="Europe1PriceFactory_PTG"
+								mode="delete" />
+						</listlayout>
+						<columnlayout mode="delete">
+							<row>
+								<attribute name="minorderquantity"
+									mode="delete" />
+								<attribute name="maxorderquantity"
+									mode="delete" />
+							</row>
+						</columnlayout>
+					</section>
+				</tab>
+			</editor>
+		</organizer>
+	</type>
+
+	<type name="EMailFaxCampaign" mode="append">
+		<organizer>
+			<editor>
+				<tab name="tab.fax.properties">
+					<section name="section.fax.properties">
+						<listlayout>
+							<attribute name="faxUserName" />
+							<attribute name="faxPassword" />
+							<attribute name="faxFaxNumber" />
+							<attribute name="faxServiceAdresse" />
+							<attribute name="faxFaxOnly" />
+						</listlayout>
+					</section>
+				</tab>
+			</editor>
+		</organizer>
+	</type>
+
+	<!-- Wizard -->
+	<type name="CreateEMailFaxCampaignWizard"
+		icon="ext/campaign/images/icons/e_campaign.gif">
+		<organizer>
+			<editor>
+				<tab name="tab.createEMailFaxCampaignWizard.one"
+					position="0">
+					<section
+						name="section.createwmpagecontentwizard.one.campaign">
+						<listlayout>
+							<attribute name="campaignName" />
+							<attribute name="campaignSubject" />
+							<attribute name="campaignSender" />
+							<attribute name="campaignFaxCampaign" />
+						</listlayout>
+					</section>
+					<section
+						name="section.createwmpagecontentwizard.one.fax">
+						<listlayout>
+							<attribute name="faxServiceUser" />
+							<attribute name="faxServicePassword" />
+							<attribute name="faxServiceAdresse" />
+						</listlayout>
+					</section>
+				</tab>
+				<tab name="tab.createEMailFaxCampaignWizard.two"
+					position="1">
+					<section
+						name="section.createwmpagecontentwizard.two.template">
+						<listlayout>
+							<text name="nciwizard.tempalte.de" />
+							<attribute name="campaignHTMLTemplateDECH">
+								<uploadtomediaeditor />
+							</attribute>
+							<attribute name="campaignTextTemplateDECH">
+								<uploadtomediaeditor />
+							</attribute>
+							<text name="nciwizard.tempalte.en" />
+							<attribute name="campaignHTMLTemplateEN">
+								<uploadtomediaeditor />
+							</attribute>
+							<attribute name="campaignTextTemplateEN">
+								<uploadtomediaeditor />
+							</attribute>
+							<text name="nciwizard.tempalte.frch" />							
+							<attribute name="campaignHTMLTemplateFRCH">
+								<uploadtomediaeditor />
+							</attribute>
+							<attribute name="campaignTextTemplateFRCH">
+								<uploadtomediaeditor />
+							</attribute>
+							<text name="nciwizard.tempalte.itch" />							
+							<attribute name="campaignHTMLTemplateITCH">
+								<uploadtomediaeditor />
+							</attribute>
+							<attribute name="campaignTextTemplateITCH">
+								<uploadtomediaeditor />
+							</attribute>
+							<text name="nciwizard.tempalte.es" />							
+							<attribute name="campaignHTMLTemplateES">
+								<uploadtomediaeditor />
+							</attribute>
+							<attribute name="campaignTextTemplateES">
+								<uploadtomediaeditor />
+							</attribute>
+							<text name="nciwizard.tempalte.pt" />							
+							<attribute name="campaignHTMLTemplatePT">
+								<uploadtomediaeditor />
+							</attribute>
+							<attribute name="campaignTextTemplatePT">
+								<uploadtomediaeditor />
+							</attribute>																																			
+						</listlayout>
+					</section>
+				</tab>
+				<tab name="tab.createEMailFaxCampaignWizard.three"
+					position="2">
+					<section
+						name="section.createwmpagecontentwizard.three.newsletter">
+						<listlayout>
+							<text name="nciwizard.newsletter" />
+							<attribute name="campaignNewsletter" />
+						</listlayout>
+					</section>
+					<section
+						name="section.createwmpagecontentwizard.three.import">
+						<listlayout>
+							<text name="nciwizard.import" />
+							<attribute name="campaignImportFile">
+								<uploadtomediaeditor />
+							</attribute>
+							<table>
+								<tr>
+									<td>
+										<action type="item"
+											classname="ch.screenconcept.artoz.hmc.actions.StartNewsletterCustomerImportAction"
+											name="action.nlcimport.start" showtoolbarlabel="true"
+											icon="images/ext/cronjob/e_cronjob.gif" />
+									</td>
+								</tr>
+							</table>
+						</listlayout>
+					</section>
+				</tab>
+			</editor>
+		</organizer>
+	</type>
 </configuration>

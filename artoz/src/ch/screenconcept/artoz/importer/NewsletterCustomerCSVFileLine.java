@@ -35,4 +35,8 @@ public class NewsletterCustomerCSVFileLine extends AbstractCSVFileLine
 		return getColumn(4);
 	}
 
+	public String getLanguageIsoCode()
+	{
+		return getColumn(5);
+	}
 }

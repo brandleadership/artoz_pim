@@ -21,6 +21,7 @@ public final class ArtozConstants extends GeneratedArtozConstants
 {
 	public static final String NEWSLETTERGROUP = "newslettergroup";
 	public static final String STANDARDCATALOG = "Artoz - Standard";
+	public static final String NEWSLETTER_PREFIX = "Artoz_Newsletter_";
 	
 	public static final class MimeTypes
 	{
@@ -217,6 +218,7 @@ public final class ArtozConstants extends GeneratedArtozConstants
 		public static final class IDs
 		{
 			public static final String PRODUCTIMPORT = "productimport";
+			public static final String NEWSLETTERCUSTOMER = "newslettercustomer";
 		}
 		
 		public static int getNewProductImportNumber(){
@@ -234,6 +236,18 @@ public final class ArtozConstants extends GeneratedArtozConstants
 		
 		public static int getCurrentProductImportNumber(){
 			return currentNumber;
+		}
+		
+		public static int getNewsletterCustomerNumber(){
+			
+			NumberSeriesManager numberManager = NumberSeriesManager.getInstance();
+			try {
+				numberManager.getNumberSeries(IDs.NEWSLETTERCUSTOMER);
+			}
+			catch(JaloInvalidParameterException je){
+				numberManager.createNumberSeries( IDs.NEWSLETTERCUSTOMER, "0000000000", 1, 10 );
+			}
+			return Integer.parseInt(numberManager.getUniqueNumber(IDs.NEWSLETTERCUSTOMER));
 		}
 	}
 }
