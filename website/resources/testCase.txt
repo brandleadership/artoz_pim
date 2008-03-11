@@ -4,4 +4,3 @@
 #and execute your test
 
 ch.screenconcept.artoz.website.jalo.WebsiteTest
-

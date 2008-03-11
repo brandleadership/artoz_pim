@@ -26,6 +26,7 @@
       <requires-extension name="impex"/> 
       <requires-extension name="cronjob"/>
       <requires-extension name="cms"/>      
+      <requires-extension name="artoz"/>      
 
       <coremodule packageroot="ch.screenconcept.artoz.website"
                   manager="ch.screenconcept.artoz.website.jalo.WebsiteManager"

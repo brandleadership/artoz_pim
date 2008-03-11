@@ -28,7 +28,6 @@ public class CmsJSFBean
 
 	public AbstractCMSItem getMainNav()
 	{
-		log.info("Entering MainNav");
 		return getWebsite().getNavigationElement(MAIN_NAV);
 	}
 
@@ -39,9 +38,7 @@ public class CmsJSFBean
 		Collection<NavigationElement> children = ((NavigationElement) getMainNav()).getChildren();
 		for (NavigationElement c : children)
 		{
-			log.info("Found one" + c.getClass().getName());
 			if (c instanceof ArtozMainNavigationElement){
-				log.info("added " + c.getName());
 				results.add((ArtozMainNavigationElement) c);
 			}
 		}
@@ -50,7 +47,6 @@ public class CmsJSFBean
 
 	public Website getWebsite()
 	{
-		log.info("getWebsite");
 		return CmsManager.getInstance().getWebsite("Artoz");
 	}
 

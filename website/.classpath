@@ -12,5 +12,6 @@
 	<classpathentry kind="lib" path="web/webroot/WEB-INF/lib/shale-core-1.0.4.jar"/>
 	<classpathentry kind="lib" path="web/webroot/WEB-INF/lib/shale-tiger-1.0.4.jar"/>
 	<classpathentry kind="lib" path="web/webroot/WEB-INF/lib/shale-view-1.0.4.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/artoz"/>
 	<classpathentry kind="output" path="eclipsebin"/>
 </classpath>
