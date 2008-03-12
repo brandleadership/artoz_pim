@@ -1,7 +1,5 @@
 package ch.screenconcept.artoz.campaign;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.Collection;
@@ -23,7 +21,6 @@ import com.exedio.campaign.jalo.EMailCampaignParticipation;
 import com.exedio.campaign.jalo.EMailConfig;
 import com.exedio.campaign.jalo.MailProxyFactory;
 import com.exedio.campaign.jalo.MailTemplateException;
-import com.exedio.campaign.jalo.proxy.DefaultMailProxyFactory;
 
 import de.hybris.platform.jalo.JaloInvalidParameterException;
 import de.hybris.platform.jalo.JaloSession;
@@ -97,7 +94,7 @@ public class EMailFaxCampaign extends GeneratedEMailFaxCampaign
 
 		final VelocityContext ctx = new VelocityContext();
 		final CampaignContext campaignContext = new CampaignContext(this, participation);
-		final MailProxyFactory proxyFactory = DefaultMailProxyFactory.getInstance();
+		final MailProxyFactory proxyFactory = ArtozMailProxyFactory.getInstance();
 		if (log.isDebugEnabled())
 			log.debug("MailProxyFactory used >" + proxyFactory.getClass().getName() + "< ");
 

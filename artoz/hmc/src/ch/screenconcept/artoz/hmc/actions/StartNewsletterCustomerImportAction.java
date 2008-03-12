@@ -12,6 +12,7 @@ import ch.screenconcept.artoz.jalo.ArtozManager;
 import ch.screenconcept.artoz.wizard.CreateEMailFaxCampaignWizard;
 
 import com.exedio.campaign.jalo.CampaignManager;
+import com.exedio.campaign.jalo.Newsletter;
 
 import de.hybris.platform.cronjob.jalo.CronJobManager;
 import de.hybris.platform.hmc.util.action.ActionEvent;
@@ -23,7 +24,7 @@ import de.hybris.platform.jalo.user.UserManager;
 public class StartNewsletterCustomerImportAction extends ItemAction
 {
 	private final String NEWSLETTERCUSTOMERIMPORTJOBCODE = "newsletterCustomerImportJob";
-	
+
 	@Override
 	public ActionResult perform(ActionEvent actionevent) throws JaloBusinessException
 	{
@@ -31,8 +32,10 @@ public class StartNewsletterCustomerImportAction extends ItemAction
 		if (item.getCampaignNewsletter() == null)
 		{
 			SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy_HH-mm-ss");
-			item.setCampaignNewsletter(CampaignManager.getInstance().createNewsletter(
-						ArtozConstants.NEWSLETTER_PREFIX + sdf.format(new Date())));
+			String newsletterName = ArtozConstants.NEWSLETTER_PREFIX + sdf.format(new Date());
+			Newsletter newsletter = CampaignManager.getInstance().createNewsletter(newsletterName);
+			newsletter.setName(newsletterName);
+			item.setCampaignNewsletter(newsletter);
 		}
 
 		ArtozManager artozManager = ArtozManager.getInstance();
@@ -56,7 +59,7 @@ public class StartNewsletterCustomerImportAction extends ItemAction
 		MediaNewsletterImportCronjob cronjob = artozManager.createMediaNewsletterImportCronjob(paramsCronjob);
 
 		job.perform(cronjob);
-		
+
 		return null;
 	}
 

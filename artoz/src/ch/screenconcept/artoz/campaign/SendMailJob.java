@@ -79,6 +79,10 @@ public class SendMailJob extends GeneratedSendMailJob
 			InterFaxStub theBinding = new InterFaxStub(fax.getFaxServiceAdresse());
 			SendfaxEx_2Response response = theBinding.SendfaxEx_2(sendfax);
 			log.info("sendFax() call returned with code: " + response.getSendfaxEx_2Result());
+			if (response.getSendfaxEx_2Result() > 0)
+				fax.setLastSentDate(new Date());
+			else
+				fax.setFailure("Error code: " + response.getSendfaxEx_2Result());
 		}
 	}
 }

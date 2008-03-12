@@ -15,28 +15,33 @@ public class NewsletterCustomerCSVFileLine extends AbstractCSVFileLine
 		return getColumn(0);
 	}
 
-	public String getName()
+	public String getTitle()
 	{
 		return getColumn(1);
 	}
-
-	public String getFirstname()
+	
+	public String getName()
 	{
 		return getColumn(2);
 	}
 
-	public String getEMail()
+	public String getFirstname()
 	{
 		return getColumn(3);
 	}
 
-	public String getFax()
+	public String getEMail()
 	{
 		return getColumn(4);
 	}
 
-	public String getLanguageIsoCode()
+	public String getFax()
 	{
 		return getColumn(5);
+	}
+
+	public String getLanguageIsoCode()
+	{
+		return getColumn(6);
 	}
 }

@@ -3,7 +3,6 @@ package ch.screenconcept.artoz.importer;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
@@ -21,11 +20,14 @@ import de.hybris.platform.jalo.JaloBusinessException;
 import de.hybris.platform.jalo.JaloInvalidParameterException;
 import de.hybris.platform.jalo.JaloSession;
 import de.hybris.platform.jalo.SearchResult;
+import de.hybris.platform.jalo.SessionContext;
 import de.hybris.platform.jalo.c2l.C2LManager;
+import de.hybris.platform.jalo.c2l.Language;
 import de.hybris.platform.jalo.security.JaloSecurityException;
 import de.hybris.platform.jalo.type.TypeManager;
 import de.hybris.platform.jalo.user.Address;
 import de.hybris.platform.jalo.user.Customer;
+import de.hybris.platform.jalo.user.Title;
 import de.hybris.platform.jalo.user.User;
 import de.hybris.platform.jalo.user.UserGroup;
 import de.hybris.platform.jalo.user.UserManager;
@@ -48,7 +50,7 @@ public class NewsletterCustomerImportJob extends GeneratedNewsletterCustomerImpo
 		final Newsletter newsletter = importCronjob.getNewsletter();
 		try
 		{
-			newsletterParser = new NewsletterCustomerCSVFileParser(importCronjob.getMedia().getDataFromStream(), ';', 6);
+			newsletterParser = new NewsletterCustomerCSVFileParser(importCronjob.getMedia().getDataFromStream(), ';', 7);
 			while (!newsletterParser.isClosed())
 			{
 				createOrUpdateNewsletterCustomer((NewsletterCustomerCSVFileLine) newsletterParser.readLine(),
@@ -71,10 +73,18 @@ public class NewsletterCustomerImportJob extends GeneratedNewsletterCustomerImpo
 					+ line.getColumn(3) + " " + line.getColumn(4));
 
 		// Don't check fax because the email address identifies the customer
-		Customer customer = findCustomerByMailOrFax(line.getEMail(), null);
+		Customer customer;
+		if (line.getEMail() != null && !line.getEMail().equals(""))
+			customer = findCustomerByMailOrFax(line.getEMail(), null);
+		else
+			customer = getCustomerByName(line.getName() + "_" + line.getFirstname());
+
 		if (customer == null)
+		{
 			customer = UserManager.getInstance().createCustomer(
 						"nlc_" + ArtozConstants.NumberSeries.getNewsletterCustomerNumber());
+			customer.setAttribute(CampaignConstants.Attributes.User.NEWSLETTERSUBSCRIBED, true);
+		}
 
 		log.info("UID " + customer.getUID());
 		updateCustomer(customer, line, newsletter);
@@ -84,26 +94,29 @@ public class NewsletterCustomerImportJob extends GeneratedNewsletterCustomerImpo
 				throws JaloSecurityException, JaloBusinessException
 	{
 		final String email = line.getEMail();
+		final Language customerLanguage = C2LManager.getInstance().getLanguageByIsoCode(line.getLanguageIsoCode());
 		cus.setAttribute(Customer.LOGIN_DISABLED, true);
 		cus.setAttribute(Customer.NAME, line.getName() + "_" + line.getFirstname());
-		cus.setAttribute(Customer.SESSION_LANGUAGE, C2LManager.getInstance().getLanguageByIsoCode(
-					line.getLanguageIsoCode()));
+		cus.setAttribute(Customer.SESSION_LANGUAGE, customerLanguage);	
 		cus.setAttribute(CampaignConstants.Attributes.User.EMAILADDRESS, email);
-		cus.setAttribute(CampaignConstants.Attributes.Customer.NEWSLETTERS, Collections.singletonList(newsletter));
+		Boolean isNewsletterSubscribed = (Boolean) cus.getAttribute(CampaignConstants.Attributes.User.NEWSLETTERSUBSCRIBED);
+		if (isNewsletterSubscribed == null || isNewsletterSubscribed)
+			cus.setAttribute(CampaignConstants.Attributes.Customer.NEWSLETTERS, Collections.singletonList(newsletter));
 
-		Map<String, String> params = new HashMap<String, String>();
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put(Address.TITLE, getTitleByName(line.getTitle(), customerLanguage));
 		params.put(Address.LASTNAME, line.getName());
 		params.put(Address.FIRSTNAME, line.getFirstname());
 		params.put(Address.COMPANY, line.getCompany());
 		params.put(Address.FAX, line.getFax());
 
-		Iterator<Address> iterator = cus.getAllAddresses().iterator();
-		if (iterator.hasNext())
-			iterator.next().setAllAttributes(params);
+		Address address = cus.getDefaultPaymentAddress();
+		if (address != null)
+			address.setAllAttributes(params);
 		else
-			cus.createAddress(params);
+			cus.setDefaultPaymentAddress(cus.createAddress(params));
 
-		//Replace all user groups and add the newsletter one
+		// Replace all user groups and add the newsletter one
 		UserGroup userGroup = UserManager.getInstance().getUserGroupByGroupID(ArtozConstants.NEWSLETTERGROUP);
 		Set<UserGroup> usergroups = new HashSet<UserGroup>();
 		usergroups.add(userGroup);
@@ -152,6 +165,41 @@ public class NewsletterCustomerImportJob extends GeneratedNewsletterCustomerImpo
 			return (Customer) res.getResult().get(0);
 		}
 		return null;
+	}
 
+	private Title getTitleByName(String name, Language language)
+	{
+		Map<String, String> value = new HashMap<String, String>();
+		value.put("name", name);
+
+		String query = "SELECT { " + Title.PK + "} FROM {"
+					+ TypeManager.getInstance().getComposedType(Title.class).getCode() + "} WHERE {" + Title.NAME
+					+ "} = ?name";
+
+		final SessionContext ctx = JaloSession.getCurrentSession().createSessionContext();
+		ctx.setLanguage(language);
+		final SearchResult res = JaloSession.getCurrentSession().getFlexibleSearch().search(ctx, query.toString(),
+					value, Collections.singletonList(Title.class), true, true, 0, -1);
+
+		if (res.getResult().isEmpty())
+			return null;
+		return (Title) res.getResult().get(0);
+	}
+
+	private Customer getCustomerByName(String name)
+	{
+		Map<String, String> value = new HashMap<String, String>();
+		value.put("name", name);
+
+		String query = "SELECT { " + Customer.PK + "} FROM {"
+					+ TypeManager.getInstance().getComposedType(Customer.class).getCode() + "} WHERE {" + Customer.NAME
+					+ "} = ?name";
+
+		final SearchResult res = JaloSession.getCurrentSession().getFlexibleSearch().search(query.toString(), value,
+					Collections.singletonList(Customer.class), true, true, 0, -1);
+
+		if (res.getResult().isEmpty())
+			return null;
+		return (Customer) res.getResult().get(0);
 	}
 }

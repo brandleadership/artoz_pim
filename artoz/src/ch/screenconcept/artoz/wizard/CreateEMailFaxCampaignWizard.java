@@ -264,37 +264,37 @@ public class CreateEMailFaxCampaignWizard extends GeneratedCreateEMailFaxCampaig
 	@Override
 	public Media getCampaignTextTemplateDECH(SessionContext ctx)
 	{
-		return campaignHTMLTemplateDECH;
+		return campaignTextTemplateDECH;
 	}
 
 	@Override
 	public Media getCampaignTextTemplateEN(SessionContext ctx)
 	{
-		return campaignHTMLTemplateEN;
+		return campaignTextTemplateEN;
 	}
 
 	@Override
 	public Media getCampaignTextTemplateES(SessionContext ctx)
 	{
-		return campaignHTMLTemplateES;
+		return campaignTextTemplateES;
 	}
 
 	@Override
 	public Media getCampaignTextTemplateFRCH(SessionContext ctx)
 	{
-		return campaignHTMLTemplateFRCH;
+		return campaignTextTemplateFRCH;
 	}
 
 	@Override
 	public Media getCampaignTextTemplateITCH(SessionContext ctx)
 	{
-		return campaignHTMLTemplateITCH;
+		return campaignTextTemplateITCH;
 	}
 
 	@Override
 	public Media getCampaignTextTemplatePT(SessionContext ctx)
 	{
-		return campaignHTMLTemplatePT;
+		return campaignTextTemplatePT;
 	}
 
 	@Override
@@ -476,6 +476,8 @@ public class CreateEMailFaxCampaignWizard extends GeneratedCreateEMailFaxCampaig
 
 	private String getStringFromTxtMedia(Media media) throws JaloBusinessException, IOException
 	{
+		if (media == null)
+			return null;
 		StringBuffer data = new StringBuffer();
 		char[] buffer = new char[4];
 		BufferedReader br = new BufferedReader(new InputStreamReader(media.getDataFromStream()));
