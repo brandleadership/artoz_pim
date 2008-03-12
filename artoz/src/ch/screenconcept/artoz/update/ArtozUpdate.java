@@ -2,6 +2,8 @@ package ch.screenconcept.artoz.update;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import ch.screenconcept.artoz.constants.ArtozConstants;
 import de.hybris.platform.catalog.jalo.CatalogManager;
@@ -12,6 +14,7 @@ import de.hybris.platform.jalo.c2l.C2LManager;
 import de.hybris.platform.jalo.c2l.Currency;
 import de.hybris.platform.jalo.c2l.Language;
 import de.hybris.platform.jalo.product.ProductManager;
+import de.hybris.platform.jalo.user.UserManager;
 
 public class ArtozUpdate
 {
@@ -69,9 +72,11 @@ public class ArtozUpdate
 	public static void createCatalog()
 	{
 		CatalogManager manager = CatalogManager.getInstance();
-		if (manager.getCatalog(ArtozConstants.STANDARDCATALOG) == null){
+		if (manager.getCatalog(ArtozConstants.STANDARDCATALOG) == null)
+		{
 			manager.createCatalog(ArtozConstants.STANDARDCATALOG);
-			CatalogVersion version = manager.createCatalogVersion(manager.getCatalog(ArtozConstants.STANDARDCATALOG), "Online", ArtozConstants.Languages.getGerman());
+			CatalogVersion version = manager.createCatalogVersion(manager.getCatalog(ArtozConstants.STANDARDCATALOG),
+						"Online", ArtozConstants.Languages.getGerman());
 			version.setActive(true);
 			Collection<Language> languages = new ArrayList<Language>();
 			languages.add(ArtozConstants.Languages.getGerman());
@@ -83,9 +88,22 @@ public class ArtozUpdate
 			version.setLanguages(languages);
 		}
 	}
-	
-	public static void creatUnits(){
+
+	public static void creatUnits()
+	{
 		if (ProductManager.getInstance().getUnit(ArtozConstants.Units.IDs.PIECES) == null)
-			ProductManager.getInstance().createUnit( "p" ,ArtozConstants.Units.IDs.PIECES);
+			ProductManager.getInstance().createUnit("p", ArtozConstants.Units.IDs.PIECES);
+	}
+
+	public static void createTitles() throws ConsistencyCheckException
+	{
+		try
+		{
+			UserManager.getInstance().getTitleByCode(ArtozConstants.Titles.MISTER_CODE);
+		}
+		catch (JaloItemNotFoundException je)
+		{
+			UserManager.getInstance().createTitle(ArtozConstants.Titles.MISTER_CODE);
+		}
 	}
 }
