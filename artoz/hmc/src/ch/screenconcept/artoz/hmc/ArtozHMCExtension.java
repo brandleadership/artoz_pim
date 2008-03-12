@@ -8,14 +8,19 @@ import de.hybris.platform.hmc.extension.HMCExtension;
 import de.hybris.platform.hmc.extension.MenuEntrySlotEntry;
 import de.hybris.platform.hmc.generic.ClipChip;
 import de.hybris.platform.hmc.generic.ToolbarActionChip;
+import de.hybris.platform.hmc.util.action.ActionResult;
 import de.hybris.platform.hmc.webchips.Chip;
 import de.hybris.platform.hmc.webchips.DisplayState;
+import de.hybris.platform.jalo.Item;
 import de.hybris.platform.jalo.JaloSession;
 import de.hybris.platform.jalo.SessionContext;
+import de.hybris.platform.jalo.type.ComposedType;
 
 import java.util.*;
 
 import org.apache.log4j.Logger;
+
+import ch.screenconcept.artoz.constants.ArtozConstants;
 
 
 /**
@@ -153,5 +158,19 @@ public class ArtozHMCExtension extends HMCExtension
    public String getResourcePath()
    {
     	return RESOURCE_PATH;
-   } 
+   }
+
+	@Override
+	public ActionResult beforeRemove(Item item, ComposedType itemType, DisplayState displayState, Map values) {
+		if( ArtozConstants.TC.ARTOZPRODUCT.equals( itemType.getCode() ) )
+		{
+			return new ActionResult( ActionResult.FAILED, getLocalizedString("notallowed", JaloSession.getCurrentSession().getSessionContext()), false );
+		}
+		else
+		{
+			return super.beforeRemove(item, itemType, displayState, values);
+		}
+	} 
+   
+   
 }

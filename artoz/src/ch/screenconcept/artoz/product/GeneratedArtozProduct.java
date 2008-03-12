@@ -14,17 +14,17 @@ import java.lang.String;
 
 public abstract class GeneratedArtozProduct extends Product
 {
-	public static final String DIMENSIONS = "dimensions".intern();
-	public static final String MATERIALGROUP = "materialGroup".intern();
-	public static final String ARTIST = "artist".intern();
+	public static final String ICONCODE = "iconCode".intern();
 	public static final String DIN = "din".intern();
-	public static final String GRAMMAGE = "grammage".intern();
+	public static final String ARTIST = "artist".intern();
+	public static final String NEWNESSCODE = "newnessCode".intern();
+	public static final String DIMENSIONS = "dimensions".intern();
 	public static final String UPDATECOUNTER = "updateCounter".intern();
-	public static final String ITEMTYPEGROUP = "itemTypeGroup".intern();
 	public static final String MDAVIEW = "mdaView".intern();
 	public static final String DISTRIBUTIONSTATUS = "distributionStatus".intern();
-	public static final String NEWNESSCODE = "newnessCode".intern();
-	public static final String ICONCODE = "iconCode".intern();
+	public static final String ITEMTYPEGROUP = "itemTypeGroup".intern();
+	public static final String MATERIALGROUP = "materialGroup".intern();
+	public static final String GRAMMAGE = "grammage".intern();
 	public String getArtist(final SessionContext ctx)
 	{
 		return (String)getProperty( ctx, ARTIST);
