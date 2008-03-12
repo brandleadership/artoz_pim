@@ -11,18 +11,18 @@ import de.hybris.platform.jalo.numberseries.NumberSeriesManager;
 import de.hybris.platform.jalo.product.ProductManager;
 import de.hybris.platform.jalo.product.Unit;
 
-
-
 /**
- * Global class for all Artoz constants.  
- * You can add global constants for your extension into this class 
+ * Global class for all Artoz constants. You can add global constants for your
+ * extension into this class
  */
 public final class ArtozConstants extends GeneratedArtozConstants
 {
 	public static final String NEWSLETTERGROUP = "newslettergroup";
+
 	public static final String STANDARDCATALOG = "Artoz - Standard";
+
 	public static final String NEWSLETTER_PREFIX = "Artoz_Newsletter_";
-	
+
 	public static final class MimeTypes
 	{
 		public static final String XML = "text/xml";
@@ -30,18 +30,20 @@ public final class ArtozConstants extends GeneratedArtozConstants
 		public static final String CSV = "text/x-comma-separated-values";
 
 		public static final String XSL = "application/xslt+xml";
-		
+
 		public static final String TXT = "text/plain";
 	}
 
 	public static final class Charsets
 	{
 		public static final String UTF8 = "UTF-8";
+
 		public static final String ISO_8859_1 = "ISO-8859-1";
+
 		public static final String LATIN_1 = "latin1";
+
 		public static final String CP1252 = "cp1252";
 	}
-
 
 	public static final class Languages
 	{
@@ -56,7 +58,7 @@ public final class ArtozConstants extends GeneratedArtozConstants
 			public static final String FRENCH = "frCH";
 
 			public static final String SPANISH = "es";
-			
+
 			public static final String PORTUGUESE = "pt";
 		}
 
@@ -107,7 +109,7 @@ public final class ArtozConstants extends GeneratedArtozConstants
 			ctxFR.setLanguage(getFrench());
 			return ctxFR;
 		}
-		
+
 		public static Language getSpanish()
 		{
 			return (Language) Tools.get(Language.class, Language.ISOCODE, IsoCodes.SPANISH);
@@ -139,12 +141,19 @@ public final class ArtozConstants extends GeneratedArtozConstants
 		public final class IsoCodes
 		{
 			public static final String LICHTENSTEIN = "fl";
-			public static final String SWITZERLAND = "ch";			
+
+			public static final String SWITZERLAND = "ch";
+
 			public static final String GERMANY = "DE";
+
 			public static final String FRANCE = "FR";
+
 			public static final String PORTUGAL = "PT";
+
 			public static final String SPAIN = "ES";
+
 			public static final String USA = "US";
+
 			public static final String GREATBRITAN = "GB";
 		}
 
@@ -157,7 +166,7 @@ public final class ArtozConstants extends GeneratedArtozConstants
 		{
 			return (Country) Tools.get(Country.class, Country.ISOCODE, IsoCodes.SWITZERLAND);
 		}
-		
+
 	}
 
 	public static final class Currencies
@@ -165,18 +174,23 @@ public final class ArtozConstants extends GeneratedArtozConstants
 		public static final class IsoCodes
 		{
 			public static final String CHF = "CHF";
+
 			public static final String EUR = "EUR";
+
 			public static final String GBP = "GBP";
+
 			public static final String USD = "USD";
 		}
 
 		public static final class Symbols
 		{
 			public static final String CHF = "CHF";
+
 			public static final String EUR = "€";
+
 			public static final String GBP = "£";
 		}
-		
+
 		public static final Currency getCHF()
 		{
 			return (Currency) Tools.get(Currency.class, Currency.ISOCODE, IsoCodes.CHF);
@@ -186,7 +200,7 @@ public final class ArtozConstants extends GeneratedArtozConstants
 		{
 			return (Currency) Tools.get(Currency.class, Currency.ISOCODE, IsoCodes.EUR);
 		}
-		
+
 		public static final Currency getGBP()
 		{
 			return (Currency) Tools.get(Currency.class, Currency.ISOCODE, IsoCodes.GBP);
@@ -197,57 +211,74 @@ public final class ArtozConstants extends GeneratedArtozConstants
 			return (Currency) Tools.get(Currency.class, Currency.ISOCODE, IsoCodes.USD);
 		}
 	}
-	
-	public static final class Units{
-		
+
+	public static final class Units
+	{
+
 		public static final class IDs
 		{
 			public static final String PIECES = "pieces";
 		}
-				
+
 		public static final Unit getPieces()
 		{
 			return ProductManager.getInstance().getUnit("pieces");
 		}
 	}
-	
+
 	public static final class NumberSeries
 	{
 		private static int currentNumber;
-		
+
 		public static final class IDs
 		{
 			public static final String PRODUCTIMPORT = "productimport";
+
 			public static final String NEWSLETTERCUSTOMER = "newslettercustomer";
 		}
-		
-		public static int getNewProductImportNumber(){
-			
+
+		public static int getNewProductImportNumber()
+		{
+
 			NumberSeriesManager numberManager = NumberSeriesManager.getInstance();
-			try {
+			try
+			{
 				numberManager.getNumberSeries(IDs.PRODUCTIMPORT);
 			}
-			catch(JaloInvalidParameterException je){
-				numberManager.createNumberSeries( IDs.PRODUCTIMPORT, "0000000000", 1, 10 );
+			catch (JaloInvalidParameterException je)
+			{
+				numberManager.createNumberSeries(IDs.PRODUCTIMPORT, "0000000000", 1, 10);
 			}
 			currentNumber = Integer.parseInt(numberManager.getUniqueNumber(IDs.PRODUCTIMPORT));
 			return currentNumber;
 		}
-		
-		public static int getCurrentProductImportNumber(){
+
+		public static int getCurrentProductImportNumber()
+		{
 			return currentNumber;
 		}
-		
-		public static int getNewsletterCustomerNumber(){
-			
+
+		public static int getNewsletterCustomerNumber()
+		{
+
 			NumberSeriesManager numberManager = NumberSeriesManager.getInstance();
-			try {
+			try
+			{
 				numberManager.getNumberSeries(IDs.NEWSLETTERCUSTOMER);
 			}
-			catch(JaloInvalidParameterException je){
-				numberManager.createNumberSeries( IDs.NEWSLETTERCUSTOMER, "0000000000", 1, 10 );
+			catch (JaloInvalidParameterException je)
+			{
+				numberManager.createNumberSeries(IDs.NEWSLETTERCUSTOMER, "0000000000", 1, 10);
 			}
 			return Integer.parseInt(numberManager.getUniqueNumber(IDs.NEWSLETTERCUSTOMER));
 		}
+	}
+
+	public static final class Titles
+	{
+
+		public static final String MISTER_CODE = "mister";
+
+		public static final String MRS_CODE = "mrs";
 	}
 }
