@@ -53,7 +53,7 @@ public class SendMailJob extends GeneratedSendMailJob
 			sendfax.setPassword(fax.getFaxServicePassword());
 			sendfax.setFaxNumbers(fax.getRecipient());
 			sendfax.setSubject(fax.getSubject());
-			sendfax.setPageHeader("To: {To} From: {From} Pages: {TotalPages}");
+			sendfax.setPageHeader("To: {To} From: " + fax.getFaxSender() + " Pages: {TotalPages}");
 			sendfax.setPostpone(new GregorianCalendar());
 
 			File fileToSend = new File("/home/pascal/workspace/artoz/import/", "tmp.txt");

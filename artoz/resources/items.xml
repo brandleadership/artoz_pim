@@ -222,6 +222,12 @@
 					<modifiers optional="true" write="true" read="true"
 						search="true" />
 				</attribute>
+				<attribute qualifier="faxSender"
+					type="java.lang.String">
+					<persistence type="property" />
+					<modifiers optional="true" write="true" read="true"
+						search="true" />
+				</attribute>				
 				<attribute qualifier="faxFaxNumber"
 					type="java.lang.String">
 					<persistence type="property" />
@@ -259,6 +265,12 @@
 					<modifiers optional="false" write="true" read="true"
 						search="true" initial="true" />
 					<defaultvalue>false</defaultvalue>
+				</attribute>
+				<attribute qualifier="faxSender"
+					type="java.lang.String">
+					<persistence type="property" />
+					<modifiers optional="true" write="true" read="true"
+						search="true" />
 				</attribute>
 				<attribute qualifier="faxServiceUser"
 					type="java.lang.String">
@@ -309,6 +321,11 @@
 				</attribute>
 				<attribute qualifier="campaignText"
 					type="localized:java.lang.String">
+					<modifiers optional="true" />
+					<persistence type="jalo" />
+				</attribute>
+				<attribute qualifier="faxSender"
+					type="java.lang.String">
 					<modifiers optional="true" />
 					<persistence type="jalo" />
 				</attribute>

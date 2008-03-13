@@ -46,6 +46,8 @@ public class CreateEMailFaxCampaignWizard extends GeneratedCreateEMailFaxCampaig
 
 	private String faxServiceAdresse = Config.getParameter("campaign.faxServiceAdresse");
 
+	private String faxSender = Config.getParameter("campaign.faxSender");
+	
 	private Newsletter newsletter = null;
 
 	private Map<Language, String> campaignSubjectMap, campaignHTMLTextMap, campaignTextMap;
@@ -177,6 +179,19 @@ public class CreateEMailFaxCampaignWizard extends GeneratedCreateEMailFaxCampaig
 		faxServiceUser = value.trim();
 	}
 
+
+	@Override
+	public String getFaxSender(SessionContext ctx)
+	{
+		return faxSender;
+	}
+
+	@Override
+	public void setFaxSender(SessionContext ctx, String value)
+	{
+		faxSender = value;
+	}
+	
 	@Override
 	public Map<Language, String> getAllCampaignHTMLText(SessionContext ctx)
 	{
@@ -403,7 +418,7 @@ public class CreateEMailFaxCampaignWizard extends GeneratedCreateEMailFaxCampaig
 		ctx.hideTab(TAB1);
 		ctx.hideTab(TAB2);
 		ctx.hideTab(TAB3);
-		ctx.showSummaryTab("Kampaine beendet");
+		ctx.showSummaryTab("Die Kampanie wurde erfolgreich erstellt.");
 	}
 
 	@Override
@@ -431,6 +446,7 @@ public class CreateEMailFaxCampaignWizard extends GeneratedCreateEMailFaxCampaig
 		params.put(EMailFaxCampaign.PLAINTEXT, createTxtTemplateList());
 		params.put(EMailFaxCampaign.SENDER, getCampaignSender());
 		params.put(EMailFaxCampaign.FAXFAXONLY, isCampaignFaxCampaign());
+		params.put(EMailFaxCampaign.FAXSENDER, getFaxSender());
 		params.put(EMailFaxCampaign.FAXSERVICEADRESSE, getFaxServiceAdresse());
 		params.put(EMailFaxCampaign.FAXUSERNAME, getFaxServiceUser());
 		params.put(EMailFaxCampaign.FAXPASSWORD, getFaxServicePassword());

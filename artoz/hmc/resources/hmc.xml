@@ -130,6 +130,7 @@
 						<listlayout>
 							<attribute name="faxUserName" />
 							<attribute name="faxPassword" />
+							<attribute name="faxSender" />
 							<attribute name="faxFaxNumber" />
 							<attribute name="faxServiceAdresse" />
 							<attribute name="faxFaxOnly" />
@@ -159,6 +160,7 @@
 					<section
 						name="section.createwmpagecontentwizard.one.fax">
 						<listlayout>
+							<attribute name="faxSender" />
 							<attribute name="faxServiceUser" />
 							<attribute name="faxServicePassword" />
 							<attribute name="faxServiceAdresse" />
