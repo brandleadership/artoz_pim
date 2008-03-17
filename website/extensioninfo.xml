@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2008 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+-->
+<extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
+
+   <extension  name="website"
+               abstractclassprefix="Generated"
+               classprefix="Website"
+               managername="WebsiteManager"
+               managersuperclass="de.hybris.platform.jalo.extension.Extension"
+               >
+               
+      <!-- you should add all required extensions to this list -->         
+      <requires-extension name="hmc"/>         
+      <requires-extension name="impex"/> 
+      <requires-extension name="cronjob"/>
+      <requires-extension name="cms"/>      
+      <requires-extension name="artoz"/>      
+
+      <coremodule packageroot="ch.screenconcept.artoz.website"
+                  manager="ch.screenconcept.artoz.website.jalo.WebsiteManager"
+                  sourceavailable="true"
+                  generated="true" 
+       						java5="true"
+                  />
+
+      <webmodule  jspcompile="false" 
+                  sourceavailable="true"
+                  webroot="/"/>
+
+      <hmcmodule   sourceavailable="true"
+                     extensionclassname="ch.screenconcept.artoz.website.hmc.WebsiteHMCExtension" />
+
+   </extension>
+      
+</extensioninfo>

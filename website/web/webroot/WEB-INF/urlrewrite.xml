@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 2.5//EN"
+"http://tuckey.org/res/dtds/urlrewrite2.5.dtd">
+<!--
+Configuration file for UrlRewriteFilter
+http://tuckey.org/urlrewrite/
+-->
+<urlrewrite>
+
+<!-- URLSHORTCUTS START_ARTOZ --><!-- URLSHORTCUTS END_ARTOZ -->
+
+
+<!-- RULES START_ARTOZ --><!-- RULES END_ARTOZ -->
+
+
+	<!-- Inbound Strategy 3
+	     
+	     Direct requests to xhtml files are mapped to the startpage.
+	-->
+	<!--
+	<rule>
+		<from>/(.*)xhtml(.*)</from>
+		<to type="redirect">%{context-path}/pages/index.jsf</to>
+	</rule>
+    -->
+    <rule>
+        <from>^/index.jsf$</from>
+        <to type="redirect">/pages/index.jsf</to>
+    </rule>
+
+    <rule>
+        <from>^/$</from>
+        <to type="redirect">/pages/index.jsf</to>
+    </rule>
+
+</urlrewrite>
