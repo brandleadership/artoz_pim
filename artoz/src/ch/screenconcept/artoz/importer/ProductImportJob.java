@@ -3,6 +3,7 @@ package ch.screenconcept.artoz.importer;
 import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -91,6 +92,7 @@ public class ProductImportJob extends GeneratedProductImportJob
 			params.put(CatalogConstants.Attributes.Product.EAN, line.getEAN());
 			params.put(CatalogConstants.Attributes.Product.NUMBERCONTENTUNITS, line.getSalesUnit());
 			params.put(CatalogConstants.Attributes.Product.CONTENTUNIT, ArtozConstants.Units.getPieces());
+			params.put(CatalogConstants.Attributes.Product.OFFLINEDATE, null);
 			params.put(ArtozProduct.DIN, line.getDIN());
 			params.put(ArtozProduct.DIMENSIONS, line.getDimensions());
 			params.put(ArtozProduct.UPDATECOUNTER, ArtozConstants.NumberSeries.getCurrentProductImportNumber());
@@ -147,12 +149,11 @@ public class ProductImportJob extends GeneratedProductImportJob
 		}
 	}
 
-	private void deleteNotUpdatedProductsAndPriceRows() throws ConsistencyCheckException
+	private void deleteNotUpdatedProductsAndPriceRows() throws JaloInvalidParameterException, JaloSecurityException, JaloBusinessException
 	{
 		for (ArtozProduct product : ArtozProduct.findNotUpdatedProducts(ArtozConstants.NumberSeries
 					.getCurrentProductImportNumber()))
-			product.remove();
-		// sef offline
+			product.setAttribute(CatalogConstants.Attributes.Product.OFFLINEDATE, new Date());
 
 		for (ArtozPriceRow priceRow : ArtozPriceRow.findNotUpdatedPriceRows(ArtozConstants.NumberSeries
 					.getCurrentProductImportNumber()))

@@ -11,6 +11,7 @@ import ch.screenconcept.artoz.constants.ArtozConstants;
 import ch.screenconcept.artoz.jalo.ArtozManager;
 import ch.screenconcept.artoz.prices.ArtozPriceRow;
 import ch.screenconcept.artoz.prices.PriceRowValues;
+import de.hybris.platform.catalog.constants.CatalogConstants;
 import de.hybris.platform.jalo.JaloBusinessException;
 import de.hybris.platform.jalo.JaloInvalidParameterException;
 import de.hybris.platform.jalo.JaloSession;
@@ -122,18 +123,14 @@ public class ArtozProduct extends GeneratedArtozProduct
 		value.put("number", importNumber);
 
 		final SearchResult res = JaloSession.getCurrentSession().getFlexibleSearch().search(
-					"SELECT {" + ArtozProduct.PK + "} FROM {" + ArtozConstants.TC.ARTOZPRODUCT + "} " + "WHERE {"
-								+ ArtozProduct.UPDATECOUNTER + "} < ?number", value,
-					Collections.singletonList(ArtozProduct.class), true, // fail
-					// on
-					// unknown
-					// fields
-					true, // don't need total
-					0, -1 // range
+					"SELECT {" + ArtozProduct.PK + "} FROM {" + ArtozConstants.TC.ARTOZPRODUCT + "} WHERE {"
+								+ ArtozProduct.UPDATECOUNTER + "} < ?number AND {" + CatalogConstants.Attributes.Product.OFFLINEDATE + "} is null" , value,
+					Collections.singletonList(ArtozProduct.class), true,
+					true, 
+					0, -1 
 					);
 		log.info("Found " + res.getResult().size() + " not updated products by import number " + importNumber);
 		return res.getResult();
-
 	}
 
 	public List<ArtozPriceRow> getAllPriceRows()

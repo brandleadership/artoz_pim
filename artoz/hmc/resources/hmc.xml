@@ -53,19 +53,18 @@
 					mode="delete" />
 				<tab name="tab.product.versions" mode="delete" />
 				<tab name="tab.product.bmecat" mode="delete" />
+				<tab name="administration" mode="delete" />
 				<tab name="tab.product.extendedattributes"
 					mode="delete" />
 				<tab name="tab.product.properties">
-					<section name="section.catalog_and_validity"
-						mode="delete" />
 					<section name="section.product.ids" mode="append">
 						<columnlayout>
 							<row>
-								<attribute name="ean" />
+								<attribute name="ean" editable="false" />
 							</row>
 							<row>
-								<attribute name="contentunit" />
-								<attribute name="numbercontentunits" />
+								<attribute name="contentunit" editable="false" />
+								<attribute name="numbercontentunits" editable="false" />
 							</row>
 						</columnlayout>
 					</section>
@@ -97,6 +96,7 @@
 				<tab name="tab.product.prices">
 					<section name="section.product.pricesdiscounts">
 						<listlayout>
+						   <attribute name="europe1Prices" editable="false"/>
 							<attribute name="europe1Discounts"
 								mode="delete" />
 							<text name="text.product.pg" mode="delete" />
@@ -118,6 +118,13 @@
 						</columnlayout>
 					</section>
 				</tab>
+            <tab name="tab.product.categorysystem">
+               <section name="section.product.productincategory">
+                  <listlayout>
+                     <attribute name="supercategories" editable="false"/>
+                  </listlayout>
+               </section>
+            </tab>		
 			</editor>
 		</organizer>
 	</type>
