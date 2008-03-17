@@ -1,0 +1,14 @@
+Sehr geehrete / geehrter ${customer.name}
+<br />
+<br />
+Artoz bietet Ihnen neue Produkte an:
+<br />
+<table>
+	#foreach ( $product in ${products} )
+	<tr>
+		<td>${product.code}</td>
+		<td>${product.name}</td>
+	</tr>
+	#end
+</table>
+${optOutInfo}
