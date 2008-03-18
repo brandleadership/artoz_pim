@@ -55,8 +55,9 @@ public class SendMailJob extends GeneratedSendMailJob
 			sendfax.setSubject(fax.getSubject());
 			sendfax.setPageHeader("To: {To} From: " + fax.getFaxSender() + " Pages: {TotalPages}");
 			sendfax.setPostpone(new GregorianCalendar());
-
-			File fileToSend = new File("/home/pascal/workspace/artoz/import/", "tmp.txt");
+			
+			File fileToSend = File.createTempFile("tmp", "txt");
+			//File fileToSend = new File(".", "tmp.txt");
 			FileWriter fw = new FileWriter(fileToSend);
 
 			final boolean isHTML = !fax.getTextAsHtml().equals("");

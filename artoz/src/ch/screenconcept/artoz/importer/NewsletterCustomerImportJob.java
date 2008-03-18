@@ -138,7 +138,7 @@ public class NewsletterCustomerImportJob extends GeneratedNewsletterCustomerImpo
 
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT {u." + User.PK + "} FROM {"
-						+ TypeManager.getInstance().getComposedType(User.class).getCode() + " as u} ");
+						+ TypeManager.getInstance().getComposedType(Customer.class).getCode() + " as u} ");
 			if (!emptyFax)
 				query.append(", {" + TypeManager.getInstance().getComposedType(Address.class).getCode() + " as a} ");
 			query.append("WHERE ");
@@ -159,7 +159,7 @@ public class NewsletterCustomerImportJob extends GeneratedNewsletterCustomerImpo
 			}
 
 			final SearchResult res = JaloSession.getCurrentSession().getFlexibleSearch().search(query.toString(),
-						value, Collections.singletonList(User.class), true, true, 0, -1);
+						value, Collections.singletonList(Customer.class), true, true, 0, -1);
 			if (res.getResult().isEmpty())
 				return null;
 			return (Customer) res.getResult().get(0);

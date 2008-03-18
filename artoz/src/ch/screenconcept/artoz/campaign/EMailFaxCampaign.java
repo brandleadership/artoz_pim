@@ -130,6 +130,7 @@ public class EMailFaxCampaign extends GeneratedEMailFaxCampaign
 				attributes.put(EMailFax.TEXT, plainText);
 				attributes.put(EMailFax.TEXTASHTML, htmlText);
 				attributes.put(EMailFax.FAXSERVICEUSER, getFaxUserName());
+				attributes.put(EMailFax.FAXSENDER, getFaxSender());
 				attributes.put(EMailFax.FAXSERVICEPASSWORD, getFaxPassword());
 				attributes.put(EMailFax.FAXSERVICEADRESSE, getFaxServiceAdresse());
 				attributes.put(EMailFax.FAX, true);
