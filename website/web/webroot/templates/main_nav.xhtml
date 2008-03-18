@@ -6,12 +6,14 @@
 		xmlns:c="http://java.sun.com/jstl/core"
 		xmlns:cms="http://hybris.com/cms">
 		
-		<c:forEach items="#{mainNav.children}" var="child" >
-			<!-- <cms:editable item="#{mainNav.children}" template="#{child.template.code}">-->
+		<ul>
+			<c:forEach items="#{mainNav.children}" var="child" >
+				<cms:editable item="#{mainNav.children}" template="#{child.template.code}">
 					<ui:include src="#{child.template.code}">
 							<ui:param name="element" value="#{child}"/>
-					</ui:include> 
-			<!-- </cms:editable> -->
-		</c:forEach>
+					</ui:include>
+				</cms:editable>
+			</c:forEach>
+		</ul>
 		
 </ui:composition> 

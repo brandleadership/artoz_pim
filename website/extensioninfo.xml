@@ -13,7 +13,6 @@
   
 -->
 <extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
-
    <extension  name="website"
                abstractclassprefix="Generated"
                classprefix="Website"
@@ -25,8 +24,9 @@
       <requires-extension name="hmc"/>         
       <requires-extension name="impex"/> 
       <requires-extension name="cronjob"/>
+      <requires-extension name="webfoundation"/>      
       <requires-extension name="cms"/>      
-      <requires-extension name="artoz"/>      
+      <requires-extension name="artoz"/>    
 
       <coremodule packageroot="ch.screenconcept.artoz.website"
                   manager="ch.screenconcept.artoz.website.jalo.WebsiteManager"

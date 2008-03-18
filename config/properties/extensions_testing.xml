@@ -16,10 +16,6 @@
 
 	<extensions>
 
-		<!-- *************************************************** -->
-		<!-- *** hybris Platform                             *** -->
-		<!-- *************************************************** -->
-
 		<extension dir="ext/core"/>
 		<extension dir="ext/category" />
 		<extension dir="ext/europe1" />
@@ -37,58 +33,27 @@
 		<extension dir="ext/hmc" />
 		<extension dir="ext/maintenanceweb"/>
 		<extension dir="ext/webservice"/>
-		
-		
-		<!--<extension dir="ext/yempty"/>-->
-		<!--<extension dir="ext/perfweb"/>-->
-
-
-		<!-- *************************************************** -->
-		<!-- *** hybris Commerce Modules                     *** -->
-		<!-- *************************************************** -->
-
 		<!-- 
-		<extension dir="../ext-commerce/storefoundation"/>
+		<extension dir="../ext-commerce/storefoundation"/>-->
+		<extension dir="../ext-commerce/beanlayer"/>
+		<extension dir="../ext-commerce/voucher"/>
 		<extension dir="../ext-commerce/webfoundation"/>
-		<extension dir="../ext-commerce/voucher"/>-->
 		<extension dir="../ext-commerce/cms"/>
 		<!--<extension dir="../ext-commerce/oci"/>
 		-->
-
-
-		
-		<!-- *************************************************** -->
-		<!-- *** hybris PIM Modules                          *** -->
-		<!-- *************************************************** -->
-		
 		<!--
 		<extension dir="../ext-pim/workflow"/> 
 		<extension dir="../ext-pim/bmecat"/>
 		-->
-
-
-
-		<!-- *************************************************** -->
-		<!-- *** hybris Print Module                         *** -->
-		<!-- *************************************************** -->
-
 		<!--
 		<extension dir="../ext-print/print"/>
 		-->
-		
-
-
-		<!-- **************************************************************** -->
-		<!-- *** hybris Misc Modules (released, but not part of a suite)  *** -->
-		<!-- **************************************************************** -->
-		
 		<!--
 		<extension dir="../ext-misc/bibit"/>
 		<extension dir="../ext-misc/escore"/>
 		<extension dir="../ext-misc/xprint"/>
 		<extension dir="../ext-misc/xprintdemo"/>
 		-->
-
 
         <!-- **************************************************************** -->
         <!-- *** Screenconcept Extensions                                 *** -->

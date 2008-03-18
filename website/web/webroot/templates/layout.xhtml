@@ -26,11 +26,11 @@
 			<div id="top_nav">
 				<!-- meta menu from CMS (pages)-->
 				<c:if test="#{!empty cmsJSFBean.mainNav}">
- 				<cms:editable item="#{cmsJSFBean.mainNav}" template="#{cmsJSFBean.mainNav.template.code}" id="navItem_#{cmsJSFBean.mainNav.PK}">
-						<ui:include src="#{cmsJSFBean.mainNav.template.code}">
-							<ui:param name="mainNav" value="#{cmsJSFBean.mainNav}"/>
-						</ui:include>
- 				</cms:editable>
+				<cms:editable item="#{cmsJSFBean.mainNav}" template="#{cmsJSFBean.mainNav.template.code}">
+					<ui:include src="#{cmsJSFBean.mainNav.template.code}">
+						<ui:param name="mainNav" value="#{cmsJSFBean.mainNav}" />
+					</ui:include>
+				</cms:editable>
 				</c:if>
 			</div>
 		
@@ -42,6 +42,6 @@
 		
 			</div>
 		</div>
-		
+		<cms:script />
 	</body>
 </html>

@@ -1,99 +1,125 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app id="StoreFoundation" version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" 
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+<web-app id="StoreFoundation" version="2.4"
+	xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
 
+	<!-- LiveEdit -->
+	<filter>
+		<filter-name>initfilter</filter-name>
+		<filter-class>
+			de.hybris.platform.cms.web.CMSServletFilter
+		</filter-class>
+	</filter>
 
-    <!-- Facelets Paramater -->
-    <context-param>
-        <param-name>facelets.LIBRARIES</param-name>
-        <param-value>
-                /WEB-INF/config/jsf-core.taglib.xml;
-                /WEB-INF/config/jsf-html.taglib.xml;
-                /WEB-INF/config/jsf-ui.taglib.xml;
-                /WEB-INF/config/jstl-core.taglib.xml;
-                /WEB-INF/config/jstl-fn.taglib.xml;
-                /WEB-INF/config/tomahawk.taglib.xml;
-                /WEB-INF/config/cms.xml;
-            </param-value>
-    </context-param>
+	<filter-mapping>
+		<filter-name>initfilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 
-    <context-param>
-        <param-name>facelets.REFRESH_PERIOD</param-name>
-        <param-value>2</param-value>
-    </context-param>
+	<filter-mapping>
+		<filter-name>initfilter</filter-name>
+		<servlet-name>action</servlet-name>
+	</filter-mapping>
 
-    <context-param>
-        <param-name>facelets.DEVELOPMENT</param-name>
-        <param-value>true</param-value>
-    </context-param>
+	<!-- Facelets Paramater -->
+	<context-param>
+		<param-name>facelets.LIBRARIES</param-name>
+		<param-value>
+			/WEB-INF/config/jsf-core.taglib.xml;
+			/WEB-INF/config/jsf-html.taglib.xml;
+			/WEB-INF/config/jsf-ui.taglib.xml;
+			/WEB-INF/config/jstl-core.taglib.xml;
+			/WEB-INF/config/jstl-fn.taglib.xml;
+			/WEB-INF/config/tomahawk.taglib.xml;
+			/WEB-INF/config/cms.xml;
+		</param-value>
+	</context-param>
 
-    <context-param>
-        <param-name>javax.faces.DEFAULT_SUFFIX</param-name>
-        <param-value>.xhtml</param-value>
-    </context-param>
-    
-   <!-- URL Rewriting-->
-    <filter>
-       <filter-name>UrlRewriteFilter</filter-name>
-       <filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
-    </filter>
-    <filter-mapping>
-       <filter-name>UrlRewriteFilter</filter-name>
-       <url-pattern>/*</url-pattern>
-    </filter-mapping>
+	<context-param>
+		<param-name>facelets.REFRESH_PERIOD</param-name>
+		<param-value>2</param-value>
+	</context-param>
 
-    <!-- ServletContextListener - Initialize the application -->
-    <listener>
-   <listener-class>org.apache.myfaces.webapp.StartupServletContextListener</listener-class>
-    </listener>
+	<context-param>
+		<param-name>facelets.DEVELOPMENT</param-name>
+		<param-value>true</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>javax.faces.DEFAULT_SUFFIX</param-name>
+		<param-value>.xhtml</param-value>
+	</context-param>
+
+	<!-- URL Rewriting-->
+	<filter>
+		<filter-name>UrlRewriteFilter</filter-name>
+		<filter-class>
+			org.tuckey.web.filters.urlrewrite.UrlRewriteFilter
+		</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>UrlRewriteFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!-- ServletContextListener - Initialize the application -->
+	<listener>
+		<listener-class>
+			org.apache.myfaces.webapp.StartupServletContextListener
+		</listener-class>
+	</listener>
 
 
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<!-- shale					   -->
-	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~ -->	
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<filter>
 		<filter-name>shale</filter-name>
-		<filter-class>org.apache.shale.application.faces.ShaleApplicationFilter</filter-class>
+		<filter-class>
+			org.apache.shale.application.faces.ShaleApplicationFilter
+		</filter-class>
 	</filter>
-	
+
 	<filter-mapping>
 		<filter-name>shale</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
- 
-   <listener>
-      <listener-class>
-        org.apache.commons.chain.web.ChainListener
-      </listener-class>
-   </listener>
+
+	<listener>
+		<listener-class>
+			org.apache.commons.chain.web.ChainListener
+		</listener-class>
+	</listener>
 
 	<!-- listener for initializing shale-view -->
 	<listener>
-		<listener-class>org.apache.shale.view.faces.LifecycleListener</listener-class>
+		<listener-class>
+			org.apache.shale.view.faces.LifecycleListener
+		</listener-class>
 	</listener>
-	       
 
-    <!-- Faces Servlet -->
-    <servlet>
-        <servlet-name>Faces Servlet</servlet-name>
-        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
-        <!--<load-on-startup>1</load-on-startup>-->
-    </servlet>
 
-    <!-- Faces Servlet Mapping -->
-    <servlet-mapping>
-        <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>*.jsf</url-pattern>
-    </servlet-mapping>
+	<!-- Faces Servlet -->
+	<servlet>
+		<servlet-name>Faces Servlet</servlet-name>
+		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+		<!--<load-on-startup>1</load-on-startup>-->
+	</servlet>
 
-    <!--  Session config and welcome files -->
-    <session-config>
-      <session-timeout>30</session-timeout>
-    </session-config>   
-  
-    <welcome-file-list>
-        <welcome-file>index.jsf</welcome-file>
-    </welcome-file-list>
-    
+	<!-- Faces Servlet Mapping -->
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.jsf</url-pattern>
+	</servlet-mapping>
+
+	<!--  Session config and welcome files -->
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
+
+	<welcome-file-list>
+		<welcome-file>index.jsf</welcome-file>
+	</welcome-file-list>
+
 </web-app>

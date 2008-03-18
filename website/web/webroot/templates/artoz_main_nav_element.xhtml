@@ -1,11 +1,14 @@
-<ui:composition
-		xmlns:ui="http://java.sun.com/jsf/facelets"
-		xmlns:h="http://java.sun.com/jsf/html"
-		xmlns:f="http://java.sun.com/jsf/core"
-		xmlns:t="http://myfaces.apache.org/tomahawk"
-		xmlns:c="http://java.sun.com/jstl/core"
-		xmlns:cms="http://hybris.com/cms">
-		
-		<img src="#{element.picture.URL}" />
-		
-</ui:composition> 
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:cms="http://hybris.com/cms">
+
+	<li>
+		<h:outputLink alt="#{element.name}" value="#{element.content}">
+			<h:outputText value="#{element.name}" />
+		</h:outputLink>
+	</li>
+
+</ui:composition>

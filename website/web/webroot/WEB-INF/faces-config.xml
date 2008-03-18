@@ -12,5 +12,30 @@
       com.sun.facelets.FaceletViewHandler
     </view-handler>    
   </application> 
+  	<managed-bean>
+		<managed-bean-name>cmsBean</managed-bean-name>
+		<managed-bean-class>ch.screenconcept.artoz.faces.beans.CmsJSFBean</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
 	
+	<component>
+		<component-type>de.hybris.cms.CMSEditableComponent</component-type>
+		<component-class>ch.screenconcept.artoz.cms.CMSEditableComponent</component-class>
+  	</component>
+  	
+	<component>
+		<component-type>de.hybris.cms.CMSTranslateLinksComponent</component-type>
+		<component-class>ch.screenconcept.artoz.cms.CMSTranslateLinksComponent</component-class>
+  	</component>
+
+  	<component>
+		<component-type>de.hybris.cms.CMSScriptComponent</component-type>
+		<component-class>ch.screenconcept.artoz.cms.CMSScriptComponent</component-class>
+  	</component>
+
+  	<component>
+		<component-type>de.hybris.cms.CMSItemComponent</component-type>
+		<component-class>ch.screenconcept.artoz.cms.CMSItemComponent</component-class>
+  	</component>
+  	
 </faces-config>
