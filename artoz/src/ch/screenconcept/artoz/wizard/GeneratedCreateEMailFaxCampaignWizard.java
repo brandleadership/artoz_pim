@@ -17,30 +17,30 @@ import java.util.Map;
 
 public abstract class GeneratedCreateEMailFaxCampaignWizard extends WizardBusinessItem
 {
-	public static final String FAXSERVICEPASSWORD = "faxServicePassword".intern();
-	public static final String CAMPAIGNHTMLTEMPLATEITCH = "campaignHTMLTemplateITCH".intern();
-	public static final String CAMPAIGNTEXTTEMPLATEEN = "campaignTextTemplateEN".intern();
-	public static final String CAMPAIGNNEWSLETTER = "campaignNewsletter".intern();
-	public static final String FAXSERVICEADRESSE = "faxServiceAdresse".intern();
-	public static final String CAMPAIGNHTMLTEMPLATEDECH = "campaignHTMLTemplateDECH".intern();
-	public static final String CAMPAIGNHTMLTEMPLATEPT = "campaignHTMLTemplatePT".intern();
-	public static final String CAMPAIGNTEXTTEMPLATEFRCH = "campaignTextTemplateFRCH".intern();
-	public static final String CAMPAIGNSUBJECT = "campaignSubject".intern();
-	public static final String CAMPAIGNIMPORTFILE = "campaignImportFile".intern();
-	public static final String CAMPAIGNHTMLTEMPLATEFRCH = "campaignHTMLTemplateFRCH".intern();
-	public static final String CAMPAIGNHTMLTEXT = "campaignHTMLText".intern();
-	public static final String FAXSERVICEUSER = "faxServiceUser".intern();
 	public static final String CAMPAIGNSENDER = "campaignSender".intern();
-	public static final String FAXSENDER = "faxSender".intern();
-	public static final String CAMPAIGNTEXT = "campaignText".intern();
-	public static final String CAMPAIGNTEXTTEMPLATEPT = "campaignTextTemplatePT".intern();
+	public static final String CAMPAIGNHTMLTEMPLATEPT = "campaignHTMLTemplatePT".intern();
+	public static final String CAMPAIGNHTMLTEMPLATEDECH = "campaignHTMLTemplateDECH".intern();
+	public static final String CAMPAIGNHTMLTEXT = "campaignHTMLText".intern();
 	public static final String CAMPAIGNTEXTTEMPLATEES = "campaignTextTemplateES".intern();
-	public static final String CAMPAIGNFAXCAMPAIGN = "campaignFaxCampaign".intern();
-	public static final String CAMPAIGNTEXTTEMPLATEITCH = "campaignTextTemplateITCH".intern();
-	public static final String CAMPAIGNTEXTTEMPLATEDECH = "campaignTextTemplateDECH".intern();
-	public static final String CAMPAIGNNAME = "campaignName".intern();
+	public static final String CAMPAIGNHTMLTEMPLATEITCH = "campaignHTMLTemplateITCH".intern();
+	public static final String CAMPAIGNNEWSLETTER = "campaignNewsletter".intern();
+	public static final String CAMPAIGNTEXT = "campaignText".intern();
+	public static final String FAXSENDER = "faxSender".intern();
+	public static final String CAMPAIGNSUBJECT = "campaignSubject".intern();
+	public static final String CAMPAIGNTEXTTEMPLATEPT = "campaignTextTemplatePT".intern();
+	public static final String FAXSERVICEPASSWORD = "faxServicePassword".intern();
 	public static final String CAMPAIGNHTMLTEMPLATEEN = "campaignHTMLTemplateEN".intern();
+	public static final String CAMPAIGNIMPORTFILE = "campaignImportFile".intern();
+	public static final String CAMPAIGNTEXTTEMPLATEEN = "campaignTextTemplateEN".intern();
+	public static final String CAMPAIGNTEXTTEMPLATEFRCH = "campaignTextTemplateFRCH".intern();
+	public static final String CAMPAIGNTEXTTEMPLATEITCH = "campaignTextTemplateITCH".intern();
+	public static final String CAMPAIGNNAME = "campaignName".intern();
+	public static final String CAMPAIGNHTMLTEMPLATEFRCH = "campaignHTMLTemplateFRCH".intern();
+	public static final String CAMPAIGNTEXTTEMPLATEDECH = "campaignTextTemplateDECH".intern();
 	public static final String CAMPAIGNHTMLTEMPLATEES = "campaignHTMLTemplateES".intern();
+	public static final String CAMPAIGNFAXCAMPAIGN = "campaignFaxCampaign".intern();
+	public static final String FAXSERVICEUSER = "faxServiceUser".intern();
+	public static final String FAXSERVICEADRESSE = "faxServiceAdresse".intern();
 	public abstract Boolean isCampaignFaxCampaign(final SessionContext ctx);
 	
 	public Boolean isCampaignFaxCampaign()
