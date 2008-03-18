@@ -3,6 +3,7 @@ package ch.screenconcept.artoz.wizard;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -26,6 +27,7 @@ import de.hybris.platform.jalo.SessionContext;
 import de.hybris.platform.jalo.c2l.Language;
 import de.hybris.platform.jalo.enumeration.EnumerationManager;
 import de.hybris.platform.jalo.media.Media;
+import de.hybris.platform.jalo.product.Product;
 import de.hybris.platform.util.Config;
 
 public class CreateEMailFaxCampaignWizard extends GeneratedCreateEMailFaxCampaignWizard
@@ -51,6 +53,8 @@ public class CreateEMailFaxCampaignWizard extends GeneratedCreateEMailFaxCampaig
 	private Newsletter newsletter = null;
 
 	private Map<Language, String> campaignSubjectMap, campaignHTMLTextMap, campaignTextMap;
+	
+	private Collection<Product> campaignProducts;
 
 	private boolean campaignFaxCampaign;
 
@@ -384,7 +388,18 @@ public class CreateEMailFaxCampaignWizard extends GeneratedCreateEMailFaxCampaig
 		campaignTextTemplatePT = value;
 	}
 
+	@Override
+	public Collection<Product> getCampaignProducts(SessionContext ctx)
+	{
+		return campaignProducts;
+	}
 
+	@Override
+	public void setCampaignProducts(SessionContext ctx, Collection<Product> value)
+	{
+		campaignProducts = value;
+	}
+	
 	// ----------------------------------------------------------------------------------------
 	public String getDescription(SessionContext ctx)
 	{
@@ -405,6 +420,10 @@ public class CreateEMailFaxCampaignWizard extends GeneratedCreateEMailFaxCampaig
 		try
 		{
 			createEMailFaxCampaign();
+			ctx.hideTab(TAB1);
+			ctx.hideTab(TAB2);
+			ctx.hideTab(TAB3);
+			ctx.showSummaryTab("Die Kampanie wurde erfolgreich erstellt.");
 		}
 		catch (JaloBusinessException e)
 		{
@@ -414,11 +433,6 @@ public class CreateEMailFaxCampaignWizard extends GeneratedCreateEMailFaxCampaig
 		{
 			ctx.showErrorTab(ie.getMessage());
 		}
-
-		ctx.hideTab(TAB1);
-		ctx.hideTab(TAB2);
-		ctx.hideTab(TAB3);
-		ctx.showSummaryTab("Die Kampanie wurde erfolgreich erstellt.");
 	}
 
 	@Override
@@ -445,6 +459,7 @@ public class CreateEMailFaxCampaignWizard extends GeneratedCreateEMailFaxCampaig
 		params.put(EMailFaxCampaign.HTMLTEXT, createHTMLTemplateList());
 		params.put(EMailFaxCampaign.PLAINTEXT, createTxtTemplateList());
 		params.put(EMailFaxCampaign.SENDER, getCampaignSender());
+		params.put(EMailFaxCampaign.PRODUCTS, getCampaignProducts());
 		params.put(EMailFaxCampaign.FAXFAXONLY, isCampaignFaxCampaign());
 		params.put(EMailFaxCampaign.FAXSENDER, getFaxSender());
 		params.put(EMailFaxCampaign.FAXSERVICEADRESSE, getFaxServiceAdresse());

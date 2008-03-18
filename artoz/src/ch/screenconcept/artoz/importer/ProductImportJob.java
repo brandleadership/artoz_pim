@@ -22,7 +22,6 @@ import de.hybris.platform.category.jalo.CategoryManager;
 import de.hybris.platform.cronjob.jalo.AbortCronJobException;
 import de.hybris.platform.cronjob.jalo.CronJob;
 import de.hybris.platform.cronjob.jalo.CronJob.CronJobResult;
-import de.hybris.platform.jalo.ConsistencyCheckException;
 import de.hybris.platform.jalo.JaloBusinessException;
 import de.hybris.platform.jalo.JaloInvalidParameterException;
 import de.hybris.platform.jalo.c2l.Currency;

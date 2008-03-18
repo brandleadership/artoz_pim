@@ -63,8 +63,10 @@
 								<attribute name="ean" editable="false" />
 							</row>
 							<row>
-								<attribute name="contentunit" editable="false" />
-								<attribute name="numbercontentunits" editable="false" />
+								<attribute name="contentunit"
+									editable="false" />
+								<attribute name="numbercontentunits"
+									editable="false" />
 							</row>
 						</columnlayout>
 					</section>
@@ -96,7 +98,8 @@
 				<tab name="tab.product.prices">
 					<section name="section.product.pricesdiscounts">
 						<listlayout>
-						   <attribute name="europe1Prices" editable="false"/>
+							<attribute name="europe1Prices"
+								editable="false" />
 							<attribute name="europe1Discounts"
 								mode="delete" />
 							<text name="text.product.pg" mode="delete" />
@@ -118,15 +121,25 @@
 						</columnlayout>
 					</section>
 				</tab>
-            <tab name="tab.product.categorysystem">
-               <section name="section.product.productincategory">
-                  <listlayout>
-                     <attribute name="supercategories" editable="false"/>
-                  </listlayout>
-               </section>
-            </tab>		
+				<tab name="tab.product.categorysystem">
+					<section name="section.product.productincategory">
+						<listlayout>
+							<attribute name="supercategories"
+								editable="false" />
+						</listlayout>
+					</section>
+				</tab>
 			</editor>
 		</organizer>
+	</type>
+
+	<type name="Unit" mode="append">
+		<organizer />
+		<defaultreference mode="replace">
+			<itemlayout>
+				<attribute name="name" />
+			</itemlayout>
+		</defaultreference>
 	</type>
 
 	<type name="EMailFaxCampaign" mode="append">
@@ -180,10 +193,12 @@
 						name="section.createwmpagecontentwizard.two.template">
 						<listlayout>
 							<text name="nciwizard.tempalte.de" />
-							<attribute name="campaignHTMLTemplateDECH">
+							<attribute
+								name="campaignHTMLTemplateDECH">
 								<uploadtomediaeditor />
 							</attribute>
-							<attribute name="campaignTextTemplateDECH">
+							<attribute
+								name="campaignTextTemplateDECH">
 								<uploadtomediaeditor />
 							</attribute>
 							<text name="nciwizard.tempalte.en" />
@@ -193,39 +208,43 @@
 							<attribute name="campaignTextTemplateEN">
 								<uploadtomediaeditor />
 							</attribute>
-							<text name="nciwizard.tempalte.frch" />							
-							<attribute name="campaignHTMLTemplateFRCH">
+							<text name="nciwizard.tempalte.frch" />
+							<attribute
+								name="campaignHTMLTemplateFRCH">
 								<uploadtomediaeditor />
 							</attribute>
-							<attribute name="campaignTextTemplateFRCH">
+							<attribute
+								name="campaignTextTemplateFRCH">
 								<uploadtomediaeditor />
 							</attribute>
-							<text name="nciwizard.tempalte.itch" />							
-							<attribute name="campaignHTMLTemplateITCH">
+							<text name="nciwizard.tempalte.itch" />
+							<attribute
+								name="campaignHTMLTemplateITCH">
 								<uploadtomediaeditor />
 							</attribute>
-							<attribute name="campaignTextTemplateITCH">
+							<attribute
+								name="campaignTextTemplateITCH">
 								<uploadtomediaeditor />
 							</attribute>
-							<text name="nciwizard.tempalte.es" />							
+							<text name="nciwizard.tempalte.es" />
 							<attribute name="campaignHTMLTemplateES">
 								<uploadtomediaeditor />
 							</attribute>
 							<attribute name="campaignTextTemplateES">
 								<uploadtomediaeditor />
 							</attribute>
-							<text name="nciwizard.tempalte.pt" />							
+							<text name="nciwizard.tempalte.pt" />
 							<attribute name="campaignHTMLTemplatePT">
 								<uploadtomediaeditor />
 							</attribute>
 							<attribute name="campaignTextTemplatePT">
 								<uploadtomediaeditor />
-							</attribute>																																			
+							</attribute>
 						</listlayout>
 					</section>
 				</tab>
 				<tab name="tab.createEMailFaxCampaignWizard.three"
-					position="2">
+					position="3">
 					<section
 						name="section.createwmpagecontentwizard.three.newsletter">
 						<listlayout>
@@ -250,6 +269,16 @@
 									</td>
 								</tr>
 							</table>
+						</listlayout>
+					</section>
+				</tab>
+				<tab name="tab.createEMailFaxCampaignWizard.four"
+					position="2">
+					<section
+						name="section.createwmpagecontentwizard.four.products">
+						<listlayout>
+							<text name="nciwizard.products" />
+							<attribute name="campaignProducts" />
 						</listlayout>
 					</section>
 				</tab>

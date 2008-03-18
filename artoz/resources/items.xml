@@ -420,6 +420,10 @@
 					<modifiers optional="true" />
 					<persistence type="jalo" />
 				</attribute>
+				<attribute qualifier="campaignProducts" type="ProductCollection">
+					<modifiers optional="true" write="true"/>
+					<persistence type="jalo"/>
+				</attribute>				
 			</attributes>
 		</itemtype>
 	</itemtypes>
