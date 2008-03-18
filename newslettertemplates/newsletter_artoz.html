@@ -1,0 +1,61 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Unbenanntes Dokument</title>
+</head>
+
+<body bgcolor="#FFFFFF" style="margin:0px;padding:0px;font-family:Arial, Helvetica, sans-serif;font-size:14px;">
+<table width="600" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td height="100" colspan="2" align="left" valign="top"><img src="http://dev.screenconcept.ch/artoz/head.jpg" width="600" border="0"></td>
+  </tr>
+  <tr>
+    <td width="400" align="left" valign="top">
+    <div style="margin:0px 10px 40px 10px;color:#666666;">
+    	Infoletter Artoz Papier AG, Ausgabe April 2008
+    </div>
+    <div style="margin:0px 10px 25px 10px;">
+            <strong style="font-size:16px;margin-bottom:14px;display:block;"><a id="01"></a>Erfolgreich durch voneinander lernen</strong>
+        <div style="display:block;width:100%;">Sehr geehrte / geehrter ${customer.fullNameWithTitle}</div>
+        Transformation von Wissen in Nutzen erfolgt am besten, wenn Transformation von Wissen in Nutzen erfolgt am besten, wenn Transformation von Wissen in Nutzen erfolgt am besten, wenn Zum Beispiel B&uuml;ttenpr&auml;geaktionen am Point of Sale sind &hellip;<br/>
+        <a href="http://www.artoz.ch" style="color:#000000">Lesen Sie nach</a>    </div>
+    <div style="margin:0px 10px 25px 10px;">
+            <strong style="font-size:16px;margin-bottom:14px;display:block;"><a id="02"></a>Aktualisierter Internet-Auftritt</strong>
+        <div style="display:block;width:100%;">Sonniger, w&auml;rmer lautete das Motto unseres Internet- Aktualisierungsprojekts &hellip;</div>
+        <br/>
+        <a href="http://www.artoz.ch" target="_blank" style="color:#000000">Zur aktualisierter Website www.artoz.ch</a><br/>
+        <br/>
+        <img src="http://dev.screenconcept.ch/artoz/01.jpg">
+</div><a id="03"></a>
+#foreach ( $orderedProduct in ${products} )
+<div style="margin:0px 10px 25px 10px;display:block;float:left;">
+	<img src="http://dev.screenconcept.ch/artoz/03.jpg" width="100" height="71" style="float:left; margin-right: 5px;">
+	<div style="height:71px;float:left;"><strong>${orderedProduct.name}</strong><br/>
+	Beschreibung: ${orderedProduct.description}</div>
+</div>
+#end
+    </td>
+    <td width="200" align="left" valign="top">
+      <div style="margin:57px 10px 25px 10px;border-bottom:1px solid #FFCC00;padding-bottom:20px;">
+          <strong>Inhalt</strong>
+          <ul style="margin:5px 0 0 0;padding:0 0 0 15px;">
+            <li><a href="#01" style="text-decoration:none;color:#000000">Voneinander lernen</a></li>
+            <li><a href="#02" style="text-decoration:none;color:#000000">Internet-Auftritt</a></li>
+            <li><a href="#03" style="text-decoration:none;color:#000000">Zukunft Handel</a></li>
+          </ul>
+   	  </div>
+      <div style="margin:0px 10px 25px 10px;border-bottom:1px solid #FFCC00;padding-bottom:10px;">
+      	<img src="http://dev.screenconcept.ch/artoz/02.jpg" width="180">
+        <strong>B&uuml;tten pr&auml;gen lernen<br/>
+	    <a href="http://www.artoz.ch" target="_blank" style="color:#000000">Movie anschauen</a> </strong></div>
+        <div style="margin:0px 10px 25px 10px;border-bottom:1px solid #FFCC00;padding-bottom:10px;">
+        <strong>TIPP<br/>
+		Kreativ-Buch von Artoz      	</strong><img src="http://dev.screenconcept.ch/artoz/01.png" width="180">
+        <strong><a href="http://www.artoz.ch" target="_blank" style="color:#000000">Zum Shop</a> </strong></div>
+    </td>
+  </tr>
+</table>
+${optOutInfo}
+</body>
+</html>
