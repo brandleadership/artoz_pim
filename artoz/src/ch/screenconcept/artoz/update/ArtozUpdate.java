@@ -2,12 +2,11 @@ package ch.screenconcept.artoz.update;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
 import ch.screenconcept.artoz.constants.ArtozConstants;
 import de.hybris.platform.catalog.jalo.CatalogManager;
 import de.hybris.platform.catalog.jalo.CatalogVersion;
+import de.hybris.platform.europe1.jalo.Europe1PriceFactory;
 import de.hybris.platform.jalo.ConsistencyCheckException;
 import de.hybris.platform.jalo.JaloItemNotFoundException;
 import de.hybris.platform.jalo.c2l.C2LManager;
@@ -105,5 +104,15 @@ public class ArtozUpdate
 		{
 			UserManager.getInstance().createTitle(ArtozConstants.Titles.MISTER_CODE);
 		}
+	}
+
+	public static void createUserPriceGroups() throws ConsistencyCheckException
+	{
+		if (Europe1PriceFactory.getInstance().getUserPriceGroup(ArtozConstants.UserPriceGroups.CHF_STANDARD_NAME) == null)
+			Europe1PriceFactory.getInstance().createUserPriceGroup(ArtozConstants.UserPriceGroups.CHF_STANDARD_NAME);
+		if (Europe1PriceFactory.getInstance().getUserPriceGroup(ArtozConstants.UserPriceGroups.EUR_STANDARD_NAME) == null)
+			Europe1PriceFactory.getInstance().createUserPriceGroup(ArtozConstants.UserPriceGroups.EUR_STANDARD_NAME);
+		if (Europe1PriceFactory.getInstance().getUserPriceGroup(ArtozConstants.UserPriceGroups.GBP_STANDARD_NAME) == null)
+			Europe1PriceFactory.getInstance().createUserPriceGroup(ArtozConstants.UserPriceGroups.GBP_STANDARD_NAME);
 	}
 }

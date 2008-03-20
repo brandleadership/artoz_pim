@@ -22,11 +22,13 @@ import de.hybris.platform.category.jalo.CategoryManager;
 import de.hybris.platform.cronjob.jalo.AbortCronJobException;
 import de.hybris.platform.cronjob.jalo.CronJob;
 import de.hybris.platform.cronjob.jalo.CronJob.CronJobResult;
+import de.hybris.platform.europe1.jalo.Europe1PriceFactory;
 import de.hybris.platform.jalo.JaloBusinessException;
 import de.hybris.platform.jalo.JaloInvalidParameterException;
 import de.hybris.platform.jalo.c2l.Currency;
 import de.hybris.platform.jalo.c2l.Language;
 import de.hybris.platform.jalo.enumeration.EnumerationManager;
+import de.hybris.platform.jalo.enumeration.EnumerationValue;
 import de.hybris.platform.jalo.security.JaloSecurityException;
 
 /**
@@ -73,7 +75,7 @@ public class ProductImportJob extends GeneratedProductImportJob
 
 		if (line != null)
 		{
-			//Get the active catalog version
+			// Get the active catalog version
 			CatalogManager catalogManager = CatalogManager.getInstance();
 			CatalogVersion catalogVersion = catalogManager.getCatalog(ArtozConstants.STANDARDCATALOG)
 						.getActiveCatalogVersion();
@@ -96,7 +98,7 @@ public class ProductImportJob extends GeneratedProductImportJob
 			params.put(ArtozProduct.DIMENSIONS, line.getDimensions());
 			params.put(ArtozProduct.UPDATECOUNTER, ArtozConstants.NumberSeries.getCurrentProductImportNumber());
 
-			//Create name array with text in all 6 languages
+			// Create name array with text in all 6 languages
 			final Map<Language, String> names = new HashMap<Language, String>();
 			names.put(ArtozConstants.Languages.getGerman(), line.getShortTextDE());
 			names.put(ArtozConstants.Languages.getEnglish(), line.getShortTextEN());
@@ -104,7 +106,7 @@ public class ProductImportJob extends GeneratedProductImportJob
 			names.put(ArtozConstants.Languages.getItalian(), line.getShortTextIT());
 			names.put(ArtozConstants.Languages.getSpanish(), line.getShortTextES());
 			names.put(ArtozConstants.Languages.getPortuguese(), line.getShortTextPT());
-			
+
 			ArtozProduct product = ArtozProduct.findArtozProduct(line.getCode());
 
 			if (product == null)
@@ -131,7 +133,7 @@ public class ProductImportJob extends GeneratedProductImportJob
 
 			Collection<Category> productCategories = catalogManager.getCategoriesByProduct(catalogVersion, product);
 
-			//Update categories; Delete old once.
+			// Update categories; Delete old once.
 			boolean hasCategory = false;
 			for (Category productCategory : productCategories)
 				if (productCategory.getCode().equals(category.getCode()))
@@ -148,7 +150,8 @@ public class ProductImportJob extends GeneratedProductImportJob
 		}
 	}
 
-	private void deleteNotUpdatedProductsAndPriceRows() throws JaloInvalidParameterException, JaloSecurityException, JaloBusinessException
+	private void deleteNotUpdatedProductsAndPriceRows() throws JaloInvalidParameterException, JaloSecurityException,
+				JaloBusinessException
 	{
 		for (ArtozProduct product : ArtozProduct.findNotUpdatedProducts(ArtozConstants.NumberSeries
 					.getCurrentProductImportNumber()))
@@ -159,13 +162,15 @@ public class ProductImportJob extends GeneratedProductImportJob
 			priceRow.remove();
 	}
 
-	private PriceRowValues createPriceRowValues(Long quantity, Double price, Integer unitFactor, Currency currency)
+	private PriceRowValues createPriceRowValues(Long quantity, Double price, Integer unitFactor, Currency currency,
+				EnumerationValue userPriceGroup)
 	{
 		PriceRowValues priceRowValues = new PriceRowValues();
 		priceRowValues.setQuantity(quantity);
 		priceRowValues.setPrice(price);
 		priceRowValues.setUnitFactor(unitFactor);
 		priceRowValues.setCurrency(currency);
+		priceRowValues.setUserGroup(userPriceGroup);
 		return priceRowValues;
 	}
 
@@ -173,128 +178,137 @@ public class ProductImportJob extends GeneratedProductImportJob
 	{
 
 		List<PriceRowValues> priceRowsValues = new ArrayList<PriceRowValues>();
+
+		// Europe1Constants.Enumerations.UserPriceGroup.
+		EnumerationValue userPriceGroupCHF = Europe1PriceFactory.getInstance().getUserPriceGroup(
+					ArtozConstants.UserPriceGroups.CHF_STANDARD_NAME);
+		EnumerationValue userPriceGroupEUR = Europe1PriceFactory.getInstance().getUserPriceGroup(
+					ArtozConstants.UserPriceGroups.EUR_STANDARD_NAME);
+		EnumerationValue userPriceGroupGBP = Europe1PriceFactory.getInstance().getUserPriceGroup(
+					ArtozConstants.UserPriceGroups.GBP_STANDARD_NAME);
+
 		// CHF
 		if (line.getPlchf01() != null)
 			priceRowsValues.add(createPriceRowValues(line.getPlstchf01() == null ? 1 : line.getPlstchf01(), line
-						.getPlchf01(), line.getPlCHFUnit(), ArtozConstants.Currencies.getCHF()));
+						.getPlchf01(), line.getPlCHFUnit(), ArtozConstants.Currencies.getCHF(), userPriceGroupCHF));
 
 		if (line.getPlstchf02() != null && line.getPlchf02() != null)
 			priceRowsValues.add(createPriceRowValues(line.getPlstchf02(), line.getPlchf02(), line.getPlCHFUnit(),
-						ArtozConstants.Currencies.getCHF()));
+						ArtozConstants.Currencies.getCHF(), userPriceGroupCHF));
 
 		if (line.getPlstchf03() != null && line.getPlchf03() != null)
 			priceRowsValues.add(createPriceRowValues(line.getPlstchf03(), line.getPlchf03(), line.getPlCHFUnit(),
-						ArtozConstants.Currencies.getCHF()));
+						ArtozConstants.Currencies.getCHF(), userPriceGroupCHF));
 
 		if (line.getPlstchf04() != null && line.getPlchf04() != null)
 			priceRowsValues.add(createPriceRowValues(line.getPlstchf04(), line.getPlchf04(), line.getPlCHFUnit(),
-						ArtozConstants.Currencies.getCHF()));
+						ArtozConstants.Currencies.getCHF(), userPriceGroupCHF));
 
 		if (line.getPlstchf05() != null && line.getPlchf05() != null)
 			priceRowsValues.add(createPriceRowValues(line.getPlstchf05(), line.getPlchf05(), line.getPlCHFUnit(),
-						ArtozConstants.Currencies.getCHF()));
+						ArtozConstants.Currencies.getCHF(), userPriceGroupCHF));
 
 		if (line.getPlstchf06() != null && line.getPlchf06() != null)
 			priceRowsValues.add(createPriceRowValues(line.getPlstchf06(), line.getPlchf06(), line.getPlCHFUnit(),
-						ArtozConstants.Currencies.getCHF()));
+						ArtozConstants.Currencies.getCHF(), userPriceGroupCHF));
 
 		if (line.getPlstchf07() != null && line.getPlchf07() != null)
 			priceRowsValues.add(createPriceRowValues(line.getPlstchf07(), line.getPlchf07(), line.getPlCHFUnit(),
-						ArtozConstants.Currencies.getCHF()));
+						ArtozConstants.Currencies.getCHF(), userPriceGroupCHF));
 
 		if (line.getPlstchf08() != null && line.getPlchf08() != null)
 			priceRowsValues.add(createPriceRowValues(line.getPlstchf08(), line.getPlchf08(), line.getPlCHFUnit(),
-						ArtozConstants.Currencies.getCHF()));
+						ArtozConstants.Currencies.getCHF(), userPriceGroupCHF));
 
 		if (line.getPlstchf09() != null && line.getPlchf09() != null)
 			priceRowsValues.add(createPriceRowValues(line.getPlstchf09(), line.getPlchf09(), line.getPlCHFUnit(),
-						ArtozConstants.Currencies.getCHF()));
+						ArtozConstants.Currencies.getCHF(), userPriceGroupCHF));
 
 		if (line.getPlstchf10() != null && line.getPlchf10() != null)
 			priceRowsValues.add(createPriceRowValues(line.getPlstchf10(), line.getPlchf10(), line.getPlCHFUnit(),
-						ArtozConstants.Currencies.getCHF()));
+						ArtozConstants.Currencies.getCHF(), userPriceGroupCHF));
 
 		// Euro
 		if (line.getPleur01() != null)
 			priceRowsValues.add(createPriceRowValues(line.getPlsteur01() == null ? 1 : line.getPlsteur01(), line
-						.getPleur01(), line.getPlEURUnit(), ArtozConstants.Currencies.getEUR()));
+						.getPleur01(), line.getPlEURUnit(), ArtozConstants.Currencies.getEUR(), userPriceGroupEUR));
 
 		if (line.getPlsteur02() != null && line.getPleur02() != null)
 			priceRowsValues.add(createPriceRowValues(line.getPlsteur02(), line.getPleur02(), line.getPlEURUnit(),
-						ArtozConstants.Currencies.getEUR()));
+						ArtozConstants.Currencies.getEUR(), userPriceGroupEUR));
 
 		if (line.getPlsteur03() != null && line.getPleur03() != null)
 			priceRowsValues.add(createPriceRowValues(line.getPlsteur03(), line.getPleur03(), line.getPlEURUnit(),
-						ArtozConstants.Currencies.getEUR()));
+						ArtozConstants.Currencies.getEUR(), userPriceGroupEUR));
 
 		if (line.getPlsteur04() != null && line.getPleur04() != null)
 			priceRowsValues.add(createPriceRowValues(line.getPlsteur04(), line.getPleur04(), line.getPlEURUnit(),
-						ArtozConstants.Currencies.getEUR()));
+						ArtozConstants.Currencies.getEUR(), userPriceGroupEUR));
 
 		if (line.getPlsteur05() != null && line.getPleur05() != null)
 			priceRowsValues.add(createPriceRowValues(line.getPlsteur05(), line.getPleur05(), line.getPlEURUnit(),
-						ArtozConstants.Currencies.getEUR()));
+						ArtozConstants.Currencies.getEUR(), userPriceGroupEUR));
 
 		if (line.getPlsteur06() != null && line.getPleur06() != null)
 			priceRowsValues.add(createPriceRowValues(line.getPlsteur06(), line.getPleur06(), line.getPlEURUnit(),
-						ArtozConstants.Currencies.getEUR()));
+						ArtozConstants.Currencies.getEUR(), userPriceGroupEUR));
 
 		if (line.getPlsteur07() != null && line.getPleur07() != null)
 			priceRowsValues.add(createPriceRowValues(line.getPlsteur07(), line.getPleur07(), line.getPlEURUnit(),
-						ArtozConstants.Currencies.getEUR()));
+						ArtozConstants.Currencies.getEUR(), userPriceGroupEUR));
 
 		if (line.getPlsteur08() != null && line.getPleur08() != null)
 			priceRowsValues.add(createPriceRowValues(line.getPlsteur08(), line.getPleur08(), line.getPlEURUnit(),
-						ArtozConstants.Currencies.getEUR()));
+						ArtozConstants.Currencies.getEUR(), userPriceGroupEUR));
 
 		if (line.getPlsteur08() != null && line.getPleur09() != null)
 			priceRowsValues.add(createPriceRowValues(line.getPlsteur09(), line.getPleur09(), line.getPlEURUnit(),
-						ArtozConstants.Currencies.getEUR()));
+						ArtozConstants.Currencies.getEUR(), userPriceGroupEUR));
 
 		if (line.getPlsteur10() != null && line.getPleur10() != null)
 			priceRowsValues.add(createPriceRowValues(line.getPlsteur10(), line.getPleur10(), line.getPlEURUnit(),
-						ArtozConstants.Currencies.getEUR()));
+						ArtozConstants.Currencies.getEUR(), userPriceGroupEUR));
 
 		// Pound
 		if (line.getPlgbp01() != null)
 			priceRowsValues.add(createPriceRowValues(line.getPlstgbp01() == null ? 1 : line.getPlstgbp01(), line
-						.getPlgbp01(), line.getPlGBPUnit(), ArtozConstants.Currencies.getGBP()));
+						.getPlgbp01(), line.getPlGBPUnit(), ArtozConstants.Currencies.getGBP(), userPriceGroupGBP));
 
 		if (line.getPlstgbp02() != null && line.getPlgbp02() != null)
 			priceRowsValues.add(createPriceRowValues(line.getPlstgbp02(), line.getPlgbp02(), line.getPlGBPUnit(),
-						ArtozConstants.Currencies.getGBP()));
+						ArtozConstants.Currencies.getGBP(), userPriceGroupGBP));
 
 		if (line.getPlstgbp03() != null && line.getPlgbp03() != null)
 			priceRowsValues.add(createPriceRowValues(line.getPlstgbp03(), line.getPlgbp03(), line.getPlGBPUnit(),
-						ArtozConstants.Currencies.getGBP()));
+						ArtozConstants.Currencies.getGBP(), userPriceGroupGBP));
 
 		if (line.getPlstgbp04() != null && line.getPlgbp04() != null)
 			priceRowsValues.add(createPriceRowValues(line.getPlstgbp04(), line.getPlgbp04(), line.getPlGBPUnit(),
-						ArtozConstants.Currencies.getGBP()));
+						ArtozConstants.Currencies.getGBP(), userPriceGroupGBP));
 
 		if (line.getPlstgbp05() != null && line.getPlgbp05() != null)
 			priceRowsValues.add(createPriceRowValues(line.getPlstgbp05(), line.getPlgbp05(), line.getPlGBPUnit(),
-						ArtozConstants.Currencies.getGBP()));
+						ArtozConstants.Currencies.getGBP(), userPriceGroupGBP));
 
 		if (line.getPlstgbp06() != null && line.getPlgbp06() != null)
 			priceRowsValues.add(createPriceRowValues(line.getPlstgbp06(), line.getPlgbp06(), line.getPlGBPUnit(),
-						ArtozConstants.Currencies.getGBP()));
+						ArtozConstants.Currencies.getGBP(), userPriceGroupGBP));
 
 		if (line.getPlstgbp07() != null && line.getPlgbp07() != null)
 			priceRowsValues.add(createPriceRowValues(line.getPlstgbp07(), line.getPlgbp07(), line.getPlGBPUnit(),
-						ArtozConstants.Currencies.getGBP()));
+						ArtozConstants.Currencies.getGBP(), userPriceGroupGBP));
 
 		if (line.getPlstgbp08() != null && line.getPlgbp08() != null)
 			priceRowsValues.add(createPriceRowValues(line.getPlstgbp08(), line.getPlgbp08(), line.getPlGBPUnit(),
-						ArtozConstants.Currencies.getGBP()));
+						ArtozConstants.Currencies.getGBP(), userPriceGroupGBP));
 
 		if (line.getPlstgbp09() != null && line.getPlgbp09() != null)
 			priceRowsValues.add(createPriceRowValues(line.getPlstgbp09(), line.getPlgbp09(), line.getPlGBPUnit(),
-						ArtozConstants.Currencies.getGBP()));
+						ArtozConstants.Currencies.getGBP(), userPriceGroupGBP));
 
 		if (line.getPlstgbp10() != null && line.getPlgbp10() != null)
 			priceRowsValues.add(createPriceRowValues(line.getPlstgbp10(), line.getPlgbp10(), line.getPlGBPUnit(),
-						ArtozConstants.Currencies.getGBP()));
+						ArtozConstants.Currencies.getGBP(), userPriceGroupGBP));
 
 		return priceRowsValues;
 	}

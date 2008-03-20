@@ -9,6 +9,7 @@ import ch.screenconcept.artoz.product.ArtozProduct;
 import de.hybris.platform.jalo.JaloBusinessException;
 import de.hybris.platform.jalo.JaloInvalidParameterException;
 import de.hybris.platform.jalo.c2l.Currency;
+import de.hybris.platform.jalo.enumeration.EnumerationValue;
 import de.hybris.platform.jalo.order.price.JaloPriceFactoryException;
 import de.hybris.platform.jalo.security.JaloSecurityException;
 
@@ -25,8 +26,10 @@ public class PriceRowValues
 	private Double price = null;
 
 	private Currency currency = null;
-	
+
 	private Integer unitFactor = null;
+
+	private EnumerationValue userGroup = null;
 
 	public Long getQuantity()
 	{
@@ -68,6 +71,16 @@ public class PriceRowValues
 		this.unitFactor = unitFactor;
 	}
 
+	public EnumerationValue getUserGroup()
+	{
+		return userGroup;
+	}
+
+	public void setUserGroup(EnumerationValue userGroup)
+	{
+		this.userGroup = userGroup;
+	}
+
 	/**
 	 * Create a PriceRow with the given values
 	 * 
@@ -84,6 +97,7 @@ public class PriceRowValues
 		params.put(ArtozPriceRow.UNIT, ArtozConstants.Units.getPieces());
 		params.put(ArtozPriceRow.UNITFACTOR, getUnitFactor());
 		params.put(ArtozPriceRow.PRICE, getPrice());
+		params.put(ArtozPriceRow.UG, getUserGroup());
 		params.put(ArtozPriceRow.UPDATECOUNTER, ArtozConstants.NumberSeries.getCurrentProductImportNumber());
 		return ArtozManager.getInstance().createArtozPriceRow(params);
 	}
@@ -91,10 +105,11 @@ public class PriceRowValues
 	public void updatePriceRow(ArtozProduct product) throws JaloInvalidParameterException, JaloSecurityException,
 				JaloBusinessException
 	{
-		ArtozPriceRow priceRow = product.getPriceRow(getQuantity(), getCurrency());
+		ArtozPriceRow priceRow = product.getPriceRow(getQuantity(), getCurrency(), getUserGroup());
 
 		if (priceRow != null)
 		{
+			priceRow.setUg(getUserGroup());
 			priceRow.setAttribute(ArtozPriceRow.MINQTD, getQuantity());
 			priceRow.setAttribute(ArtozPriceRow.PRICE, getPrice());
 			priceRow.setAttribute(ArtozPriceRow.UNITFACTOR, getUnitFactor());

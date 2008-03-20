@@ -19,6 +19,7 @@ import de.hybris.platform.jalo.SearchResult;
 import de.hybris.platform.jalo.SessionContext;
 import de.hybris.platform.jalo.c2l.Currency;
 import de.hybris.platform.jalo.c2l.Language;
+import de.hybris.platform.jalo.enumeration.EnumerationValue;
 import de.hybris.platform.jalo.security.JaloSecurityException;
 
 /**
@@ -124,11 +125,9 @@ public class ArtozProduct extends GeneratedArtozProduct
 
 		final SearchResult res = JaloSession.getCurrentSession().getFlexibleSearch().search(
 					"SELECT {" + ArtozProduct.PK + "} FROM {" + ArtozConstants.TC.ARTOZPRODUCT + "} WHERE {"
-								+ ArtozProduct.UPDATECOUNTER + "} < ?number AND {" + CatalogConstants.Attributes.Product.OFFLINEDATE + "} is null" , value,
-					Collections.singletonList(ArtozProduct.class), true,
-					true, 
-					0, -1 
-					);
+								+ ArtozProduct.UPDATECOUNTER + "} < ?number AND {"
+								+ CatalogConstants.Attributes.Product.OFFLINEDATE + "} is null", value,
+					Collections.singletonList(ArtozProduct.class), true, true, 0, -1);
 		log.info("Found " + res.getResult().size() + " not updated products by import number " + importNumber);
 		return res.getResult();
 	}
@@ -154,18 +153,20 @@ public class ArtozProduct extends GeneratedArtozProduct
 		return res.getResult();
 	}
 
-	public ArtozPriceRow getPriceRow(Long quantity, Currency currency)
+	public ArtozPriceRow getPriceRow(Long quantity, Currency currency, EnumerationValue userPriceGroup)
 	{
 		Map<String, Object> value = new HashMap<String, Object>();
 		value.put("product", this);
 		value.put("quantity", quantity);
 		value.put("currency", currency);
+		value.put("ug", userPriceGroup);
 
 		final SearchResult res = JaloSession.getCurrentSession().getFlexibleSearch().search(
 					"SELECT {" + ArtozPriceRow.PK + "} FROM {" + ArtozConstants.TC.ARTOZPRICEROW + "} " + "WHERE {"
 								+ ArtozPriceRow.PRODUCT + "} = ?product AND {" + ArtozPriceRow.MINQTD
-								+ "} = ?quantity AND {" + ArtozPriceRow.CURRENCY + "} = ?currency", value,
-					Collections.singletonList(ArtozPriceRow.class), true, // fail
+								+ "} = ?quantity AND {" + ArtozPriceRow.CURRENCY + "} = ?currency AND {"
+								+ ArtozPriceRow.UG + "} = ?ug", value, Collections.singletonList(ArtozPriceRow.class),
+					true, // fail
 					// on
 					// unknown
 					// fields

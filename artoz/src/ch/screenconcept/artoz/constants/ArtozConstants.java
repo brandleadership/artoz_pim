@@ -281,4 +281,10 @@ public final class ArtozConstants extends GeneratedArtozConstants
 
 		public static final String MRS_CODE = "mrs";
 	}
+	
+	public static final class UserPriceGroups {
+		public static final String CHF_STANDARD_NAME = "CHSTANDARD";
+		public static final String EUR_STANDARD_NAME = "EURSTANDARD";
+		public static final String GBP_STANDARD_NAME = "GBBSTANDARD";
+	}
 }
