@@ -62,7 +62,6 @@ public class ProductImportJob extends GeneratedProductImportJob
 		}
 		catch (Exception e)
 		{
-			e.printStackTrace();
 			throw new AbortCronJobException(e.getMessage());
 		}
 

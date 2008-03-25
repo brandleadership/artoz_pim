@@ -19,6 +19,11 @@
 <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="items.xsd">
 
+	<collectiontypes>
+		<collectiontype code="ArtozMSRPriceCollection" elementtype="ArtozMSRPrice"
+			autocreate="true" generate="true" />
+	</collectiontypes>
+
 	<itemtypes>
 		<!-- Product -->
 		<itemtype generate="true" code="ArtozProduct"
@@ -100,6 +105,13 @@
 						initial="true" />
 					<persistence type="property" />
 				</attribute>
+				<attribute qualifier="msrPrices"
+					type="ArtozMSRPriceCollection">
+					<description>msr pricesr</description>
+					<modifiers read="true" write="true" search="true"
+						initial="true" />
+					<persistence type="property" />
+				</attribute>				
 			</attributes>
 		</itemtype>
 
@@ -113,6 +125,30 @@
 					<description>update counter</description>
 					<modifiers read="true" write="true" search="true"
 						initial="true" />
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<!-- MSR Price -->
+		<itemtype generate="true" code="ArtozMSRPrice"
+			jaloclass="ch.screenconcept.artoz.prices.ArtozMSRPrice"
+			extends="GenericItem" autocreate="true">
+			<deployment table="ArtozMSRPrice" typecode="999999" />
+			<attributes>
+				<attribute qualifier="currency" type="Currency">
+					<modifiers read="true" write="true" search="true"
+						optional="false" initial="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="price" type="java.lang.Double">
+					<modifiers read="true" write="true" search="true"
+						optional="false" initial="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="ug" type="UserPriceGroup">
+					<modifiers read="true" write="true" search="true"
+						optional="false" initial="true" />
 					<persistence type="property" />
 				</attribute>
 			</attributes>
@@ -227,7 +263,7 @@
 					<persistence type="property" />
 					<modifiers optional="true" write="true" read="true"
 						search="true" />
-				</attribute>				
+				</attribute>
 				<attribute qualifier="faxFaxNumber"
 					type="java.lang.String">
 					<persistence type="property" />
@@ -420,10 +456,11 @@
 					<modifiers optional="true" />
 					<persistence type="jalo" />
 				</attribute>
-				<attribute qualifier="campaignProducts" type="ProductCollection">
-					<modifiers optional="true" write="true"/>
-					<persistence type="jalo"/>
-				</attribute>				
+				<attribute qualifier="campaignProducts"
+					type="ProductCollection">
+					<modifiers optional="true" write="true" />
+					<persistence type="jalo" />
+				</attribute>
 			</attributes>
 		</itemtype>
 	</itemtypes>

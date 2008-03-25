@@ -120,6 +120,12 @@
 							</row>
 						</columnlayout>
 					</section>
+					<section name="section.product.msrprice">
+						<listlayout>
+							<attribute name="msrPrices"
+								editable="false" />
+						</listlayout>
+					</section>
 				</tab>
 				<tab name="tab.product.categorysystem">
 					<section name="section.product.productincategory">
