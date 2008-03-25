@@ -51,9 +51,9 @@
 		<!--
 		<extension dir="../ext-misc/bibit"/>
 		<extension dir="../ext-misc/escore"/>
-		<extension dir="../ext-misc/xprint"/>
 		<extension dir="../ext-misc/xprintdemo"/>
 		-->
+		<extension dir="../ext-misc/xprint"/>
 
         <!-- **************************************************************** -->
         <!-- *** Screenconcept Extensions                                 *** -->

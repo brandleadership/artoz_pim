@@ -87,7 +87,7 @@
                 <delete dir="${tmp.dir}" />
             </else>
         </if>
-        
+
         <!--Commerce Extension -->
         <if>
             <available file="${hybris.home}/campaign/" />
@@ -106,7 +106,26 @@
                 </move>
                 <delete dir="${tmp.dir}" />
             </else>
-        </if>    
+        </if>
+        <!-- Misc Extension -->
+        <if>
+            <available file="${hybris.home}/ext-misc/" />
+            <then>
+                <echo message="ext misc installed." />
+            </then>
+            <else>
+                <mkdir dir="${tmp.dir}" />
+                <unzip dest="${tmp.dir}">
+                    <fileset dir="${hybris.software.dir}">
+                        <include name="hybris-misc-modules*.zip" />
+                    </fileset>
+                </unzip>
+                <move todir="${hybris.home}">
+                    <fileset dir="${tmp.dir}/hybris" />
+                </move>
+                <delete dir="${tmp.dir}" />
+            </else>
+        </if>
     </target>
 
     <!-- 
