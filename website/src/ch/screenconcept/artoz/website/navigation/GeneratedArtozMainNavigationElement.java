@@ -8,29 +8,29 @@ package ch.screenconcept.artoz.website.navigation;
 import ch.screenconcept.artoz.website.constants.WebsiteConstants;
 import de.hybris.platform.cms.jalo.NavigationElement;
 import de.hybris.platform.jalo.SessionContext;
-import de.hybris.platform.jalo.media.Media;
+import de.hybris.platform.jalo.enumeration.EnumerationValue;
 
 public abstract class GeneratedArtozMainNavigationElement extends NavigationElement
 {
-	public static final String PICTURE = "picture".intern();
-	public Media getPicture(final SessionContext ctx)
+	public static final String COLOR = "color".intern();
+	public EnumerationValue getColor(final SessionContext ctx)
 	{
-		return (Media)getProperty( ctx, PICTURE);
+		return (EnumerationValue)getProperty( ctx, COLOR);
 	}
 	
-	public Media getPicture()
+	public EnumerationValue getColor()
 	{
-		return getPicture( getSession().getSessionContext() );
+		return getColor( getSession().getSessionContext() );
 	}
 	
-	public void setPicture(final SessionContext ctx, final Media value)
+	public void setColor(final SessionContext ctx, final EnumerationValue value)
 	{
-		setProperty(ctx, PICTURE,value);
+		setProperty(ctx, COLOR,value);
 	}
 	
-	public void setPicture(final Media value)
+	public void setColor(final EnumerationValue value)
 	{
-		setPicture( getSession().getSessionContext(), value );
+		setColor( getSession().getSessionContext(), value );
 	}
 	
 }

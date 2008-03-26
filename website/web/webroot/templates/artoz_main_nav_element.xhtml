@@ -6,7 +6,7 @@
 	xmlns:cms="http://hybris.com/cms">
 
 	<li>
-		<h:outputLink alt="#{element.name}" value="#{element.content}">
+		<h:outputLink alt="#{element.name}" value="#{element.content.code}" class="#{element.color.code}">
 			<h:outputText value="#{element.name}" />
 		</h:outputLink>
 	</li>

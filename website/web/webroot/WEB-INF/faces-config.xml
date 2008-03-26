@@ -12,11 +12,6 @@
       com.sun.facelets.FaceletViewHandler
     </view-handler>    
   </application> 
-  	<managed-bean>
-		<managed-bean-name>cmsBean</managed-bean-name>
-		<managed-bean-class>ch.screenconcept.artoz.faces.beans.CmsJSFBean</managed-bean-class>
-		<managed-bean-scope>request</managed-bean-scope>
-	</managed-bean>
 	
 	<component>
 		<component-type>de.hybris.cms.CMSEditableComponent</component-type>
@@ -38,4 +33,20 @@
 		<component-class>ch.screenconcept.artoz.cms.CMSItemComponent</component-class>
   	</component>
   	
+  	<navigation-rule>  
+        <navigation-case>
+            <from-outcome>unregvalid</from-outcome>
+            <to-view-id>/pages/newsLetterUnregistrationSuccessed.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>  
+        <navigation-case>
+            <from-outcome>unreginvalid</from-outcome>
+            <to-view-id>/pages/newsLetterUnregistrationFailed.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
 </faces-config>
