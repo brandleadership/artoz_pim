@@ -20,6 +20,12 @@ public class ProductCSVFileLine extends AbstractCSVFileLine
 		if (getPlgbp01() != null)
 			if (getPlGBPUnit() == null)
 				throw new CSVFormatException("PlGBPUnit is empty and a GBP price is set");
+		if (getPleurexp01() != null)
+			if (getPlEUREXPUnit() == null)
+				throw new CSVFormatException("PlGBPUnit is empty and a GBP price is set");
+		if (getPlusd01() != null)
+			if (getPlUSDUnit() == null)
+				throw new CSVFormatException("PlGBPUnit is empty and a GBP price is set");		
 	}
 
 	public String getCode()
@@ -81,7 +87,27 @@ public class ProductCSVFileLine extends AbstractCSVFileLine
 	{
 		return getInteger(11);
 	}
+	
+	public Integer getBrand()
+	{
+		return getInteger(12);
+	}
 
+	public Integer getFormat()
+	{
+		return getInteger(13);
+	}
+	
+	public Integer getDesign()
+	{
+		return getInteger(14);
+	}
+	
+	public Integer getColor()
+	{
+		return getInteger(15);
+	}
+	
 	public boolean getMdaView()
 	{
 		if (getColumn(16) != null)
@@ -432,5 +458,265 @@ public class ProductCSVFileLine extends AbstractCSVFileLine
 	public Double getPlgbp10()
 	{
 		return getDouble(85);
+	}
+
+	public Integer getPlEUREXPUnit()
+	{
+		return getInteger(86);
+	}
+
+	public Long getPlsteurexp01()
+	{
+		return getLong(87);
+	}
+
+	public Double getPleurexp01()
+	{
+		return getDouble(88);
+	}
+
+	public Long getPlsteurexp02()
+	{
+		return getLong(89);
+	}
+
+	public Double getPleurexp02()
+	{
+		return getDouble(90);
+	}
+
+	public Long getPlsteurexp03()
+	{
+		return getLong(91);
+	}
+
+	public Double getPleurexp03()
+	{
+		return getDouble(92);
+	}
+
+	public Long getPlsteurexp04()
+	{
+		return getLong(93);
+	}
+
+	public Double getPleurexp04()
+	{
+		return getDouble(94);
+	}
+
+	public Long getPlsteurexp05()
+	{
+		return getLong(95);
+	}
+
+	public Double getPleurexp05()
+	{
+		return getDouble(96);
+	}
+
+	public Long getPlsteurexp06()
+	{
+		return getLong(97);
+	}
+
+	public Double getPleurexp06()
+	{
+		return getDouble(98);
+	}
+
+	public Long getPlsteurexp07()
+	{
+		return getLong(99);
+	}
+
+	public Double getPleurexp07()
+	{
+		return getDouble(100);
+	}
+
+	public Long getPlsteurexp08()
+	{
+		return getLong(101);
+	}
+
+	public Double getPleurexp08()
+	{
+		return getDouble(102);
+	}
+
+	public Long getPlsteurexp09()
+	{
+		return getLong(103);
+	}
+
+	public Double getPleurexp09()
+	{
+		return getDouble(104);
+	}
+
+	public Long getPlsteurexp10()
+	{
+		return getLong(105);
+	}
+
+	public Double getPleurexp10()
+	{
+		return getDouble(106);
+	}
+
+	public Integer getPlUSDUnit()
+	{
+		return getInteger(107);
+	}
+
+	public Long getPlstusd01()
+	{
+		return getLong(108);
+	}
+
+	public Double getPlusd01()
+	{
+		return getDouble(109);
+	}
+
+	public Long getPlstusd02()
+	{
+		return getLong(110);
+	}
+
+	public Double getPlusd02()
+	{
+		return getDouble(111);
+	}
+
+	public Long getPlstusd03()
+	{
+		return getLong(112);
+	}
+
+	public Double getPlusd03()
+	{
+		return getDouble(113);
+	}
+
+	public Long getPlstusd04()
+	{
+		return getLong(114);
+	}
+
+	public Double getPlusd04()
+	{
+		return getDouble(115);
+	}
+
+	public Long getPlstusd05()
+	{
+		return getLong(116);
+	}
+
+	public Double getPlusd05()
+	{
+		return getDouble(117);
+	}
+
+	public Long getPlstusd06()
+	{
+		return getLong(118);
+	}
+
+	public Double getPlusd06()
+	{
+		return getDouble(119);
+	}
+
+	public Long getPlstusd07()
+	{
+		return getLong(120);
+	}
+
+	public Double getPlusd07()
+	{
+		return getDouble(121);
+	}
+
+	public Long getPlstusd08()
+	{
+		return getLong(122);
+	}
+
+	public Double getPlusd08()
+	{
+		return getDouble(123);
+	}
+
+	public Long getPlstusd09()
+	{
+		return getLong(124);
+	}
+
+	public Double getPlusd09()
+	{
+		return getDouble(125);
+	}
+
+	public Long getPlstusd10()
+	{
+		return getLong(126);
+	}
+
+	public Double getPlusd10()
+	{
+		return getDouble(127);
+	}
+
+	public Integer getUVPCHFUnit()
+	{
+		return getInteger(128);
+	}
+	
+	public Double getUVPCHF()
+	{
+		return getDouble(129);
+	}
+	
+	public Integer getUVPEURUnit()
+	{
+		return getInteger(130);
+	}
+	
+	public Double getUVPEUR()
+	{
+		return getDouble(131);
+	}
+
+	public Integer getUVPEUREXUnit()
+	{
+		return getInteger(132);
+	}
+	
+	public Double getUVPEUREX()
+	{
+		return getDouble(133);
+	}
+
+	public Integer getUVPGBPUnit()
+	{
+		return getInteger(134);
+	}
+	
+	public Double getUVPGBP()
+	{
+		return getDouble(135);
+	}
+
+	public Integer getUVPUSDUnit()
+	{
+		return getInteger(136);
+	}
+	
+	public Double getUVPUSD()
+	{
+		return getDouble(137);
 	}
 }

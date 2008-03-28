@@ -28,6 +28,10 @@
 			<typeref type="CreateEMailFaxCampaignWizard"
 				description="typeref.CreateEMailFaxCampaignWizard.description" />
 		</group>
+		<group name="group.xprint">
+			<typeref type="CreateProductPlacmentWizard"
+				description="typeref.CreateProductPlacmentWizard.description" />
+		</group>
 	</explorertree>
 
 	<type name="ArtozProduct" icon="images/icons/e_product.gif"
@@ -123,7 +127,23 @@
 					<section name="section.product.msrprice">
 						<listlayout>
 							<attribute name="msrPrices"
-								editable="false" />
+								editable="false">
+								<referencecollectioneditor
+									editable="false" externalcreate="false" resortable="false"
+									remove="false" create="false" add="false"
+									considersubtypes="false">
+									<itemlayout>
+										<attribute name="ug"
+											width="120" />
+										<attribute name="unit"
+											width="90" />
+										<attribute name="price"
+											width="60" />
+										<attribute name="currency"
+											width="60" />
+									</itemlayout>
+								</referencecollectioneditor>
+							</attribute>
 						</listlayout>
 					</section>
 				</tab>
@@ -285,6 +305,24 @@
 						<listlayout>
 							<text name="nciwizard.products" />
 							<attribute name="campaignProducts" />
+						</listlayout>
+					</section>
+				</tab>
+			</editor>
+		</organizer>
+	</type>
+
+	<type name="CreateProductPlacmentWizard"
+		icon="ext/campaign/images/icons/e_campaign.gif">
+		<organizer>
+			<editor>
+				<tab name="tab.CreateProductPlacmentWizard.one"
+					position="0">
+					<section
+						name="section.CreateProductPlacmentWizard.one">
+						<listlayout>
+							<attribute name="category" />
+							<attribute name="tablePlacement" />
 						</listlayout>
 					</section>
 				</tab>

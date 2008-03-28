@@ -20,8 +20,8 @@
 	xsi:noNamespaceSchemaLocation="items.xsd">
 
 	<collectiontypes>
-		<collectiontype code="ArtozMSRPriceCollection" elementtype="ArtozMSRPrice"
-			autocreate="true" generate="true" />
+		<collectiontype code="ArtozMSRPriceCollection"
+			elementtype="ArtozMSRPrice" autocreate="true" generate="true" />
 	</collectiontypes>
 
 	<itemtypes>
@@ -111,7 +111,7 @@
 					<modifiers read="true" write="true" search="true"
 						initial="true" />
 					<persistence type="property" />
-				</attribute>				
+				</attribute>
 			</attributes>
 		</itemtype>
 
@@ -134,7 +134,7 @@
 		<itemtype generate="true" code="ArtozMSRPrice"
 			jaloclass="ch.screenconcept.artoz.prices.ArtozMSRPrice"
 			extends="GenericItem" autocreate="true">
-			<deployment table="ArtozMSRPrice" typecode="999999" />
+			<deployment table="ArtozMSRPrice" typecode="32767" />
 			<attributes>
 				<attribute qualifier="currency" type="Currency">
 					<modifiers read="true" write="true" search="true"
@@ -151,6 +151,23 @@
 						optional="false" initial="true" />
 					<persistence type="property" />
 				</attribute>
+				<attribute qualifier="unit" type="Unit">
+					<modifiers read="true" write="true" search="true"
+						optional="false" initial="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="quantity" type="java.lang.Integer">
+					<modifiers read="true" write="true" search="true"
+						optional="false" initial="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="updateCounter"
+					type="java.lang.Integer">
+					<description>update counter</description>
+					<modifiers read="true" write="true" search="true"
+						initial="true" />
+					<persistence type="property" />
+				</attribute>				
 			</attributes>
 		</itemtype>
 
@@ -459,6 +476,23 @@
 				<attribute qualifier="campaignProducts"
 					type="ProductCollection">
 					<modifiers optional="true" write="true" />
+					<persistence type="jalo" />
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype code="CreateProductPlacmentWizard"
+			extends="WizardBusinessItem"
+			jaloclass="ch.screenconcept.artoz.wizard.CreateProductPlacmentWizard"
+			autocreate="true" generate="true">
+			<attributes>
+				<attribute qualifier="category" type="Category">
+					<modifiers optional="false" />
+					<persistence type="jalo" />
+				</attribute>
+				<attribute qualifier="tablePlacement"
+					type="XTablePlacement">
+					<modifiers optional="false" />
 					<persistence type="jalo" />
 				</attribute>
 			</attributes>

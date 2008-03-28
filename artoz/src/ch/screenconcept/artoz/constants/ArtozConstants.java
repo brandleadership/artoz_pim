@@ -189,6 +189,8 @@ public final class ArtozConstants extends GeneratedArtozConstants
 			public static final String EUR = "€";
 
 			public static final String GBP = "£";
+
+			public static final String USD = "$";
 		}
 
 		public static final Currency getCHF()
@@ -285,6 +287,8 @@ public final class ArtozConstants extends GeneratedArtozConstants
 	public static final class UserPriceGroups {
 		public static final String CHF_STANDARD_NAME = "CHSTANDARD";
 		public static final String EUR_STANDARD_NAME = "EURSTANDARD";
+		public static final String EUR_EXTENDED_NAME = "EUREXTENDED";
 		public static final String GBP_STANDARD_NAME = "GBBSTANDARD";
+		public static final String USD_STANDARD_NAME = "USDSTANDARD";
 	}
 }

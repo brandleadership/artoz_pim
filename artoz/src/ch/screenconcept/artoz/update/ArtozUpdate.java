@@ -26,7 +26,8 @@ public class ArtozUpdate
 	{
 	{ ArtozConstants.Currencies.IsoCodes.CHF, ArtozConstants.Currencies.Symbols.CHF },
 	{ ArtozConstants.Currencies.IsoCodes.EUR, ArtozConstants.Currencies.Symbols.EUR },
-	{ ArtozConstants.Currencies.IsoCodes.GBP, ArtozConstants.Currencies.Symbols.GBP } };
+	{ ArtozConstants.Currencies.IsoCodes.GBP, ArtozConstants.Currencies.Symbols.GBP },
+	{ ArtozConstants.Currencies.IsoCodes.USD, ArtozConstants.Currencies.Symbols.USD } };
 
 	public static void createLanguages() throws ConsistencyCheckException
 	{
@@ -112,7 +113,11 @@ public class ArtozUpdate
 			Europe1PriceFactory.getInstance().createUserPriceGroup(ArtozConstants.UserPriceGroups.CHF_STANDARD_NAME);
 		if (Europe1PriceFactory.getInstance().getUserPriceGroup(ArtozConstants.UserPriceGroups.EUR_STANDARD_NAME) == null)
 			Europe1PriceFactory.getInstance().createUserPriceGroup(ArtozConstants.UserPriceGroups.EUR_STANDARD_NAME);
+		if (Europe1PriceFactory.getInstance().getUserPriceGroup(ArtozConstants.UserPriceGroups.EUR_EXTENDED_NAME) == null)
+			Europe1PriceFactory.getInstance().createUserPriceGroup(ArtozConstants.UserPriceGroups.EUR_EXTENDED_NAME);
 		if (Europe1PriceFactory.getInstance().getUserPriceGroup(ArtozConstants.UserPriceGroups.GBP_STANDARD_NAME) == null)
 			Europe1PriceFactory.getInstance().createUserPriceGroup(ArtozConstants.UserPriceGroups.GBP_STANDARD_NAME);
+		if (Europe1PriceFactory.getInstance().getUserPriceGroup(ArtozConstants.UserPriceGroups.USD_STANDARD_NAME) == null)
+			Europe1PriceFactory.getInstance().createUserPriceGroup(ArtozConstants.UserPriceGroups.USD_STANDARD_NAME);
 	}
 }
