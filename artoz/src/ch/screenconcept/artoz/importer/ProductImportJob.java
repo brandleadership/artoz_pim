@@ -136,30 +136,81 @@ public class ProductImportJob extends GeneratedProductImportJob
 				product.update(params, names, getPrices(line));
 			}
 
-			// Add product to category
-			Collection<Category> categories = CategoryManager.getInstance().getCategoriesByCode(line.getCategory());
-			final Category category;
-			if (categories == null || categories.isEmpty())
+			if (line.getBrand() != null)
 			{
-				category = CategoryManager.getInstance().createCategory(line.getCategory());
-				category.setName(line.getCategoryName());
+				// Add product to category
+				final Collection<Category> brandCategories = CategoryManager.getInstance().getCategoriesByCode(
+							line.getBrand());
+				final Category brandCategory;
+				if (brandCategories == null || brandCategories.isEmpty())
+				{
+					brandCategory = CategoryManager.getInstance().createCategory(line.getBrand());
+					brandCategory.setName(line.getBrand());
+				}
+				else
+					brandCategory = brandCategories.iterator().next();
+
+				// Update categories; Delete old once.
+				boolean hasBrandCategory = false;
+				for (Category productCategory : catalogManager.getCategoriesByProduct(catalogVersion, product))
+					if (productCategory.getCode().equals(brandCategory.getCode()))
+						hasBrandCategory = true;
+					else
+						productCategory.removeProduct(product);
+				if (!hasBrandCategory)
+					brandCategory.addProduct(product);
+
+				catalogManager.setCatalogVersion(brandCategory, catalogVersion);
+
+				final Collection<Category> categories = CategoryManager.getInstance().getCategoriesByCode(
+							line.getCategory());
+				final Category category;
+				if (categories == null || categories.isEmpty())
+				{
+					category = CategoryManager.getInstance().createCategory(line.getCategory());
+					category.setName(line.getCategoryName());
+				}
+				else
+					category = categories.iterator().next();
+
+				// Update categories; Delete old once.
+				boolean hascategoryCategory = false;
+				for (Category categoryCategory : brandCategory.getSupercategories())
+					if (categoryCategory.getCode().equals(category.getCode()))
+						hascategoryCategory = true;
+					else
+						categoryCategory.removeProduct(product);
+				if (!hascategoryCategory)
+					brandCategory.addSubcategory(category);
+
+				catalogManager.setCatalogVersion(category, catalogVersion);
 			}
 			else
-				category = categories.iterator().next();
-
-			Collection<Category> productCategories = catalogManager.getCategoriesByProduct(catalogVersion, product);
-
-			// Update categories; Delete old once.
-			boolean hasCategory = false;
-			for (Category productCategory : productCategories)
-				if (productCategory.getCode().equals(category.getCode()))
-					hasCategory = true;
+			{
+				final Collection<Category> categories = CategoryManager.getInstance().getCategoriesByCode(
+							line.getCategory());
+				final Category category;
+				if (categories == null || categories.isEmpty())
+				{
+					category = CategoryManager.getInstance().createCategory(line.getCategory());
+					category.setName(line.getCategoryName());
+				}
 				else
-					productCategory.removeProduct(product);
-			if (!hasCategory)
-				category.addProduct(product);
+					category = categories.iterator().next();
 
-			catalogManager.setCatalogVersion(category, catalogVersion);
+				// Update categories; Delete old once.
+				boolean hasCategory = false;
+				for (Category productCategory : catalogManager.getCategoriesByProduct(catalogVersion, product))
+					if (productCategory.getCode().equals(category.getCode()))
+						hasCategory = true;
+					else
+						productCategory.removeProduct(product);
+				if (!hasCategory)
+					category.addProduct(product);
+
+				catalogManager.setCatalogVersion(category, catalogVersion);
+			}
+
 			catalogManager.setApprovalStatus(product, EnumerationManager.getInstance().getEnumerationValue(
 						CatalogConstants.TC.ARTICLEAPPROVALSTATUS,
 						CatalogConstants.Enumerations.ArticleApprovalStatus.APPROVED));
