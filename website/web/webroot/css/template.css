@@ -113,3 +113,19 @@ height: 100px;
 display: block;
 background-color: #336699;
 }
+/******************************************/
+/* Newsletter Unregistration              */
+/* /pages/newsletterUnregistration*.xhtml */
+/******************************************/
+div.registration {
+margin: 20px 20px 20px 20px;
+}
+div.registration div.button a {
+text-decoration: none;
+color: black;
+border: 2px solid white;
+float: right;
+}
+div.registration div.button a:hover {
+border: 2px solid black;
+}

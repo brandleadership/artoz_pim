@@ -28,8 +28,8 @@
 					</t:panelGroup>	
 					<t:panelGroup/>
 					<t:panelGroup>
-						<div class="button_middle_white">					
-							<h:commandLink id="registrationButton" action="#{newsletterJSFBean.doNewsletterUnregistration}">
+						<div class="button">					
+							<h:commandLink id="registrationButton" action="#{newsletterJSFBean.doNewsletterUnregistration}" actionListener="#{newsletterJSFBean.doNewsletterUnregistration}">
 								<h:outputText value="Abmelden" />
 							</h:commandLink>
 						</div>
