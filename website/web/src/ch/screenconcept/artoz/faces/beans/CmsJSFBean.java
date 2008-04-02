@@ -36,7 +36,17 @@ public class CmsJSFBean
 	public static final String	FRONTPAGE_CATEGORY_CODE	= "frontpage";
 	
 	PageContent	pageContent;
-
+	
+	public String getTemplate()
+	{
+		return "home";
+	}
+	
+	public String getParagraph()
+	{
+		return "home";
+	}
+	
 	public AbstractCMSItem getMainNav()
 	{
 		return getWebsite().getNavigationElement(MAIN_NAV);

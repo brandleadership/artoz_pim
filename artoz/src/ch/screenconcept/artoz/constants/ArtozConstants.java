@@ -52,10 +52,10 @@ public final class ArtozConstants extends GeneratedArtozConstants
 			public static final String GERMAN = "deCH";
 
 			public static final String ENGLISH = "en";
+			
+			public static final String FRENCH = "frCH";
 
 			public static final String ITALIAN = "itCH";
-
-			public static final String FRENCH = "frCH";
 
 			public static final String SPANISH = "es";
 

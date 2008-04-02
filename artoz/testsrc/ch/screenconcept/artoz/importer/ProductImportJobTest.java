@@ -184,19 +184,19 @@ public class ProductImportJobTest extends JaloTest
 	private void checkPrices(ArtozProduct product, Map<String, Object> values)
 	{
 		long quantity = (Integer) values.get("PLSTCHF01");
-		ArtozPriceRow priceRow = product.getPriceRow(quantity, ArtozConstants.Currencies.getCHF());
+		ArtozPriceRow priceRow = product.getPriceRow(quantity, ArtozConstants.Currencies.getCHF(), null);
 		assertNotNull("No CHF price row found", priceRow);
 		assertEquals((Integer) values.get("PLCHFEinheit"), priceRow.getUnitFactor());
 		assertEquals((Double) values.get("PLCHF01"), (Double) priceRow.getPrice());
 
 		quantity = (Integer) values.get("PLSTEUR01");
-		priceRow = product.getPriceRow(quantity, ArtozConstants.Currencies.getEUR());
+		priceRow = product.getPriceRow(quantity, ArtozConstants.Currencies.getEUR(), null);
 		assertNotNull("No EUR price row found", priceRow);
 		assertEquals((Integer) values.get("PLEUREinheit"), priceRow.getUnitFactor());
 		assertEquals((Double) values.get("PLEUR01"), (Double) priceRow.getPrice());
 
 		quantity = (Integer) values.get("PLSTGBP01");
-		priceRow = product.getPriceRow(quantity, ArtozConstants.Currencies.getGBP());
+		priceRow = product.getPriceRow(quantity, ArtozConstants.Currencies.getGBP(), null);
 		assertNotNull("No GPB price row found", priceRow);
 		assertEquals((Integer) values.get("PLGBPEinheit"), priceRow.getUnitFactor());
 		assertEquals((Double) values.get("PLGBP01"), (Double) priceRow.getPrice());
