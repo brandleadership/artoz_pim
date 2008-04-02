@@ -37,6 +37,9 @@
 	<type name="ArtozProduct" icon="images/icons/e_product.gif"
 		mode="append">
 		<organizer>
+			<search>
+				<condition attribute="code" operator="equal"/>
+			</search>
 			<editor>
 				<essentials>
 					<columnlayout mode="replace">
