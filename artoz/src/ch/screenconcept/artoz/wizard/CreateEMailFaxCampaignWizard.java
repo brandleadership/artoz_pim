@@ -26,6 +26,7 @@ import de.hybris.platform.jalo.JaloSession;
 import de.hybris.platform.jalo.SessionContext;
 import de.hybris.platform.jalo.c2l.Language;
 import de.hybris.platform.jalo.enumeration.EnumerationManager;
+import de.hybris.platform.jalo.enumeration.EnumerationValue;
 import de.hybris.platform.jalo.media.Media;
 import de.hybris.platform.jalo.product.Product;
 import de.hybris.platform.util.Config;
@@ -93,15 +94,15 @@ public class CreateEMailFaxCampaignWizard extends GeneratedCreateEMailFaxCampaig
 	}
 
 	@Override
-	public Boolean isCampaignFaxCampaign(SessionContext ctx)
+	public EnumerationValue getCampaignFaxCampaign()
 	{
-		return campaignFaxCampaign;
+		return getCampaignFaxCampaign( getSession().getSessionContext() );
 	}
 
 	@Override
-	public void setCampaignFaxCampaign(SessionContext ctx, Boolean value)
+	public void setCampaignFaxCampaign(final SessionContext ctx, final EnumerationValue value)
 	{
-		campaignFaxCampaign = value;
+		setProperty(ctx, CAMPAIGNFAXCAMPAIGN,value);
 	}
 
 	@Override
@@ -435,7 +436,6 @@ public class CreateEMailFaxCampaignWizard extends GeneratedCreateEMailFaxCampaig
 		params.put(EMailFaxCampaign.PLAINTEXT, createTxtTemplateList());
 		params.put(EMailFaxCampaign.SENDER, getCampaignSender());
 		params.put(EMailFaxCampaign.PRODUCTS, getCampaignProducts());
-		params.put(EMailFaxCampaign.FAXFAXONLY, isCampaignFaxCampaign());
 		params.put(EMailFaxCampaign.FAXSENDER, getFaxSender());
 		params.put(EMailFaxCampaign.FAXSERVICEADRESSE, getFaxServiceAdresse());
 		params.put(EMailFaxCampaign.FAXUSERNAME, getFaxServiceUser());
