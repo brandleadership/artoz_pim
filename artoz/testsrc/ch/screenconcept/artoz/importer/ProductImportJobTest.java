@@ -175,8 +175,6 @@ public class ProductImportJobTest extends JaloTest
 		assertEquals((String) values.get("TextF"), product.getName(ctx));
 		ctx.setLanguage(ArtozConstants.Languages.getItalian());
 		assertEquals((String) values.get("TextI"), product.getName(ctx));
-		ctx.setLanguage(ArtozConstants.Languages.getPortuguese());
-		assertEquals((String) values.get("TextP"), product.getName(ctx));
 		ctx.setLanguage(ArtozConstants.Languages.getSpanish());
 		assertEquals((String) values.get("TextS"), product.getName(ctx));
 	}

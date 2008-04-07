@@ -262,13 +262,6 @@
 							<attribute name="campaignTextTemplateES">
 								<uploadtomediaeditor />
 							</attribute>
-							<text name="nciwizard.tempalte.pt" />
-							<attribute name="campaignHTMLTemplatePT">
-								<uploadtomediaeditor />
-							</attribute>
-							<attribute name="campaignTextTemplatePT">
-								<uploadtomediaeditor />
-							</attribute>
 						</listlayout>
 					</section>
 				</tab>
@@ -325,7 +318,11 @@
 						name="section.CreateProductPlacmentWizard.one">
 						<listlayout>
 							<attribute name="category" />
+							<attribute name="publication" />
 							<attribute name="tablePlacement" />
+							<attribute name="masterPageTemplate" />
+							<attribute name="defauktTablePlacmentTemplate" />
+							<attribute name="pqsTablePlacmentTemplate" />
 						</listlayout>
 					</section>
 				</tab>

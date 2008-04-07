@@ -60,8 +60,7 @@ public class CreateEMailFaxCampaignWizard extends GeneratedCreateEMailFaxCampaig
 
 	private Media campaignImportFile, campaignHTMLTemplateDECH, campaignTextTemplateDECH, campaignHTMLTemplateFRCH,
 				campaignTextTemplateFRCH, campaignHTMLTemplateITCH, campaignTextTemplateITCH, campaignHTMLTemplateEN,
-				campaignTextTemplateEN, campaignHTMLTemplateES, campaignTextTemplateES, campaignHTMLTemplatePT,
-				campaignTextTemplatePT;
+				campaignTextTemplateEN, campaignHTMLTemplateES, campaignTextTemplateES;
 
 	@Override
 	public String getCampaignHTMLText(SessionContext ctx)
@@ -275,12 +274,6 @@ public class CreateEMailFaxCampaignWizard extends GeneratedCreateEMailFaxCampaig
 	}
 
 	@Override
-	public Media getCampaignHTMLTemplatePT(SessionContext ctx)
-	{
-		return campaignHTMLTemplatePT;
-	}
-
-	@Override
 	public Media getCampaignTextTemplateDECH(SessionContext ctx)
 	{
 		return campaignTextTemplateDECH;
@@ -308,12 +301,6 @@ public class CreateEMailFaxCampaignWizard extends GeneratedCreateEMailFaxCampaig
 	public Media getCampaignTextTemplateITCH(SessionContext ctx)
 	{
 		return campaignTextTemplateITCH;
-	}
-
-	@Override
-	public Media getCampaignTextTemplatePT(SessionContext ctx)
-	{
-		return campaignTextTemplatePT;
 	}
 
 	@Override
@@ -347,12 +334,6 @@ public class CreateEMailFaxCampaignWizard extends GeneratedCreateEMailFaxCampaig
 	}
 
 	@Override
-	public void setCampaignHTMLTemplatePT(SessionContext ctx, Media value)
-	{
-		campaignHTMLTemplatePT = value;
-	}
-
-	@Override
 	public void setCampaignTextTemplateDECH(SessionContext ctx, Media value)
 	{
 		campaignTextTemplateDECH = value;
@@ -380,12 +361,6 @@ public class CreateEMailFaxCampaignWizard extends GeneratedCreateEMailFaxCampaig
 	public void setCampaignTextTemplateITCH(SessionContext ctx, Media value)
 	{
 		campaignTextTemplateITCH = value;
-	}
-
-	@Override
-	public void setCampaignTextTemplatePT(SessionContext ctx, Media value)
-	{
-		campaignTextTemplatePT = value;
 	}
 
 	@Override
@@ -489,7 +464,6 @@ public class CreateEMailFaxCampaignWizard extends GeneratedCreateEMailFaxCampaig
 		values.put(ArtozConstants.Languages.getFrench(), getStringFromTxtMedia(getCampaignHTMLTemplateFRCH()));
 		values.put(ArtozConstants.Languages.getItalian(), getStringFromTxtMedia(getCampaignHTMLTemplateITCH()));
 		values.put(ArtozConstants.Languages.getSpanish(), getStringFromTxtMedia(getCampaignHTMLTemplateES()));
-		values.put(ArtozConstants.Languages.getPortuguese(), getStringFromTxtMedia(getCampaignHTMLTemplatePT()));
 		return values;
 	}
 
@@ -501,7 +475,6 @@ public class CreateEMailFaxCampaignWizard extends GeneratedCreateEMailFaxCampaig
 		values.put(ArtozConstants.Languages.getFrench(), getStringFromTxtMedia(getCampaignTextTemplateFRCH()));
 		values.put(ArtozConstants.Languages.getItalian(), getStringFromTxtMedia(getCampaignTextTemplateITCH()));
 		values.put(ArtozConstants.Languages.getSpanish(), getStringFromTxtMedia(getCampaignTextTemplateES()));
-		values.put(ArtozConstants.Languages.getPortuguese(), getStringFromTxtMedia(getCampaignTextTemplatePT()));
 		return values;
 	}
 

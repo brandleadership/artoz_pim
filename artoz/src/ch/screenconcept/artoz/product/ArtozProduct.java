@@ -1,5 +1,6 @@
 package ch.screenconcept.artoz.product;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -9,9 +10,12 @@ import org.apache.log4j.Logger;
 
 import ch.screenconcept.artoz.constants.ArtozConstants;
 import ch.screenconcept.artoz.jalo.ArtozManager;
+import ch.screenconcept.artoz.prices.ArtozMSRPrice;
 import ch.screenconcept.artoz.prices.ArtozPriceRow;
 import ch.screenconcept.artoz.prices.PriceRowValues;
 import de.hybris.platform.catalog.constants.CatalogConstants;
+import de.hybris.platform.europe1.constants.Europe1Constants;
+import de.hybris.platform.europe1.constants.GeneratedEurope1Constants.Enumerations.UserPriceGroup;
 import de.hybris.platform.jalo.JaloBusinessException;
 import de.hybris.platform.jalo.JaloInvalidParameterException;
 import de.hybris.platform.jalo.JaloSession;
@@ -140,13 +144,7 @@ public class ArtozProduct extends GeneratedArtozProduct
 		final SearchResult res = JaloSession.getCurrentSession().getFlexibleSearch().search(
 					"SELECT {" + ArtozPriceRow.PK + "} FROM {" + ArtozConstants.TC.ARTOZPRICEROW + "} " + "WHERE {"
 								+ ArtozPriceRow.PRODUCT + "} = ?product", value,
-					Collections.singletonList(ArtozPriceRow.class), true, // fail
-					// on
-					// unknown
-					// fields
-					true, // don't need total
-					0, -1 // range
-					);
+					Collections.singletonList(ArtozPriceRow.class), true, true, 0, -1);
 		if (res.getResult().isEmpty())
 			return null;
 
@@ -166,16 +164,50 @@ public class ArtozProduct extends GeneratedArtozProduct
 								+ ArtozPriceRow.PRODUCT + "} = ?product AND {" + ArtozPriceRow.MINQTD
 								+ "} = ?quantity AND {" + ArtozPriceRow.CURRENCY + "} = ?currency AND {"
 								+ ArtozPriceRow.UG + "} = ?ug", value, Collections.singletonList(ArtozPriceRow.class),
-					true, // fail
-					// on
-					// unknown
-					// fields
-					true, // don't need total
-					0, -1 // range
-					);
+					true, true, 0, -1);
 		if (res.getResult().isEmpty())
 			return null;
 
 		return (ArtozPriceRow) res.getResult().get(0);
+	}
+
+	public List<ArtozPriceRow> getAllPriceRows(Currency currency, EnumerationValue userPriceGroup)
+	{
+		Map<String, Object> value = new HashMap<String, Object>();
+		value.put("product", this);
+		value.put("currency", currency);
+		value.put("ug", userPriceGroup);
+
+		final SearchResult res = JaloSession.getCurrentSession().getFlexibleSearch().search(
+					"SELECT {" + ArtozPriceRow.PK + "} FROM {" + ArtozConstants.TC.ARTOZPRICEROW + "} " + "WHERE {"
+								+ ArtozPriceRow.PRODUCT + "} = ?product AND {" + ArtozPriceRow.CURRENCY
+								+ "} = ?currency AND {" + ArtozPriceRow.UG + "} = ?ug", value,
+					Collections.singletonList(ArtozPriceRow.class), true, true, 0, -1);
+		if (res.getResult().isEmpty())
+			return null;
+
+		return res.getResult();
+	}
+
+	public boolean hasPriceQuantityScale() throws JaloInvalidParameterException, JaloSecurityException
+	{
+		if (getAllPriceRows(
+					JaloSession.getCurrentSession().getUser().getSessionCurrency(),
+					((EnumerationValue) JaloSession.getCurrentSession().getUser().getAttribute(
+								Europe1Constants.Attributes.User.EUROPE1PRICEFACTORY_UPG))).size() > 1)
+			;
+		return false;
+	}
+
+	public ArtozMSRPrice getMsrPrice() throws JaloInvalidParameterException, JaloSecurityException
+	{
+		for (ArtozMSRPrice price : getMsrPrices())
+		{
+			if (price.getUg().getCode().equals(
+						((EnumerationValue) JaloSession.getCurrentSession().getUser().getAttribute(
+									Europe1Constants.Attributes.User.EUROPE1PRICEFACTORY_UPG)).getCode()))
+				return price;
+		}
+		return null;
 	}
 }

@@ -156,7 +156,8 @@
 						optional="false" initial="true" />
 					<persistence type="property" />
 				</attribute>
-				<attribute qualifier="quantity" type="java.lang.Integer">
+				<attribute qualifier="quantity"
+					type="java.lang.Integer">
 					<modifiers read="true" write="true" search="true"
 						optional="false" initial="true" />
 					<persistence type="property" />
@@ -167,7 +168,7 @@
 					<modifiers read="true" write="true" search="true"
 						initial="true" />
 					<persistence type="property" />
-				</attribute>				
+				</attribute>
 			</attributes>
 		</itemtype>
 
@@ -459,16 +460,6 @@
 					<modifiers optional="true" />
 					<persistence type="jalo" />
 				</attribute>
-				<attribute qualifier="campaignHTMLTemplatePT"
-					type="Media">
-					<modifiers optional="true" />
-					<persistence type="jalo" />
-				</attribute>
-				<attribute qualifier="campaignTextTemplatePT"
-					type="Media">
-					<modifiers optional="true" />
-					<persistence type="jalo" />
-				</attribute>
 				<attribute qualifier="campaignNewsletter"
 					type="Newsletter">
 					<modifiers optional="true" />
@@ -491,12 +482,76 @@
 					<modifiers optional="false" />
 					<persistence type="jalo" />
 				</attribute>
+				<attribute qualifier="publication"
+					type="XPublication">
+					<modifiers optional="true" />
+					<persistence type="jalo" />
+				</attribute>
 				<attribute qualifier="tablePlacement"
 					type="XTablePlacement">
+					<modifiers optional="true" />
+					<persistence type="jalo" />
+				</attribute>
+				<attribute qualifier="masterPageTemplate"
+					type="XMasterPage">
 					<modifiers optional="false" />
 					<persistence type="jalo" />
 				</attribute>
+				<attribute qualifier="defauktTablePlacmentTemplate"
+					type="XLayoutTemplate">
+					<modifiers optional="false" />
+					<persistence type="jalo" />
+				</attribute>
+				<attribute qualifier="pqsTablePlacmentTemplate"
+					type="XLayoutTemplate">
+					<modifiers optional="false" />
+					<persistence type="jalo" />
+				</attribute>				
 			</attributes>
 		</itemtype>
+
+		<itemtype code="XProductPlacement" extends="XPlacement"
+			jaloclass="de.hybris.platform.xprint.jalo.ProductPlacement"
+			generate="false" singleton="false" jaloonly="false"
+			metatype="XPlacementType" autocreate="false">
+			<attributes>
+				<attribute generate="false" autocreate="true"
+					qualifier="msrPrice" type="java.lang.String"
+					metatype="XVelocityAttributeDescriptor">
+					<persistence type="property" qualifier="" />
+					<custom-properties>
+						<property name="velocityTemplate">
+							<value>
+								"$!this.product.msrPrice.price"
+							</value>
+						</property>
+					</custom-properties>
+					<modifiers read="true" write="true" search="true"
+						encrypted="false" optional="true" removable="true" initial="false"
+						unique="false" private="false" partof="false" />
+				</attribute>
+				<attribute generate="false" autocreate="true"
+					qualifier="numberContentUnits" type="java.lang.String"
+					metatype="XVelocityAttributeDescriptor">
+					<persistence type="property" qualifier="" />
+					<custom-properties>
+						<property name="velocityTemplate">
+							<value>
+								"$!this.product.getAttribute(\"numberContentUnits\")"
+							</value>
+						</property>
+					</custom-properties>
+					<modifiers read="true" write="true" search="true"
+						encrypted="false" optional="true" removable="true" initial="false"
+						unique="false" private="false" partof="false" />
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype code="ArtozXTablePlacement"
+			extends="XTablePlacement"
+			jaloclass="ch.screenconcept.artoz.publication.ArtozTablePlacement"
+			autocreate="true" generate="true" />
+
 	</itemtypes>
 </items>

@@ -73,7 +73,27 @@ public class ProductImportJob extends GeneratedProductImportJob
 			productParser = new ProductCSVFileParser(fis, ';', 138);
 			while (!productParser.isClosed())
 			{
-				createOrUpdateArtozProduct((ProductCSVFileLine) productParser.readLine());
+				ProductCSVFileLine line = (ProductCSVFileLine) productParser.readLine();
+				try
+				{
+					createOrUpdateArtozProduct(line);
+				}
+				catch (JaloInvalidParameterException jipe)
+				{
+					logFailedData(line, jipe);
+				}
+				catch (JaloSecurityException jse)
+				{
+					logFailedData(line, jse);
+				}
+				catch (JaloBusinessException jbe)
+				{
+					logFailedData(line, jbe);
+				}
+				catch (NullPointerException npe)
+				{
+					logFailedData(line, npe);
+				}
 			}
 			deleteNotUpdatedProductsAndPriceRows();
 		}
@@ -83,6 +103,11 @@ public class ProductImportJob extends GeneratedProductImportJob
 		}
 
 		return fileImportCronjob.getFinishedResult(true);
+	}
+
+	private void logFailedData(ProductCSVFileLine line, Exception e)
+	{
+		log.warn("Article not imported: " + line.getCode() + "; Failure: " + e.getMessage());
 	}
 
 	private void createOrUpdateArtozProduct(ProductCSVFileLine line) throws JaloInvalidParameterException,
@@ -121,7 +146,6 @@ public class ProductImportJob extends GeneratedProductImportJob
 			names.put(ArtozConstants.Languages.getFrench(), line.getShortTextFR());
 			names.put(ArtozConstants.Languages.getItalian(), line.getShortTextIT());
 			names.put(ArtozConstants.Languages.getSpanish(), line.getShortTextES());
-			names.put(ArtozConstants.Languages.getPortuguese(), line.getShortTextPT());
 
 			ArtozProduct product = ArtozProduct.findArtozProduct(line.getCode());
 

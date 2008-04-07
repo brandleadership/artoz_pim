@@ -20,7 +20,7 @@ public class ArtozUpdate
 	private static String[] languageISOCodes =
 	{ ArtozConstants.Languages.IsoCodes.GERMAN, ArtozConstants.Languages.IsoCodes.ENGLISH,
 				ArtozConstants.Languages.IsoCodes.FRENCH, ArtozConstants.Languages.IsoCodes.SPANISH,
-				ArtozConstants.Languages.IsoCodes.PORTUGUESE, ArtozConstants.Languages.IsoCodes.ITALIAN };
+				ArtozConstants.Languages.IsoCodes.ITALIAN };
 
 	private static String[][] currencyISOCodes =
 	{
@@ -84,7 +84,6 @@ public class ArtozUpdate
 			languages.add(ArtozConstants.Languages.getFrench());
 			languages.add(ArtozConstants.Languages.getItalian());
 			languages.add(ArtozConstants.Languages.getSpanish());
-			languages.add(ArtozConstants.Languages.getPortuguese());
 			version.setLanguages(languages);
 		}
 	}

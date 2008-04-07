@@ -21,15 +21,13 @@ public class ArtozProductTest extends JaloTest
 
 	private final String NAMEDE = "nameDE";
 
-	private final String NAMEEN = "nameDE";
+	private final String NAMEEN = "nameNE";
 
-	private final String NAMEFR = "nameDE";
+	private final String NAMEFR = "nameFR";
 
-	private final String NAMEIT = "nameDE";
+	private final String NAMEIT = "nameIT";
 
-	private final String NAMESP = "nameDE";
-
-	private final String NAMEPT = "nameDE";
+	private final String NAMEES = "nameES";
 
 	private final String DIN = "A4";
 
@@ -63,9 +61,7 @@ public class ArtozProductTest extends JaloTest
 		ctx.setLanguage(ArtozConstants.Languages.getItalian());
 		assertEquals(NAMEIT, findedProduct.getName(ctx));
 		ctx.setLanguage(ArtozConstants.Languages.getSpanish());
-		assertEquals(NAMESP, findedProduct.getName(ctx));
-		ctx.setLanguage(ArtozConstants.Languages.getPortuguese());
-		assertEquals(NAMEPT, findedProduct.getName(ctx));
+		assertEquals(NAMEES, findedProduct.getName(ctx));
 	}
 
 	public void testUpdate() throws JaloInvalidParameterException, JaloSecurityException, JaloBusinessException
@@ -93,8 +89,7 @@ public class ArtozProductTest extends JaloTest
 		names.put(ArtozConstants.Languages.getEnglish(), NAMEEN);
 		names.put(ArtozConstants.Languages.getFrench(), NAMEFR);
 		names.put(ArtozConstants.Languages.getItalian(), NAMEIT);
-		names.put(ArtozConstants.Languages.getSpanish(), NAMESP);
-		names.put(ArtozConstants.Languages.getPortuguese(), NAMEPT);
+		names.put(ArtozConstants.Languages.getSpanish(), NAMEES);
 
 		ArtozProduct product = ArtozProduct.createArtozProduct(params, names, new ArrayList<PriceRowValues>());
 		registerForRemoval(product);

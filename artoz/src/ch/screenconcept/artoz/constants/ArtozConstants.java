@@ -58,8 +58,6 @@ public final class ArtozConstants extends GeneratedArtozConstants
 			public static final String ITALIAN = "itCH";
 
 			public static final String SPANISH = "es";
-
-			public static final String PORTUGUESE = "pt";
 		}
 
 		public static Language getGerman()
@@ -121,19 +119,6 @@ public final class ArtozConstants extends GeneratedArtozConstants
 			ctxFR.setLanguage(getSpanish());
 			return ctxFR;
 		}
-
-		public static Language getPortuguese()
-		{
-			return (Language) Tools.get(Language.class, Language.ISOCODE, IsoCodes.PORTUGUESE);
-		}
-
-		public static SessionContext getPortugueseCtx()
-		{
-			final SessionContext ctxFR = JaloSession.getCurrentSession().createSessionContext();
-			ctxFR.setLanguage(getPortuguese());
-			return ctxFR;
-		}
-
 	}
 
 	public static final class Countries
