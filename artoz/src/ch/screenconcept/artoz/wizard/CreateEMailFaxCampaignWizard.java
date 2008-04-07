@@ -492,4 +492,10 @@ public class CreateEMailFaxCampaignWizard extends GeneratedCreateEMailFaxCampaig
 
 		return data.toString();
 	}
+
+	@Override
+	public EnumerationValue getCampaignFaxCampaign(SessionContext ctx) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
