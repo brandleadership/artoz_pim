@@ -364,6 +364,7 @@
 				</attribute>
 				<attribute qualifier="campaignSender"
 					type="java.lang.String">
+					<defaultvalue>Config.getParameter("campaign.campaignSender")</defaultvalue>
 					<modifiers optional="false" />
 					<persistence type="jalo" />
 				</attribute>
