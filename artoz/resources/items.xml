@@ -25,7 +25,7 @@
 	</collectiontypes>
 	
 	<enumtypes>
-		<enumtype generate="true" code="campaignFaxCampaign" autocreate="true">
+		<enumtype generate="true" code="CampaignEnum" autocreate="true">
 			<value code="email"/>
 			<value code="fax"/>
 			<value code="emailfax"/>
@@ -315,6 +315,10 @@
 					<modifiers optional="false" initial="true" />
 					<defaultvalue>10000</defaultvalue>
 				</attribute>
+				<attribute qualifier="typ" type="CampaignEnum">
+					<modifiers optional="false" write="true"/>
+					<persistence type="property"/>
+				</attribute>
 			</attributes>
 		</itemtype>
 
@@ -407,13 +411,13 @@
 					<modifiers optional="true" />
 					<persistence type="jalo" />
 				</attribute>
-				<attribute qualifier="campaignFaxCampaign"
-					type="campaignFaxCampaign">
-					<modifiers read="true" write="true" search="true" />
-					<persistence type="jalo" />
+				<attribute qualifier="campaignEnum"
+					type="CampaignEnum">
+					<modifiers read="true" write="true" search="true" optional="false" />
 					<defaultvalue>
-						em().getEnumerationValue("campaignFaxCampaign", "email")
+						em().getEnumerationValue("CampaignEnum", "email")
 					</defaultvalue>
+					<persistence type="jalo" />
 				</attribute>
 				<attribute qualifier="campaignImportFile"
 					type="Media">

@@ -203,7 +203,7 @@
 							<attribute name="campaignName" />
 							<attribute name="campaignSubject" />
 							<attribute name="campaignSender" />
-							<attribute name="campaignFaxCampaign" />
+							<attribute name="campaignEnum" />
 						</listlayout>
 					</section>
 					<section

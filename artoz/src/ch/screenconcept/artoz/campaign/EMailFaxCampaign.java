@@ -12,6 +12,7 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.apache.velocity.VelocityContext;
 
+import ch.screenconcept.artoz.constants.ArtozConstants;
 import ch.screenconcept.artoz.jalo.ArtozManager;
 
 import com.exedio.campaign.jalo.CampaignConfig;
@@ -26,6 +27,7 @@ import de.hybris.platform.jalo.JaloInvalidParameterException;
 import de.hybris.platform.jalo.JaloSession;
 import de.hybris.platform.jalo.SearchResult;
 import de.hybris.platform.jalo.c2l.Language;
+import de.hybris.platform.jalo.enumeration.EnumerationValue;
 import de.hybris.platform.jalo.security.JaloSecurityException;
 import de.hybris.platform.jalo.user.Address;
 import de.hybris.platform.jalo.user.User;
@@ -91,7 +93,7 @@ public class EMailFaxCampaign extends GeneratedEMailFaxCampaign
 		final User user = (User) resultVector.get(0);
 		final Language sessionLanguage = user.getSessionLanguage();
 		getSession().createLocalSessionContext().setLanguage(sessionLanguage);
-
+		
 		final VelocityContext ctx = new VelocityContext();
 		final CampaignContext campaignContext = new CampaignContext(this, participation);
 		final MailProxyFactory proxyFactory = ArtozMailProxyFactory.getInstance();
@@ -117,7 +119,7 @@ public class EMailFaxCampaign extends GeneratedEMailFaxCampaign
 
 		final Map<String, Object> attributes = new HashMap<String, Object>();
 
-		if (isFaxFaxOnly() || recieverEMailAddress == null || recieverEMailAddress.equals(""))
+		if ( ArtozConstants.Enumerations.CampaignEnum.FAX.equals(this.getTyp().getCode()) )
 		{
 			try
 			{
@@ -144,7 +146,7 @@ public class EMailFaxCampaign extends GeneratedEMailFaxCampaign
 				throw new MailTemplateException(se.getMessage(), se);
 			}
 		}
-		else
+		else if ( ArtozConstants.Enumerations.CampaignEnum.EMAIL.equals(this.getTyp().getCode()) )
 		{
 			attributes.put(EMailFax.RECIPIENT, recieverEMailAddress);
 			attributes.put(EMailFax.SENDER, EMailConfig.evaluate(ctx, getSender()));
@@ -155,6 +157,33 @@ public class EMailFaxCampaign extends GeneratedEMailFaxCampaign
 			attributes.put(EMailFax.TEXT, plainText);
 			attributes.put(EMailFax.TEXTASHTML, htmlText);
 			attributes.put(EMailFax.FAX, false);
+		}
+		else if ( ArtozConstants.Enumerations.CampaignEnum.EMAILFAX.equals(this.getTyp().getCode()) )
+		{
+			try
+			{
+				attributes.put(EMailFax.RECIPIENT, getFaxNumber(user));
+				attributes.put(EMailFax.SENDER, EMailConfig.evaluate(ctx, getSender()));
+				attributes.put(EMailFax.REPLYTO, null);
+				attributes.put(EMailFax.SUBJECT, EMailConfig.evaluate(ctx, getSubject()));
+				attributes.put(EMailFax.TYPE, CampaignManager.getInstance().getCampaignConfig("eMailCampaign"));
+				attributes.put(EMailFax.USER, user);
+				attributes.put(EMailFax.TEXT, plainText);
+				attributes.put(EMailFax.TEXTASHTML, htmlText);
+				attributes.put(EMailFax.FAXSERVICEUSER, getFaxUserName());
+				attributes.put(EMailFax.FAXSENDER, getFaxSender());
+				attributes.put(EMailFax.FAXSERVICEPASSWORD, getFaxPassword());
+				attributes.put(EMailFax.FAXSERVICEADRESSE, getFaxServiceAdresse());
+				attributes.put(EMailFax.FAX, true);
+			}
+			catch (JaloInvalidParameterException je)
+			{
+				throw new MailTemplateException(je.getMessage(), je);
+			}
+			catch (JaloSecurityException se)
+			{
+				throw new MailTemplateException(se.getMessage(), se);
+			}
 		}
 		ArtozManager.getInstance().createEMailFax(attributes);
 

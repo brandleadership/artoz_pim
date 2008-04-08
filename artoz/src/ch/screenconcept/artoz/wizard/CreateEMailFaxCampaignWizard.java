@@ -56,9 +56,9 @@ public class CreateEMailFaxCampaignWizard extends GeneratedCreateEMailFaxCampaig
 	private Map<Language, String> campaignSubjectMap, campaignHTMLTextMap, campaignTextMap;
 	
 	private Collection<Product> campaignProducts;
-
-	private boolean campaignFaxCampaign;
-
+	
+	private EnumerationValue typ;
+	
 	private Media campaignImportFile, campaignHTMLTemplateDECH, campaignTextTemplateDECH, campaignHTMLTemplateFRCH,
 				campaignTextTemplateFRCH, campaignHTMLTemplateITCH, campaignTextTemplateITCH, campaignHTMLTemplateEN,
 				campaignTextTemplateEN, campaignHTMLTemplateES, campaignTextTemplateES;
@@ -93,16 +93,20 @@ public class CreateEMailFaxCampaignWizard extends GeneratedCreateEMailFaxCampaig
 		return campaignName;
 	}
 
-	@Override
-	public EnumerationValue getCampaignFaxCampaign()
+	public EnumerationValue getCampaignEnum()
 	{
-		return getCampaignFaxCampaign( getSession().getSessionContext() );
+		return getCampaignEnum( getSession().getSessionContext() );
 	}
 
 	@Override
-	public void setCampaignFaxCampaign(final SessionContext ctx, final EnumerationValue value)
+	public EnumerationValue getCampaignEnum(SessionContext ctx) {
+		return typ;
+	}
+
+	@Override
+	public void setCampaignEnum(final SessionContext ctx, final EnumerationValue value)
 	{
-		setProperty(ctx, CAMPAIGNFAXCAMPAIGN,value);
+		typ = value;
 	}
 
 	@Override
@@ -182,7 +186,6 @@ public class CreateEMailFaxCampaignWizard extends GeneratedCreateEMailFaxCampaig
 	{
 		faxServiceUser = value.trim();
 	}
-
 
 	@Override
 	public String getFaxSender(SessionContext ctx)
@@ -434,8 +437,9 @@ public class CreateEMailFaxCampaignWizard extends GeneratedCreateEMailFaxCampaig
 		params.put(EMailFaxCampaign.SUBJECT, getAllCampaignSubject());
 		params.put(EMailFaxCampaign.HTMLTEXT, createHTMLTemplateList());
 		params.put(EMailFaxCampaign.PLAINTEXT, createTxtTemplateList());
-		params.put(EMailFaxCampaign.SENDER, getCampaignSender());
 		params.put(EMailFaxCampaign.PRODUCTS, getCampaignProducts());
+		params.put(EMailFaxCampaign.SENDER, getCampaignSender());
+		params.put(EMailFaxCampaign.TYP, getCampaignEnum());
 		params.put(EMailFaxCampaign.FAXSENDER, getFaxSender());
 		params.put(EMailFaxCampaign.FAXSERVICEADRESSE, getFaxServiceAdresse());
 		params.put(EMailFaxCampaign.FAXUSERNAME, getFaxServiceUser());
@@ -491,11 +495,5 @@ public class CreateEMailFaxCampaignWizard extends GeneratedCreateEMailFaxCampaig
 		}
 
 		return data.toString();
-	}
-
-	@Override
-	public EnumerationValue getCampaignFaxCampaign(SessionContext ctx) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }
