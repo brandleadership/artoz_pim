@@ -1,0 +1,29 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+    	xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:t="http://myfaces.apache.org/tomahawk"
+      xmlns:c="http://java.sun.com/jstl/core">
+	
+	<div class="paragraphPage">
+		<!-- start: paragraphPage.xhtml-->
+		<c:forEach items="#{item.paragraphs}" var="paragraph" >
+			<!-- start Paragraph: #{paragraph.code} template: #{paragraph.template.code}-->
+			<c:choose>
+				<c:when test="#{empty paragraph.template}" >
+					<span class="error">No template defined for the paragraph (#{paragraph.code}) !</span>
+				</c:when>
+				<c:otherwise>
+					<ui:remove><!-- <cms:editable item="#{paragraph}" template="#{paragraph.template}" > --></ui:remove>
+						<ui:include src="#{paragraph.template.code}">
+							<ui:param name="item" value="#{paragraph}"/>
+						</ui:include>
+					<ui:remove><!-- </cms:editable> --></ui:remove>
+				</c:otherwise>
+			</c:choose>
+			<!-- end Paragraph: #{paragraph.code} template: #{paragraph.template.code}-->
+		</c:forEach>
+		<!-- end: paragraphPage.xhtml -->
+	</div>
+</ui:composition>

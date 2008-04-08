@@ -7,11 +7,9 @@
    xmlns:t="http://myfaces.apache.org/tomahawk"
  	xmlns:f="http://java.sun.com/jsf/core"
    xmlns:c="http://java.sun.com/jstl/core"
-   template="/templates/layout.xhtml" 
    xmlns:hy="http://hybris.com/jsf">
 		
-	<ui:define name="content">	
-		<t:div styleClass="registration">
+	<t:div styleClass="registration">
 			<h2>Abmeldung</h2><br />		
 			<h:form id="registrationForm" rendered="#{!empty newsletterJSFBean.name}">
 				<!-- The login part -->
@@ -40,6 +38,4 @@
 				Falsch
 			</c:if>
 		</t:div>
-		
-	</ui:define>         
 </ui:composition>

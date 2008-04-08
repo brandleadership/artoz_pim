@@ -1,0 +1,41 @@
+<!--
+ Facelet-Composition which shows CMS Pagecontent.
+-->
+
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:c="http://java.sun.com/jstl/core"
+	template="/templates/layout.xhtml"
+	>
+	
+	<ui:define name="nonPrettyUrlsSaveState"><t:saveState value="#{pageBean}"/></ui:define>
+	
+	<ui:define name="contentTitle">
+		<c:set var="page" value="#{pageBean.baseBean.item}"/>
+		<c:if test="#{!empty page.template}" >
+			<ui:remove><!-- <cms:editable item="#{page}" template="#{page.template.code}" >--></ui:remove>
+				#{page.title}
+			<ui:remove><!--</cms:editable>--></ui:remove>
+		</c:if>
+	</ui:define>
+			
+	<ui:define name="content">
+		<c:set var="page" value="#{pageBean.baseBean.item}"/>
+		
+		<c:if test="#{empty page.template}" >
+			<span class="error">No template defined for the page (#{page.code}) !</span>
+		</c:if>
+		
+		<c:if test="#{!empty page.template}" >
+			<ui:include src="#{page.template.code}" >
+				<ui:param name="item" value="#{page}"/>
+			</ui:include>
+		</c:if>
+	</ui:define>
+	
+</ui:composition>
+
