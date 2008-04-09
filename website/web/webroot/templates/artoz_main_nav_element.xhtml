@@ -6,9 +6,18 @@
 	xmlns:cms="http://hybris.com/cms">
 
 	<li>
+		<!-- element <=> cmsJSFBean -->
+		<c:if test="#{element.code == cmsJSFBean.activeMainNav}">
+		<h:outputLink alt="#{element.name}" value="#{element.content.code}" class="#{element.color.code}-act">
+			<h:outputText value="#{element.name}" />
+		</h:outputLink>
+		</c:if>
+		
+		<c:if test="#{element.code != cmsJSFBean.activeMainNav}">
 		<h:outputLink alt="#{element.name}" value="#{element.content.code}" class="#{element.color.code}">
 			<h:outputText value="#{element.name}" />
 		</h:outputLink>
+		</c:if>
 	</li>
 
 </ui:composition>
