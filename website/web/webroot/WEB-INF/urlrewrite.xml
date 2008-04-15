@@ -32,11 +32,9 @@ http://tuckey.org/urlrewrite/
         <from>^/$</from>
         <to type="redirect">/pages/home</to>
     </rule>
-    
-    <rule>
-    	<from>/pages/(.*)</from>
-    	<to>/pages/index.jsf?pageid=$1</to>
-    	<set name="URLINSIDE">/pages/(.*)</set>
-    </rule>
 
+    <rule>
+        <from>^/pages/([a-z0-9]+)$</from>
+        <to>/pages/index.jsf?pageid=$1</to>
+    </rule>
 </urlrewrite>
