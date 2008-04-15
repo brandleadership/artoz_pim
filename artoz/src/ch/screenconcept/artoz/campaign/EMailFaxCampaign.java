@@ -118,9 +118,10 @@ public class EMailFaxCampaign extends GeneratedEMailFaxCampaign
 								.getHtmlContent(), participation));
 
 		final Map<String, Object> attributes = new HashMap<String, Object>();
-
+		System.out.println(this.getTyp().getCode());
 		if ( ArtozConstants.Enumerations.CampaignEnum.FAX.equals(this.getTyp().getCode()) )
 		{
+			System.out.println("FAX");
 			try
 			{
 				attributes.put(EMailFax.RECIPIENT, getFaxNumber(user));
@@ -148,6 +149,7 @@ public class EMailFaxCampaign extends GeneratedEMailFaxCampaign
 		}
 		else if ( ArtozConstants.Enumerations.CampaignEnum.EMAIL.equals(this.getTyp().getCode()) )
 		{
+			System.out.println("EMAIL");
 			attributes.put(EMailFax.RECIPIENT, recieverEMailAddress);
 			attributes.put(EMailFax.SENDER, EMailConfig.evaluate(ctx, getSender()));
 			attributes.put(EMailFax.REPLYTO, null);
@@ -160,6 +162,7 @@ public class EMailFaxCampaign extends GeneratedEMailFaxCampaign
 		}
 		else if ( ArtozConstants.Enumerations.CampaignEnum.EMAILFAX.equals(this.getTyp().getCode()) )
 		{
+			System.out.println("EMAILFAX");
 			try
 			{
 				attributes.put(EMailFax.RECIPIENT, getFaxNumber(user));

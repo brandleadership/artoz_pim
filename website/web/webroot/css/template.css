@@ -78,22 +78,28 @@ background-repeat: no-repeat;
 #top_nav ul li a:hover {
 background-image: url(/css/images/btn_main_green.jpg);
 }
-#top_nav ul li a.blue:hover {
+#top_nav ul li a.blue:hover,
+#top_nav ul li a.blue-act {
 background-image: url(/css/images/btn_main_blue.jpg);
 }
-#top_nav ul li a.green:hover {
+#top_nav ul li a.green:hover,
+#top_nav ul li a.green-act {
 background-image: url(/css/images/btn_main_green.jpg);
 }
-#top_nav ul li a.yellow:hover {
+#top_nav ul li a.yellow:hover,
+#top_nav ul li a.yellow-act {
 background-image: url(/css/images/btn_main_yellow.jpg);
 }
-#top_nav ul li a.orange:hover {
+#top_nav ul li a.orange:hover,
+#top_nav ul li a.orange-act {
 background-image: url(/css/images/btn_main_orange.jpg);
 }
-#top_nav ul li a.red:hover {
+#top_nav ul li a.red:hover,
+#top_nav ul li a.red-act {
 background-image: url(/css/images/btn_main_red.jpg);
 }
-#top_nav ul li a.grey:hover {
+#top_nav ul li a.grey:hover,
+#top_nav ul li a.grey-act {
 background-image: url(/css/images/btn_main_grey.jpg);
 }
 /****************************/
@@ -113,6 +119,50 @@ height: 100px;
 display: block;
 background-color: #336699;
 }
+#bottom-nav ul {
+display: block; 
+width: 100%; 
+float: left;
+}
+#bottom-nav ul li { 
+display: block; 
+width: 127px;
+float: left;
+height: 33px; 
+text-align: center;
+}
+#bottom-nav ul li a {
+line-height: 33px;
+display: block;
+height: 33px;
+text-decoration: none;
+color: white;
+font-weight: bold;
+font-size: 10px;
+}
+#bottom-nav ul li a:hover,
+#bottom-nav ul li a.act {
+background-image: url(/css/images/btn_sub_over.jpg);
+background-repeat: x-repeat;
+}
+#bottom-nav ul li ul {
+margin-left: 15px;
+}
+#bottom-nav ul li ul li {
+text-align: left;
+height: 25px;
+}
+#bottom-nav ul li ul li a {
+line-height: 25px;
+padding-left: 8px;
+background-image: url(/css/images/bullet_white.gif);
+background-repeat: no-repeat;
+}
+#bottom-nav ul li ul li a.act,
+#bottom-nav ul li ul li a:hover {
+color: #FFCC66;
+background-image: url(/css/images/bullet_orange.gif);
+}
 /******************************************/
 /* Newsletter Unregistration              */
 /* /pages/newsletterUnregistration*.xhtml */
@@ -128,4 +178,14 @@ float: right;
 }
 div.registration div.button a:hover {
 border: 2px solid black;
+}
+/****************************/
+/*  CMS-Context-Menu        */
+/****************************/
+#cmscontextmenu a {
+font-size: 12px;
+text-decoration: none;
+}
+#cmscontextmenu a img {
+padding-right: 5px;
 }

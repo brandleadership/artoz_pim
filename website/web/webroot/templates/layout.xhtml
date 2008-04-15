@@ -8,52 +8,53 @@
 	xmlns:c="http://java.sun.com/jstl/core"
 	xmlns:cms="http://hybris.com/cms">
 
-	<head profile="http://www.w3.org/2000/08/w3c-synd/#">
-		<title><ui:insert name="title">Artoz Papier AG, CH-Lenzburg</ui:insert></title>
-		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
-		<meta http-equiv="Content-Style-Type" content="text/css" />
-		<link rel="stylesheet" href="/css/template.css" />
-	</head>
+<head profile="http://www.w3.org/2000/08/w3c-synd/#">
+	<title><ui:insert name="title">Artoz Papier AG, CH-Lenzburg</ui:insert></title>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<meta http-equiv="Content-Style-Type" content="text/css" />
+	<link type="text/css" rel="stylesheet" href="/css/template.css" />
+</head>
 
-	<body>
-		
-		<div id="body">
-		
-			<div id="head">
-				<div id="headcontent">
-				</div>
-				<div id="top_nav">
-					<!-- meta menu from CMS (pages)-->
-					<c:if test="#{!empty cmsJSFBean.mainNav}">
-					<cms:editable item="#{cmsJSFBean.mainNav}" template="#{cmsJSFBean.mainNav.template.code}">
-						<ui:include src="#{cmsJSFBean.mainNav.template.code}">
-							<ui:param name="mainNav" value="#{cmsJSFBean.mainNav}" />
-						</ui:include>
-					</cms:editable>
-					</c:if>
-				</div>
-			</div>
-
-			<div id="content">
-				<ui:insert name="content"/>
-			</div>
+<body>
+	<div id="body">
 	
-			<div id="bottom-nav">
-				<c:if test="#{!empty cmsJSFBean.activeMainNav}">
-					<cms:editable item="#{cmsJSFBean.activeMainNav}" template="#{cmsJSFBean.activeMainNav.template.code}">
-						<ui:include src="#{cmsJSFBean.activeMainNav.template.code}">
-							<ui:param name="mainNav" value="#{cmsJSFBean.activeMainNav}" />
+		<div id="head">
+			<div id="headcontent"></div>
+			<div id="top_nav">
+				<!-- meta menu from CMS (pages)-->
+ 				<c:if test="#{!empty cmsJSFBean.mainNav}">
+					<c:set var="mainNavigation" value="#{cmsJSFBean.mainNav}" />
+					<cms:editable item="#{mainNavigation}"
+						template="#{mainNavigation.template.code}">
+						<ui:include src="#{mainNavigation.template.code}">
+							<ui:param name="mainNav" value="#{mainNavigation}" />
 						</ui:include>
 					</cms:editable>
 				</c:if>
 			</div>
-			
 		</div>
-		<t:div 
-		id="cmscontextmenu"
-		style="width:150px;position:absolute;background-color:#e7e7e7;border: 2px outset #e7e7e7;right:0px;top:0px;z-index:1000;padding:0px;margin:0px;visibility:hidden" 
+		
+		<div id="content">
+			<ui:insert name="content" />
+		</div>
+		
+		<div id="bottom-nav">
+			<c:set var="subNavigation" value="#{cmsJSFBean.subNav}" />
+ 			<c:if test="#{!empty subNavigation}">
+				<cms:editable item="#{subNavigation}"
+					template="#{mainNavigation.template.code}">
+					<ui:include src="#{mainNavigation.template.code}">
+						<ui:param name="mainNav" value="#{subNavigation}" />
+					</ui:include>
+				</cms:editable>
+			</c:if>
+		</div>
+	
+	</div>
+	<t:div id="cmscontextmenu"
+		style="width:150px;position:absolute;background-color:#e7e7e7;border: 2px outset #e7e7e7;right:0px;top:0px;z-index:1000;padding:0px;margin:0px;visibility:hidden"
 		onmouseover="document.getElementById('cmscontextmenu').style.visibility='visible';"
 		onmouseout="document.getElementById('cmscontextmenu').style.visibility='hidden';" />
-		<cms:script />
-	</body>
+	<cms:script />
+</body>
 </html>

@@ -1,0 +1,30 @@
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:cms="http://hybris.com/cms">
+
+	<li>
+		<c:if test="#{element.code == cmsJSFBean.activSubNavigationElement.code}">
+			<!-- Sub-Navigation Activ -->
+			<h:outputLink value="#{element.content.code}" class="act">
+				<h:outputText value="#{element.name}" />
+			</h:outputLink>
+			<c:if test="#{!empty element.children}">
+				<!-- Sub2-Navigation -->
+				<ui:include src="#{mainNavigation.template.code}">
+					<ui:param name="mainNav" value="#{element}" />
+				</ui:include>
+			</c:if>
+		</c:if>
+		
+		<c:if test="#{element.code != cmsJSFBean.activSubNavigationElement}">
+			<!-- Sub-Navigation Unactiv -->
+			<h:outputLink value="#{element.content.code}" class="#{element.color.code}">
+				<h:outputText value="#{element.name}" />
+			</h:outputLink>
+		</c:if>
+	</li>
+
+</ui:composition>

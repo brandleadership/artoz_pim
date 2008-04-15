@@ -25,12 +25,18 @@ http://tuckey.org/urlrewrite/
     -->
     <rule>
         <from>^/index.jsf$</from>
-        <to type="redirect">/pages/index.jsf</to>
+        <to type="redirect">/pages/home</to>
     </rule>
 
     <rule>
         <from>^/$</from>
-        <to type="redirect">/pages/index.jsf</to>
+        <to type="redirect">/pages/home</to>
+    </rule>
+    
+    <rule>
+    	<from>/pages/(.*)</from>
+    	<to>/pages/index.jsf?pageid=$1</to>
+    	<set name="URLINSIDE">/pages/(.*)</set>
     </rule>
 
 </urlrewrite>
