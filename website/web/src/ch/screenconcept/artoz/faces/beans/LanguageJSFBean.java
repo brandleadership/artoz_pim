@@ -78,10 +78,8 @@ public class LanguageJSFBean
 	
 	public String doChoose()
 	{
-		System.out.println("choose");
 		final HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
 		final String isoCode = request.getParameter("language");
-		System.out.println(isoCode);
 		final Language lang = C2LManager.getInstance().getLanguageByIsoCode(isoCode);
 		setLanguage(lang);
 		return null;

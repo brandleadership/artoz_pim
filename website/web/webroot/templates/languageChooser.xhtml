@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "/microspot/dtd/xhtml1-transitional.dtd">
+<div xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:c="http://java.sun.com/jstl/core">
+<ul id="language-chooser">
+	<c:forEach items="#{languageBean.selectableLanguages}" var="language">
+		<li>
+			<h:form id="chooseLanguageForm-#{language.isoCode}">
+				<c:if test="#{language.isoCode != languageBean.isoCode}">
+					<h:commandButton id="#{language.isoCode}"
+						class="#{language.isoCode}-inactiv" value=""
+						action="#{languageBean.doChoose}" />
+				</c:if>
+				<c:if test="#{language.isoCode == languageBean.isoCode}">
+					<h:commandButton id="#{language.isoCode}"
+						class="#{language.isoCode}-activ" value=""
+						action="#{languageBean.doChoose}" />
+				</c:if>
+				<input type="hidden" id="pageid" name="pageid"
+					value="#{frontPageBean.pageContent.code}" />
+				<input type="hidden" id="language" name="language"
+					value="#{language.isoCode}" />
+			</h:form>
+		</li>
+	</c:forEach>
+</ul>
+
+</div>

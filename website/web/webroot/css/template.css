@@ -105,15 +105,52 @@ background-image: url(/css/images/btn_main_grey.jpg);
 /*  Kopfbereich             */
 /*  Sprachwahl              */
 /****************************/
-#top_nav ul#language-chooser {
+ul#language-chooser {
 float: right;
 margin-right: 50px;
+background-image: url(/css/images/grey_dotted_border.jpg);
+background-repeat: no-repeat;
 }
-#top_nav ul#language-chooser li {
+ul#language-chooser li {
 width: auto;
 }
-#top_nav ul#language-chooser li a {
-background-image: none;
+ul#language-chooser li form input {
+border: none;
+background-color: white;
+background-repeat: no-repeat;
+width: 16px;
+height: 11px;
+margin: 11px 0px 0px 14px;
+}
+ul#language-chooser li form input.deCH-inactiv {
+background-image: url(/css/images/flags/flag_de_inactiv.gif);
+}
+ul#language-chooser li form input.deCH-activ {
+background-image: url(/css/images/flags/flag_de_activ.gif);
+}
+ul#language-chooser li form input.en-activ {
+background-image: url(/css/images/flags/flag_en_activ.gif);
+}
+ul#language-chooser li form input.en-inactiv {
+background-image: url(/css/images/flags/flag_en_inactiv.gif);
+}
+ul#language-chooser li form input.es-activ {
+background-image: url(/css/images/flags/flag_e_activ.gif);
+}
+ul#language-chooser li form input.es-inactiv {
+background-image: url(/css/images/flags/flag_e_inactiv.gif);
+}
+ul#language-chooser li form input.frCH-inactiv {
+background-image: url(/css/images/flags/flag_fr_inactiv.gif);
+}
+ul#language-chooser li form input.frCH-activ {
+background-image: url(/css/images/flags/flag_fr_activ.gif);
+}
+ul#language-chooser li form input.itCH-inactiv {
+background-image: url(/css/images/flags/flag_it_inactiv.gif);
+}
+ul#language-chooser li form input.itCH-activ {
+background-image: url(/css/images/flags/flag_it_activ.gif);
 }
 /****************************/
 /*  Inhalt                  */
