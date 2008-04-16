@@ -54,7 +54,6 @@ background-repeat: repeat-x;
 }
 #top_nav ul { 
 display: block; 
-width: 100%; 
 float: left;
 }
 #top_nav ul li { 
@@ -101,6 +100,20 @@ background-image: url(/css/images/btn_main_red.jpg);
 #top_nav ul li a.grey:hover,
 #top_nav ul li a.grey-act {
 background-image: url(/css/images/btn_main_grey.jpg);
+}
+/****************************/
+/*  Kopfbereich             */
+/*  Sprachwahl              */
+/****************************/
+#top_nav ul#language-chooser {
+float: right;
+margin-right: 50px;
+}
+#top_nav ul#language-chooser li {
+width: auto;
+}
+#top_nav ul#language-chooser li a {
+background-image: none;
 }
 /****************************/
 /*  Inhalt                  */

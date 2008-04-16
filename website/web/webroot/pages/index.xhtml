@@ -10,8 +10,7 @@
 	<ui:define name="content">
 		<c:choose>
 			<c:when test="#{empty frontPageBean.pageContent.template}">
-				<span class="error">No template defined for the page
-				(#{frontPageBean.pageContent.code}) !</span>
+				<span class="error">No template defined for the page (#{frontPageBean.pageContent.code})!</span>
 			</c:when>
 			<c:otherwise>
 				<!-- start:test#{frontPageBean.pageContent.code}:#{frontPageBean.pageContent.template.code} -->

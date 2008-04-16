@@ -19,7 +19,9 @@
 	<div id="body">
 	
 		<div id="head">
-			<div id="headcontent"></div>
+			<div id="headcontent">
+				
+			</div>
 			<div id="top_nav">
 				<!-- meta menu from CMS (pages)-->
  				<c:if test="#{!empty cmsJSFBean.mainNav}">
@@ -31,6 +33,21 @@
 						</ui:include>
 					</cms:editable>
 				</c:if>
+				<ul id="language-chooser">
+						<c:forEach items="#{languageBean.selectableLanguages}" var="language" >
+							<li>
+							<h:form id="chooseLanguageForm-#{language.isoCode}">
+								<h:commandButton id="#{language.isoCode}"
+								value="#{language.isoCode}"
+			           			action="#{languageBean.doChoose}"
+								/>
+								<input type="hidden" id="pageid" name="pageid" value="#{frontPageBean.pageContent.code}"/>
+								<input type="hidden" id="language" name="language" value="#{language.isoCode}"/>
+							</h:form>
+							</li>
+						</c:forEach>
+				</ul>
+				
 			</div>
 		</div>
 		

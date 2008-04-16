@@ -16,6 +16,8 @@ import javax.faces.context.FacesContext;
 import org.apache.shale.tiger.managed.Bean;
 import org.apache.shale.tiger.managed.Scope;
 
+import ch.screenconcept.artoz.website.constants.WebsiteConstants;
+
 @Bean(name = "frontPageBean", scope = Scope.REQUEST)
 public class FrontPageJSFBean
 {
@@ -25,7 +27,9 @@ public class FrontPageJSFBean
 
 	public FrontPageJSFBean()
 	{
-		//pageContent = (PageContent)CmsManager.getInstance().getPageContent("frontpage", CommerceUtils.getWebsite() );
+		// pageContent =
+		// (PageContent)CmsManager.getInstance().getPageContent("frontpage",
+		// CommerceUtils.getWebsite() );
 	}
 
 	public Collection getProducts()
@@ -45,9 +49,13 @@ public class FrontPageJSFBean
 
 	public PageContent getPageContent()
 	{
+		this.pageContent = (PageContent) CmsManager.getInstance().getPageContent(
+					(String) FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get(
+								WebsiteConstants.PARAM_PAGEID), CommerceUtils.getWebsite());
 		if (this.pageContent == null)
 		{
-			pageContent = (PageContent) CmsManager.getInstance().getPageContent("home", CommerceUtils.getWebsite());
+			pageContent = (PageContent) CmsManager.getInstance().getPageContent(FRONTPAGE_CATEGORY_CODE,
+						CommerceUtils.getWebsite());
 		}
 		return pageContent;
 	}
