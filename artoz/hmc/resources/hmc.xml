@@ -38,7 +38,7 @@
 		mode="append">
 		<organizer>
 			<search>
-				<condition attribute="code" operator="equal"/>
+				<condition attribute="code" operator="equal" />
 			</search>
 			<editor>
 				<essentials>
@@ -317,12 +317,37 @@
 					<section
 						name="section.CreateProductPlacmentWizard.one">
 						<listlayout>
-							<attribute name="category" />
 							<attribute name="publication" />
-							<attribute name="tablePlacement" />
 							<attribute name="masterPageTemplate" />
-							<attribute name="defauktTablePlacmentTemplate" />
+							<attribute
+								name="defauktTablePlacmentTemplate" />
 							<attribute name="pqsTablePlacmentTemplate" />
+							<attribute name="categories" />
+							<attribute name="artozProducts" />
+						</listlayout>
+					</section>
+				</tab>
+				<tab name="tab.CreateProductPlacmentWizard.two"
+					position="1">
+					<section
+						name="section.CreateProductPlacmentWizard.two">
+						<listlayout>
+							<attribute name="publicationName" />
+							<attribute name="headTextColumn1">
+								<textareaeditor cols="25" rows="5" />
+							</attribute>
+							<attribute name="headTextColumn2">
+								<textareaeditor cols="25" rows="5" />
+							</attribute>
+							<attribute name="headTextColumn3">
+								<textareaeditor cols="25" rows="5" />
+							</attribute>
+							<attribute name="headTextColumn4">
+								<textareaeditor cols="25" rows="5" />
+							</attribute>
+							<attribute name="headTextColumn5">
+								<textareaeditor cols="25" rows="5" />
+							</attribute>
 						</listlayout>
 					</section>
 				</tab>

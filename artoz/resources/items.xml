@@ -22,13 +22,16 @@
 	<collectiontypes>
 		<collectiontype code="ArtozMSRPriceCollection"
 			elementtype="ArtozMSRPrice" autocreate="true" generate="true" />
+		<collectiontype code="ArtozProductCollection"
+			elementtype="ArtozProduct" autocreate="true" generate="true" />
 	</collectiontypes>
-	
+
 	<enumtypes>
-		<enumtype generate="true" code="CampaignEnum" autocreate="true">
-			<value code="email"/>
-			<value code="fax"/>
-			<value code="emailfax"/>
+		<enumtype generate="true" code="CampaignEnum"
+			autocreate="true">
+			<value code="email" />
+			<value code="fax" />
+			<value code="emailfax" />
 		</enumtype>
 	</enumtypes>
 
@@ -316,8 +319,8 @@
 					<defaultvalue>10000</defaultvalue>
 				</attribute>
 				<attribute qualifier="typ" type="CampaignEnum">
-					<modifiers optional="false" write="true"/>
-					<persistence type="property"/>
+					<modifiers optional="false" write="true" />
+					<persistence type="property" />
 				</attribute>
 			</attributes>
 		</itemtype>
@@ -377,7 +380,9 @@
 				</attribute>
 				<attribute qualifier="campaignSender"
 					type="java.lang.String">
-					<defaultvalue>Config.getParameter("campaign.campaignSender")</defaultvalue>
+					<defaultvalue>
+						Config.getParameter("campaign.campaignSender")
+					</defaultvalue>
 					<modifiers optional="false" />
 					<persistence type="jalo" />
 				</attribute>
@@ -413,9 +418,11 @@
 				</attribute>
 				<attribute qualifier="campaignEnum"
 					type="CampaignEnum">
-					<modifiers read="true" write="true" search="true" optional="false" />
+					<modifiers read="true" write="true" search="true"
+						optional="false" />
 					<defaultvalue>
-						em().getEnumerationValue("CampaignEnum", "email")
+						em().getEnumerationValue("CampaignEnum",
+						"email")
 					</defaultvalue>
 					<persistence type="jalo" />
 				</attribute>
@@ -520,7 +527,50 @@
 					type="XLayoutTemplate">
 					<modifiers optional="false" />
 					<persistence type="jalo" />
-				</attribute>				
+				</attribute>
+				<attribute qualifier="categories"
+					type="CategoryCollection">
+					<modifiers read="true" write="true" search="true"
+						initial="true" />
+					<persistence type="jalo" />
+				</attribute>
+				<attribute qualifier="artozProducts"
+					type="ArtozProductCollection">
+					<modifiers read="true" write="true" search="true"
+						initial="true" />
+					<persistence type="jalo" />
+				</attribute>
+				<attribute qualifier="headTextColumn1"
+					type="localized:java.lang.String">
+					<modifiers optional="true" />
+					<persistence type="jalo" />
+				</attribute>
+				<attribute qualifier="headTextColumn2"
+					type="localized:java.lang.String">
+					<modifiers optional="true" />
+					<persistence type="jalo" />
+				</attribute>
+				<attribute qualifier="headTextColumn3"
+					type="localized:java.lang.String">
+					<modifiers optional="true" />
+					<persistence type="jalo" />
+				</attribute>
+				<attribute qualifier="headTextColumn4"
+					type="localized:java.lang.String">
+					<modifiers optional="true" />
+					<persistence type="jalo" />
+				</attribute>
+				<attribute qualifier="headTextColumn5"
+					type="localized:java.lang.String">
+					<modifiers optional="true" />
+					<persistence type="jalo" />
+				</attribute>
+				<attribute qualifier="publicationName"
+					type="localized:java.lang.String">
+					<modifiers optional="true" />
+					<persistence type="jalo" />
+				</attribute>
+
 			</attributes>
 		</itemtype>
 
@@ -559,13 +609,33 @@
 						encrypted="false" optional="true" removable="true" initial="false"
 						unique="false" private="false" partof="false" />
 				</attribute>
+				<attribute generate="false" autocreate="true"
+					qualifier="numberContentUnitsTest" type="java.lang.String"
+					metatype="ArtozXVelocityAttributeDescriptor">
+					<persistence type="property" qualifier="" />
+					<custom-properties>
+						<property name="velocityTemplate">
+							<value>
+								"$!this.product.getAttribute(\"numberContentUnits\")"
+							</value>
+						</property>
+					</custom-properties>
+					<modifiers read="true" write="true" search="true"
+						encrypted="false" optional="true" removable="true" initial="false"
+						unique="false" private="false" partof="false" />
+				</attribute>
 			</attributes>
 		</itemtype>
 
-		<itemtype code="ArtozXTablePlacement"
-			extends="XTablePlacement"
+		<itemtype code="ArtozXTablePlacement" extends="XTablePlacement"
 			jaloclass="ch.screenconcept.artoz.publication.ArtozTablePlacement"
 			autocreate="true" generate="true" />
 
+		<itemtype code="ArtozXVelocityAttributeDescriptor"
+			extends="XVelocityAttributeDescriptor"
+			jaloclass="ch.screenconcept.artoz.publication.ArtozVelocityAttributeDescriptor"
+			autocreate="true" generate="true" />
+
 	</itemtypes>
+
 </items>
