@@ -21,7 +21,16 @@
 	
 		<div id="head">
 			<div id="headcontent">
-				
+				<!-- meta menu from CMS (pages)-->
+ 				<c:if test="#{!empty cmsJSFBean.helpNav}">
+					<c:set var="helpNavigation" value="#{cmsJSFBean.helpNav}" />
+					<cms:editable item="#{helpNavigation}"
+						template="#{helpNavigation.template.code}">
+						<ui:include src="#{helpNavigation.template.code}">
+							<ui:param name="helpNav" value="#{helpNavigation}" />
+						</ui:include>
+					</cms:editable>
+				</c:if>
 			</div>
 			<div id="top_nav">
 				<!-- meta menu from CMS (pages)-->

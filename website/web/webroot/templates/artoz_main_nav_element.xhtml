@@ -5,22 +5,26 @@
 	xmlns:c="http://java.sun.com/jstl/core"
 	xmlns:cms="http://hybris.com/cms">
 
-	<li>
-		<c:if test="#{element.code == cmsJSFBean.activMainNavigationElement.code}">
-			<!-- Main-Navigation Activ -->
-			<h:outputLink value="#{element.content.code}" class="#{element.color.code}-act">
-				<h:outputText value="#{element.name}" />
-			</h:outputLink>
-		</c:if>
-		
-		<c:if test="#{element.code != cmsJSFBean.activMainNavigationElement.code}">
-			<!-- Main-Navigation Unactiv -->
-			<cms:item item="#{element}">
-				<h:outputLink value="#{element.content.code}" class="#{element.color.code}">
-					<h:outputText value="#{element.name}" />
-				</h:outputLink>
-			</cms:item>
-		</c:if>
-	</li>
+	<c:choose>
+		<c:when test="#{!empty element.name}">
+			<li>
+				<c:if test="#{element.code == cmsJSFBean.activMainNavigationElement.code}">
+					<!-- Main-Navigation Activ -->
+					<h:outputLink value="#{element.content.code}" class="#{element.color.code}-act">
+						<h:outputText value="#{element.name}" />
+					</h:outputLink>
+				</c:if>
+				
+				<c:if test="#{element.code != cmsJSFBean.activMainNavigationElement.code}">
+					<!-- Main-Navigation Unactiv -->
+					<cms:item item="#{element}">
+						<h:outputLink value="#{element.content.code}" class="#{element.color.code}">
+							<h:outputText value="#{element.name}" />
+						</h:outputLink>
+					</cms:item>
+				</c:if>
+			</li>
+		</c:when>
+	</c:choose>
 
 </ui:composition>

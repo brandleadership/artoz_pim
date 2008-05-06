@@ -1,0 +1,19 @@
+<ui:composition
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:t="http://myfaces.apache.org/tomahawk"
+		xmlns:c="http://java.sun.com/jstl/core"
+		xmlns:cms="http://hybris.com/cms">
+		
+		<ul id="help-nav">
+			<c:forEach items="#{helpNav.children}" var="child" >
+				<cms:editable item="#{helpNav.children}" template="#{child.template.code}">
+					<ui:include src="#{child.template.code}">
+							<ui:param name="element" value="#{child}"/>
+					</ui:include>
+				</cms:editable>
+			</c:forEach>
+		</ul>
+		
+</ui:composition> 

@@ -13,4 +13,6 @@ public final class WebsiteConstants extends GeneratedWebsiteConstants
 	public static final String PARAM_PAGEID = "pageid";
 
 	public static final String MAIN_NAV = "main_nav";
+	
+	public static final String HELP_NAV = "help_nav";
 }

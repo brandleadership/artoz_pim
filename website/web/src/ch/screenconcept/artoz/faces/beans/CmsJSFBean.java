@@ -55,6 +55,11 @@ public class CmsJSFBean
 	{
 		return getActivMainNavigationElement();
 	}
+	
+	public AbstractCMSItem getHelpNav()
+	{
+		return getWebsite().getNavigationElement(WebsiteConstants.HELP_NAV);
+	}
 
 	public PageContent getPageContent()
 	{
@@ -66,7 +71,7 @@ public class CmsJSFBean
 	public NavigationElement getActivMainNavigationElement()
 	{
 		final NavigationElement link = getActivNavigationElement();
-
+		
 		if (link == null)
 			return null;
 
@@ -74,6 +79,8 @@ public class CmsJSFBean
 			return link;
 		if (getMainNav().equals(link.getParent().getParent()))
 			return link.getParent();
+		if (null == link.getParent().getParent())
+			return null;
 		if (getMainNav().equals(link.getParent().getParent().getParent()))
 			return link.getParent().getParent();
 		return null;
@@ -91,6 +98,8 @@ public class CmsJSFBean
 			return null;
 		if (getMainNav().equals(link.getParent().getParent()))
 			return link;
+		if (null == link.getParent().getParent())
+			return null;
 		if (getMainNav().equals(link.getParent().getParent().getParent()))
 			return link.getParent();
 		return null;

@@ -42,6 +42,16 @@ height: 121px;
 background-image: url(/css/images/header.jpg);
 background-repeat: no-repeat;
 }
+#help-nav {
+list-style: none;
+margin-left: 15px;
+padding-top: 17px;
+}
+#help-nav li a {
+color: white;
+text-decoration: none;
+font-size: 10px;
+}
 /****************************/
 /*  Kopfbereich             */
 /*  Hauptnavigation         */
