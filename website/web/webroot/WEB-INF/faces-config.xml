@@ -33,6 +33,7 @@
 		<component-class>ch.screenconcept.artoz.cms.CMSItemComponent</component-class>
   	</component>
   	
+  	<!-- NewsletterUnregistration: Successed -->
   	<navigation-rule>  
         <navigation-case>
             <from-outcome>unregvalid</from-outcome>
@@ -40,7 +41,7 @@
             <redirect/>
         </navigation-case>
     </navigation-rule>
-    
+    <!-- NewsletterUnregistration: Failed -->
     <navigation-rule>  
         <navigation-case>
             <from-outcome>unreginvalid</from-outcome>
@@ -49,4 +50,15 @@
         </navigation-case>
     </navigation-rule>
     
+    
+    <!-- ContactForm -->
+    <!--
+    <navigation-rule>  
+        <navigation-case>
+            <from-outcome>submitted</from-outcome>
+            <to-view-id>/pages/index.jsf</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    -->
 </faces-config>

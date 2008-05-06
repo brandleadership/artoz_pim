@@ -151,7 +151,8 @@ public class CmsJSFBean
 
 	public Website getWebsite()
 	{
-		return CmsManager.getInstance().getWebsite("Artoz");
+		//return CmsManager.getInstance().getActiveWebsite();
+		return CmsManager.getInstance().getWebsite("artoz");
 	}
 
 }

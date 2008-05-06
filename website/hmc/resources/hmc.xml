@@ -26,5 +26,109 @@
 		</group>
 	</explorertree>
 -->
-
+	<type name="ContactFormParagraph" mode="append">
+		<organizer>
+			<editor>
+				<tab name="tab.paragraph.content" mode="append">
+					<section name="text">
+						<table>
+							<tr>
+								<td>
+									<attribute name="formHeader">
+										<wysiwygeditor/>
+									</attribute>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<attribute name="afterFormText">
+										<wysiwygeditor/>
+									</attribute>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<attribute name="emailReceiver"/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<attribute name="firstname"/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<attribute name="lastname"/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<attribute name="street"/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<attribute name="city"/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<attribute name="country"/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<attribute name="email"/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<attribute name="telephone"/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<attribute name="telefax"/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<attribute name="message"/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<attribute name="send"/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<attribute name="delete"/>
+								</td>
+							</tr>
+						</table>
+					</section>
+				</tab>
+				<tab name="tab.formparagraph.data" position="4">
+					<section name="section.formparagraph.data">
+						<listlayout>
+							<attribute name="lastContactFormParagraphDatas">
+								<referencecollectioneditor autosave="true" resortable="false" add="false" remove="false" create="false"/>
+							</attribute>
+						</listlayout>
+						<table>
+							<tr>
+								<td width="146px"></td>
+								<td>
+									<shortcut name="find.formcontent.data" type="ContactFormParagraphData" usage="finder" autoperform="true">
+										<preset targetattribute="contactFormParagraph"/>
+									</shortcut>
+								</td>
+							</tr>
+						</table>						
+					</section>
+				</tab>
+			</editor>
+		</organizer>
+	</type>
 </configuration>

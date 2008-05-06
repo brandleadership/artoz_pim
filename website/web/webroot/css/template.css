@@ -5,6 +5,7 @@
 margin: 0px 0px 0px 0px; 
 padding: 0px 0px 0px 0px; 
 font-family: Verdana,Arial,Helvetica,sans-serif;
+font-size: 12px;
 }
 * span {
 float: left;
@@ -238,4 +239,60 @@ text-decoration: none;
 }
 #cmscontextmenu a img {
 padding-right: 5px;
+}
+/****************************/
+/*  Contact-Formular        */
+/****************************/
+div#contactform {
+width: 700px;
+float: right; 
+}
+div#contactform * input,
+div#contactform * textarea {
+border: 1px solid #336699;
+}
+div#contactform * input {
+width: 200px;
+}
+div#contactform * textarea {
+width: 300px;
+}
+div#contactform-text-top {
+margin-top: 35px;
+margin-bottom: 20px;
+}
+div#contactform-content-left,
+div#contactform-content-right {
+width: 350px;
+height: 200px;
+float: left;
+display: block;
+}
+div#contactform-content-left .zeile,
+div#contactform-content-right .zeile {
+margin-bottom: 10px;
+}
+div#contactform-content-left .zeile span,
+div#contactform-content-right .zeile span {
+display: block;
+width: 100px;
+}
+div#contactform-content-left .message span {
+margin-bottom: 10px;
+}
+div#contactform-content-left .zeile span.error,
+div#contactform-content-right .zeile span.error {
+color: red;
+width: 350px;
+margin-bottom: 5px;
+margin-top: 2px;
+}
+div#contactform-content-right .sendbuttons .leftbutton {
+margin-left: 90px;
+}
+div#contactform-content-right .sendbuttons * input,
+div#contactform-content-right .sendbuttons input {
+width: auto;
+float: left;
+margin-left: 10px;
 }

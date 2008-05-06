@@ -52,7 +52,7 @@
 	</context-param>
 
 	<!-- URL Rewriting-->
-<!-- 	
+<!-- 	 -->
 	<filter>
 		<filter-name>UrlRewriteFilter</filter-name>
 		<filter-class>
@@ -64,7 +64,7 @@
 		<filter-name>UrlRewriteFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
- -->
+
 	<!-- ServletContextListener - Initialize the application -->
 	<listener>
 		<listener-class>

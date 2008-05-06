@@ -18,6 +18,9 @@
 
 <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="items.xsd">
+	<collectiontypes>
+		<collectiontype code="ContactFormParagraphDataCollection" elementtype="ContactFormParagraphData" autocreate="true" generate="true" type="list"/>
+	</collectiontypes>
 	<enumtypes>
 		<enumtype code="NavigationColor" autocreate="true"
 			generate="true">
@@ -43,6 +46,117 @@
 					<persistence type="property" />
 				</attribute>
 			</attributes>
+		</itemtype>
+		
+		<itemtype code="ContactFormParagraph"
+			extends="Paragraph"
+			jaloclass="ch.screenconcept.artoz.website.ContactFormParagraph"
+			autocreate="true" generate="true">
+			<attributes>
+				<attribute qualifier="lastContactFormParagraphDatas" type="ContactFormParagraphDataCollection">
+					<persistence type="jalo"/>
+					<modifiers write="false"/>
+				</attribute>
+				<attribute qualifier="successPageContent" type="PageContent" >
+					<persistence type="property"/>
+					<modifiers optional="false"/>
+				</attribute>
+				<attribute type="java.lang.String" qualifier="emailReceiver">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="formHeader">
+					<persistence type="property">
+						<columntype database="mysql">
+							<value>text</value>
+						</columntype>
+					</persistence>
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="afterFormText">
+					<persistence type="property">
+						<columntype database="mysql">
+							<value>text</value>
+						</columntype>
+					</persistence>
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="firstname">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="lastname">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="street">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="city">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="country">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="email">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="telephone">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="telefax">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="message">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="send">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="delete">
+					<persistence type="property"/>
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype	code="ContactFormParagraphData"
+						extends="GenericItem"
+						generate="true"
+						autocreate="true"
+						jaloclass="ch.screenconcept.artoz.website.ContactFormParagraphData">
+			<attributes>
+				<attribute qualifier="contactFormParagraph" type="ContactFormParagraph" >
+					<persistence type="property"/>
+					<modifiers initial="true" write="false" optional="false"/>
+				</attribute>
+				<attribute type="java.lang.String" qualifier="firstname">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="java.lang.String" qualifier="lastname">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="java.lang.String" qualifier="street">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="java.lang.String" qualifier="city">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="java.lang.String" qualifier="country">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="java.lang.String" qualifier="email">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="java.lang.String" qualifier="telephone">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="java.lang.String" qualifier="telefax">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="java.lang.String" qualifier="message">
+					<persistence type="property"/>
+				</attribute>
+			</attributes>
+			<indexes>
+				<index name="contactFormParagraphIdx">
+					<key attribute="contactFormParagraph"/>
+				</index>
+			</indexes>
 		</itemtype>
 	</itemtypes>
 </items>
