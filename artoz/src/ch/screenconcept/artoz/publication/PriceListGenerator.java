@@ -50,7 +50,7 @@ public class PriceListGenerator
 	private int rowPerPage = 60;
 
 	private List<String> headTexts;
-
+	
 	private TreeSet<ArtozProduct> sortedProducts = new TreeSet<ArtozProduct>(new ArtozProductComparator());
 
 	public void addArtozProduct(ArtozProduct product)
@@ -147,7 +147,7 @@ public class PriceListGenerator
 		PrintManager printMan = PrintManager.getInstance();
 
 		// TODO: get your objects (user, date, ...) in another way
-		final User user = JaloSession.getCurrentSession().getUser();
+		User user = JaloSession.getCurrentSession().getUser();
 		final Date date = new Date();
 
 		// Create a special SessionContext that is used while creating and later

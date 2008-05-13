@@ -16,7 +16,6 @@ import org.apache.velocity.exception.ResourceNotFoundException;
 import ch.screenconcept.artoz.prices.ArtozMSRPrice;
 import ch.screenconcept.artoz.product.ArtozProduct;
 import de.hybris.platform.jalo.JaloInvalidParameterException;
-import de.hybris.platform.jalo.JaloSession;
 import de.hybris.platform.jalo.order.price.JaloPriceFactoryException;
 import de.hybris.platform.jalo.product.Product;
 import de.hybris.platform.jalo.security.JaloSecurityException;
@@ -111,7 +110,7 @@ public class PriceTableContent
 		return true;
 	}
 
-	public String getText(Publication publication)
+	public String getText(Publication publication) throws JaloInvalidParameterException, JaloSecurityException
 	{
 		for (Product product : products)
 		{
@@ -139,7 +138,7 @@ public class PriceTableContent
 		return sb.toString();
 	}
 
-	private StringBuffer getHeader()
+	private StringBuffer getHeader() throws JaloInvalidParameterException, JaloSecurityException
 	{
 		StringBuffer header = new StringBuffer();
 
@@ -148,7 +147,6 @@ public class PriceTableContent
 			final HeadTextValues headTextValues = new HeadTextValues(products.get(0).getPriceQuantityScale(1), products
 						.get(0).getPriceQuantityScale(2));
 			headTextValues.setMinNumberContentUnits(getUnitFormat(minNumberContentUnits));
-			headTextValues.setCurrency(JaloSession.getCurrentSession().getSessionContext().getCurrency().getIsoCode());
 
 			final VelocityContext ctx = new VelocityContext();
 			ctx.put("header", headTextValues);

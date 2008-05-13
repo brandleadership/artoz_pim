@@ -111,13 +111,7 @@ public class ArtozProduct extends GeneratedArtozProduct
 		final SearchResult res = JaloSession.getCurrentSession().getFlexibleSearch().search(
 					"SELECT {" + ArtozProduct.PK + "} FROM {" + ArtozConstants.TC.ARTOZPRODUCT + "} " + "WHERE {"
 								+ ArtozProduct.CODE + "} = ?code", value,
-					Collections.singletonList(ArtozProduct.class), true, // fail
-					// on
-					// unknown
-					// fields
-					true, // don't need total
-					0, -1 // range
-					);
+					Collections.singletonList(ArtozProduct.class), true, true, 0, -1);
 		if (res.getResult().isEmpty())
 			return null;
 		return (ArtozProduct) res.getResult().get(0);
@@ -209,21 +203,54 @@ public class ArtozProduct extends GeneratedArtozProduct
 		return null;
 	}
 
-	public double getPriceQuantityScalePriceValue(int scale) throws JaloPriceFactoryException{
-		PriceInformation priceInformation = getPriceQuantityScale(scale);
+	public double getPriceQuantityScalePriceValueForOneUnitFactor(int scale) throws JaloPriceFactoryException,
+				JaloInvalidParameterException, JaloSecurityException
+	{
+		ArtozPriceRow priceInformation = getPriceQuantityScale(scale);
 		if (priceInformation == null)
 			return -1;
-		return priceInformation.getPriceValue().getValue();
+		return priceInformation.getPriceAsPrimitive();
 	}
 
-	public double getPriceQuantityScalePriceValueForOneUnitFactor(int scale) throws JaloPriceFactoryException{
-		PriceInformation priceInformation = getPriceQuantityScale(scale);
-		if (priceInformation == null)
-			return -1;
-		return ((PriceRow)priceInformation.getQualifierValue("pricerow")).getPriceAsPrimitive();
+	public ArtozPriceRow getPriceQuantityScale(int scale) throws JaloPriceFactoryException,
+				JaloInvalidParameterException, JaloSecurityException
+	{
+		List<ArtozPriceRow> priceRows = getAllPriceRows(JaloSession.getCurrentSession().getUser().getSessionCurrency(),
+					((EnumerationValue) JaloSession.getCurrentSession().getUser().getAttribute(
+								Europe1Constants.Attributes.User.EUROPE1PRICEFACTORY_UPG)));
+
+		List<ArtozPriceRow> sortedPriceRows = new ArrayList<ArtozPriceRow>();
+
+		if (priceRows.isEmpty())
+			return null;
+
+		for (ArtozPriceRow priceRow : priceRows)
+		{
+			for (int i = 0; i < sortedPriceRows.size(); i++)
+			{
+				if (priceRow.getMinqtd() < sortedPriceRows.get(i).getMinqtd())
+				{
+					sortedPriceRows.add(i, priceRow);
+					break;
+				}
+				else
+				{
+					sortedPriceRows.add(priceRow);
+					break;
+				}
+			}
+
+			if (sortedPriceRows.isEmpty())
+				sortedPriceRows.add(priceRow);
+
+		}
+		if (sortedPriceRows.size() < scale)
+			return null;
+
+		return sortedPriceRows.get(scale - 1);
 	}
-	
-	public PriceInformation getPriceQuantityScale(int scale) throws JaloPriceFactoryException
+
+	public PriceInformation getPriceQuantityScaleByPriceInformation(int scale) throws JaloPriceFactoryException
 	{
 		List<PriceInformation> priceInformations = getPriceInformations(true);
 
@@ -231,9 +258,9 @@ public class ArtozProduct extends GeneratedArtozProduct
 
 		if (priceInformations.isEmpty())
 			return null;
-		
+
 		for (PriceInformation priceInformation : priceInformations)
-		{			
+		{
 			for (int i = 0; i < sortedPriceInformations.size(); i++)
 			{
 				PriceInformation spi = sortedPriceInformations.get(i);
@@ -243,7 +270,8 @@ public class ArtozProduct extends GeneratedArtozProduct
 					sortedPriceInformations.add(i, priceInformation);
 					break;
 				}
-				else {
+				else
+				{
 					sortedPriceInformations.add(priceInformation);
 					break;
 				}
@@ -255,7 +283,7 @@ public class ArtozProduct extends GeneratedArtozProduct
 		}
 		if (sortedPriceInformations.size() < scale)
 			return null;
-		
+
 		return sortedPriceInformations.get(scale - 1);
 	}
 }

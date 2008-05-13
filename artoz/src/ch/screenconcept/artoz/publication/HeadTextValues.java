@@ -1,17 +1,17 @@
 package ch.screenconcept.artoz.publication;
 
-import de.hybris.platform.europe1.jalo.PriceRow;
-import de.hybris.platform.jalo.order.price.PriceInformation;
+import ch.screenconcept.artoz.prices.ArtozPriceRow;
 
 public class HeadTextValues
 {
 	private String currency;
-	private PriceInformation pi1, pi2; 
+	private ArtozPriceRow priceRow1, priceRow2; 
 	private String minNumberContentUnits;
 
-	public HeadTextValues(PriceInformation priceInformation1, PriceInformation priceInformation2){
-		pi1 = priceInformation1;
-		pi2 = priceInformation2;
+	public HeadTextValues(ArtozPriceRow pr1, ArtozPriceRow pr2){
+		priceRow1 = pr1;
+		priceRow2 = pr2;
+		setCurrency(priceRow1.getCurrency().getIsoCode());
 	}
 	
 	public String getCurrency()
@@ -25,31 +25,31 @@ public class HeadTextValues
 	}
 	
 	public String getOrderQuantity1(){
-		if (pi2 == null)
+		if (priceRow2 == null)
 			return "1";
-		if (pi1 == null)
+		if (priceRow1 == null)
 			return "";
-		return minNumberContentUnits + " - " + ((Long)pi1.getQualifierValue(PriceRow.MINQTD) + 1);
+		return minNumberContentUnits + " - " + (priceRow1.getMinqtd() + 1);
 	}
 	
 	public String getOrderQuantity2(){
-		if (pi2 == null)
+		if (priceRow2 == null)
 			return "";
-		return ">" + ((Long)pi1.getQualifierValue(PriceRow.MINQTD) + 1);
+		return ">" + (priceRow1.getMinqtd() + 1);
 	}
 	
 	public String getUnitFactor1(){
-		if (pi2 == null)
+		if (priceRow2 == null)
 			return "";
-		if (pi1 == null)
+		if (priceRow1 == null)
 			return "";
-		return "" + ((PriceRow)pi1.getQualifierValue("pricerow")).getUnitFactorAsPrimitive();
+		return "" + priceRow1.getUnitFactorAsPrimitive();
 	}
 
 	public String getUnitFactor2(){
-		if (pi2 == null)
+		if (priceRow2 == null)
 			return "";
-		return "" + ((PriceRow)pi2.getQualifierValue("pricerow")).getUnitFactorAsPrimitive();
+		return "" + priceRow2.getUnitFactorAsPrimitive();
 	}
 
 	public String getUnitFactorWithSlash1(){

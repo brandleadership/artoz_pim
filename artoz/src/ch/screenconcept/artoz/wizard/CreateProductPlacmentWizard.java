@@ -19,6 +19,7 @@ import de.hybris.platform.jalo.JaloInvalidParameterException;
 import de.hybris.platform.jalo.SessionContext;
 import de.hybris.platform.jalo.c2l.Language;
 import de.hybris.platform.jalo.security.JaloSecurityException;
+import de.hybris.platform.jalo.user.User;
 import de.hybris.platform.util.Config;
 import de.hybris.platform.xprint.jalo.LayoutTemplate;
 import de.hybris.platform.xprint.jalo.MasterPage;
@@ -48,7 +49,7 @@ public class CreateProductPlacmentWizard extends GeneratedCreateProductPlacmentW
 	private String publicationName;
 
 	private Map<Language, String> allPublicationTitle;
-
+	
 	@Override
 	public void initialize(WizardEditorContext ctx)
 	{
