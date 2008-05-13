@@ -1,0 +1,35 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:c="http://java.sun.com/jstl/core">
+	
+	<div class="tradeparagraph">
+		<table>
+			<thead>
+				<tr>
+					<th>#{item.startdate}</th>
+					<th>#{item.tradefair}</th>
+					<th>#{item.country}</th>
+					<th>#{item.city}</th>
+					<th>#{item.hall}</th>
+					<th>#{item.stand}</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="#{tradeFairJSFBean.tradefairparagraphdatas}" var="paragraph" >
+					<tr>
+						<td>#{paragraph.startdate}</td>
+						<td>#{paragraph.tradefair}</td>
+						<td>#{paragraph.country}</td>
+						<td>#{paragraph.city}</td>
+						<td>#{paragraph.hall}</td>
+						<td>#{paragraph.stand}</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
+	
+</ui:composition>

@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2008 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+-->
+<configuration xmlns="hybris.de/schemas/hmc/generic"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="hybris.de/schemas/hmc/generic hmc.xsd">
+
+
+	<!-- Configuration for extension website -->
+
+<!--
+	<explorertree>
+		<group name="websitegroup">
+			<externalnode classname="ch.screenconcept.artoz.website.hmc.WebsiteTreeLeafChip"/>		
+		</group>
+	</explorertree>
+-->
+	<type name="LinkParagraph" mode="append">
+		<organizer>
+			<editor>
+				<tab name="tab.paragraph.content" mode="append">
+					<section name="text">
+						<table>
+								<tr>
+									<td>
+										<attribute name="paragraphHeader"/>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<attribute name="paragraphText">
+											<wysiwygeditor/>
+										</attribute>
+									</td>
+								</tr>
+						</table>
+					</section>
+				</tab>
+			</editor>
+		</organizer>
+	</type>
+	
+	<type name="ContactFormParagraph" mode="append">
+		<organizer>
+			<editor>
+				<tab name="tab.paragraph.content" mode="append">
+					<section name="text">
+						<table>
+							<tr>
+								<td>
+									<attribute name="formHeader">
+										<wysiwygeditor/>
+									</attribute>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<attribute name="afterFormText">
+										<wysiwygeditor/>
+									</attribute>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<attribute name="emailReceiver"/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<attribute name="firstname"/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<attribute name="lastname"/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<attribute name="street"/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<attribute name="city"/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<attribute name="country"/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<attribute name="email"/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<attribute name="telephone"/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<attribute name="telefax"/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<attribute name="message"/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<attribute name="send"/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<attribute name="delete"/>
+								</td>
+							</tr>
+						</table>
+					</section>
+				</tab>
+				<tab name="tab.formparagraph.data" position="4">
+					<section name="section.formparagraph.data">
+						<listlayout>
+							<attribute name="lastContactFormParagraphDatas">
+								<referencecollectioneditor autosave="true" resortable="false" add="false" remove="false" create="false"/>
+							</attribute>
+						</listlayout>
+						<table>
+							<tr>
+								<td width="146px"></td>
+								<td>
+									<shortcut name="find.formcontent.data" type="ContactFormParagraphData" usage="finder" autoperform="true">
+										<preset targetattribute="contactFormParagraph"/>
+									</shortcut>
+								</td>
+							</tr>
+						</table>						
+					</section>
+				</tab>
+			</editor>
+		</organizer>
+	</type>
+	
+		<type name="TradeFairParagraph" mode="append">
+		<organizer>
+			<editor>
+				<tab name="tab.paragraph.content" mode="append">
+					<section name="text">
+						<table>
+							<tr>
+								<td>
+									<attribute name="startdate">
+										<dateeditor/>
+									</attribute>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<attribute name="enddate">
+										<dateeditor/>
+									</attribute>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<attribute name="tradefair"/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<attribute name="country"/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<attribute name="city"/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<attribute name="hall"/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<attribute name="stand"/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<listlayout>
+										<attribute name="lastTradeFairParagraphDatas">
+											<referencecollectioneditor autosave="true" resortable="true" add="true" remove="true" create="true">
+												<itemlayout>
+													<attribute name="tradefair"/>
+													<attribute name="startdate"/>
+													<attribute name="enddate"/>
+												</itemlayout>
+											</referencecollectioneditor>
+										</attribute>
+									</listlayout>
+								</td>
+							</tr>
+						</table>
+					</section>
+				</tab>
+			</editor>
+		</organizer>
+	</type>
+</configuration>
