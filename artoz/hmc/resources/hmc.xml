@@ -317,13 +317,15 @@
 					<section
 						name="section.CreateProductPlacmentWizard.one">
 						<listlayout>
-							<attribute name="publication" />
+							<attribute name="publicationName" />
+							<attribute name="publicationTitle" />
+							<attribute name="categories" />
+							<attribute name="artozProducts" />
 							<attribute name="masterPageTemplate" />
+							<attribute name="pqsMasterPageTemplate" />
 							<attribute
 								name="defauktTablePlacmentTemplate" />
 							<attribute name="pqsTablePlacmentTemplate" />
-							<attribute name="categories" />
-							<attribute name="artozProducts" />
 						</listlayout>
 					</section>
 				</tab>
@@ -332,7 +334,6 @@
 					<section
 						name="section.CreateProductPlacmentWizard.two">
 						<listlayout>
-							<attribute name="publicationName" />
 							<attribute name="headTextColumn1">
 								<textareaeditor cols="25" rows="5" />
 							</attribute>

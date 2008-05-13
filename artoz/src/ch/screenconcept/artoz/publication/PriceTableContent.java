@@ -31,10 +31,6 @@ public class PriceTableContent
 
 	private final String LINEBREAK = "<0x000A>";
 
-	private final String BOLDSTART = "<ct:Bold>";
-
-	private final String BOLDEND = "<ct:>";
-
 	private static Logger log = Logger.getLogger(PriceTableContent.class.getName());
 
 	private List<ArtozProduct> products = new ArrayList<ArtozProduct>();
@@ -44,6 +40,8 @@ public class PriceTableContent
 	private boolean hasPriceQuantityScale = false;
 
 	private List<String> headTexts;
+
+	private double minNumberContentUnits = 999999;
 
 	public PriceTableContent(List<String> texts)
 	{
@@ -92,6 +90,10 @@ public class PriceTableContent
 		return getDefaultLayout();
 	}
 
+	public boolean hasPriceQuantityScale(){
+		return hasPriceQuantityScale;
+	}
+	
 	// todo: Define rules
 	public boolean isAcceptable(Product product) throws JaloInvalidParameterException, JaloSecurityException
 	{
@@ -111,6 +113,28 @@ public class PriceTableContent
 
 	public String getText(Publication publication)
 	{
+		for (Product product : products)
+		{
+			try
+			{
+				if ((Double) product.getAttribute("numberContentUnits") < minNumberContentUnits) {
+					minNumberContentUnits = (Double) product.getAttribute("numberContentUnits");
+					if (minNumberContentUnits == 1)
+						continue;
+				}
+			}
+			catch (JaloInvalidParameterException e)
+			{
+				minNumberContentUnits = -1;
+				continue;
+			}
+			catch (JaloSecurityException e)
+			{
+				minNumberContentUnits = -1;
+				continue;
+			}
+		}
+		
 		StringBuffer sb = getHeader().append(getBody(publication));
 		return sb.toString();
 	}
@@ -123,6 +147,7 @@ public class PriceTableContent
 		{
 			final HeadTextValues headTextValues = new HeadTextValues(products.get(0).getPriceQuantityScale(1), products
 						.get(0).getPriceQuantityScale(2));
+			headTextValues.setMinNumberContentUnits(getUnitFormat(minNumberContentUnits));
 			headTextValues.setCurrency(JaloSession.getCurrentSession().getSessionContext().getCurrency().getIsoCode());
 
 			final VelocityContext ctx = new VelocityContext();
@@ -188,12 +213,13 @@ public class PriceTableContent
 				body.append(getUnitFormat((Double) product.getAttribute("numberContentUnits")));
 				body.append(NEWCELL);
 
-				body.append(getPriceFormat(product.getPriceQuantityScalePriceValue(1)));
+				double price = product.getPriceQuantityScalePriceValueForOneUnitFactor(1);
+				body.append(price == -1 ? "" : getPriceFormat(price));
 				body.append(NEWCELL);
 
 				if (hasPriceQuantityScale)
 				{
-					body.append(getPriceFormat(product.getPriceQuantityScalePriceValue(2)));
+					body.append(getPriceFormat(product.getPriceQuantityScalePriceValueForOneUnitFactor(2)));
 					body.append(NEWCELL);
 				}
 

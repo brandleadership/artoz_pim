@@ -7,6 +7,7 @@ public class HeadTextValues
 {
 	private String currency;
 	private PriceInformation pi1, pi2; 
+	private String minNumberContentUnits;
 
 	public HeadTextValues(PriceInformation priceInformation1, PriceInformation priceInformation2){
 		pi1 = priceInformation1;
@@ -28,13 +29,13 @@ public class HeadTextValues
 			return "1";
 		if (pi1 == null)
 			return "";
-		return pi1.getQualifierValue(PriceRow.MINQTD) + " - " + getOrderQuantity2();
+		return minNumberContentUnits + " - " + ((Long)pi1.getQualifierValue(PriceRow.MINQTD) + 1);
 	}
 	
 	public String getOrderQuantity2(){
 		if (pi2 == null)
 			return "";
-		return ">" +pi2.getQualifierValue(PriceRow.MINQTD) + 1;
+		return ">" + ((Long)pi1.getQualifierValue(PriceRow.MINQTD) + 1);
 	}
 	
 	public String getUnitFactor1(){
@@ -42,21 +43,37 @@ public class HeadTextValues
 			return "";
 		if (pi1 == null)
 			return "";
-		return "" + pi1.getQualifierValue(PriceRow.UNITFACTOR);
+		return "" + ((PriceRow)pi1.getQualifierValue("pricerow")).getUnitFactorAsPrimitive();
 	}
 
 	public String getUnitFactor2(){
 		if (pi2 == null)
 			return "";
-		return "" + pi2.getQualifierValue(PriceRow.UNITFACTOR);
+		return "" + ((PriceRow)pi2.getQualifierValue("pricerow")).getUnitFactorAsPrimitive();
 	}
 
-	public String unitFactorWithSlash1(){
-		return "/" + getUnitFactor1();
+	public String getUnitFactorWithSlash1(){
+		String uf = getUnitFactor1();
+		if ("".equals(uf))
+			return "";
+		return "/" + uf;
 	}
 
-	public String unitFactorWithSlash2(){
-		return "/" + getUnitFactor2();
+	public String getUnitFactorWithSlash2(){
+		String uf = getUnitFactor2();
+		if ("".equals(uf))
+			return "";
+		return "/" + uf;
+	}
+
+	public String getMinNumberContentUnits()
+	{
+		return minNumberContentUnits;
+	}
+
+	public void setMinNumberContentUnits(String minNumberContentUnits)
+	{
+		this.minNumberContentUnits = minNumberContentUnits;
 	}
 
 	

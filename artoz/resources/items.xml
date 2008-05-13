@@ -499,21 +499,12 @@
 			jaloclass="ch.screenconcept.artoz.wizard.CreateProductPlacmentWizard"
 			autocreate="true" generate="true">
 			<attributes>
-				<attribute qualifier="category" type="Category">
+				<attribute qualifier="masterPageTemplate"
+					type="XMasterPage">
 					<modifiers optional="false" />
 					<persistence type="jalo" />
 				</attribute>
-				<attribute qualifier="publication"
-					type="XPublication">
-					<modifiers optional="true" />
-					<persistence type="jalo" />
-				</attribute>
-				<attribute qualifier="tablePlacement"
-					type="XTablePlacement">
-					<modifiers optional="true" />
-					<persistence type="jalo" />
-				</attribute>
-				<attribute qualifier="masterPageTemplate"
+				<attribute qualifier="pqsMasterPageTemplate"
 					type="XMasterPage">
 					<modifiers optional="false" />
 					<persistence type="jalo" />
@@ -566,11 +557,15 @@
 					<persistence type="jalo" />
 				</attribute>
 				<attribute qualifier="publicationName"
-					type="localized:java.lang.String">
-					<modifiers optional="true" />
+					type="java.lang.String">
+					<modifiers optional="false" />
 					<persistence type="jalo" />
 				</attribute>
-
+				<attribute qualifier="publicationTitle"
+					type="localized:java.lang.String">
+					<modifiers optional="false" />
+					<persistence type="jalo" />
+				</attribute>
 			</attributes>
 		</itemtype>
 

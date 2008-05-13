@@ -7,11 +7,13 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeSet;
 
 import org.apache.log4j.Logger;
 
 import ch.screenconcept.artoz.constants.ArtozConstants;
 import ch.screenconcept.artoz.product.ArtozProduct;
+import ch.screenconcept.artoz.product.ArtozProductComparator;
 import de.hybris.platform.category.jalo.Category;
 import de.hybris.platform.jalo.JaloInvalidParameterException;
 import de.hybris.platform.jalo.JaloSession;
@@ -45,42 +47,48 @@ public class PriceListGenerator
 
 	static int pageCounter = 0;
 
-	private int rowPerPage = 50;
+	private int rowPerPage = 60;
 
 	private List<String> headTexts;
-	
-	private Collection<ArtozProduct> products = new ArrayList<ArtozProduct>();
+
+	private TreeSet<ArtozProduct> sortedProducts = new TreeSet<ArtozProduct>(new ArtozProductComparator());
 
 	public void addArtozProduct(ArtozProduct product)
 	{
-		products.add(product);
+		sortedProducts.add(product);
 	}
 
 	public void addCategory(Category category)
 	{
-		products.addAll((Collection<ArtozProduct>) category.getProducts());
+		Collection<ArtozProduct> products = (Collection<ArtozProduct>) category.getProducts();
+		for (ArtozProduct product : products)
+			addArtozProduct(product);
 	}
 
-	public void setHeadTexts(List<String> texts){
+	public void setHeadTexts(List<String> texts)
+	{
 		headTexts = texts;
 	}
-	
-	public List<String> getHeadTexts(){
+
+	public List<String> getHeadTexts()
+	{
 		return headTexts;
 	}
-	
-	public void generate(MasterPage masterPageLayoutTemplate, LayoutTemplate layoutTemplate,
+
+	public void generate(String publicationName, String publicationTitle, MasterPage masterPageLayoutTemplate,
+				MasterPage priceQuantityScaleMasterPageLayoutTemplate, LayoutTemplate layoutTemplate,
 				LayoutTemplate priceQuantityScaleLayoutTemplate) throws JaloInvalidParameterException,
 				JaloSecurityException
 	{
-		log.info("founded products: " + products.size());
-		Publication publication = createPublication();
-		publication.addToChapters( createChapter(publication) );
+		log.info("founded products: " + sortedProducts.size());
+
+		Publication publication = createPublication(publicationName, publicationTitle);
+		publication.addToChapters(createChapter(publication));
 
 		List<PriceTableContent> priceTables = new ArrayList<PriceTableContent>();
 		int productCounter = 0;
 		PriceTableContent priceTableContent = new PriceTableContent(getHeadTexts());
-		for (ArtozProduct product : products)
+		for (ArtozProduct product : sortedProducts)
 		{
 			if (priceTableContent.isAcceptable(product))
 				priceTableContent.addProduct(product);
@@ -91,12 +99,11 @@ public class PriceListGenerator
 				if (priceTableContent.isAcceptable(product))
 				{
 					priceTableContent.addProduct(product);
-					//productCounter = productCounter + 3;
 				}
 			}
 			productCounter++;
 
-			if (productCounter % rowPerPage == 0 || productCounter == products.size())
+			if (productCounter % rowPerPage == 0 || productCounter == sortedProducts.size())
 			{
 				priceTableContent = getNewPriceTableContent(priceTableContent, priceTables, layoutTemplate,
 							priceQuantityScaleLayoutTemplate);
@@ -106,11 +113,14 @@ public class PriceListGenerator
 
 		int placementCounter = 0;
 		List<Placement> placementList = new ArrayList<Placement>();
+		boolean hasPriceQuantityScale = false;
 		for (PriceTableContent priceTable : priceTables)
 		{
 			TextTablePlacement tablePlacement = createTextTablePlacement(publication, priceTable.getLayoutToUse());
 			tablePlacement.setText(priceTable.getText(publication));
 
+			if (!hasPriceQuantityScale)
+				hasPriceQuantityScale = priceTable.hasPriceQuantityScale();
 			// TablePlacement tablePlacement = createTablePlacement(publication,
 			// priceTable.getLayoutToUse());
 			placementList.add(tablePlacement);
@@ -118,18 +128,21 @@ public class PriceListGenerator
 
 			if (placementCounter % 2 == 0 || placementCounter == priceTables.size())
 			{
-				Page singlePage = createDynamicPage(publication, masterPageLayoutTemplate);
+				Page singlePage = createDynamicPage(publication,
+							hasPriceQuantityScale ? priceQuantityScaleMasterPageLayoutTemplate
+										: masterPageLayoutTemplate);
 				addPlacements(singlePage, placementList);
 				((Chapter) publication.getChapters(0, 1).iterator().next()).addToPages(singlePage);
 				placementList.clear();
+				hasPriceQuantityScale = false;
 			}
 		}
 
-		publication.synchronize( PublicationComponent.SYNC_TREE );
+		publication.synchronize(PublicationComponent.SYNC_TREE);
 		publication.generateGetters();
 	}
 
-	private Publication createPublication()
+	private Publication createPublication(String publicationName, String publicationTitle)
 	{
 		PrintManager printMan = PrintManager.getInstance();
 
@@ -150,7 +163,7 @@ public class PriceListGenerator
 		// **************************************************************************
 		// ** Create the publication
 		// **************************************************************************
-		String pubCode = "Pricelist" + date.getHours() + date.getMinutes() + "_" +date.getDay();
+		String pubCode = publicationName;
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put(Publication.CODE, pubCode);
 		params.put(Publication.SYNCLANGUAGE, ctx.getLanguage());
@@ -160,24 +173,25 @@ public class PriceListGenerator
 					PrintConstants.TC.XIMAGEMODE, PrintConstants.Enumerations.XImageMode.HIGHRES));
 		params.put(Publication.SYNCPRICEDATE, date);
 		params.put(Publication.SYNCPRICEISNET, new Boolean(false));
-		params.put( Publication.USABLEPLACEMENTTYPES, getUsablePlacementTypes() );
-		params.put( Publication.USABLEPAGETYPES, getUsablePageTypes() );
+		params.put(Publication.USABLEPLACEMENTTYPES, getUsablePlacementTypes());
+		params.put(Publication.USABLEPAGETYPES, getUsablePageTypes());
 
 		Publication publication = printMan.createXPublication(params);
 
 		// TODO: you may set values for other languages too by using
 		// setAllTitle() or setAllSubTitle() or setAllDescription()
-		publication.setTitle("Pricelist");
+		publication.setTitle(publicationTitle);
 		return publication;
 	}
 
-	public Chapter createChapter(Publication publication){
+	public Chapter createChapter(Publication publication)
+	{
 		PrintManager printMan = PrintManager.getInstance();
-		Chapter rootChapter = printMan.createChapter( "pricelist", publication );
-		rootChapter.setTitle( "pricelist" );
+		Chapter rootChapter = printMan.createChapter("pricelist", publication);
+		rootChapter.setTitle("pricelist");
 		return rootChapter;
 	}
-	
+
 	private TextTablePlacement createTextTablePlacement(Publication publication, LayoutTemplate layoutTemplate)
 	{
 
@@ -320,50 +334,51 @@ public class PriceListGenerator
 
 	/**
 	 * Returns the Placement Types that can be used within your Publication
-	 *
-	 * @return		The Placement Types that can be used within your Publication
+	 * 
+	 * @return The Placement Types that can be used within your Publication
 	 */
 	private Collection getUsablePlacementTypes()
 	{
-		// TODO: This method returns any existing placement type. You may modify this code to return certain placement types only
-		final Collection types = TypeManager.getInstance().getComposedType( Placement.class ).getAllSubTypes();
+		// TODO: This method returns any existing placement type. You may modify
+		// this code to return certain placement types only
+		final Collection types = TypeManager.getInstance().getComposedType(Placement.class).getAllSubTypes();
 		final Collection nonAbstractTypes = new ArrayList();
-		if( !types.isEmpty() )
+		if (!types.isEmpty())
 		{
-			for( Iterator typesIter = types.iterator(); typesIter.hasNext(); )
+			for (Iterator typesIter = types.iterator(); typesIter.hasNext();)
 			{
 				ComposedType type = (ComposedType) typesIter.next();
 
-				if( !type.isAbstract() )
-					nonAbstractTypes.add( type );
+				if (!type.isAbstract())
+					nonAbstractTypes.add(type);
 			}
 		}
 
 		return nonAbstractTypes;
 	}
 
-
 	/**
 	 * Returns the Page Types that can be used within your Publication
-	 *
-	 * @return		The Page Types that can be used within your Publication
+	 * 
+	 * @return The Page Types that can be used within your Publication
 	 */
 	private Collection getUsablePageTypes()
 	{
-		// TODO: This method returns any existing page type. You may modify this code to return certain page types only
-		final Collection types = TypeManager.getInstance().getComposedType( Page.class ).getAllSubTypes();
+		// TODO: This method returns any existing page type. You may modify this
+		// code to return certain page types only
+		final Collection types = TypeManager.getInstance().getComposedType(Page.class).getAllSubTypes();
 		final Collection nonAbstractTypes = new ArrayList();
-		if( !types.isEmpty() )
+		if (!types.isEmpty())
 		{
-			for( Iterator typesIter = types.iterator(); typesIter.hasNext(); )
+			for (Iterator typesIter = types.iterator(); typesIter.hasNext();)
 			{
 				ComposedType type = (ComposedType) typesIter.next();
 
-				if( !type.isAbstract() )
-					nonAbstractTypes.add( type );
+				if (!type.isAbstract())
+					nonAbstractTypes.add(type);
 			}
 		}
 
-		return nonAbstractTypes; 
+		return nonAbstractTypes;
 	}
 }

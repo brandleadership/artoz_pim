@@ -12,6 +12,7 @@ import ch.screenconcept.artoz.constants.ArtozConstants;
 import ch.screenconcept.artoz.product.ArtozProduct;
 import ch.screenconcept.artoz.publication.PriceListGenerator;
 import de.hybris.platform.category.jalo.Category;
+import de.hybris.platform.hmc.jalo.ValidationException;
 import de.hybris.platform.hmc.jalo.VetoException;
 import de.hybris.platform.hmc.jalo.WizardEditorContext;
 import de.hybris.platform.jalo.JaloInvalidParameterException;
@@ -21,22 +22,14 @@ import de.hybris.platform.jalo.security.JaloSecurityException;
 import de.hybris.platform.util.Config;
 import de.hybris.platform.xprint.jalo.LayoutTemplate;
 import de.hybris.platform.xprint.jalo.MasterPage;
-import de.hybris.platform.xprint.jalo.Publication;
-import de.hybris.platform.xprint.jalo.TablePlacement;
 
 public class CreateProductPlacmentWizard extends GeneratedCreateProductPlacmentWizard
 {
 	private static Logger log = Logger.getLogger(CreateProductPlacmentWizard.class.getName());
 
-	private Category category;
-
-	private TablePlacement tablePlacement;
-
-	private MasterPage masterPageTemplate;
+	private MasterPage masterPageTemplate, pqsMasterPageTemplate;
 
 	private LayoutTemplate defaultTablePlacmentTemplate, pqsTablePlacmentTemplate;
-
-	private Publication publication;
 
 	private Map<Language, String> allHeadTextColumn1;
 
@@ -48,35 +41,13 @@ public class CreateProductPlacmentWizard extends GeneratedCreateProductPlacmentW
 
 	private Map<Language, String> allHeadTextColumn5;
 
-	private Map<Language, String> allPublicationName;
-
 	private Collection<ArtozProduct> artozProducts = new ArrayList<ArtozProduct>();
 
 	private Collection<Category> categoriesCollection = new ArrayList<Category>();
 
-	@Override
-	public Category getCategory(SessionContext ctx)
-	{
-		return category;
-	}
+	private String publicationName;
 
-	@Override
-	public void setCategory(SessionContext ctx, Category value)
-	{
-		category = value;
-	}
-
-	@Override
-	public TablePlacement getTablePlacement(SessionContext ctx)
-	{
-		return tablePlacement;
-	}
-
-	@Override
-	public void setTablePlacement(SessionContext ctx, TablePlacement value)
-	{
-		tablePlacement = value;
-	}
+	private Map<Language, String> allPublicationTitle;
 
 	@Override
 	public void initialize(WizardEditorContext ctx)
@@ -177,6 +148,20 @@ public class CreateProductPlacmentWizard extends GeneratedCreateProductPlacmentW
 	}
 
 	@Override
+	public void tabChanges(WizardEditorContext ctx, String fromTabName, String toTabName) throws VetoException
+	{
+		// TODO Auto-generated method stub
+		super.tabChanges(ctx, fromTabName, toTabName);
+	}
+
+	@Override
+	public void validate(WizardEditorContext ctx, String fromTab, String toTab) throws ValidationException
+	{
+		// TODO Auto-generated method stub
+		super.validate(ctx, fromTab, toTab);
+	}
+
+	@Override
 	public void start(WizardEditorContext ctx) throws VetoException
 	{
 		super.start(ctx);
@@ -198,8 +183,8 @@ public class CreateProductPlacmentWizard extends GeneratedCreateProductPlacmentW
 			headTexts.add(getHeadTextColumn5());
 			generator.setHeadTexts(headTexts);
 
-			generator.generate(getMasterPageTemplate(), getDefauktTablePlacmentTemplate(),
-						getPqsTablePlacmentTemplate());
+			generator.generate(getPublicationName(), getPublicationTitle(), getMasterPageTemplate(),
+						getPqsMasterPageTemplate(), getDefauktTablePlacmentTemplate(), getPqsTablePlacmentTemplate());
 		}
 		catch (JaloInvalidParameterException e)
 		{
@@ -233,18 +218,6 @@ public class CreateProductPlacmentWizard extends GeneratedCreateProductPlacmentW
 	public void setDefauktTablePlacmentTemplate(SessionContext ctx, LayoutTemplate value)
 	{
 		defaultTablePlacmentTemplate = value;
-	}
-
-	@Override
-	public Publication getPublication(SessionContext ctx)
-	{
-		return publication;
-	}
-
-	@Override
-	public void setPublication(SessionContext ctx, Publication value)
-	{
-		publication = value;
 	}
 
 	@Override
@@ -287,12 +260,6 @@ public class CreateProductPlacmentWizard extends GeneratedCreateProductPlacmentW
 	public Map<Language, String> getAllHeadTextColumn5(SessionContext ctx)
 	{
 		return allHeadTextColumn5;
-	}
-
-	@Override
-	public Map<Language, String> getAllPublicationName(SessionContext ctx)
-	{
-		return allPublicationName;
 	}
 
 	@Override
@@ -340,7 +307,7 @@ public class CreateProductPlacmentWizard extends GeneratedCreateProductPlacmentW
 	@Override
 	public String getPublicationName(SessionContext ctx)
 	{
-		return allPublicationName.get(ctx.getLanguage());
+		return publicationName;
 	}
 
 	@Override
@@ -371,12 +338,6 @@ public class CreateProductPlacmentWizard extends GeneratedCreateProductPlacmentW
 	public void setAllHeadTextColumn5(SessionContext ctx, Map<Language, String> value)
 	{
 		allHeadTextColumn5 = value;
-	}
-
-	@Override
-	public void setAllPublicationName(SessionContext ctx, Map<Language, String> value)
-	{
-		allPublicationName = value;
 	}
 
 	@Override
@@ -424,6 +385,42 @@ public class CreateProductPlacmentWizard extends GeneratedCreateProductPlacmentW
 	@Override
 	public void setPublicationName(SessionContext ctx, String value)
 	{
-		allPublicationName.put(ctx.getLanguage(), value);
+		publicationName = value;
+	}
+
+	@Override
+	public Map<Language, String> getAllPublicationTitle(SessionContext ctx)
+	{
+		return allPublicationTitle;
+	}
+
+	@Override
+	public String getPublicationTitle(SessionContext ctx)
+	{
+		return allPublicationTitle.get(ctx.getLanguage());
+	}
+
+	@Override
+	public void setAllPublicationTitle(SessionContext ctx, Map<Language, String> value)
+	{
+		allPublicationTitle = value;
+	}
+
+	@Override
+	public void setPublicationTitle(SessionContext ctx, String value)
+	{
+		allPublicationTitle.put(ctx.getLanguage(), value);
+	}
+
+	@Override
+	public MasterPage getPqsMasterPageTemplate(SessionContext ctx)
+	{
+		return pqsMasterPageTemplate;
+	}
+
+	@Override
+	public void setPqsMasterPageTemplate(SessionContext ctx, MasterPage value)
+	{
+		pqsMasterPageTemplate = value;
 	}
 }

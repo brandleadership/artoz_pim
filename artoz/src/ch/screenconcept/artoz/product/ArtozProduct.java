@@ -215,6 +215,13 @@ public class ArtozProduct extends GeneratedArtozProduct
 			return -1;
 		return priceInformation.getPriceValue().getValue();
 	}
+
+	public double getPriceQuantityScalePriceValueForOneUnitFactor(int scale) throws JaloPriceFactoryException{
+		PriceInformation priceInformation = getPriceQuantityScale(scale);
+		if (priceInformation == null)
+			return -1;
+		return ((PriceRow)priceInformation.getQualifierValue("pricerow")).getPriceAsPrimitive();
+	}
 	
 	public PriceInformation getPriceQuantityScale(int scale) throws JaloPriceFactoryException
 	{
