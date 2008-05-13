@@ -170,6 +170,7 @@ background-image: url(/css/images/flags/flag_it_activ.gif);
 width: 1024px; 
 height: 360px;  
 display: block;
+overflow: auto;
 }
 /****************************/
 /*  Zusatznavi Unten        */
@@ -305,4 +306,32 @@ div#contactform-content-right .sendbuttons input {
 width: auto;
 float: left;
 margin-left: 10px;
+}
+/****************************/
+/*  FAQ                     */
+/****************************/
+ol#faq-listing {
+padding-left: 20px;
+list-style-typ: decimal;
+float: left;
+width: 150px;
+}
+ol#faq-listing li a {
+text-decoration: none;
+color: black;
+display: block;
+margin-right: 15px;
+}
+div#faq-content {
+display: block;
+float: left;
+width: 388px;
+}
+div#faq-content .line {
+margin-top: 10px;
+height: 10px;
+width: 388px;
+background-repeat: no-repeat;
+background-image: url(/css/images/trennlinie_blau.gif); 
+margin-bottom: 10px;
 }

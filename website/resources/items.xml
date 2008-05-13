@@ -20,6 +20,7 @@
 	xsi:noNamespaceSchemaLocation="items.xsd">
 	<collectiontypes>
 		<collectiontype code="ContactFormParagraphDataCollection" elementtype="ContactFormParagraphData" autocreate="true" generate="true" type="list"/>
+		<collectiontype code="TradeFairParagraphDataCollection" elementtype="TradeFairParagraphData" autocreate="true" generate="true" type="list"/>
 	</collectiontypes>
 	<enumtypes>
 		<enumtype code="NavigationColor" autocreate="true"
@@ -158,5 +159,100 @@
 				</index>
 			</indexes>
 		</itemtype>
+		
+		<itemtype	code="LinkParagraph"
+						extends="Paragraph"
+						jaloclass="de.hybris.platform.cms.jalo.LinkParagraph"
+						generate="true"
+						autocreate="true">
+			<attributes>
+				<attribute qualifier="paragraphHeader" type="localized:java.lang.String">
+					<persistence type="property"/>
+				</attribute>						
+				<attribute qualifier="paragraphText" type="localized:java.lang.String">
+					<persistence type="property">
+						<columntype database="mysql">
+							<value>text</value>
+						</columntype>
+					</persistence>
+					<custom-properties>
+						<property name="hmcIndexField"><value>"thefield"</value></property>
+					</custom-properties>
+				</attribute>				
+			</attributes>
+		</itemtype>
+		
+		<itemtype	code="TradeFairParagraph"
+						extends="Paragraph"
+						jaloclass="de.hybris.platform.cms.jalo.TradeFairParagraph"
+						generate="true"
+						autocreate="true">
+			<attributes>
+				<attribute qualifier="lastTradeFairParagraphDatas" type="TradeFairParagraphDataCollection">
+					<persistence type="jalo"/>
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="tradefair">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="country">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="city">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="hall">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="stand">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="startdate">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="enddate">
+					<persistence type="property"/>
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype	code="TradeFairParagraphData"
+						extends="GenericItem"
+						generate="true"
+						autocreate="true"
+						jaloclass="ch.screenconcept.artoz.website.TradeFairParagraphData">
+			<attributes>
+				<attribute qualifier="tradeFairParagraph" type="TradeFairParagraph" >
+					<persistence type="property"/>
+					<modifiers initial="true" write="false" optional="false"/>
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="tradefair">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="country">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="city">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="hall">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="stand">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="java.util.Date" qualifier="startdate">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="java.util.Date" qualifier="enddate">
+					<persistence type="property"/>
+				</attribute>
+			</attributes>
+			<indexes>
+				<index name="tradeFairParagraphIdx">
+					<key attribute="tradeFairParagraph"/>
+				</index>
+			</indexes>
+		</itemtype>
+		
 	</itemtypes>
 </items>

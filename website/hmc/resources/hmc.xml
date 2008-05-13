@@ -26,6 +26,31 @@
 		</group>
 	</explorertree>
 -->
+	<type name="LinkParagraph" mode="append">
+		<organizer>
+			<editor>
+				<tab name="tab.paragraph.content" mode="append">
+					<section name="text">
+						<table>
+								<tr>
+									<td>
+										<attribute name="paragraphHeader"/>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<attribute name="paragraphText">
+											<wysiwygeditor/>
+										</attribute>
+									</td>
+								</tr>
+						</table>
+					</section>
+				</tab>
+			</editor>
+		</organizer>
+	</type>
+	
 	<type name="ContactFormParagraph" mode="append">
 		<organizer>
 			<editor>
@@ -126,6 +151,73 @@
 								</td>
 							</tr>
 						</table>						
+					</section>
+				</tab>
+			</editor>
+		</organizer>
+	</type>
+	
+		<type name="TradeFairParagraph" mode="append">
+		<organizer>
+			<editor>
+				<tab name="tab.paragraph.content" mode="append">
+					<section name="text">
+						<table>
+							<tr>
+								<td>
+									<attribute name="startdate">
+										<dateeditor/>
+									</attribute>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<attribute name="enddate">
+										<dateeditor/>
+									</attribute>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<attribute name="tradefair"/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<attribute name="country"/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<attribute name="city"/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<attribute name="hall"/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<attribute name="stand"/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<listlayout>
+										<attribute name="lastTradeFairParagraphDatas">
+											<referencecollectioneditor autosave="true" resortable="true" add="true" remove="true" create="true">
+												<itemlayout>
+													<attribute name="tradefair"/>
+													<attribute name="startdate"/>
+													<attribute name="enddate"/>
+												</itemlayout>
+											</referencecollectioneditor>
+										</attribute>
+									</listlayout>
+								</td>
+							</tr>
+						</table>
 					</section>
 				</tab>
 			</editor>

@@ -5,6 +5,7 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
 
 	<!-- LiveEdit -->
+	<!-- old initFilter: ch.screenconcept.artoz.website.LexikonFilter -->
 	<filter>
 		<filter-name>initfilter</filter-name>
 		<filter-class>
@@ -14,14 +15,41 @@
 
 	<filter-mapping>
 		<filter-name>initfilter</filter-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>*.jsf</url-pattern>
 	</filter-mapping>
-
+	
+<!-- 
 	<filter-mapping>
 		<filter-name>initfilter</filter-name>
 		<servlet-name>action</servlet-name>
 	</filter-mapping>
-
+ -->	
+	<!-- LexikonFilter -->
+<!-- 	<filter>
+	   <filter-name>TextFilter</filter-name>
+	   <filter-class>ch.screenconcept.artoz.website.TextFilter</filter-class>
+	   <init-param>
+			<param-name>enable.compression</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>enable.buffer.regexp</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>tenantIDPattern</param-name>
+			<param-value>;\s*tenantID\s*=\s*(\w+)</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>TextFilter</filter-name>
+		<url-pattern>*.jsf</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>TextFilter</filter-name>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
+ -->
 	<!-- Facelets Paramater -->
 	<context-param>
 		<param-name>facelets.LIBRARIES</param-name>
