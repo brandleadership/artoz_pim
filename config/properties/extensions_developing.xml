@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!--
+   extensions.xml 
+
+   Note: If a file localextensions.xml is available, it is used instead of this file.
+
+   this file configures which hybris Platform extensions are installed,
+   each <extension dir=".."> points to an extension directory. The path can be
+   absolute or relative.
+
+   After adding an extension, call 'ant' to build the system.
+-->
+
+<hybrisconfig>
+
+	<extensions>
+
+		<extension dir="ext/core"/>
+		<extension dir="ext/category" />
+		<extension dir="ext/europe1" />
+		<extension dir="ext/paymentstandard" />
+		<extension dir="ext/deliveryzone" />
+		<extension dir="ext/variants" />
+		<extension dir="ext/lucenesearch"/>
+		<extension dir="ext/cronjob" />
+		<extension dir="ext/catalog"/>
+		<extension dir="ext/ldap"/>
+		<extension dir="ext/impex" />
+		<extension dir="ext/commons"/>
+		<extension dir="ext/adminweb" />
+		<extension dir="ext/mediaweb" />
+		<extension dir="ext/hmc" />
+		<extension dir="ext/maintenanceweb"/>
+		<extension dir="ext/webservice"/>
+		<!-- 
+		<extension dir="../ext-commerce/storefoundation"/>-->
+		<extension dir="../ext-commerce/beanlayer"/>
+		<extension dir="../ext-commerce/voucher"/>
+		<extension dir="../ext-commerce/webfoundation"/>
+		<extension dir="../ext-commerce/cms"/>
+		<!--<extension dir="../ext-commerce/oci"/>
+		-->
+		<!--
+		<extension dir="../ext-pim/workflow"/> 
+		<extension dir="../ext-pim/bmecat"/>
+		-->
+		<!--
+		<extension dir="../ext-print/print"/>
+		-->
+		<!--
+		<extension dir="../ext-misc/bibit"/>
+		<extension dir="../ext-misc/escore"/>
+		<extension dir="../ext-misc/xprintdemo"/>
+		-->
+		<extension dir="../ext-misc/xprint"/>
+
+        <!-- **************************************************************** -->
+        <!-- *** Screenconcept Extensions                                 *** -->
+        <!-- **************************************************************** -->
+
+        <extension dir="../artoz"/>
+        <extension dir="../website"/>
+        <extension dir="../campaign"/>
+        
+	</extensions>
+
+</hybrisconfig>
