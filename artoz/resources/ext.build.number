@@ -1,0 +1,7 @@
+
+#you can set a version number for your extension which 
+#is used e.g. during API-doc-generation.
+
+artoz.build.version=TRUNK
+artoz.build.description=artoz extension
+
