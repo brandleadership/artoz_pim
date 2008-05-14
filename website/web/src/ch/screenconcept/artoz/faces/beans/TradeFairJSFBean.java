@@ -30,17 +30,21 @@ public class TradeFairJSFBean
 	{
 		Map attributes = new HashMap();
 		attributes.put("code", "152003227400355456");
-		Calendar cal = new GregorianCalendar();
-		cal.add(Calendar.DAY_OF_YEAR, -14);
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd 00:00:00.0");
-		attributes.put("end", dateFormat.format(cal.getTime()));
+		Calendar cal1 = new GregorianCalendar();
+		cal1.add(Calendar.DAY_OF_YEAR, -14);
+		attributes.put("end", dateFormat.format(cal1.getTime()));
+		Calendar cal2 = new GregorianCalendar();
+		cal2.add(Calendar.DAY_OF_YEAR, 300);
+		attributes.put("start", dateFormat.format(cal2.getTime()));
 		final SearchResult res = JaloSession.getCurrentSession().getFlexibleSearch()
 					.search(
 								"SELECT {" + TradeFairParagraphData.PK + "} FROM {"
 											+ WebsiteConstants.TC.TRADEFAIRPARAGRAPHDATA + "} " + "WHERE {"
 											+ TradeFairParagraphData.TRADEFAIRPARAGRAPH + "} = ?code AND {"
-											+ TradeFairParagraphData.ENDDATE + "} >= ?end "
-											+ "ORDER BY {" + TradeFairParagraphData.STARTDATE + "} DESC", attributes,
+											+ TradeFairParagraphData.ENDDATE + "} >= ?end AND {"
+											+ TradeFairParagraphData.STARTDATE + "} <= ?start "
+											+ "ORDER BY {" + TradeFairParagraphData.STARTDATE + "} ASC", attributes,
 								TradeFairParagraphData.class);
 		tradefairData = (List) res.getResult();
 		return tradefairData;
