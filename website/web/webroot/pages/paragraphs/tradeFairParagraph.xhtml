@@ -18,14 +18,22 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="#{tradeFairJSFBean.tradefairparagraphdatas}" var="paragraph" >
+				<c:forEach items="#{tradeFairJSFBean.tradeFairParagraphDatas}" var="item" >
 					<tr>
-						<td>#{paragraph.startdate}</td>
-						<td>#{paragraph.tradefair}</td>
-						<td>#{paragraph.country}</td>
-						<td>#{paragraph.city}</td>
-						<td>#{paragraph.hall}</td>
-						<td>#{paragraph.stand}</td>
+						<td>
+							<h:outputText value="#{item.startdate}">
+								<f:convertDateTime type="date" pattern="dd.MM." />
+							</h:outputText>
+							<h:outputText value="&#160;-&#160;"/>
+							<h:outputText value="#{item.enddate}">
+								<f:convertDateTime type="date" pattern="dd.MM.yyyy" />
+							</h:outputText>
+						</td>
+						<td>#{item.tradefair}	</td>
+						<td>#{item.country}		</td>
+						<td>#{item.city}		</td>
+						<td>#{item.hall}		</td>
+						<td>#{item.stand}		</td>
 					</tr>
 				</c:forEach>
 			</tbody>
