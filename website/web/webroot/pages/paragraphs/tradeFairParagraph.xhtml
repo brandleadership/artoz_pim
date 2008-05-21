@@ -18,26 +18,25 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="#{tradeFairJSFBean.tradeFairParagraphDatas}" var="item" >
+				<c:forEach items="#{tradeFairJSFBean.tradeFairParagraphDatas}" var="tradefair" >
 					<tr>
 						<td>
-							<h:outputText value="#{item.startdate}">
-								<f:convertDateTime type="date" pattern="dd.MM." />
+							<h:outputText value="#{tradefair.startdate}">
+								<f:convertDateTime type="date" pattern="dd.MM." locale="de" />
 							</h:outputText>
 							<h:outputText value="&#160;-&#160;"/>
-							<h:outputText value="#{item.enddate}">
-								<f:convertDateTime type="date" pattern="dd.MM.yyyy" />
+							<h:outputText value="#{tradefair.enddate}">
+								<f:convertDateTime type="date" pattern="dd.MM.yyyy" locale="en" />
 							</h:outputText>
 						</td>
-						<td>#{item.tradefair}	</td>
-						<td>#{item.country}		</td>
-						<td>#{item.city}		</td>
-						<td>#{item.hall}		</td>
-						<td>#{item.stand}		</td>
+						<td>#{tradefair.tradefair}	</td>
+						<td>#{tradefair.country}	</td>
+						<td>#{tradefair.city}		</td>
+						<td>#{tradefair.hall}		</td>
+						<td>#{tradefair.stand}		</td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 	</div>
-	
 </ui:composition>

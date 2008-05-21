@@ -7,11 +7,9 @@
 
 	<c:choose>
 		<c:when test="#{!empty element.name}">
-			<li>
-				<h:outputLink value="#{element.content.code}" class="#{element.color.code}">
+			<option value="#{element.content.code}">
 					<h:outputText value="#{element.name}" />
-				</h:outputLink>
-			</li>
+			</option>			
 		</c:when>
 	</c:choose>
 

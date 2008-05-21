@@ -60,6 +60,11 @@ public class CmsJSFBean
 	{
 		return getWebsite().getNavigationElement(WebsiteConstants.HELP_NAV);
 	}
+	
+	public AbstractCMSItem getQuickNav()
+	{
+		return getWebsite().getNavigationElement(WebsiteConstants.QUICK_NAV);
+	}
 
 	public PageContent getPageContent()
 	{

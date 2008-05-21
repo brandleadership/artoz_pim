@@ -52,6 +52,21 @@ color: white;
 text-decoration: none;
 font-size: 10px;
 }
+#help-nav li a.home {
+padding-left: 15px;
+background-image: url(/css/images/nav_home.gif);
+background-repeat: no-repeat;
+}
+#help-nav li a.impressum {
+padding-left: 15px;
+background-image: url(/css/images/nav_impressum.gif);
+background-repeat: no-repeat;
+}
+#help-nav li a.sitemap {
+padding-left: 15px;
+background-image: url(/css/images/nav_sitemap.gif);
+background-repeat: no-repeat;
+}
 /****************************/
 /*  Kopfbereich             */
 /*  Hauptnavigation         */
@@ -171,6 +186,26 @@ width: 1024px;
 height: 360px;  
 display: block;
 overflow: auto;
+}
+#content .paragraphPage {
+float: left;
+}
+#content .paragraphPage div#contactform,
+#content .paragraphPage div.tradeparagraph,
+#content .paragraphPage div.lexikonparagraph {
+z-index: 2;
+margin-left: 250px;
+position: relative;
+}
+#content .paragraphPage .headline-image {
+z-index: 1;
+float: left;
+position: absolute;
+margin-left: 0px;
+}
+*+html #content .paragraphPage .headline-image,
+* html #content .paragraphPage .headline-image {
+margin-left: -250px;
 }
 /****************************/
 /*  Zusatznavi Unten        */

@@ -1,4 +1,4 @@
-package de.hybris.platform.cms.jalo;
+package ch.screenconcept.artoz.website;
 
 import de.hybris.platform.jalo.Item;
 import de.hybris.platform.jalo.Item.ItemAttributeMap;
@@ -7,10 +7,10 @@ import de.hybris.platform.jalo.SessionContext;
 import de.hybris.platform.jalo.type.ComposedType;
 import org.apache.log4j.Logger;
 
-public class LinkParagraph extends GeneratedLinkParagraph
+public class TitleImageParagraph extends GeneratedTitleImageParagraph
 {
-	private static Logger log = Logger.getLogger( LinkParagraph.class.getName() );
-	public LinkParagraph()
+	private static Logger log = Logger.getLogger( TitleImageParagraph.class.getName() );
+	public TitleImageParagraph()
 	{
 		// empty
 	}

@@ -1,4 +1,4 @@
-package de.hybris.platform.cms.jalo;
+package ch.screenconcept.artoz.website;
 
 import java.util.ArrayList;
 import java.util.Collections;

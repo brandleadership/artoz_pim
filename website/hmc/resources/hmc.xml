@@ -157,7 +157,7 @@
 		</organizer>
 	</type>
 	
-		<type name="TradeFairParagraph" mode="append">
+	<type name="TradeFairParagraph" mode="append">
 		<organizer>
 			<editor>
 				<tab name="tab.paragraph.content" mode="append">
@@ -211,6 +211,32 @@
 													<attribute name="tradefair"/>
 													<attribute name="startdate"/>
 													<attribute name="enddate"/>
+												</itemlayout>
+											</referencecollectioneditor>
+										</attribute>
+									</listlayout>
+								</td>
+							</tr>
+						</table>
+					</section>
+				</tab>
+			</editor>
+		</organizer>
+	</type>
+
+	<type name="LexikonParagraph" mode="append">
+		<organizer>
+			<editor>
+				<tab name="tab.paragraph.content" mode="append">
+					<section name="text">
+						<table>
+							<tr>
+								<td>
+									<listlayout>
+										<attribute name="lastLexikonParagraphDatas">
+											<referencecollectioneditor autosave="true" resortable="true" add="true" remove="true" create="true">
+												<itemlayout>
+													<attribute name="name"/>
 												</itemlayout>
 											</referencecollectioneditor>
 										</attribute>

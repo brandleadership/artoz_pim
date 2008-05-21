@@ -15,4 +15,8 @@ public final class WebsiteConstants extends GeneratedWebsiteConstants
 	public static final String MAIN_NAV = "main_nav";
 	
 	public static final String HELP_NAV = "help_nav";
+	
+	public static final String QUICK_NAV = "quick_nav";
+	
+	public static final String LEXIKON = "lexikon";
 }

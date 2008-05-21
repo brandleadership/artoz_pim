@@ -21,6 +21,7 @@
 	<collectiontypes>
 		<collectiontype code="ContactFormParagraphDataCollection" elementtype="ContactFormParagraphData" autocreate="true" generate="true" type="list"/>
 		<collectiontype code="TradeFairParagraphDataCollection" elementtype="TradeFairParagraphData" autocreate="true" generate="true" type="list"/>
+		<collectiontype code="LexikonParagraphDataCollection" elementtype="LexikonParagraphData" autocreate="true" generate="true" type="list"/>
 	</collectiontypes>
 	<enumtypes>
 		<enumtype code="NavigationColor" autocreate="true"
@@ -31,6 +32,9 @@
 			<value code="orange" />
 			<value code="red" />
 			<value code="grey" />
+			<value code="home" />
+			<value code="sitemap" />
+			<value code="impressum" />
 		</enumtype>
 	</enumtypes>
 	<itemtypes>
@@ -162,7 +166,7 @@
 		
 		<itemtype	code="LinkParagraph"
 						extends="Paragraph"
-						jaloclass="de.hybris.platform.cms.jalo.LinkParagraph"
+						jaloclass="ch.screenconcept.artoz.website.LinkParagraph"
 						generate="true"
 						autocreate="true">
 			<attributes>
@@ -184,7 +188,7 @@
 		
 		<itemtype	code="TradeFairParagraph"
 						extends="Paragraph"
-						jaloclass="de.hybris.platform.cms.jalo.TradeFairParagraph"
+						jaloclass="ch.screenconcept.artoz.website.TradeFairParagraph"
 						generate="true"
 						autocreate="true">
 			<attributes>
@@ -252,6 +256,54 @@
 					<key attribute="tradeFairParagraph"/>
 				</index>
 			</indexes>
+		</itemtype>
+		
+		<itemtype	code="LexikonParagraph"
+						extends="Paragraph"
+						jaloclass="ch.screenconcept.artoz.website.LexikonParagraph"
+						generate="true"
+						autocreate="true">
+			<attributes>
+				<attribute qualifier="lastLexikonParagraphDatas" type="LexikonParagraphDataCollection">
+					<persistence type="property"/>
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype	code="LexikonParagraphData"
+						extends="GenericItem"
+						generate="true"
+						autocreate="true"
+						jaloclass="ch.screenconcept.artoz.website.LexikonParagraphData">
+			<attributes>
+				<attribute qualifier="lexikonParagraph" type="LexikonParagraph" >
+					<persistence type="property"/>
+					<modifiers initial="true" write="false" optional="false"/>
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="name">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="description">
+					<persistence type="property"/>
+				</attribute>
+			</attributes>
+			<indexes>
+				<index name="lexikonParagraphIdx">
+					<key attribute="lexikonParagraph"/>
+				</index>
+			</indexes>
+		</itemtype>
+		
+		<itemtype	code="TitleImageParagraph"
+						extends="Paragraph"
+						jaloclass="ch.screenconcept.artoz.website.TitleImageParagraph"
+						generate="true"
+						autocreate="true">
+			<attributes>
+				<attribute qualifier="image" type="localized:Media">
+					<persistence type="property"/>
+				</attribute>
+			</attributes>
 		</itemtype>
 		
 	</itemtypes>

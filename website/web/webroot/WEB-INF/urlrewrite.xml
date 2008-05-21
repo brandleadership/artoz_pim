@@ -23,29 +23,8 @@ http://tuckey.org/urlrewrite/
 		<to type="redirect">%{context-path}/pages/index.jsf</to>
 	</rule>
     -->
-    <!-- 
-    <rule>
-        <from>^/index.jsf$</from>
-        <to type="redirect">/pages/home</to>
-    </rule>
-	 -->
     <rule>
         <from>^/$</from>
-        <to type="redirect">/pages/index.jsf?pageid=home</to>
-    </rule>
-    <outbound-rule>
-	    <from>^/pages/([a-z0-9]+)$</from>
-	    <to>/pages/index.jsp?pageid=$1</to>
-    </outbound-rule>
-	<!-- 
-	<rule>
-        <from>^/pages/index.jsf</from>
-        <to type="redirect">/pages/home</to>
-    </rule>
-    
-    <rule>
-        <from>^/pages/([a-z0-9]+)$</from>
-        <to>/pages/index.jsf?pageid=$1</to>
-    </rule>
-     -->
+		<to type="redirect">/pages/index.jsf?pageid=home</to>
+	</rule>
 </urlrewrite>

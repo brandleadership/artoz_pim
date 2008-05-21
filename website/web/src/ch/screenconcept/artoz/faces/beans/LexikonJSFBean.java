@@ -18,7 +18,8 @@ import org.apache.shale.tiger.managed.Scope;
 
 import sun.util.calendar.LocalGregorianCalendar.Date;
 
-import ch.screenconcept.artoz.website.TradeFairParagraph;
+import ch.screenconcept.artoz.website.LexikonParagraph;
+import ch.screenconcept.artoz.website.LexikonParagraphData;
 import ch.screenconcept.artoz.website.TradeFairParagraphData;
 import ch.screenconcept.artoz.website.constants.WebsiteConstants;
 import ch.screenconcept.artoz.website.jalo.WebsiteManager;
@@ -31,45 +32,36 @@ import de.hybris.platform.jalo.JaloSession;
 import de.hybris.platform.jalo.SearchResult;
 import de.hybris.platform.webfoundation.jalo.bean.PageContentBean;
 
-@Bean(name = "tradeFairJSFBean", scope = Scope.REQUEST)
-public class TradeFairJSFBean
+@Bean(name = "lexikonJSFBean", scope = Scope.REQUEST)
+public class LexikonJSFBean
 {
 	
-	private List<TradeFairParagraphData> tradefairData = new ArrayList<TradeFairParagraphData>();
+	private List<LexikonParagraphData> lexikonData = new ArrayList<LexikonParagraphData>();
 	PageJSFBean pageBean;
 	
 	@SuppressWarnings("unchecked")
-	public List getTradeFairParagraphDatas()
+	public List getLexikonParagraphDatas()
 	{
 		Map attributes = new HashMap();
 		Paragraph paragraph = getParagraph();
 		attributes.put("code", paragraph.getPK().toString());
-		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd 00:00:00");
-		Calendar cal1 = Calendar.getInstance();//new GregorianCalendar();
-		cal1.add(Calendar.DAY_OF_YEAR, -14);
-		attributes.put("end", cal1.getTime());
-		Calendar cal2 = Calendar.getInstance();//new GregorianCalendar();
-		cal2.add(Calendar.DAY_OF_YEAR, 300);
-		attributes.put("start", cal2.getTime());
 		final SearchResult res = JaloSession.getCurrentSession().getFlexibleSearch()
 					.search(
-								"SELECT {" + TradeFairParagraphData.PK + "} FROM {"
-											+ WebsiteConstants.TC.TRADEFAIRPARAGRAPHDATA + "} " + "WHERE {"
-											+ TradeFairParagraphData.TRADEFAIRPARAGRAPH + "} = ?code AND {"
-											+ TradeFairParagraphData.ENDDATE + "} >= ?end AND {"
-											+ TradeFairParagraphData.STARTDATE + "} <= ?start "
-											+ "ORDER BY {" + TradeFairParagraphData.STARTDATE + "} ASC", attributes,
-								TradeFairParagraphData.class);
-		tradefairData = (List) res.getResult();
-		return tradefairData;
+								 "SELECT {" + LexikonParagraphData.PK + "} FROM {"
+											+ WebsiteConstants.TC.LEXIKONPARAGRAPHDATA + "} " + "WHERE {"
+											+ LexikonParagraphData.LEXIKONPARAGRAPH + "} = ?code " 
+											+ "ORDER BY {" + LexikonParagraphData.NAME + "} ASC", attributes,
+											LexikonParagraphData.class);
+		lexikonData = (List) res.getResult();
+		return lexikonData;
 	}
 	
 	private Paragraph getParagraph() 
 	{
 		final ParagraphContent content = (ParagraphContent)getPageBean().getPageContent();
 		for( final Paragraph paragraph : (List<Paragraph>) content.getParagraphs() )
-			if( paragraph instanceof TradeFairParagraph )
-				return (TradeFairParagraph)paragraph;
+			if( paragraph instanceof LexikonParagraph )
+				return (LexikonParagraph)paragraph;
 		return null;
 	}
 	
