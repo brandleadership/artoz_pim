@@ -50,13 +50,13 @@ public class ProductImportJob extends GeneratedProductImportJob
 				ArtozConstants.UserPriceGroups.EUR_STANDARD_NAME);
 
 	private final EnumerationValue userPriceGroupEUREX = Europe1PriceFactory.getInstance().getUserPriceGroup(
-				ArtozConstants.UserPriceGroups.GBP_STANDARD_NAME);
+				ArtozConstants.UserPriceGroups.EUR_EXTENDED_NAME);
 
 	private final EnumerationValue userPriceGroupGBP = Europe1PriceFactory.getInstance().getUserPriceGroup(
 				ArtozConstants.UserPriceGroups.GBP_STANDARD_NAME);
 
 	private final EnumerationValue userPriceGroupUSD = Europe1PriceFactory.getInstance().getUserPriceGroup(
-				ArtozConstants.UserPriceGroups.GBP_STANDARD_NAME);
+				ArtozConstants.UserPriceGroups.USD_STANDARD_NAME);
 
 	@Override
 	protected CronJobResult performCronJob(CronJob cronJob) throws AbortCronJobException
