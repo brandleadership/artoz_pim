@@ -1,0 +1,165 @@
+<project name="artoz" default="all" basedir=".">
+
+    <taskdef resource="net/sf/antcontrib/antlib.xml" />
+
+    <target name="init">
+
+        <!-- check, if build properties are avaliable and load it-->
+        <condition property="build.properties.available">
+            <not>
+                <available file="build.properties" />
+            </not>
+        </condition>
+        <fail if="build.properties.available" />
+        <property file="build.properties" />
+
+        <!-- check, if local properties are avaliable -->
+        <condition property="local.properties.available">
+            <not>
+                <available file="./properties/local_${config}.properties" />
+            </not>
+        </condition>
+        <fail if="local.properties.available" message="local_${config}.properties not available" />
+
+        <!-- check, if extensions.xml is avaliable -->
+        <condition property="local.properties.available">
+            <not>
+                <available file="./properties/extensions_${config}.xml" />
+            </not>
+        </condition>
+        <fail if="local.properties.available" message="extensions_${config}.xml not available" />
+    </target>
+
+    <!-- 
+    ************************************************************
+     Target init.hybris
+     
+     Guaranties the existence of the configured hybris modules
+     in the project. Modules not allready present are
+     downloaded automatically from ${hybris.software.dir}
+    ************************************************************
+    -->
+    <target name="init.hybris">
+        <!-- Platform Extension -->
+        <if>
+            <available file="${platform.home}" />
+            <then>
+                <echo message="hybris platform installed." />
+            </then>
+            <else>
+                <mkdir dir="${tmp.dir}" />
+                <unzip dest="${tmp.dir}">
+                    <fileset dir="${hybris.software.dir}">
+                        <include name="hybris-platform*.zip" />
+                    </fileset>
+                </unzip>
+                <mkdir dir="${platform.home}" />
+                <move todir="${platform.home}">
+                    <fileset dir="${tmp.dir}/hybris/platform" />
+                </move>
+                <delete dir="${tmp.dir}" />
+            </else>
+        </if>
+
+        <copy tofile="${platform.home}/local.properties" overwrite="true">
+            <fileset file="./properties/local_${config}.properties" />
+        </copy>
+        <copy tofile="${platform.home}/extensions.xml" overwrite="true">
+            <fileset file="./properties/extensions_${config}.xml" />
+        </copy>
+
+        <!--Commerce Extension -->
+        <if>
+            <available file="${hybris.home}/ext-commerce/" />
+            <then>
+                <echo message="hybris commerce installed." />
+            </then>
+            <else>
+                <mkdir dir="${tmp.dir}" />
+                <unzip dest="${tmp.dir}">
+                    <fileset dir="${hybris.software.dir}">
+                        <include name="hybris-commerce*.zip" />
+                    </fileset>
+                </unzip>
+                <move todir="${hybris.home}">
+                    <fileset dir="${tmp.dir}/hybris/" />
+                </move>
+                <delete dir="${tmp.dir}" />
+            </else>
+        </if>
+
+        <!--Commerce Extension -->
+        <if>
+            <available file="${hybris.home}/campaign/" />
+            <then>
+                <echo message="campaign installed." />
+            </then>
+            <else>
+                <mkdir dir="${tmp.dir}" />
+                <unzip dest="${tmp.dir}">
+                    <fileset dir="${hybris.software.dir}">
+                        <include name="hybrisplatform_campaign*.zip" />
+                    </fileset>
+                </unzip>
+                <move todir="${hybris.home}">
+                    <fileset dir="${tmp.dir}/" />
+                </move>
+                <delete dir="${tmp.dir}" />
+            </else>
+        </if>
+        <!-- Misc Extension -->
+        <if>
+            <available file="${hybris.home}/ext-misc/" />
+            <then>
+                <echo message="ext misc installed." />
+            </then>
+            <else>
+                <mkdir dir="${tmp.dir}" />
+                <unzip dest="${tmp.dir}">
+                    <fileset dir="${hybris.software.dir}">
+                        <include name="hybris-misc-modules*.zip" />
+                    </fileset>
+                </unzip>
+                <move todir="${hybris.home}">
+                    <fileset dir="${tmp.dir}/hybris" />
+                </move>
+                <delete dir="${tmp.dir}" />
+            </else>
+        </if>
+    </target>
+
+    <!-- 
+	******************************
+	 Target all
+	******************************
+	-->
+    <target name="all" depends="init, init.hybris" description="Builds all.">
+        <if>
+            <isset property="ext" />
+            <then>
+                <ant dir="${extensions.dir}/${ext}" />
+            </then>
+            <else>
+                <ant dir="${platform.home}" />
+            </else>
+        </if>
+    </target>
+
+    <!-- 
+	******************************
+	 Target clean
+	******************************
+	-->
+    <target name="clean" depends="init, init.hybris" description="Cleans all.">
+        <if>
+            <isset property="ext" />
+            <then>
+                <ant dir="${extensions.dir}/${ext}" target="clean" />
+            </then>
+            <else>
+                <ant dir="${platform.home}" target="clean" inheritall="false" inheritrefs="false" />
+            </else>
+        </if>
+    </target>
+
+</project>
