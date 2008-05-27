@@ -16,6 +16,7 @@ import ch.screenconcept.artoz.prices.ArtozMSRPrice;
 import ch.screenconcept.artoz.prices.ArtozPriceRow;
 import ch.screenconcept.artoz.prices.PriceRowValues;
 import ch.screenconcept.artoz.product.ArtozProduct;
+import ch.screenconcept.artoz.product.Sort;
 import de.hybris.platform.catalog.constants.CatalogConstants;
 import de.hybris.platform.catalog.jalo.CatalogManager;
 import de.hybris.platform.catalog.jalo.CatalogVersion;
@@ -160,31 +161,33 @@ public class ProductImportJob extends GeneratedProductImportJob
 				product.update(params, names, getPrices(line));
 			}
 
-			if (line.getBrand() != null)
+			if (line.getSort() != null)
 			{
 				// Add product to category
-				final Collection<Category> brandCategories = CategoryManager.getInstance().getCategoriesByCode(
-							line.getBrand());
-				final Category brandCategory;
-				if (brandCategories == null || brandCategories.isEmpty())
+				final Collection<Category> sortCategories = CategoryManager.getInstance().getCategoriesByCode(
+							line.getSort());
+				final Category sortCategory;
+				if (sortCategories == null || sortCategories.isEmpty())
 				{
-					brandCategory = CategoryManager.getInstance().createCategory(line.getBrand());
-					brandCategory.setName(line.getBrand());
+					Map<String, String> sortCatParams = new HashMap<String, String>();
+					sortCatParams.put(Sort.CODE, line.getSort());
+					sortCatParams.put(Sort.NAME, line.getSort());
+					sortCategory = ArtozManager.getInstance().createSort(sortCatParams);
 				}
 				else
-					brandCategory = brandCategories.iterator().next();
+					sortCategory = sortCategories.iterator().next();
 
 				// Update categories; Delete old once.
-				boolean hasBrandCategory = false;
+				boolean hasSortCategory = false;
 				for (Category productCategory : catalogManager.getCategoriesByProduct(catalogVersion, product))
-					if (productCategory.getCode().equals(brandCategory.getCode()))
-						hasBrandCategory = true;
+					if (productCategory.getCode().equals(sortCategory.getCode()))
+						hasSortCategory = true;
 					else
 						productCategory.removeProduct(product);
-				if (!hasBrandCategory)
-					brandCategory.addProduct(product);
+				if (!hasSortCategory)
+					sortCategory.addProduct(product);
 
-				catalogManager.setCatalogVersion(brandCategory, catalogVersion);
+				catalogManager.setCatalogVersion(sortCategory, catalogVersion);
 
 				final Collection<Category> categories = CategoryManager.getInstance().getCategoriesByCode(
 							line.getCategory());
@@ -198,14 +201,14 @@ public class ProductImportJob extends GeneratedProductImportJob
 					category = categories.iterator().next();
 
 				// Update categories; Delete old once.
-				boolean hascategoryCategory = false;
-				for (Category categoryCategory : brandCategory.getSupercategories())
+				boolean hasCategoryCategory = false;
+				for (Category categoryCategory : sortCategory.getSupercategories())
 					if (categoryCategory.getCode().equals(category.getCode()))
-						hascategoryCategory = true;
+						hasCategoryCategory = true;
 					else
 						categoryCategory.removeProduct(product);
-				if (!hascategoryCategory)
-					brandCategory.addSubcategory(category);
+				if (!hasCategoryCategory)
+					category.addSubcategory(sortCategory);
 
 				catalogManager.setCatalogVersion(category, catalogVersion);
 			}

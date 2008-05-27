@@ -24,6 +24,8 @@
 			elementtype="ArtozMSRPrice" autocreate="true" generate="true" />
 		<collectiontype code="ArtozProductCollection"
 			elementtype="ArtozProduct" autocreate="true" generate="true" />
+		<collectiontype code="SortCollection" elementtype="Sort"
+			autocreate="true" generate="true" />
 	</collectiontypes>
 
 	<enumtypes>
@@ -125,6 +127,10 @@
 				</attribute>
 			</attributes>
 		</itemtype>
+
+		<itemtype code="Sort" extends="Category"
+			jaloclass="ch.screenconcept.artoz.product.Sort" autocreate="true"
+			generate="true" />
 
 		<!-- PriceRow -->
 		<itemtype generate="true" code="ArtozPriceRow"
@@ -230,12 +236,40 @@
 			</attributes>
 		</itemtype>
 
+		<itemtype generate="true" code="ProductImportMediaImportCronjob"
+			jaloclass="ch.screenconcept.artoz.importer.ProductImportMediaImportCronjob"
+			extends="Cronjob" autocreate="true">
+			<attributes>
+				<attribute qualifier="media"
+					type="ProductImportMedia">
+					<description>
+						ProductImportMedia to import
+					</description>
+					<modifiers read="true" write="true" search="true"
+						initial="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="productList" type="ProductList">
+					<description>
+						ProductList to add products
+					</description>
+					<modifiers read="true" write="true" search="true"
+						initial="true" />
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+
 		<itemtype generate="true" code="CustomerImportJob"
 			jaloclass="ch.screenconcept.artoz.importer.CustomerImportJob"
 			extends="Job" autocreate="true" />
 
 		<itemtype generate="true" code="NewsletterCustomerImportJob"
 			jaloclass="ch.screenconcept.artoz.importer.NewsletterCustomerImportJob"
+			extends="Job" autocreate="true" />
+
+		<itemtype generate="true" code="ProductListImportJob"
+			jaloclass="ch.screenconcept.artoz.importer.ProductListImportJob"
 			extends="Job" autocreate="true" />
 
 		<itemtype generate="true" code="ProductImportJob"
@@ -361,6 +395,44 @@
 				</attribute>
 			</attributes>
 		</itemtype>
+
+		<itemtype code="ProductList" extends="GenericItem"
+			jaloclass="ch.screenconcept.artoz.product.ProductList"
+			autocreate="true" generate="true">
+			<attributes>
+				<attribute qualifier="name" type="java.lang.String">
+					<modifiers optional="false" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="categories"
+					type="CategoryCollection">
+					<modifiers read="true" write="true" search="true"
+						initial="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="artozProducts"
+					type="ArtozProductCollection">
+					<modifiers read="true" write="true" search="true"
+						initial="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="sorts" type="SortCollection">
+					<modifiers read="true" write="true" search="true"
+						initial="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="productImportFile"
+					type="ProductImportMedia">
+					<modifiers read="true" write="true" search="true"
+						initial="true" />
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype code="ProductImportMedia" extends="Media"
+			jaloclass="ch.screenconcept.artoz.product.ProductImportMedia"
+			autocreate="true" generate="true" />
 
 		<!-- Wizard -->
 		<itemtype code="CreateEMailFaxCampaignWizard"
@@ -519,14 +591,7 @@
 					<modifiers optional="false" />
 					<persistence type="jalo" />
 				</attribute>
-				<attribute qualifier="categories"
-					type="CategoryCollection">
-					<modifiers read="true" write="true" search="true"
-						initial="true" />
-					<persistence type="jalo" />
-				</attribute>
-				<attribute qualifier="artozProducts"
-					type="ArtozProductCollection">
+				<attribute qualifier="productList" type="ProductList">
 					<modifiers read="true" write="true" search="true"
 						initial="true" />
 					<persistence type="jalo" />
@@ -621,10 +686,6 @@
 				</attribute>
 			</attributes>
 		</itemtype>
-
-		<itemtype code="ArtozXTablePlacement" extends="XTablePlacement"
-			jaloclass="ch.screenconcept.artoz.publication.ArtozTablePlacement"
-			autocreate="true" generate="true" />
 
 		<itemtype code="ArtozXVelocityAttributeDescriptor"
 			extends="XVelocityAttributeDescriptor"

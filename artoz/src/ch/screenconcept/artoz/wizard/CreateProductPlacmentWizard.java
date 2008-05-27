@@ -1,7 +1,6 @@
 package ch.screenconcept.artoz.wizard;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +9,7 @@ import org.apache.log4j.Logger;
 
 import ch.screenconcept.artoz.constants.ArtozConstants;
 import ch.screenconcept.artoz.product.ArtozProduct;
+import ch.screenconcept.artoz.product.ProductList;
 import ch.screenconcept.artoz.publication.PriceListGenerator;
 import de.hybris.platform.category.jalo.Category;
 import de.hybris.platform.hmc.jalo.ValidationException;
@@ -19,7 +19,6 @@ import de.hybris.platform.jalo.JaloInvalidParameterException;
 import de.hybris.platform.jalo.SessionContext;
 import de.hybris.platform.jalo.c2l.Language;
 import de.hybris.platform.jalo.security.JaloSecurityException;
-import de.hybris.platform.jalo.user.User;
 import de.hybris.platform.util.Config;
 import de.hybris.platform.xprint.jalo.LayoutTemplate;
 import de.hybris.platform.xprint.jalo.MasterPage;
@@ -42,13 +41,11 @@ public class CreateProductPlacmentWizard extends GeneratedCreateProductPlacmentW
 
 	private Map<Language, String> allHeadTextColumn5;
 
-	private Collection<ArtozProduct> artozProducts = new ArrayList<ArtozProduct>();
-
-	private Collection<Category> categoriesCollection = new ArrayList<Category>();
-
 	private String publicationName;
 
 	private Map<Language, String> allPublicationTitle;
+	
+	private ProductList productList;
 	
 	@Override
 	public void initialize(WizardEditorContext ctx)
@@ -170,10 +167,13 @@ public class CreateProductPlacmentWizard extends GeneratedCreateProductPlacmentW
 		{
 			PriceListGenerator generator = new PriceListGenerator();
 
-			for (ArtozProduct product : getArtozProducts())
+			for (ArtozProduct product : getProductList().getArtozProducts())
 				generator.addArtozProduct(product);
 
-			for (Category category : getCategories())
+			for (Category category : getProductList().getSorts())
+				generator.addCategory(category);
+			
+			for (Category category : getProductList().getCategories())
 				generator.addCategory(category);
 
 			List<String> headTexts = new ArrayList<String>();
@@ -264,18 +264,6 @@ public class CreateProductPlacmentWizard extends GeneratedCreateProductPlacmentW
 	}
 
 	@Override
-	public Collection<ArtozProduct> getArtozProducts(SessionContext ctx)
-	{
-		return artozProducts;
-	}
-
-	@Override
-	public Collection<Category> getCategories(SessionContext ctx)
-	{
-		return categoriesCollection;
-	}
-
-	@Override
 	public String getHeadTextColumn1(SessionContext ctx)
 	{
 		return allHeadTextColumn1.get(ctx.getLanguage());
@@ -339,18 +327,6 @@ public class CreateProductPlacmentWizard extends GeneratedCreateProductPlacmentW
 	public void setAllHeadTextColumn5(SessionContext ctx, Map<Language, String> value)
 	{
 		allHeadTextColumn5 = value;
-	}
-
-	@Override
-	public void setArtozProducts(SessionContext ctx, Collection<ArtozProduct> value)
-	{
-		artozProducts = value;
-	}
-
-	@Override
-	public void setCategories(SessionContext ctx, Collection<Category> value)
-	{
-		categoriesCollection = value;
 	}
 
 	@Override
@@ -423,5 +399,17 @@ public class CreateProductPlacmentWizard extends GeneratedCreateProductPlacmentW
 	public void setPqsMasterPageTemplate(SessionContext ctx, MasterPage value)
 	{
 		pqsMasterPageTemplate = value;
+	}
+
+	@Override
+	public ProductList getProductList(SessionContext ctx)
+	{
+		return productList;
+	}
+
+	@Override
+	public void setProductList(SessionContext ctx, ProductList value)
+	{
+		productList = value;
 	}
 }

@@ -4,41 +4,48 @@ import ch.screenconcept.artoz.prices.ArtozPriceRow;
 
 public class HeadTextValues
 {
-	private String currency;
-	private ArtozPriceRow priceRow1, priceRow2; 
+	private String currency = null;
+
+	private ArtozPriceRow priceRow1, priceRow2;
+
 	private String minNumberContentUnits;
 
-	public HeadTextValues(ArtozPriceRow pr1, ArtozPriceRow pr2){
+	public HeadTextValues(ArtozPriceRow pr1, ArtozPriceRow pr2)
+	{
 		priceRow1 = pr1;
 		priceRow2 = pr2;
-		setCurrency(priceRow1.getCurrency().getIsoCode());
+		if (priceRow1 != null)
+			setCurrency(priceRow1.getCurrency().getIsoCode());
 	}
-	
+
 	public String getCurrency()
 	{
-		return currency;
+		return currency == null ? "" : currency;
 	}
 
 	public void setCurrency(String currency)
 	{
 		this.currency = currency;
 	}
-	
-	public String getOrderQuantity1(){
+
+	public String getOrderQuantity1()
+	{
 		if (priceRow2 == null)
 			return "1";
 		if (priceRow1 == null)
 			return "";
 		return minNumberContentUnits + " - " + (priceRow1.getMinqtd() + 1);
 	}
-	
-	public String getOrderQuantity2(){
+
+	public String getOrderQuantity2()
+	{
 		if (priceRow2 == null)
 			return "";
 		return ">" + (priceRow1.getMinqtd() + 1);
 	}
-	
-	public String getUnitFactor1(){
+
+	public String getUnitFactor1()
+	{
 		if (priceRow2 == null)
 			return "";
 		if (priceRow1 == null)
@@ -46,20 +53,23 @@ public class HeadTextValues
 		return "" + priceRow1.getUnitFactorAsPrimitive();
 	}
 
-	public String getUnitFactor2(){
+	public String getUnitFactor2()
+	{
 		if (priceRow2 == null)
 			return "";
 		return "" + priceRow2.getUnitFactorAsPrimitive();
 	}
 
-	public String getUnitFactorWithSlash1(){
+	public String getUnitFactorWithSlash1()
+	{
 		String uf = getUnitFactor1();
 		if ("".equals(uf))
 			return "";
 		return "/" + uf;
 	}
 
-	public String getUnitFactorWithSlash2(){
+	public String getUnitFactorWithSlash2()
+	{
 		String uf = getUnitFactor2();
 		if ("".equals(uf))
 			return "";
@@ -76,5 +86,4 @@ public class HeadTextValues
 		this.minNumberContentUnits = minNumberContentUnits;
 	}
 
-	
 }

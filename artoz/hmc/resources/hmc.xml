@@ -23,6 +23,8 @@
 		<group name="catalog">
 			<typeref type="Product" mode="delete" />
 			<typeref type="ArtozProduct" mode="append" position="3" />
+			<typeref type="ProductList" mode="append" />
+			<typeref type="Sort" mode="append" />
 		</group>
 		<group name="campaigngroup">
 			<typeref type="CreateEMailFaxCampaignWizard"
@@ -160,6 +162,59 @@
 				</tab>
 			</editor>
 		</organizer>
+	</type>
+
+	<type name="ProductList" mode="append"
+		icon="images/icons/e_product.gif">
+		<organizer>
+			<search mode="replace">
+				<condition attribute="name" operator="equal" />
+			</search>
+			<result>
+				<listview>
+					<itemlayout mode="replace">
+						<attribute name="name" width="150" />
+					</itemlayout>
+				</listview>
+			</result>
+			<editor>
+				<tab name="tab.productlist.properties">
+					<section name="section.productlist.properties">
+						<listlayout>
+							<attribute name="name" />
+							<attribute name="categories" />
+							<attribute name="sorts" />
+							<attribute name="artozProducts" />
+						</listlayout>
+					</section>
+				</tab>
+				<tab name="tab.productlist.import">
+					<section name="section.productlist.import">
+						<listlayout>
+							<text name="productlist.import.text" />
+							<attribute name="productImportFile">
+								<uploadtomediaeditor />
+							</attribute>
+							<table>
+								<tr>
+									<td>
+										<action type="item"
+											classname="ch.screenconcept.artoz.hmc.actions.StartProductListImportAction"
+											name="action.productlistimport.start" showtoolbarlabel="true"
+											icon="images/ext/cronjob/e_cronjob.gif" />
+									</td>
+								</tr>
+							</table>
+						</listlayout>
+					</section>
+				</tab>
+			</editor>
+		</organizer>
+		<defaultreference mode="replace">
+			<itemlayout>
+				<attribute name="name" />
+			</itemlayout>
+		</defaultreference>
 	</type>
 
 	<type name="Unit" mode="append">
@@ -319,8 +374,7 @@
 						<listlayout>
 							<attribute name="publicationName" />
 							<attribute name="publicationTitle" />
-							<attribute name="categories" />
-							<attribute name="artozProducts" />
+							<attribute name="productList" />
 							<attribute name="masterPageTemplate" />
 							<attribute name="pqsMasterPageTemplate" />
 							<attribute

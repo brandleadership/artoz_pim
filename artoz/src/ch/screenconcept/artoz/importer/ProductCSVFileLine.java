@@ -88,7 +88,7 @@ public class ProductCSVFileLine extends AbstractCSVFileLine
 		return getInteger(11);
 	}
 	
-	public String getBrand()
+	public String getSort()
 	{
 		return getColumn(12);
 	}
