@@ -1,0 +1,697 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+	[y] hybris Platform
+	
+	Copyright (c) 2000-2008 hybris AG
+	All rights reserved.
+	
+	This software is the confidential and proprietary information of hybris
+	("Confidential Information"). You shall not disclose such Confidential
+	Information and shall use it only in accordance with the terms of the
+	license agreement you entered into with hybris.
+	
+	
+-->
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<collectiontypes>
+		<collectiontype code="ArtozMSRPriceCollection"
+			elementtype="ArtozMSRPrice" autocreate="true" generate="true" />
+		<collectiontype code="ArtozProductCollection"
+			elementtype="ArtozProduct" autocreate="true" generate="true" />
+		<collectiontype code="SortCollection" elementtype="Sort"
+			autocreate="true" generate="true" />
+	</collectiontypes>
+
+	<enumtypes>
+		<enumtype generate="true" code="CampaignEnum"
+			autocreate="true">
+			<value code="email" />
+			<value code="fax" />
+			<value code="emailfax" />
+		</enumtype>
+	</enumtypes>
+
+	<itemtypes>
+		<!-- Product -->
+		<itemtype generate="true" code="ArtozProduct"
+			jaloclass="ch.screenconcept.artoz.product.ArtozProduct"
+			extends="Product" autocreate="true">
+			<attributes>
+				<attribute qualifier="din" type="java.lang.String">
+					<description>DIN Format</description>
+					<modifiers read="true" write="true" search="true"
+						initial="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="dimensions"
+					type="java.lang.String">
+					<description>Dimensions</description>
+					<modifiers read="true" write="true" search="true"
+						initial="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="grammage"
+					type="java.lang.String">
+					<description>Grammage</description>
+					<modifiers read="true" write="true" search="true"
+						initial="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="itemTypeGroup"
+					type="java.lang.String">
+					<description>item type gropu</description>
+					<modifiers read="true" write="true" search="true"
+						initial="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="materialGroup"
+					type="java.lang.Integer">
+					<description>material group</description>
+					<modifiers read="true" write="true" search="true"
+						initial="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="newnessCode"
+					type="java.lang.Integer">
+					<description>newness code</description>
+					<modifiers read="true" write="true" search="true"
+						initial="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="distributionStatus"
+					type="java.lang.String">
+					<description>Distribution status</description>
+					<modifiers read="true" write="true" search="true"
+						initial="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="mdaView"
+					type="java.lang.Boolean">
+					<description>mda view</description>
+					<modifiers read="true" write="true" search="true"
+						initial="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="artist" type="java.lang.String">
+					<description>artist name</description>
+					<modifiers read="true" write="true" search="true"
+						initial="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="iconCode"
+					type="java.lang.String">
+					<description>the icon code</description>
+					<modifiers read="true" write="true" search="true"
+						initial="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="updateCounter"
+					type="java.lang.Integer">
+					<description>update counter</description>
+					<modifiers read="true" write="true" search="true"
+						initial="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="msrPrices"
+					type="ArtozMSRPriceCollection">
+					<description>msr pricesr</description>
+					<modifiers read="true" write="true" search="true"
+						initial="true" />
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype code="Sort" extends="Category"
+			jaloclass="ch.screenconcept.artoz.product.Sort" autocreate="true"
+			generate="true" />
+
+		<!-- PriceRow -->
+		<itemtype generate="true" code="ArtozPriceRow"
+			jaloclass="ch.screenconcept.artoz.prices.ArtozPriceRow"
+			extends="PriceRow" autocreate="true">
+			<attributes>
+				<attribute qualifier="updateCounter"
+					type="java.lang.Integer">
+					<description>update counter</description>
+					<modifiers read="true" write="true" search="true"
+						initial="true" />
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<!-- MSR Price -->
+		<itemtype generate="true" code="ArtozMSRPrice"
+			jaloclass="ch.screenconcept.artoz.prices.ArtozMSRPrice"
+			extends="GenericItem" autocreate="true">
+			<deployment table="ArtozMSRPrice" typecode="32767" />
+			<attributes>
+				<attribute qualifier="currency" type="Currency">
+					<modifiers read="true" write="true" search="true"
+						optional="false" initial="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="price" type="java.lang.Double">
+					<modifiers read="true" write="true" search="true"
+						optional="false" initial="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="ug" type="UserPriceGroup">
+					<modifiers read="true" write="true" search="true"
+						optional="false" initial="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="unit" type="Unit">
+					<modifiers read="true" write="true" search="true"
+						optional="false" initial="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="quantity"
+					type="java.lang.Integer">
+					<modifiers read="true" write="true" search="true"
+						optional="false" initial="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="updateCounter"
+					type="java.lang.Integer">
+					<description>update counter</description>
+					<modifiers read="true" write="true" search="true"
+						initial="true" />
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<!-- Job -->
+		<itemtype generate="true" code="FileImportCronjob"
+			jaloclass="ch.screenconcept.artoz.importer.FileImportCronjob"
+			extends="Cronjob" autocreate="true">
+			<attributes>
+				<attribute qualifier="fileDirectory"
+					type="java.lang.String">
+					<description>
+						Directory where the import file is stored
+					</description>
+					<modifiers read="true" write="true" search="true"
+						initial="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="fileName"
+					type="java.lang.String">
+					<description>
+						the name of the import file
+					</description>
+					<modifiers read="true" write="true" search="true"
+						initial="true" />
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype generate="true" code="MediaNewsletterImportCronjob"
+			jaloclass="ch.screenconcept.artoz.importer.MediaNewsletterImportCronjob"
+			extends="Cronjob" autocreate="true">
+			<attributes>
+				<attribute qualifier="media" type="Media">
+					<description>Media to import</description>
+					<modifiers read="true" write="true" search="true"
+						initial="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="newsletter" type="Newsletter">
+					<description>
+						Newsletter to add the media data
+					</description>
+					<modifiers read="true" write="true" search="true"
+						initial="true" />
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype generate="true" code="ProductImportMediaImportCronjob"
+			jaloclass="ch.screenconcept.artoz.importer.ProductImportMediaImportCronjob"
+			extends="Cronjob" autocreate="true">
+			<attributes>
+				<attribute qualifier="media"
+					type="ProductImportMedia">
+					<description>
+						ProductImportMedia to import
+					</description>
+					<modifiers read="true" write="true" search="true"
+						initial="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="productList" type="ProductList">
+					<description>
+						ProductList to add products
+					</description>
+					<modifiers read="true" write="true" search="true"
+						initial="true" />
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype generate="true" code="CustomerImportJob"
+			jaloclass="ch.screenconcept.artoz.importer.CustomerImportJob"
+			extends="Job" autocreate="true" />
+
+		<itemtype generate="true" code="NewsletterCustomerImportJob"
+			jaloclass="ch.screenconcept.artoz.importer.NewsletterCustomerImportJob"
+			extends="Job" autocreate="true" />
+
+		<itemtype generate="true" code="ProductListImportJob"
+			jaloclass="ch.screenconcept.artoz.importer.ProductListImportJob"
+			extends="Job" autocreate="true" />
+
+		<itemtype generate="true" code="ProductImportJob"
+			jaloclass="ch.screenconcept.artoz.importer.ProductImportJob"
+			extends="Job" autocreate="true" />
+
+		<itemtype code="SendMailCronJob" extends="CronJob"
+			jaloclass="ch.screenconcept.artoz.campaign.SendMailCronJob"
+			autocreate="true" generate="true">
+			<attributes>
+				<attribute qualifier="campaign"
+					type="java.lang.Boolean">
+					<persistence type="property" />
+					<modifiers optional="false" initial="true" />
+					<defaultvalue>Boolean.FALSE</defaultvalue>
+				</attribute>
+				<attribute qualifier="countPerRun"
+					type="java.lang.Integer">
+					<persistence type="property" />
+					<modifiers optional="false" initial="true" />
+					<defaultvalue>100</defaultvalue>
+				</attribute>
+				<attribute qualifier="smtpServer"
+					type="java.lang.String">
+					<persistence type="property" />
+					<modifiers optional="false" initial="true" />
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype code="SendMailJob" extends="Job"
+			jaloclass="ch.screenconcept.artoz.campaign.SendMailJob"
+			autocreate="true" generate="true" />
+
+		<!-- Campaign -->
+		<itemtype code="EMailFaxCampaign" generate="true"
+			jaloclass="ch.screenconcept.artoz.campaign.EMailFaxCampaign"
+			extends="EMailCampaign" autocreate="true">
+			<attributes>
+				<attribute qualifier="faxUserName"
+					type="java.lang.String">
+					<persistence type="property" />
+					<modifiers optional="true" write="true" read="true"
+						search="true" />
+				</attribute>
+				<attribute qualifier="faxPassword"
+					type="java.lang.String">
+					<persistence type="property" />
+					<modifiers optional="true" write="true" read="true"
+						search="true" />
+				</attribute>
+				<attribute qualifier="faxSender"
+					type="java.lang.String">
+					<persistence type="property" />
+					<modifiers optional="true" write="true" read="true"
+						search="true" />
+				</attribute>
+				<attribute qualifier="faxFaxNumber"
+					type="java.lang.String">
+					<persistence type="property" />
+					<modifiers optional="true" write="true" read="true"
+						search="true" />
+				</attribute>
+				<attribute qualifier="faxServiceAdresse"
+					type="java.lang.String">
+					<persistence type="property" />
+					<modifiers optional="true" write="true" read="true"
+						search="true" />
+				</attribute>
+				<attribute qualifier="faxFaxOnly"
+					type="java.lang.Boolean">
+					<persistence type="property" />
+					<modifiers optional="true" write="true" read="true"
+						search="true" />
+					<defaultvalue>false</defaultvalue>
+				</attribute>
+				<attribute qualifier="countPerRun"
+					type="java.lang.Integer">
+					<persistence type="property" />
+					<modifiers optional="false" initial="true" />
+					<defaultvalue>10000</defaultvalue>
+				</attribute>
+				<attribute qualifier="typ" type="CampaignEnum">
+					<modifiers optional="false" write="true" />
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype code="EMailFax" generate="true"
+			jaloclass="ch.screenconcept.artoz.campaign.EMailFax" extends="EMail"
+			autocreate="true">
+			<attributes>
+				<attribute qualifier="fax" type="java.lang.Boolean">
+					<persistence type="property" />
+					<modifiers optional="false" write="true" read="true"
+						search="true" initial="true" />
+					<defaultvalue>false</defaultvalue>
+				</attribute>
+				<attribute qualifier="faxSender"
+					type="java.lang.String">
+					<persistence type="property" />
+					<modifiers optional="true" write="true" read="true"
+						search="true" />
+				</attribute>
+				<attribute qualifier="faxServiceUser"
+					type="java.lang.String">
+					<persistence type="property" />
+					<modifiers optional="true" write="true" read="true"
+						search="true" />
+				</attribute>
+				<attribute qualifier="faxServicePassword"
+					type="java.lang.String">
+					<persistence type="property" />
+					<modifiers optional="true" write="true" read="true"
+						search="true" />
+				</attribute>
+				<attribute qualifier="faxServiceAdresse"
+					type="java.lang.String">
+					<persistence type="property" />
+					<modifiers optional="true" write="true" read="true"
+						search="true" />
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype code="ProductList" extends="GenericItem"
+			jaloclass="ch.screenconcept.artoz.product.ProductList"
+			autocreate="true" generate="true">
+			<attributes>
+				<attribute qualifier="name" type="java.lang.String">
+					<modifiers optional="false" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="categories"
+					type="CategoryCollection">
+					<modifiers read="true" write="true" search="true"
+						initial="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="artozProducts"
+					type="ArtozProductCollection">
+					<modifiers read="true" write="true" search="true"
+						initial="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="sorts" type="SortCollection">
+					<modifiers read="true" write="true" search="true"
+						initial="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="productImportFile"
+					type="ProductImportMedia">
+					<modifiers read="true" write="true" search="true"
+						initial="true" />
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype code="ProductImportMedia" extends="Media"
+			jaloclass="ch.screenconcept.artoz.product.ProductImportMedia"
+			autocreate="true" generate="true" />
+
+		<!-- Wizard -->
+		<itemtype code="CreateEMailFaxCampaignWizard"
+			extends="WizardBusinessItem"
+			jaloclass="ch.screenconcept.artoz.wizard.CreateEMailFaxCampaignWizard"
+			autocreate="true" generate="true">
+			<attributes>
+				<attribute qualifier="campaignName"
+					type="java.lang.String">
+					<modifiers optional="false" />
+					<persistence type="jalo" />
+				</attribute>
+				<attribute qualifier="campaignSubject"
+					type="localized:java.lang.String">
+					<modifiers optional="false" />
+					<persistence type="jalo" />
+				</attribute>
+				<attribute qualifier="campaignSender"
+					type="java.lang.String">
+					<defaultvalue>
+						Config.getParameter("campaign.campaignSender")
+					</defaultvalue>
+					<modifiers optional="false" />
+					<persistence type="jalo" />
+				</attribute>
+				<attribute qualifier="campaignHTMLText"
+					type="localized:java.lang.String">
+					<modifiers optional="true" />
+					<persistence type="jalo" />
+				</attribute>
+				<attribute qualifier="campaignText"
+					type="localized:java.lang.String">
+					<modifiers optional="true" />
+					<persistence type="jalo" />
+				</attribute>
+				<attribute qualifier="faxSender"
+					type="java.lang.String">
+					<modifiers optional="true" />
+					<persistence type="jalo" />
+				</attribute>
+				<attribute qualifier="faxServiceUser"
+					type="java.lang.String">
+					<modifiers optional="true" />
+					<persistence type="jalo" />
+				</attribute>
+				<attribute qualifier="faxServicePassword"
+					type="java.lang.String">
+					<modifiers optional="true" />
+					<persistence type="jalo" />
+				</attribute>
+				<attribute qualifier="faxServiceAdresse"
+					type="java.lang.String">
+					<modifiers optional="true" />
+					<persistence type="jalo" />
+				</attribute>
+				<attribute qualifier="campaignEnum"
+					type="CampaignEnum">
+					<modifiers read="true" write="true" search="true"
+						optional="false" />
+					<defaultvalue>
+						em().getEnumerationValue("CampaignEnum",
+						"email")
+					</defaultvalue>
+					<persistence type="jalo" />
+				</attribute>
+				<attribute qualifier="campaignImportFile"
+					type="Media">
+					<modifiers optional="true" />
+					<persistence type="jalo" />
+				</attribute>
+				<attribute qualifier="campaignHTMLTemplateDECH"
+					type="Media">
+					<modifiers optional="true" />
+					<persistence type="jalo" />
+				</attribute>
+				<attribute qualifier="campaignTextTemplateDECH"
+					type="Media">
+					<modifiers optional="true" />
+					<persistence type="jalo" />
+				</attribute>
+				<attribute qualifier="campaignHTMLTemplateEN"
+					type="Media">
+					<modifiers optional="true" />
+					<persistence type="jalo" />
+				</attribute>
+				<attribute qualifier="campaignTextTemplateEN"
+					type="Media">
+					<modifiers optional="true" />
+					<persistence type="jalo" />
+				</attribute>
+				<attribute qualifier="campaignHTMLTemplateFRCH"
+					type="Media">
+					<modifiers optional="true" />
+					<persistence type="jalo" />
+				</attribute>
+				<attribute qualifier="campaignTextTemplateFRCH"
+					type="Media">
+					<modifiers optional="true" />
+					<persistence type="jalo" />
+				</attribute>
+				<attribute qualifier="campaignHTMLTemplateITCH"
+					type="Media">
+					<modifiers optional="true" />
+					<persistence type="jalo" />
+				</attribute>
+				<attribute qualifier="campaignTextTemplateITCH"
+					type="Media">
+					<modifiers optional="true" />
+					<persistence type="jalo" />
+				</attribute>
+				<attribute qualifier="campaignHTMLTemplateES"
+					type="Media">
+					<modifiers optional="true" />
+					<persistence type="jalo" />
+				</attribute>
+				<attribute qualifier="campaignTextTemplateES"
+					type="Media">
+					<modifiers optional="true" />
+					<persistence type="jalo" />
+				</attribute>
+				<attribute qualifier="campaignNewsletter"
+					type="Newsletter">
+					<modifiers optional="true" />
+					<persistence type="jalo" />
+				</attribute>
+				<attribute qualifier="campaignProducts"
+					type="ProductCollection">
+					<modifiers optional="true" write="true" />
+					<persistence type="jalo" />
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype code="CreateProductPlacmentWizard"
+			extends="WizardBusinessItem"
+			jaloclass="ch.screenconcept.artoz.wizard.CreateProductPlacmentWizard"
+			autocreate="true" generate="true">
+			<attributes>
+				<attribute qualifier="masterPageTemplate"
+					type="XMasterPage">
+					<modifiers optional="false" />
+					<persistence type="jalo" />
+				</attribute>
+				<attribute qualifier="pqsMasterPageTemplate"
+					type="XMasterPage">
+					<modifiers optional="false" />
+					<persistence type="jalo" />
+				</attribute>
+				<attribute qualifier="defauktTablePlacmentTemplate"
+					type="XLayoutTemplate">
+					<modifiers optional="false" />
+					<persistence type="jalo" />
+				</attribute>
+				<attribute qualifier="pqsTablePlacmentTemplate"
+					type="XLayoutTemplate">
+					<modifiers optional="false" />
+					<persistence type="jalo" />
+				</attribute>
+				<attribute qualifier="productList" type="ProductList">
+					<modifiers read="true" write="true" search="true"
+						initial="true" />
+					<persistence type="jalo" />
+				</attribute>
+				<attribute qualifier="headTextColumn1"
+					type="localized:java.lang.String">
+					<modifiers optional="true" />
+					<persistence type="jalo" />
+				</attribute>
+				<attribute qualifier="headTextColumn2"
+					type="localized:java.lang.String">
+					<modifiers optional="true" />
+					<persistence type="jalo" />
+				</attribute>
+				<attribute qualifier="headTextColumn3"
+					type="localized:java.lang.String">
+					<modifiers optional="true" />
+					<persistence type="jalo" />
+				</attribute>
+				<attribute qualifier="headTextColumn4"
+					type="localized:java.lang.String">
+					<modifiers optional="true" />
+					<persistence type="jalo" />
+				</attribute>
+				<attribute qualifier="headTextColumn5"
+					type="localized:java.lang.String">
+					<modifiers optional="true" />
+					<persistence type="jalo" />
+				</attribute>
+				<attribute qualifier="publicationName"
+					type="java.lang.String">
+					<modifiers optional="false" />
+					<persistence type="jalo" />
+				</attribute>
+				<attribute qualifier="publicationTitle"
+					type="localized:java.lang.String">
+					<modifiers optional="false" />
+					<persistence type="jalo" />
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype code="XProductPlacement" extends="XPlacement"
+			jaloclass="de.hybris.platform.xprint.jalo.ProductPlacement"
+			generate="false" singleton="false" jaloonly="false"
+			metatype="XPlacementType" autocreate="false">
+			<attributes>
+				<attribute generate="false" autocreate="true"
+					qualifier="msrPrice" type="java.lang.String"
+					metatype="XVelocityAttributeDescriptor">
+					<persistence type="property" qualifier="" />
+					<custom-properties>
+						<property name="velocityTemplate">
+							<value>
+								"$!this.product.msrPrice.price"
+							</value>
+						</property>
+					</custom-properties>
+					<modifiers read="true" write="true" search="true"
+						encrypted="false" optional="true" removable="true" initial="false"
+						unique="false" private="false" partof="false" />
+				</attribute>
+				<attribute generate="false" autocreate="true"
+					qualifier="numberContentUnits" type="java.lang.String"
+					metatype="XVelocityAttributeDescriptor">
+					<persistence type="property" qualifier="" />
+					<custom-properties>
+						<property name="velocityTemplate">
+							<value>
+								"$!this.product.getAttribute(\"numberContentUnits\")"
+							</value>
+						</property>
+					</custom-properties>
+					<modifiers read="true" write="true" search="true"
+						encrypted="false" optional="true" removable="true" initial="false"
+						unique="false" private="false" partof="false" />
+				</attribute>
+				<attribute generate="false" autocreate="true"
+					qualifier="numberContentUnitsTest" type="java.lang.String"
+					metatype="ArtozXVelocityAttributeDescriptor">
+					<persistence type="property" qualifier="" />
+					<custom-properties>
+						<property name="velocityTemplate">
+							<value>
+								"$!this.product.getAttribute(\"numberContentUnits\")"
+							</value>
+						</property>
+					</custom-properties>
+					<modifiers read="true" write="true" search="true"
+						encrypted="false" optional="true" removable="true" initial="false"
+						unique="false" private="false" partof="false" />
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype code="ArtozXVelocityAttributeDescriptor"
+			extends="XVelocityAttributeDescriptor"
+			jaloclass="ch.screenconcept.artoz.publication.ArtozVelocityAttributeDescriptor"
+			autocreate="true" generate="true" />
+
+	</itemtypes>
+
+</items>

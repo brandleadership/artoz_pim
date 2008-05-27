@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
+
+   <extension  name="artoz"
+               abstractclassprefix="Generated"
+               classprefix="Artoz"
+               managername="ArtozManager"
+               managersuperclass="de.hybris.platform.jalo.extension.Extension"
+               >
+               
+      <!-- you should add all required extensions to this list -->         
+      <requires-extension name="hmc"/>         
+      <requires-extension name="cronjob"/>
+      <requires-extension name="campaign"/>
+      
+
+      <coremodule packageroot="ch.screenconcept.artoz"
+                  manager="ch.screenconcept.artoz.jalo.ArtozManager"
+                  sourceavailable="true"
+                  generated="true" 
+       				java5="true"
+                  />
+
+      <hmcmodule   sourceavailable="true"
+                     extensionclassname="ch.screenconcept.artoz.hmc.ArtozHMCExtension" />
+
+   </extension>
+      
+</extensioninfo>
