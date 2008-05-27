@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+	[y] hybris Platform
+	
+	Copyright (c) 2000-2008 hybris AG
+	All rights reserved.
+	
+	This software is the confidential and proprietary information of hybris
+	("Confidential Information"). You shall not disclose such Confidential
+	Information and shall use it only in accordance with the terms of the
+	license agreement you entered into with hybris.
+	
+	
+-->
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="items.xsd">
+	<collectiontypes>
+		<collectiontype code="ContactFormParagraphDataCollection" elementtype="ContactFormParagraphData" autocreate="true" generate="true" type="list"/>
+		<collectiontype code="TradeFairParagraphDataCollection" elementtype="TradeFairParagraphData" autocreate="true" generate="true" type="list"/>
+		<collectiontype code="LexikonParagraphDataCollection" elementtype="LexikonParagraphData" autocreate="true" generate="true" type="list"/>
+	</collectiontypes>
+	<enumtypes>
+		<enumtype code="NavigationColor" autocreate="true"
+			generate="true">
+			<value code="blue" />
+			<value code="green" />
+			<value code="yellow" />
+			<value code="orange" />
+			<value code="red" />
+			<value code="grey" />
+			<value code="home" />
+			<value code="sitemap" />
+			<value code="impressum" />
+		</enumtype>
+	</enumtypes>
+	<itemtypes>
+		<itemtype code="ArtozMainNavigationElement"
+			extends="NavigationElement"
+			jaloclass="ch.screenconcept.artoz.website.navigation.ArtozMainNavigationElement"
+			autocreate="true" generate="true">
+			<attributes>
+				<attribute qualifier="color" type="NavigationColor">
+					<modifiers read="true" write="true" search="true" />
+					<defaultvalue>
+						em().getEnumerationValue("NavigationColor", "grey")
+					</defaultvalue>
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype code="ContactFormParagraph"
+			extends="Paragraph"
+			jaloclass="ch.screenconcept.artoz.website.ContactFormParagraph"
+			autocreate="true" generate="true">
+			<attributes>
+				<attribute qualifier="lastContactFormParagraphDatas" type="ContactFormParagraphDataCollection">
+					<persistence type="jalo"/>
+					<modifiers write="false"/>
+				</attribute>
+				<attribute qualifier="successPageContent" type="PageContent" >
+					<persistence type="property"/>
+					<modifiers optional="false"/>
+				</attribute>
+				<attribute type="java.lang.String" qualifier="emailReceiver">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="formHeader">
+					<persistence type="property">
+						<columntype database="mysql">
+							<value>text</value>
+						</columntype>
+					</persistence>
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="afterFormText">
+					<persistence type="property">
+						<columntype database="mysql">
+							<value>text</value>
+						</columntype>
+					</persistence>
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="firstname">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="lastname">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="street">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="city">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="country">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="email">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="telephone">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="telefax">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="message">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="send">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="delete">
+					<persistence type="property"/>
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype	code="ContactFormParagraphData"
+						extends="GenericItem"
+						generate="true"
+						autocreate="true"
+						jaloclass="ch.screenconcept.artoz.website.ContactFormParagraphData">
+			<attributes>
+				<attribute qualifier="contactFormParagraph" type="ContactFormParagraph" >
+					<persistence type="property"/>
+					<modifiers initial="true" write="false" optional="false"/>
+				</attribute>
+				<attribute type="java.lang.String" qualifier="firstname">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="java.lang.String" qualifier="lastname">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="java.lang.String" qualifier="street">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="java.lang.String" qualifier="city">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="java.lang.String" qualifier="country">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="java.lang.String" qualifier="email">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="java.lang.String" qualifier="telephone">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="java.lang.String" qualifier="telefax">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="java.lang.String" qualifier="message">
+					<persistence type="property"/>
+				</attribute>
+			</attributes>
+			<indexes>
+				<index name="contactFormParagraphIdx">
+					<key attribute="contactFormParagraph"/>
+				</index>
+			</indexes>
+		</itemtype>
+		
+		<itemtype	code="LinkParagraph"
+						extends="Paragraph"
+						jaloclass="ch.screenconcept.artoz.website.LinkParagraph"
+						generate="true"
+						autocreate="true">
+			<attributes>
+				<attribute qualifier="paragraphHeader" type="localized:java.lang.String">
+					<persistence type="property"/>
+				</attribute>						
+				<attribute qualifier="paragraphText" type="localized:java.lang.String">
+					<persistence type="property">
+						<columntype database="mysql">
+							<value>text</value>
+						</columntype>
+					</persistence>
+					<custom-properties>
+						<property name="hmcIndexField"><value>"thefield"</value></property>
+					</custom-properties>
+				</attribute>				
+			</attributes>
+		</itemtype>
+		
+		<itemtype	code="TradeFairParagraph"
+						extends="Paragraph"
+						jaloclass="ch.screenconcept.artoz.website.TradeFairParagraph"
+						generate="true"
+						autocreate="true">
+			<attributes>
+				<attribute qualifier="lastTradeFairParagraphDatas" type="TradeFairParagraphDataCollection">
+					<persistence type="jalo"/>
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="tradefair">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="country">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="city">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="hall">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="stand">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="startdate">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="enddate">
+					<persistence type="property"/>
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype	code="TradeFairParagraphData"
+						extends="GenericItem"
+						generate="true"
+						autocreate="true"
+						jaloclass="ch.screenconcept.artoz.website.TradeFairParagraphData">
+			<attributes>
+				<attribute qualifier="tradeFairParagraph" type="TradeFairParagraph" >
+					<persistence type="property"/>
+					<modifiers initial="true" write="false" optional="false"/>
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="tradefair">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="country">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="city">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="hall">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="stand">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="java.util.Date" qualifier="startdate">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="java.util.Date" qualifier="enddate">
+					<persistence type="property"/>
+				</attribute>
+			</attributes>
+			<indexes>
+				<index name="tradeFairParagraphIdx">
+					<key attribute="tradeFairParagraph"/>
+				</index>
+			</indexes>
+		</itemtype>
+		
+		<itemtype	code="LexikonParagraph"
+						extends="Paragraph"
+						jaloclass="ch.screenconcept.artoz.website.LexikonParagraph"
+						generate="true"
+						autocreate="true">
+			<attributes>
+				<attribute qualifier="lastLexikonParagraphDatas" type="LexikonParagraphDataCollection">
+					<persistence type="property"/>
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype	code="LexikonParagraphData"
+						extends="GenericItem"
+						generate="true"
+						autocreate="true"
+						jaloclass="ch.screenconcept.artoz.website.LexikonParagraphData">
+			<attributes>
+				<attribute qualifier="lexikonParagraph" type="LexikonParagraph" >
+					<persistence type="property"/>
+					<modifiers initial="true" write="false" optional="false"/>
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="name">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="description">
+					<persistence type="property"/>
+				</attribute>
+			</attributes>
+			<indexes>
+				<index name="lexikonParagraphIdx">
+					<key attribute="lexikonParagraph"/>
+				</index>
+			</indexes>
+		</itemtype>
+		
+		<itemtype	code="TitleImageParagraph"
+						extends="Paragraph"
+						jaloclass="ch.screenconcept.artoz.website.TitleImageParagraph"
+						generate="true"
+						autocreate="true">
+			<attributes>
+				<attribute qualifier="image" type="localized:Media">
+					<persistence type="property"/>
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+	</itemtypes>
+</items>

@@ -1,0 +1,42 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:c="http://java.sun.com/jstl/core">
+	
+	<div class="tradeparagraph">
+		<table>
+			<thead>
+				<tr>
+					<th>#{item.startdate}</th>
+					<th>#{item.tradefair}</th>
+					<th>#{item.country}</th>
+					<th>#{item.city}</th>
+					<th>#{item.hall}</th>
+					<th>#{item.stand}</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="#{tradeFairJSFBean.tradeFairParagraphDatas}" var="tradefair" >
+					<tr>
+						<td>
+							<h:outputText value="#{tradefair.startdate}">
+								<f:convertDateTime type="date" pattern="dd.MM." locale="de" />
+							</h:outputText>
+							<h:outputText value="&#160;-&#160;"/>
+							<h:outputText value="#{tradefair.enddate}">
+								<f:convertDateTime type="date" pattern="dd.MM.yyyy" locale="en" />
+							</h:outputText>
+						</td>
+						<td>#{tradefair.tradefair}	</td>
+						<td>#{tradefair.country}	</td>
+						<td>#{tradefair.city}		</td>
+						<td>#{tradefair.hall}		</td>
+						<td>#{tradefair.stand}		</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
+</ui:composition>

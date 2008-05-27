@@ -1,0 +1,372 @@
+/****************************/
+/*  Allgemeines             */
+/****************************/
+* { 
+margin: 0px 0px 0px 0px; 
+padding: 0px 0px 0px 0px; 
+font-family: Verdana,Arial,Helvetica,sans-serif;
+font-size: 12px;
+}
+* span {
+float: left;
+}
+body {
+background-image: url(/css/images/hg_body.jpg);
+}
+#body {
+width: 1024px; 
+display: block;
+position: relative; 
+left: 50%; 
+margin-left: -512px; 
+margin-top: 40px;
+background-color: white;
+}
+/****************************/
+/*  Kopfbereich             */
+/****************************/
+#head {
+width: 1024px; 
+height: 154px;  
+display: block;
+border: 1px solid #2B4F8B;
+}
+/****************************/
+/*  Kopfbereich             */
+/*  Inhalt oberh. Hautpnavi */
+/****************************/
+#headcontent {
+display: block;
+width: 100%;
+height: 121px;
+background-image: url(/css/images/header.jpg);
+background-repeat: no-repeat;
+}
+#help-nav {
+list-style: none;
+margin-left: 15px;
+padding-top: 17px;
+}
+#help-nav li a {
+color: white;
+text-decoration: none;
+font-size: 10px;
+}
+#help-nav li a.home {
+padding-left: 15px;
+background-image: url(/css/images/nav_home.gif);
+background-repeat: no-repeat;
+}
+#help-nav li a.impressum {
+padding-left: 15px;
+background-image: url(/css/images/nav_impressum.gif);
+background-repeat: no-repeat;
+}
+#help-nav li a.sitemap {
+padding-left: 15px;
+background-image: url(/css/images/nav_sitemap.gif);
+background-repeat: no-repeat;
+}
+/****************************/
+/*  Kopfbereich             */
+/*  Hauptnavigation         */
+/****************************/
+#top_nav {
+width: 1024px; 
+height: 33px;
+display: block;
+background-image: url(/css/images/btn_main_grey_background.jpg);
+background-repeat: repeat-x;
+}
+#top_nav ul { 
+display: block; 
+float: left;
+}
+#top_nav ul li { 
+display: block; 
+width: 115px;
+float: left;
+height: 33px; 
+text-align: center;
+}
+#top_nav ul li a {
+line-height: 33px;
+display: block;
+height: 33px;
+text-decoration: none;
+color: black;
+font-weight: bold;
+font-size: 10px;
+background-image: url(/css/images/btn_main_grey.jpg);
+background-repeat: no-repeat;
+}
+#top_nav ul li a:hover {
+background-image: url(/css/images/btn_main_green.jpg);
+}
+#top_nav ul li a.blue:hover,
+#top_nav ul li a.blue-act {
+background-image: url(/css/images/btn_main_blue.jpg);
+}
+#top_nav ul li a.green:hover,
+#top_nav ul li a.green-act {
+background-image: url(/css/images/btn_main_green.jpg);
+}
+#top_nav ul li a.yellow:hover,
+#top_nav ul li a.yellow-act {
+background-image: url(/css/images/btn_main_yellow.jpg);
+}
+#top_nav ul li a.orange:hover,
+#top_nav ul li a.orange-act {
+background-image: url(/css/images/btn_main_orange.jpg);
+}
+#top_nav ul li a.red:hover,
+#top_nav ul li a.red-act {
+background-image: url(/css/images/btn_main_red.jpg);
+}
+#top_nav ul li a.grey:hover,
+#top_nav ul li a.grey-act {
+background-image: url(/css/images/btn_main_grey.jpg);
+}
+/****************************/
+/*  Kopfbereich             */
+/*  Sprachwahl              */
+/****************************/
+ul#language-chooser {
+float: right;
+margin-right: 50px;
+background-image: url(/css/images/grey_dotted_border.jpg);
+background-repeat: no-repeat;
+}
+ul#language-chooser li {
+width: auto;
+}
+ul#language-chooser li form input {
+border: none;
+background-color: white;
+background-repeat: no-repeat;
+width: 16px;
+height: 11px;
+margin: 11px 0px 0px 14px;
+}
+ul#language-chooser li form input.deCH-inactiv {
+background-image: url(/css/images/flags/flag_de_inactiv.gif);
+}
+ul#language-chooser li form input.deCH-activ {
+background-image: url(/css/images/flags/flag_de_activ.gif);
+}
+ul#language-chooser li form input.en-activ {
+background-image: url(/css/images/flags/flag_en_activ.gif);
+}
+ul#language-chooser li form input.en-inactiv {
+background-image: url(/css/images/flags/flag_en_inactiv.gif);
+}
+ul#language-chooser li form input.es-activ {
+background-image: url(/css/images/flags/flag_e_activ.gif);
+}
+ul#language-chooser li form input.es-inactiv {
+background-image: url(/css/images/flags/flag_e_inactiv.gif);
+}
+ul#language-chooser li form input.frCH-inactiv {
+background-image: url(/css/images/flags/flag_fr_inactiv.gif);
+}
+ul#language-chooser li form input.frCH-activ {
+background-image: url(/css/images/flags/flag_fr_activ.gif);
+}
+ul#language-chooser li form input.itCH-inactiv {
+background-image: url(/css/images/flags/flag_it_inactiv.gif);
+}
+ul#language-chooser li form input.itCH-activ {
+background-image: url(/css/images/flags/flag_it_activ.gif);
+}
+/****************************/
+/*  Inhalt                  */
+/****************************/
+#content {
+width: 1024px; 
+height: 360px;  
+display: block;
+overflow: auto;
+}
+#content .paragraphPage {
+float: left;
+}
+#content .paragraphPage div#contactform,
+#content .paragraphPage div.tradeparagraph,
+#content .paragraphPage div.lexikonparagraph {
+z-index: 2;
+margin-left: 250px;
+position: relative;
+}
+#content .paragraphPage .headline-image {
+z-index: 1;
+float: left;
+position: absolute;
+margin-left: 0px;
+}
+*+html #content .paragraphPage .headline-image,
+* html #content .paragraphPage .headline-image {
+margin-left: -250px;
+}
+/****************************/
+/*  Zusatznavi Unten        */
+/****************************/
+#bottom-nav {
+width: 1024px; 
+height: 100px;  
+display: block;
+background-color: #336699;
+}
+#bottom-nav ul {
+display: block; 
+width: 100%; 
+float: left;
+}
+#bottom-nav ul li { 
+display: block; 
+width: 127px;
+float: left;
+height: 33px; 
+text-align: center;
+}
+#bottom-nav ul li a {
+line-height: 33px;
+display: block;
+height: 33px;
+text-decoration: none;
+color: white;
+font-weight: bold;
+font-size: 10px;
+}
+#bottom-nav ul li a:hover,
+#bottom-nav ul li a.act {
+background-image: url(/css/images/btn_sub_over.jpg);
+background-repeat: x-repeat;
+}
+#bottom-nav ul li ul {
+margin-left: 15px;
+}
+#bottom-nav ul li ul li {
+text-align: left;
+height: 25px;
+}
+#bottom-nav ul li ul li a {
+line-height: 25px;
+padding-left: 8px;
+background-image: url(/css/images/bullet_white.gif);
+background-repeat: no-repeat;
+}
+#bottom-nav ul li ul li a.act,
+#bottom-nav ul li ul li a:hover {
+color: #FFCC66;
+background-image: url(/css/images/bullet_orange.gif);
+}
+/******************************************/
+/* Newsletter Unregistration              */
+/* /pages/newsletterUnregistration*.xhtml */
+/******************************************/
+div.registration {
+margin: 20px 20px 20px 20px;
+}
+div.registration div.button a {
+text-decoration: none;
+color: black;
+border: 2px solid white;
+float: right;
+}
+div.registration div.button a:hover {
+border: 2px solid black;
+}
+/****************************/
+/*  CMS-Context-Menu        */
+/****************************/
+#cmscontextmenu a {
+font-size: 12px;
+text-decoration: none;
+}
+#cmscontextmenu a img {
+padding-right: 5px;
+}
+/****************************/
+/*  Contact-Formular        */
+/****************************/
+div#contactform {
+width: 700px;
+float: right; 
+}
+div#contactform * input,
+div#contactform * textarea {
+border: 1px solid #336699;
+}
+div#contactform * input {
+width: 200px;
+}
+div#contactform * textarea {
+width: 300px;
+}
+div#contactform-text-top {
+margin-top: 35px;
+margin-bottom: 20px;
+}
+div#contactform-content-left,
+div#contactform-content-right {
+width: 350px;
+height: 200px;
+float: left;
+display: block;
+}
+div#contactform-content-left .zeile,
+div#contactform-content-right .zeile {
+margin-bottom: 10px;
+}
+div#contactform-content-left .zeile span,
+div#contactform-content-right .zeile span {
+display: block;
+width: 100px;
+}
+div#contactform-content-left .message span {
+margin-bottom: 10px;
+}
+div#contactform-content-left .zeile span.error,
+div#contactform-content-right .zeile span.error {
+color: red;
+width: 350px;
+margin-bottom: 5px;
+margin-top: 2px;
+}
+div#contactform-content-right .sendbuttons .leftbutton {
+margin-left: 90px;
+}
+div#contactform-content-right .sendbuttons * input,
+div#contactform-content-right .sendbuttons input {
+width: auto;
+float: left;
+margin-left: 10px;
+}
+/****************************/
+/*  FAQ                     */
+/****************************/
+ol#faq-listing {
+padding-left: 20px;
+list-style-typ: decimal;
+float: left;
+width: 150px;
+}
+ol#faq-listing li a {
+text-decoration: none;
+color: black;
+display: block;
+margin-right: 15px;
+}
+div#faq-content {
+display: block;
+float: left;
+width: 388px;
+}
+div#faq-content .line {
+margin-top: 10px;
+height: 10px;
+width: 388px;
+background-repeat: no-repeat;
+background-image: url(/css/images/trennlinie_blau.gif); 
+margin-bottom: 10px;
+}

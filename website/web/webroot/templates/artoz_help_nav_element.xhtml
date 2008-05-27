@@ -1,0 +1,18 @@
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:cms="http://hybris.com/cms">
+
+	<c:choose>
+		<c:when test="#{!empty element.name}">
+			<li>
+				<h:outputLink value="#{element.content.code}" class="#{element.color.code}">
+					<h:outputText value="#{element.name}" />
+				</h:outputLink>
+			</li>
+		</c:when>
+	</c:choose>
+
+</ui:composition>
