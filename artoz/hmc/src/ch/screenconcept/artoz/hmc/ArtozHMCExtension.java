@@ -3,6 +3,7 @@
  */
 package ch.screenconcept.artoz.hmc;
 
+import de.hybris.platform.cms.jalo.Paragraph;
 import de.hybris.platform.hmc.*;
 import de.hybris.platform.hmc.extension.HMCExtension;
 import de.hybris.platform.hmc.extension.MenuEntrySlotEntry;
@@ -15,11 +16,13 @@ import de.hybris.platform.jalo.Item;
 import de.hybris.platform.jalo.JaloSession;
 import de.hybris.platform.jalo.SessionContext;
 import de.hybris.platform.jalo.type.ComposedType;
+import de.hybris.platform.jalo.type.Type;
 
 import java.util.*;
 
 import org.apache.log4j.Logger;
 
+import ch.screenconcept.artoz.campaign.NewsletterText;
 import ch.screenconcept.artoz.constants.ArtozConstants;
 
 
@@ -31,6 +34,24 @@ import ch.screenconcept.artoz.constants.ArtozConstants;
  */
 public class ArtozHMCExtension extends HMCExtension
 {
+	@Override
+	public ActionResult beforeCreate(ComposedType itemType, DisplayState displayState, Map initialValues)
+	{
+		System.out.println("itemType: "+itemType.getName());
+		return super.beforeCreate(itemType, displayState, initialValues);
+	}
+
+	@Override
+	public ActionResult beforeSave(Item item, DisplayState displayState, Map currentValues, Map initialValues)
+	{
+		if(item instanceof Paragraph)
+		{
+			System.out.println("save");
+			
+		}
+		return super.beforeSave(item, displayState, currentValues, initialValues);
+	}
+
 	//Log4J implementation - edit the project.properties file's Logging section to configurate your own log channel
 	static final Logger log = Logger.getLogger( ArtozHMCExtension.class.getName() );
 

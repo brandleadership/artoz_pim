@@ -3,9 +3,13 @@
  */
 package ch.screenconcept.artoz.jalo;
 
+import de.hybris.platform.cms.jalo.Paragraph;
 import de.hybris.platform.core.Tenant;
 import de.hybris.platform.jalo.*;
+import de.hybris.platform.jalo.c2l.Language;
+import de.hybris.platform.jalo.enumeration.EnumerationValue;
 import de.hybris.platform.jalo.extension.ExtensionManager;
+import de.hybris.platform.jalo.media.Media;
 import de.hybris.platform.jalo.product.Product;
 import de.hybris.platform.util.*;
 
@@ -16,6 +20,7 @@ import net.sf.cglib.proxy.*;
 
 import org.apache.log4j.Logger;
 
+import ch.screenconcept.artoz.campaign.NewsletterText;
 import ch.screenconcept.artoz.constants.ArtozConstants;
 
 /**
@@ -250,6 +255,403 @@ public class ArtozManager extends GeneratedArtozManager
 		{
 			throw new JaloSystemException(e);
 		}
+	}
+
+	@Override
+	public void setAllSetNewsletterHeadText(SessionContext ctx, Paragraph item, Map<Language, String> value)
+	{
+		Map attributes = new HashMap();
+		attributes.put("paragraph", item.getPK());
+		final SearchResult res = JaloSession.getCurrentSession().getFlexibleSearch()
+		.search(
+					 "SELECT {" + NewsletterText.PK + "} FROM {"
+								+ ArtozConstants.TC.NEWSLETTERTEXT + "} "+
+								" WHERE {" + NewsletterText.PARAGRAPH + "} = ?paragraph ",
+								attributes,
+								NewsletterText.class);
+		if(res.getTotalCount() > 0)
+		{
+			List result = (List) res.getResult();
+			Iterator i = result.iterator();
+			NewsletterText newsletterText = (NewsletterText)i.next();
+			newsletterText.setAllHeadtext(value);
+		}
+		else
+		{
+			ctx.setLanguage(null);
+			Map<String, Object> params = new HashMap<String, Object>();
+			params.put(NewsletterText.HEADTEXT, value);
+			params.put(NewsletterText.PARAGRAPH, item);
+			params.put(NewsletterText.NAME, item.getCode());
+			super.createNewsletterText(ctx, params);
+		}
+	}
+	
+	@Override
+	public Map<Language, String> getAllSetNewsletterHeadText(SessionContext ctx, Paragraph item)
+	{
+		NewsletterText newsletterText = new NewsletterText();
+		Map<Language, String> retValue;
+		Map attributes = new HashMap();
+		attributes.put("paragraph", item.getPK());
+		final SearchResult res = JaloSession.getCurrentSession().getFlexibleSearch()
+		.search(
+					 "SELECT {" + NewsletterText.PK + "} FROM {"
+								+ ArtozConstants.TC.NEWSLETTERTEXT + "} "+
+								" WHERE {" + NewsletterText.PARAGRAPH + "} = ?paragraph ",
+								attributes,
+								NewsletterText.class);
+		if(res.getTotalCount() > 0)
+		{
+			List result = (List) res.getResult();
+			Iterator i = result.iterator();
+			newsletterText = (NewsletterText)i.next();
+		}
+		retValue = newsletterText.getAllHeadtext(ctx);
+		return retValue;
+	}
+
+
+	@Override
+	public Map<Language, String> getAllSetNewsletterLinkText(SessionContext ctx, Paragraph item)
+	{
+		NewsletterText newsletterText = new NewsletterText();
+		Map<Language, String> retValue;
+		Map attributes = new HashMap();
+		attributes.put("paragraph", item.getPK());
+		final SearchResult res = JaloSession.getCurrentSession().getFlexibleSearch()
+		.search(
+					 "SELECT {" + NewsletterText.PK + "} FROM {"
+								+ ArtozConstants.TC.NEWSLETTERTEXT + "} "+
+								" WHERE {" + NewsletterText.PARAGRAPH + "} = ?paragraph ",
+								attributes,
+								NewsletterText.class);
+		if(res.getTotalCount() > 0)
+		{
+			List result = (List) res.getResult();
+			Iterator i = result.iterator();
+			newsletterText = (NewsletterText)i.next();
+		}
+		retValue = newsletterText.getAllLinktext(ctx);
+		return retValue;
+	}
+
+
+	@Override
+	public Map<Language, String> getAllSetNewsletterText(SessionContext ctx, Paragraph item)
+	{
+		NewsletterText newsletterText = new NewsletterText();
+		Map<Language, String> retValue;
+		Map attributes = new HashMap();
+		attributes.put("paragraph", item.getPK());
+		final SearchResult res = JaloSession.getCurrentSession().getFlexibleSearch()
+		.search(
+					 "SELECT {" + NewsletterText.PK + "} FROM {"
+								+ ArtozConstants.TC.NEWSLETTERTEXT + "} "+
+								" WHERE {" + NewsletterText.PARAGRAPH + "} = ?paragraph ",
+								attributes,
+								NewsletterText.class);
+		if(res.getTotalCount() > 0)
+		{
+			List result = (List) res.getResult();
+			Iterator i = result.iterator();
+			newsletterText = (NewsletterText)i.next();
+		}
+		retValue = newsletterText.getAllText(ctx);
+		return retValue;
+	}
+
+
+	@Override
+	public Media getSetNewsletterImage0(SessionContext ctx, Paragraph item)
+	{
+		NewsletterText newsletterText = new NewsletterText();
+		Media retValue;
+		Map attributes = new HashMap();
+		attributes.put("paragraph", item.getPK());
+		final SearchResult res = JaloSession.getCurrentSession().getFlexibleSearch()
+		.search(
+					 "SELECT {" + NewsletterText.PK + "} FROM {"
+								+ ArtozConstants.TC.NEWSLETTERTEXT + "} "+
+								" WHERE {" + NewsletterText.PARAGRAPH + "} = ?paragraph ",
+								attributes,
+								NewsletterText.class);
+		if(res.getTotalCount() > 0)
+		{
+			List result = (List) res.getResult();
+			Iterator i = result.iterator();
+			newsletterText = (NewsletterText)i.next();
+		}
+		retValue = newsletterText.getImage0(ctx);
+		return retValue;
+	}
+
+
+	@Override
+	public Media getSetNewsletterImage1(SessionContext ctx, Paragraph item)
+	{
+		NewsletterText newsletterText = new NewsletterText();
+		Media retValue;
+		Map attributes = new HashMap();
+		attributes.put("paragraph", item.getPK());
+		final SearchResult res = JaloSession.getCurrentSession().getFlexibleSearch()
+		.search(
+					 "SELECT {" + NewsletterText.PK + "} FROM {"
+								+ ArtozConstants.TC.NEWSLETTERTEXT + "} "+
+								" WHERE {" + NewsletterText.PARAGRAPH + "} = ?paragraph ",
+								attributes,
+								NewsletterText.class);
+		if(res.getTotalCount() > 0)
+		{
+			List result = (List) res.getResult();
+			Iterator i = result.iterator();
+			newsletterText = (NewsletterText)i.next();
+		}
+		retValue = newsletterText.getImage1(ctx);
+		return retValue;
+	}
+
+
+	@Override
+	public EnumerationValue getSetNewsletterLayout(SessionContext ctx, Paragraph item)
+	{
+		NewsletterText newsletterText = new NewsletterText();
+		EnumerationValue retValue;
+		Map attributes = new HashMap();
+		attributes.put("paragraph", item.getPK());
+		final SearchResult res = JaloSession.getCurrentSession().getFlexibleSearch()
+		.search(
+					 "SELECT {" + NewsletterText.PK + "} FROM {"
+								+ ArtozConstants.TC.NEWSLETTERTEXT + "} "+
+								" WHERE {" + NewsletterText.PARAGRAPH + "} = ?paragraph ",
+								attributes,
+								NewsletterText.class);
+		if(res.getTotalCount() > 0)
+		{
+			List result = (List) res.getResult();
+			Iterator i = result.iterator();
+			newsletterText = (NewsletterText)i.next();
+		}
+		retValue = newsletterText.getImagelayout(ctx);
+		return retValue;
+	}
+
+
+	@Override
+	public void setAllSetNewsletterLinkText(SessionContext ctx, Paragraph item, Map<Language, String> value)
+	{
+		Map attributes = new HashMap();
+		attributes.put("paragraph", item.getPK());
+		final SearchResult res = JaloSession.getCurrentSession().getFlexibleSearch()
+		.search(
+					 "SELECT {" + NewsletterText.PK + "} FROM {"
+								+ ArtozConstants.TC.NEWSLETTERTEXT + "} "+
+								" WHERE {" + NewsletterText.PARAGRAPH + "} = ?paragraph ",
+								attributes,
+								NewsletterText.class);
+		if(res.getTotalCount() > 0)
+		{
+			List result = (List) res.getResult();
+			Iterator i = result.iterator();
+			NewsletterText newsletterText = (NewsletterText)i.next();
+			newsletterText.setAllLinktext(value);
+		}
+		else
+		{
+			ctx.setLanguage(null);
+			Map<String, Object> params = new HashMap<String, Object>();
+			params.put(NewsletterText.LINKTEXT, value);
+			params.put(NewsletterText.PARAGRAPH, item);
+			params.put(NewsletterText.NAME, item.getCode());
+			super.createNewsletterText(ctx, params);
+		}
+	}
+
+
+	@Override
+	public void setAllSetNewsletterText(SessionContext ctx, Paragraph item, Map<Language, String> value)
+	{
+		Map attributes = new HashMap();
+		attributes.put("paragraph", item.getPK());
+		final SearchResult res = JaloSession.getCurrentSession().getFlexibleSearch()
+		.search(
+					 "SELECT {" + NewsletterText.PK + "} FROM {"
+								+ ArtozConstants.TC.NEWSLETTERTEXT + "} "+
+								" WHERE {" + NewsletterText.PARAGRAPH + "} = ?paragraph ",
+								attributes,
+								NewsletterText.class);
+		if(res.getTotalCount() > 0)
+		{
+			List result = (List) res.getResult();
+			Iterator i = result.iterator();
+			NewsletterText newsletterText = (NewsletterText)i.next();
+			newsletterText.setAllText(value);
+		}
+		else
+		{
+			ctx.setLanguage(null);
+			Map<String, Object> params = new HashMap<String, Object>();
+			params.put(NewsletterText.TEXT, value);
+			params.put(NewsletterText.PARAGRAPH, item);
+			params.put(NewsletterText.NAME, item.getCode());
+			super.createNewsletterText(ctx, params);
+		}
+	}
+
+
+	@Override
+	public void setSetNewsletterImage0(SessionContext ctx, Paragraph item, Media value)
+	{
+		Map attributes = new HashMap();
+		attributes.put("paragraph", item.getPK());
+		final SearchResult res = JaloSession.getCurrentSession().getFlexibleSearch()
+		.search(
+					 "SELECT {" + NewsletterText.PK + "} FROM {"
+								+ ArtozConstants.TC.NEWSLETTERTEXT + "} "+
+								" WHERE {" + NewsletterText.PARAGRAPH + "} = ?paragraph ",
+								attributes,
+								NewsletterText.class);
+		if(res.getTotalCount() > 0)
+		{
+			List result = (List) res.getResult();
+			Iterator i = result.iterator();
+			NewsletterText newsletterText = (NewsletterText)i.next();
+			newsletterText.setImage0(value);
+		}
+		else
+		{
+			ctx.setLanguage(null);
+			Map<String, Object> params = new HashMap<String, Object>();
+			params.put(NewsletterText.IMAGE0, value);
+			params.put(NewsletterText.PARAGRAPH, item);
+			params.put(NewsletterText.NAME, item.getCode());
+			super.createNewsletterText(ctx, params);
+		}
+	}
+
+
+	@Override
+	public void setSetNewsletterImage1(SessionContext ctx, Paragraph item, Media value)
+	{
+		Map attributes = new HashMap();
+		attributes.put("paragraph", item.getPK());
+		final SearchResult res = JaloSession.getCurrentSession().getFlexibleSearch()
+		.search(
+					 "SELECT {" + NewsletterText.PK + "} FROM {"
+								+ ArtozConstants.TC.NEWSLETTERTEXT + "} "+
+								" WHERE {" + NewsletterText.PARAGRAPH + "} = ?paragraph ",
+								attributes,
+								NewsletterText.class);
+		if(res.getTotalCount() > 0)
+		{
+			List result = (List) res.getResult();
+			Iterator i = result.iterator();
+			NewsletterText newsletterText = (NewsletterText)i.next();
+			newsletterText.setImage1(value);
+		}
+		else
+		{
+			ctx.setLanguage(null);
+			Map<String, Object> params = new HashMap<String, Object>();
+			params.put(NewsletterText.IMAGE1, value);
+			params.put(NewsletterText.PARAGRAPH, item);
+			params.put(NewsletterText.NAME, item.getCode());
+			super.createNewsletterText(ctx, params);
+		}
+	}
+
+
+	@Override
+	public void setSetNewsletterLayout(SessionContext ctx, Paragraph item, EnumerationValue value)
+	{
+		Map attributes = new HashMap();
+		attributes.put("paragraph", item.getPK());
+		final SearchResult res = JaloSession.getCurrentSession().getFlexibleSearch()
+		.search(
+					 "SELECT {" + NewsletterText.PK + "} FROM {"
+								+ ArtozConstants.TC.NEWSLETTERTEXT + "} "+
+								" WHERE {" + NewsletterText.PARAGRAPH + "} = ?paragraph ",
+								attributes,
+								NewsletterText.class);
+		if(res.getTotalCount() > 0)
+		{
+			List result = (List) res.getResult();
+			Iterator i = result.iterator();
+			NewsletterText newsletterText = (NewsletterText)i.next();
+			newsletterText.setImagelayout(value);
+		}
+		else
+		{
+			ctx.setLanguage(null);
+			Map<String, Object> params = new HashMap<String, Object>();
+			params.put(NewsletterText.IMAGELAYOUT, value);
+			params.put(NewsletterText.PARAGRAPH, item);
+			params.put(NewsletterText.NAME, item.getCode());
+			super.createNewsletterText(ctx, params);
+		}
+	}
+
+
+	@Override
+	public String getSetNewsletterHeadText(SessionContext ctx, Paragraph item)
+	{
+		return null;
+	}
+
+
+	@Override
+	public void setSetNewsletterHeadText(SessionContext ctx, Paragraph item, String value)
+	{
+		// TODO Auto-generated method stub
+		// unused
+	}
+
+
+	@Override
+	public String getSetNewsletterLinkText(SessionContext ctx, Paragraph item)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public String getSetNewsletterName(SessionContext ctx, Paragraph item)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public String getSetNewsletterText(SessionContext ctx, Paragraph item)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public void setSetNewsletterLinkText(SessionContext ctx, Paragraph item, String value)
+	{
+		// TODO Auto-generated method stub
+		// unused
+	}
+
+
+	@Override
+	public void setSetNewsletterName(SessionContext ctx, Paragraph item, String value)
+	{
+		// TODO Auto-generated method stub
+		// unused
+	}
+
+
+	@Override
+	public void setSetNewsletterText(SessionContext ctx, Paragraph item, String value)
+	{
+		// TODO Auto-generated method stub
+		// unused
 	}
 	
 	

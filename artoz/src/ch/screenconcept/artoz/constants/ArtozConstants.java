@@ -18,6 +18,8 @@ import de.hybris.platform.jalo.product.Unit;
 public final class ArtozConstants extends GeneratedArtozConstants
 {
 	public static final String NEWSLETTERGROUP = "newslettergroup";
+	
+	public static final String NEWSLETTERTEXT = "NewsletterText";
 
 	public static final String STANDARDCATALOG = "Artoz - Standard";
 
