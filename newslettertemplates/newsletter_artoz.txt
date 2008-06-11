@@ -1,0 +1,22 @@
+
+---------------------------------------------------------------------------------------------------
+#foreach ( $element in $content )
+${element.headtext}
+${element.text}
+${element.textlink}
+
+#end
+---------------------------------------------------------------------------------------------------
+#foreach ( $element in $contentright )
+${element.text} 
+--------------------------------------------------
+#end
+---------------------------------------------------------------------------------------------------
+Wichtig: Bitte antworten Sie nicht auf diese Mail.
+Anfragen werden gerne unter marketing@artoz.ch beantwortet.
+Copyright by Artoz Papier AG, Ringstrasse West 23,
+5600 Lenzburg, Schweiz. Inhalte und Angaben ohne Gewähr.
+
+Abmelden: http://${content.url}/pages/index.jsf?pageid=unregistration&amp;uid=${user.uid}
+
+${optOutInfo}

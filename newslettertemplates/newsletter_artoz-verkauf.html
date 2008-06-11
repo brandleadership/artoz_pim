@@ -2,62 +2,24 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<style type="text/css">
-<!--
-* a {
-	color:#E98300;
-}
-div.left {
-	width: 400px;
-	float: left;
-}
-div.left div.images {
-	float: left;
-}
-div.left div.text {
-	float: left;
-	width: 200px;
-	display: block;
-}
-div.bottom,
-div.top {
-	width: 400px;
-	float: left;
-}
-div.bottom img.image0,
-div.top img.image0 {
-	float: left;
-}
-div.bottom img.image1
-div.top img.image1 {
-	float: left;
-}
-div.bottom div.text,
-div.top div.text {
-	float: left;
-}
-div.right {
-	float: left;
-}
-div.right img.image0 {
-	float: right;
-}
-div.right img.image1 {
-	float: right;
-}
--->
-</style>
 </head>
+
 <body bgcolor="#FFFFFF" style="margin:0px;padding:0px;font-family:Arial, Helvetica, sans-serif;font-size:12pt;">
 <table width="600" border="0" cellspacing="0" cellpadding="0" style="border:1px solid #FFFFFF;">
   <tr>
     <td height="100" colspan="2" align="left" valign="top"><img src="http://dev.screenconcept.ch/artoz/head.jpg" width="600" border="0"></td>
   </tr>
   <tr>
+    <td height="100" colspan="2" align="left" valign="top" style="border-bottom:4px solid #0065BD;width:600px;">
+    <div style="margin:0px 10px 2px 0px;color:#666666;">
+    	Infoletter Artoz Papier AG, Ausgabe April 2008    </div>
+    <img src="${introimage.src}" alt="${introimage.alt}" width="600" border="0">    </td>
+  </tr>
+  <tr>
+    <td height="10" colspan="2" align="left" valign="top" style="">&nbsp;    </td>
+  </tr>
+  <tr style="margin-top:20px;">
     <td width="400" align="left" valign="top">
-    <div style="margin:0px 10px 40px 0px;color:#666666;">
-    	Infoletter Artoz Papier AG, Ausgabe April 2008
-    </div>
     #set($top = "top")
     #set($left = "left")
     #set($bottom = "bottom")
@@ -153,22 +115,22 @@ div.right img.image1 {
         #end
 	</table>
     #end
-<div style="float:left;padding:20px 10px 0 0;font-size:10pt;border-top:1px solid #E98300;">
-Wichtig: Bitte antworten Sie nicht auf diese Mail. Anfragen werden gerne unter <a href="mailto:marketing@artoz.ch" style="color:#E98300;">marketing@artoz.ch</a> beantwortet.<br>
+<div style="float:left;padding:20px 10px 0 0;margin-top:20px;font-size:10pt;border-top:1px solid #0065BD;">
+Wichtig: Bitte antworten Sie nicht auf diese Mail. Anfragen werden gerne unter <a href="mailto:info@artoz.ch" style="color:#0065BD;">info@artoz.ch</a> beantwortet.<br>
 Copyright by Artoz Papier AG, Ringstrasse West 23,<br>
 5600 Lenzburg, Schweiz. Inhalte und Angaben ohne Gewähr.
     <div style="text-align: center;margin:20px 0 0 0;font-weight:bold;">
     	<a href="http://www.artoz.ch" target="_blank" style="text-decoration:none;color:#000000;">Newsletter &auml;ndern</a> . <a href="http://${content.url}/pages/index.jsf?pageid=unregistration&amp;uid=${user.uid}" target="_blank" style="text-decoration:none;color:#000000;">Newsletter abbestellen</a> . <a href="http://www.artoz.ch" target="_blank" style="text-decoration:none;color:#000000;">Kontakt</a> . <a href="http://www.artoz.ch" target="_blank" style="text-decoration:none;color:#000000;">AGB</a>    </div>
 </div>
     </td>
-    <td width="200" align="left" valign="top" style="font-size:10pt;border-left:1px solid #E98300;">
-      <div style="margin:57px 0px 25px 9px;border-bottom:1px solid #E98300;padding-bottom:20px;font-size:12pt;">
+    <td width="200" align="left" valign="top" style="font-size:10pt;border-left:1px solid #0065BD;">
+      <div style="margin:0px 0px 25px 9px;border-bottom:1px solid #0065BD;padding-bottom:20px;font-size:12pt;">
           <strong>Inhalt</strong>
           <ul style="margin:5px 0 0 0;padding:0 0 0 15px;">
           #foreach ( $paragraph in ${content} )
             <li><a href="#${paragraph.paragraphlink}" style="text-decoration:none;color:#000000">${paragraph.headtext}</a></li>
            #end
-        </ul>
+          </ul>
    	  </div>
       #foreach ( $element in ${contentright} )
       <div style="margin:0px 0px 25px 9px;border-bottom:1px solid #E98300;padding-bottom:10px;">
@@ -185,19 +147,14 @@ Copyright by Artoz Papier AG, Ringstrasse West 23,<br>
         #end
       </div>
       #end
-      <div style="margin:0px 0px 25px 9px;border-bottom:1px solid #E98300;padding-bottom:10px;">
-        <strong>Weitersagen<br>
-        <br>
-        </strong><a href="mailto:?subject=Empfehlung%20Artoz%20Newsletter" style="color:#E98300;">Empfehlen Sie diesen Newsletter Ihren Geschäftskollegen/innen</a><br>
-        <br>
-        </div>
-      <div style="margin:0px 0px 25px 9px;padding-bottom:5px;">Impressum<br>
-        Dieser Newsletter ist ein kostenloser Service von Artoz Papier AG,<br>
-        CH-5006 Lenzburg<br>
+      <div style="margin:0px 0px 25px 9px;padding-bottom:5px;">
+        Impressum<br>
+        Dieser Newsletter ist ein kostenloser Service vonArtoz Papier AG,<br>
+        CHF-5006 Lenzburg<br>
         Redaktion: M. Marketing<br>
         Tel.: +41 (0)62 886 43 86<br>
         F ax: +41 (0)62 886 43 50<br>
-      E-Mail: <a href="mailto:marketing@artoz.ch" style="color:#E98300;">marketing@artoz.ch</a></div>
+        E-Mail: <a href="mailto:marketing@artoz.ch" style="color:#0065BD;">marketing@artoz.ch</a> </div>
     </td>
   </tr>
 </table>

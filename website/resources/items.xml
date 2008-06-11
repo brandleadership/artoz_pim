@@ -213,9 +213,6 @@
 				<attribute type="localized:java.lang.String" qualifier="startdate">
 					<persistence type="property"/>
 				</attribute>
-				<attribute type="localized:java.lang.String" qualifier="enddate">
-					<persistence type="property"/>
-				</attribute>
 			</attributes>
 		</itemtype>
 		

@@ -109,7 +109,23 @@ public class EMailFaxCampaign extends GeneratedEMailFaxCampaign
 		{
 			ctx.put("products", proxyFactory.createMailProxy(getProducts(), campaignContext));
 		}
-
+		
+		if (getIntroImage() !=  null)
+		{
+			ctx.put("introimage", proxyFactory.createMailProxy(getIntroImage(), campaignContext));
+		}
+		
+		if (getListNewsletterTextCollection() !=  null)
+		{
+			ctx.put("content", proxyFactory.createMailProxy(getListNewsletterTextCollection(), campaignContext));
+			ctx.put("user", proxyFactory.createMailProxy(user, campaignContext));
+		}
+		
+		if (getListRightNewsletterTextCollection() !=  null)
+		{
+			ctx.put("contentright", proxyFactory.createMailProxy(getListRightNewsletterTextCollection(), campaignContext));
+		}
+		
 		String plainText = getPlainText() == null || getPlainText().trim().length() <= 20 ? null
 					: evaluateWithAttribute(ctx, getPlainText(), "optOutInfo", insertOptOutLink(CampaignConfig
 								.getCampaignConfig().getTextContent(), participation));

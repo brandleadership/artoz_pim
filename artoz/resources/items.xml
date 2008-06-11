@@ -26,8 +26,8 @@
 			elementtype="ArtozProduct" autocreate="true" generate="true" />
 		<collectiontype code="SortCollection" elementtype="Sort"
 			autocreate="true" generate="true" />
-		<collectiontype code="NewsletterTextCollection" elementtype="NewsletterText" 
-			autocreate="true" generate="true" />
+		<collectiontype code="NewsletterTextCollection"
+			elementtype="NewsletterText" autocreate="true" generate="true" />
 	</collectiontypes>
 
 	<enumtypes>
@@ -45,82 +45,96 @@
 			<value code="bottom" />
 		</enumtype>
 	</enumtypes>
-	
+
 	<itemtypes>
 		<!-- Newsletter -->
-		<itemtype code="NewsletterText" autocreate="true" generate="true"
+		<itemtype code="NewsletterText" autocreate="true"
+			generate="true"
 			jaloclass="ch.screenconcept.artoz.campaign.NewsletterText">
 			<attributes>
 				<attribute qualifier="name" type="java.lang.String">
-					<persistence type="property"/>
+					<persistence type="property" />
 				</attribute>
-				<attribute qualifier="headtext" type="localized:java.lang.String">
-					<persistence type="property"/>
+				<attribute qualifier="headtext"
+					type="localized:java.lang.String">
+					<persistence type="property" />
 				</attribute>
-				<attribute qualifier="text" type="localized:java.lang.String">
-					<persistence type="property"/>
+				<attribute qualifier="text"
+					type="localized:java.lang.String">
+					<persistence type="property" />
 				</attribute>
-				<attribute qualifier="linktext" type="localized:java.lang.String">
-					<persistence type="property"/>
+				<attribute qualifier="linktext"
+					type="localized:java.lang.String">
+					<persistence type="property" />
 				</attribute>
 				<attribute qualifier="image0" type="Media">
-					<persistence type="property"/>
-					<modifiers read="true" write="true" search="true"/>
+					<persistence type="property" />
+					<modifiers read="true" write="true" search="true" />
 				</attribute>
 				<attribute qualifier="image1" type="Media">
-					<persistence type="property"/>
-					<modifiers read="true" write="true" search="true"/>
+					<persistence type="property" />
+					<modifiers read="true" write="true" search="true" />
 				</attribute>
-				<attribute qualifier="imagelayout" type="ImageLayoutEnum">
-					<persistence type="property"/>
+				<attribute qualifier="imagelayout"
+					type="ImageLayoutEnum">
+					<persistence type="property" />
 					<defaultvalue>
 						em().getEnumerationValue("ImageLayoutEnum",
 						"bottom")
 					</defaultvalue>
 				</attribute>
 				<attribute qualifier="paragraph" type="Paragraph">
-					<persistence type="property"/>
+					<persistence type="property" />
 				</attribute>
 			</attributes>
 		</itemtype>
-		
-		<itemtype code="Paragraph" extends="true" autocreate="false" generate="true">
+
+		<itemtype code="Paragraph" extends="true" autocreate="false"
+			generate="true">
 			<attributes>
-				<attribute qualifier="setNewsletterName" type="java.lang.String">
+				<attribute qualifier="setNewsletterName"
+					type="java.lang.String">
 					<modifiers optional="true" write="true" />
-					<persistence type="jalo"/>
+					<persistence type="jalo" />
 				</attribute>
-				<attribute qualifier="setNewsletterText" type="localized:java.lang.String">
+				<attribute qualifier="setNewsletterText"
+					type="localized:java.lang.String">
 					<modifiers optional="true" write="true" />
-					<persistence type="jalo"/>
+					<persistence type="jalo" />
 				</attribute>
-				<attribute qualifier="setNewsletterHeadText" type="localized:java.lang.String">
+				<attribute qualifier="setNewsletterHeadText"
+					type="localized:java.lang.String">
 					<modifiers optional="true" write="true" />
-					<persistence type="jalo"/>
+					<persistence type="jalo" />
 				</attribute>
-				<attribute qualifier="setNewsletterLinkText" type="localized:java.lang.String">
+				<attribute qualifier="setNewsletterLinkText"
+					type="localized:java.lang.String">
 					<modifiers optional="true" write="true" />
-					<persistence type="jalo"/>
+					<persistence type="jalo" />
 				</attribute>
-				<attribute qualifier="setNewsletterImage0" type="Media">
+				<attribute qualifier="setNewsletterImage0"
+					type="Media">
 					<modifiers optional="true" write="true" />
-					<persistence type="jalo"/>
+					<persistence type="jalo" />
 				</attribute>
-				<attribute qualifier="setNewsletterImage1" type="Media">
+				<attribute qualifier="setNewsletterImage1"
+					type="Media">
 					<modifiers optional="true" write="true" />
-					<persistence type="jalo"/>
+					<persistence type="jalo" />
 				</attribute>
-				<attribute qualifier="setNewsletterLayout" type="ImageLayoutEnum">
+				<attribute qualifier="setNewsletterLayout"
+					type="ImageLayoutEnum">
 					<modifiers optional="true" write="true" />
-					<persistence type="jalo"/>
+					<persistence type="jalo" />
 				</attribute>
-				<attribute qualifier="newsletterText" type="NewsletterText">
+				<attribute qualifier="newsletterText"
+					type="NewsletterText">
 					<modifiers optional="true" write="true" />
-					<persistence type="property"/>
+					<persistence type="property" />
 				</attribute>
 			</attributes>
 		</itemtype>
-		
+
 		<!-- Product -->
 		<itemtype generate="true" code="ArtozProduct"
 			jaloclass="ch.screenconcept.artoz.product.ArtozProduct"
@@ -386,7 +400,7 @@
 		<itemtype code="SendMailJob" extends="Job"
 			jaloclass="ch.screenconcept.artoz.campaign.SendMailJob"
 			autocreate="true" generate="true" />
-			
+
 		<!-- Campaign -->
 		<itemtype code="EMailFaxCampaign" generate="true"
 			jaloclass="ch.screenconcept.artoz.campaign.EMailFaxCampaign"
@@ -443,9 +457,20 @@
 						"emailfax")
 					</defaultvalue>
 				</attribute>
-				<attribute qualifier="listNewsletterTextCollection" type="NewsletterTextCollection">
-					<modifiers read="true" write="true" search="true" initial="true" />
-					<persistence type="property"/>
+				<attribute qualifier="introImage" type="Media">
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="listNewsletterTextCollection"
+					type="NewsletterTextCollection">
+					<modifiers read="true" write="true" search="true"
+						initial="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="listRightNewsletterTextCollection"
+					type="NewsletterTextCollection">
+					<modifiers read="true" write="true" search="true"
+						initial="true" />
+					<persistence type="property" />
 				</attribute>
 			</attributes>
 		</itemtype>

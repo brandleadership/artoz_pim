@@ -23,9 +23,47 @@
 	<explorertree>
 		<group name="websitegroup">
 			<externalnode classname="ch.screenconcept.artoz.website.hmc.WebsiteTreeLeafChip"/>		
-		</group>
+		</group> 
 	</explorertree>
 -->
+	<type name="ArtozMainNavigationElement" mode="append">
+		<organizer>
+			<editor>
+				<tab name="tab.paragraph.content" mode="append">
+					<section name="text">
+						<table>
+								<tr>
+									<td>
+										<attribute name="color"/>
+									</td>
+								</tr>
+						</table>
+					</section>
+				</tab>
+			</editor>
+		</organizer>
+	</type>
+	
+	<type name="TitleImageParagraph" mode="append">
+		<organizer>
+			<editor>
+				<tab name="tab.paragraph.content" mode="append">
+					<section name="text">
+						<table>
+								<tr>
+									<td>
+										<attribute name="image">
+											<mediaeditor/>
+										</attribute>
+									</td>
+								</tr>
+						</table>
+					</section>
+				</tab>
+			</editor>
+		</organizer>
+	</type>
+	
 	<type name="LinkParagraph" mode="append">
 		<organizer>
 			<editor>
@@ -129,6 +167,11 @@
 							<tr>
 								<td>
 									<attribute name="delete"/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<attribute name="successPageContent"/>
 								</td>
 							</tr>
 						</table>

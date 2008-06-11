@@ -15,10 +15,12 @@ import com.exedio.campaign.jalo.proxy.OrderMailProxy;
 import com.exedio.campaign.jalo.proxy.ProductMailProxy;
 
 import de.hybris.platform.jalo.JaloSystemException;
+import de.hybris.platform.jalo.media.Media;
 import de.hybris.platform.jalo.order.Order;
 import de.hybris.platform.jalo.product.Product;
 import de.hybris.platform.jalo.user.Address;
 import de.hybris.platform.jalo.user.Customer;
+import de.hybris.platform.jalo.user.User;
 
 public class ArtozMailProxyFactory implements MailProxyFactory
 {
@@ -62,7 +64,11 @@ public class ArtozMailProxyFactory implements MailProxyFactory
 		if (obj instanceof MailProxyCreator)
 			return ((MailProxyCreator) obj).createMailProxy(campaigncontext);
 		if (obj instanceof NewsletterText)
-			return new NewsletterTextProxy((NewsletterText) obj);
+			return new NewsletterTextProxy((NewsletterText) obj, campaigncontext);
+		if (obj instanceof Media)
+			return new NewsletterTextProxy((Media) obj);
+		if (obj instanceof User)
+			return new NewsletterTextProxy((User) obj);
 		else
 			return new JaloSystemException((new StringBuilder("Could not create MailProxy for object >")).append(
 						obj.toString()).append("< class >").append(obj.getClass().getName()).append("<").toString());

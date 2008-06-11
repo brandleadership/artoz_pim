@@ -70,5 +70,7 @@
 	<classpathentry kind="lib" path="/campaign/lib/exedio-sendmail.jar"/>
 	<classpathentry kind="lib" path="/campaign/lib/mail.jar"/>
 	<classpathentry kind="lib" path="/campaign/bin/campaignserver.jar"/>
+	<classpathentry kind="src" path="/ext-commerce"/>
+	<classpathentry kind="src" path="/website"/>
 	<classpathentry kind="output" path="eclipsebin"/>
 </classpath>
