@@ -67,8 +67,8 @@ div.right img.image1 {
     	#if( $element.layout == $right )
         	<tr>
             <td rowspan="2">
-          	<strong style="font-size:14pt;margin-bottom:14px;display:block;"><a id="${element.paragraphlink}"></a>${element.headtext}</strong>
-            ${element.text}
+          	<strong style="font-size:14pt;margin-bottom:14px;display:block;"><a id="${element.paragraphlink}"></a>${element.headtext}</strong><br /><br />
+            ${element.textAsHtml}
             <br />
             ${element.link}
             </td>
@@ -100,8 +100,8 @@ div.right img.image1 {
           </tr>
           <tr>
             <td colspan="2">
-            <strong style="font-size:14pt;margin-bottom:14px;display:block;"><a id="${element.paragraphlink}"></a>${element.headtext}</strong>
-            ${element.text}
+            <strong style="font-size:14pt;margin-bottom:14px;display:block;"><a id="${element.paragraphlink}"></a>${element.headtext}</strong><br /><br />
+            ${element.textAsHtml}
             <br />
             ${element.link}
             </td>
@@ -114,8 +114,8 @@ div.right img.image1 {
             #end
             </td>
             <td rowspan="2">
-            <strong style="font-size:14pt;margin-bottom:14px;display:block;"><a id="${element.paragraphlink}"></a>${element.headtext}</strong>
-            ${element.text}
+            <strong style="font-size:14pt;margin-bottom:14px;display:block;"><a id="${element.paragraphlink}"></a>${element.headtext}</strong><br /><br />
+            ${element.textAsHtml}
             <br />
             ${element.link}
             </td>
@@ -130,8 +130,8 @@ div.right img.image1 {
         #elseif( $element.layout == $bottom )
           	<tr>
             <td colspan="2">
-            <strong style="font-size:14pt;margin-bottom:14px;display:block;"><a id="${element.paragraphlink}"></a>${element.headtext}</strong>
-            ${element.text}
+            <strong style="font-size:14pt;margin-bottom:14px;display:block;"><a id="${element.paragraphlink}"></a>${element.headtext}</strong><br /><br />
+            ${element.textAsHtml}
             <br />
             ${element.link}
             </td>
@@ -177,7 +177,7 @@ Copyright by Artoz Papier AG, Ringstrasse West 23,<br>
                 <img class="image0" border="0" alt="${element.alttext0}" src="${element.image0}"/>
             #end
         #end
-        ${element.text}
+        ${element.textAsHtml}
         #if( $element.layout == "bottom")
             #if( $element.image0 )
                 <img class="image0" border="0" alt="${element.alttext0}" src="${element.image0}"/>
