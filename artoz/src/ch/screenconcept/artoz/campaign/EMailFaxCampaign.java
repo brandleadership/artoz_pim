@@ -93,7 +93,7 @@ public class EMailFaxCampaign extends GeneratedEMailFaxCampaign
 		final User user = (User) resultVector.get(0);
 		final Language sessionLanguage = user.getSessionLanguage();
 		getSession().createLocalSessionContext().setLanguage(sessionLanguage);
-		
+
 		final VelocityContext ctx = new VelocityContext();
 		final CampaignContext campaignContext = new CampaignContext(this, participation);
 		final MailProxyFactory proxyFactory = ArtozMailProxyFactory.getInstance();
@@ -109,35 +109,37 @@ public class EMailFaxCampaign extends GeneratedEMailFaxCampaign
 		{
 			ctx.put("products", proxyFactory.createMailProxy(getProducts(), campaignContext));
 		}
-		
-		if (getIntroImage() !=  null)
+
+		if (getIntroImage() != null)
 		{
 			ctx.put("introimage", proxyFactory.createMailProxy(getIntroImage(), campaignContext));
 		}
-		
-		if (getListNewsletterTextCollection() !=  null)
+
+		if (getListNewsletterTextCollection() != null)
 		{
 			ctx.put("content", proxyFactory.createMailProxy(getListNewsletterTextCollection(), campaignContext));
 			ctx.put("user", proxyFactory.createMailProxy(user, campaignContext));
 		}
-		
-		if (getListRightNewsletterTextCollection() !=  null)
+
+		if (getListRightNewsletterTextCollection() != null)
 		{
-			ctx.put("contentright", proxyFactory.createMailProxy(getListRightNewsletterTextCollection(), campaignContext));
+			ctx.put("contentright", proxyFactory.createMailProxy(getListRightNewsletterTextCollection(),
+						campaignContext));
 		}
+
+		//Set optOutInfo empty because the optOutInfo is fix in the template
+		ctx.put("optOutInfo", "");
 		
-		String plainText = getPlainText() == null || getPlainText().trim().length() <= 20 ? null
-					: evaluateWithAttribute(ctx, getPlainText(), "optOutInfo", insertOptOutLink(CampaignConfig
-								.getCampaignConfig().getTextContent(), participation));
-		String htmlText = getHtmlText() == null || getHtmlText().trim().length() <= 20 ? null : evaluateWithAttribute(
-					ctx, getHtmlText(), "optOutInfo", insertOptOutLink(CampaignConfig.getCampaignConfig()
-								.getHtmlContent(), participation));
+		String plainText = getPlainText() == null || getPlainText().trim().length() <= 20 ? null : EMailConfig
+					.evaluate(ctx, getPlainText());
+		String htmlText = getHtmlText() == null || getHtmlText().trim().length() <= 20 ? null : EMailConfig.evaluate(
+					ctx, getHtmlText());
 
 		final Map<String, Object> attributes = new HashMap<String, Object>();
-		System.out.println(this.getTyp().getCode());
-		if ( ArtozConstants.Enumerations.CampaignEnum.FAX.equals(this.getTyp().getCode()) )
+		if (ArtozConstants.Enumerations.CampaignEnum.FAX.equals(this.getTyp().getCode())
+					|| (ArtozConstants.Enumerations.CampaignEnum.EMAILFAX.equals(this.getTyp().getCode()))
+					&& recieverEMailAddress == null && recieverEMailAddress.equals(""))
 		{
-			System.out.println("FAX");
 			try
 			{
 				attributes.put(EMailFax.RECIPIENT, getFaxNumber(user));
@@ -163,9 +165,8 @@ public class EMailFaxCampaign extends GeneratedEMailFaxCampaign
 				throw new MailTemplateException(se.getMessage(), se);
 			}
 		}
-		else if ( ArtozConstants.Enumerations.CampaignEnum.EMAIL.equals(this.getTyp().getCode()) )
+		else
 		{
-			System.out.println("EMAIL");
 			attributes.put(EMailFax.RECIPIENT, recieverEMailAddress);
 			attributes.put(EMailFax.SENDER, EMailConfig.evaluate(ctx, getSender()));
 			attributes.put(EMailFax.REPLYTO, null);
@@ -176,65 +177,10 @@ public class EMailFaxCampaign extends GeneratedEMailFaxCampaign
 			attributes.put(EMailFax.TEXTASHTML, htmlText);
 			attributes.put(EMailFax.FAX, false);
 		}
-		else if ( ArtozConstants.Enumerations.CampaignEnum.EMAILFAX.equals(this.getTyp().getCode()) )
-		{
-			System.out.println("EMAILFAX");
-			try
-			{
-				attributes.put(EMailFax.RECIPIENT, getFaxNumber(user));
-				attributes.put(EMailFax.SENDER, EMailConfig.evaluate(ctx, getSender()));
-				attributes.put(EMailFax.REPLYTO, null);
-				attributes.put(EMailFax.SUBJECT, EMailConfig.evaluate(ctx, getSubject()));
-				attributes.put(EMailFax.TYPE, CampaignManager.getInstance().getCampaignConfig("eMailCampaign"));
-				attributes.put(EMailFax.USER, user);
-				attributes.put(EMailFax.TEXT, plainText);
-				attributes.put(EMailFax.TEXTASHTML, htmlText);
-				attributes.put(EMailFax.FAXSERVICEUSER, getFaxUserName());
-				attributes.put(EMailFax.FAXSENDER, getFaxSender());
-				attributes.put(EMailFax.FAXSERVICEPASSWORD, getFaxPassword());
-				attributes.put(EMailFax.FAXSERVICEADRESSE, getFaxServiceAdresse());
-				attributes.put(EMailFax.FAX, true);
-			}
-			catch (JaloInvalidParameterException je)
-			{
-				throw new MailTemplateException(je.getMessage(), je);
-			}
-			catch (JaloSecurityException se)
-			{
-				throw new MailTemplateException(se.getMessage(), se);
-			}
-		}
 		ArtozManager.getInstance().createEMailFax(attributes);
-
-		// final EMail email =
-		// CampaignManager.getInstance().createEMail(attributes);
 
 		if (sessionLanguage != null)
 			getSession().removeLocalSessionContext();
-	}
-
-	private String insertOptOutLink(final String template, final EMailCampaignParticipation participation)
-	{
-		if (template == null)
-			return "";
-		final String link;
-		if (participation == null)
-			link = getFrontEndHostAndPort() + "microspot/__HYBRIS__/newsLetterUnregistration.jsf";
-		else
-			link = getFrontEndHostAndPort() + "microspot/__HYBRIS__/newsLetterUnregistration.jsf";
-		// link = CampaignTools.buildFrontendLink( getFrontEndHostAndPort(),
-		// "optOut.do", Collections.singletonList( ( new StringBuilder(
-		// "participation=" ) ).append( participation.getPK().toString()
-		// ).toString() ) );
-		return MessageFormat.format(template, new Object[]
-		{ link });
-	}
-
-	private String evaluateWithAttribute(final VelocityContext ctx, final String template, final String attribute,
-				final String value) throws MailTemplateException
-	{
-		ctx.put(attribute, value);
-		return EMailConfig.evaluate(ctx, template);
 	}
 
 	// --------------------------------------------------------------------------------------------------------------

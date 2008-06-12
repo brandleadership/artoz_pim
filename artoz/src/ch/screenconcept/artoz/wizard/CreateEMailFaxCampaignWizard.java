@@ -11,6 +11,8 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 import ch.screenconcept.artoz.campaign.EMailFaxCampaign;
+import ch.screenconcept.artoz.campaign.NewsletterMedia;
+import ch.screenconcept.artoz.campaign.NewsletterText;
 import ch.screenconcept.artoz.constants.ArtozConstants;
 import ch.screenconcept.artoz.jalo.ArtozManager;
 
@@ -41,6 +43,10 @@ public class CreateEMailFaxCampaignWizard extends GeneratedCreateEMailFaxCampaig
 
 	private final String TAB3 = "tab.createEMailFaxCampaignWizard.three";
 
+	private final String TAB4 = "tab.createEMailFaxCampaignWizard.four";
+
+	private final String TAB5 = "tab.createEMailFaxCampaignWizard.five";
+
 	private String campaignName, campaignSubject, campaignSender, campaignHTMLText, campaignText;
 
 	private String faxServiceUser = Config.getParameter("campaign.faxServiceUser");
@@ -50,7 +56,9 @@ public class CreateEMailFaxCampaignWizard extends GeneratedCreateEMailFaxCampaig
 	private String faxServiceAdresse = Config.getParameter("campaign.faxServiceAdresse");
 
 	private String faxSender = Config.getParameter("campaign.faxSender");
-	
+
+	private String frontendHost = Config.getParameter("campaign.frontendHost");
+
 	private Newsletter newsletter = null;
 
 	private Map<Language, String> campaignSubjectMap, campaignHTMLTextMap, campaignTextMap;
@@ -59,9 +67,13 @@ public class CreateEMailFaxCampaignWizard extends GeneratedCreateEMailFaxCampaig
 	
 	private EnumerationValue typ;
 	
-	private Media campaignImportFile, campaignHTMLTemplateDECH, campaignTextTemplateDECH, campaignHTMLTemplateFRCH,
+	private NewsletterMedia campaignImportFile, campaignHTMLTemplateDECH, campaignTextTemplateDECH, campaignHTMLTemplateFRCH,
 				campaignTextTemplateFRCH, campaignHTMLTemplateITCH, campaignTextTemplateITCH, campaignHTMLTemplateEN,
 				campaignTextTemplateEN, campaignHTMLTemplateES, campaignTextTemplateES;
+	
+	private Media introImage;
+	
+	private Collection<NewsletterText> contentNewsletterTexts, rightNewsletterTexts;
 
 	@Override
 	public String getCampaignHTMLText(SessionContext ctx)
@@ -140,13 +152,13 @@ public class CreateEMailFaxCampaignWizard extends GeneratedCreateEMailFaxCampaig
 	}
 
 	@Override
-	public Media getCampaignImportFile(SessionContext ctx)
+	public NewsletterMedia getCampaignImportFile(SessionContext ctx)
 	{
 		return campaignImportFile;
 	}
 
 	@Override
-	public void setCampaignImportFile(SessionContext ctx, Media value)
+	public void setCampaignImportFile(SessionContext ctx, NewsletterMedia value)
 	{
 		campaignImportFile = value;
 	}
@@ -248,121 +260,121 @@ public class CreateEMailFaxCampaignWizard extends GeneratedCreateEMailFaxCampaig
 	}
 
 	@Override
-	public Media getCampaignHTMLTemplateDECH(SessionContext ctx)
+	public NewsletterMedia getCampaignHTMLTemplateDECH(SessionContext ctx)
 	{
 		return campaignHTMLTemplateDECH;
 	}
 
 	@Override
-	public Media getCampaignHTMLTemplateEN(SessionContext ctx)
+	public NewsletterMedia getCampaignHTMLTemplateEN(SessionContext ctx)
 	{
 		return campaignHTMLTemplateEN;
 	}
 
 	@Override
-	public Media getCampaignHTMLTemplateES(SessionContext ctx)
+	public NewsletterMedia getCampaignHTMLTemplateES(SessionContext ctx)
 	{
 		return campaignHTMLTemplateES;
 	}
 
 	@Override
-	public Media getCampaignHTMLTemplateFRCH(SessionContext ctx)
+	public NewsletterMedia getCampaignHTMLTemplateFRCH(SessionContext ctx)
 	{
 		return campaignHTMLTemplateFRCH;
 	}
 
 	@Override
-	public Media getCampaignHTMLTemplateITCH(SessionContext ctx)
+	public NewsletterMedia getCampaignHTMLTemplateITCH(SessionContext ctx)
 	{
 		return campaignHTMLTemplateITCH;
 	}
 
 	@Override
-	public Media getCampaignTextTemplateDECH(SessionContext ctx)
+	public NewsletterMedia getCampaignTextTemplateDECH(SessionContext ctx)
 	{
 		return campaignTextTemplateDECH;
 	}
 
 	@Override
-	public Media getCampaignTextTemplateEN(SessionContext ctx)
+	public NewsletterMedia getCampaignTextTemplateEN(SessionContext ctx)
 	{
 		return campaignTextTemplateEN;
 	}
 
 	@Override
-	public Media getCampaignTextTemplateES(SessionContext ctx)
+	public NewsletterMedia getCampaignTextTemplateES(SessionContext ctx)
 	{
 		return campaignTextTemplateES;
 	}
 
 	@Override
-	public Media getCampaignTextTemplateFRCH(SessionContext ctx)
+	public NewsletterMedia getCampaignTextTemplateFRCH(SessionContext ctx)
 	{
 		return campaignTextTemplateFRCH;
 	}
 
 	@Override
-	public Media getCampaignTextTemplateITCH(SessionContext ctx)
+	public NewsletterMedia getCampaignTextTemplateITCH(SessionContext ctx)
 	{
 		return campaignTextTemplateITCH;
 	}
 
 	@Override
-	public void setCampaignHTMLTemplateDECH(SessionContext ctx, Media value)
+	public void setCampaignHTMLTemplateDECH(SessionContext ctx, NewsletterMedia value)
 	{
 		campaignHTMLTemplateDECH = value;
 	}
 
 	@Override
-	public void setCampaignHTMLTemplateEN(SessionContext ctx, Media value)
+	public void setCampaignHTMLTemplateEN(SessionContext ctx, NewsletterMedia value)
 	{
 		campaignHTMLTemplateEN = value;
 	}
 
 	@Override
-	public void setCampaignHTMLTemplateES(SessionContext ctx, Media value)
+	public void setCampaignHTMLTemplateES(SessionContext ctx, NewsletterMedia value)
 	{
 		campaignHTMLTemplateES = value;
 	}
 
 	@Override
-	public void setCampaignHTMLTemplateFRCH(SessionContext ctx, Media value)
+	public void setCampaignHTMLTemplateFRCH(SessionContext ctx, NewsletterMedia value)
 	{
 		campaignHTMLTemplateFRCH = value;
 	}
 
 	@Override
-	public void setCampaignHTMLTemplateITCH(SessionContext ctx, Media value)
+	public void setCampaignHTMLTemplateITCH(SessionContext ctx, NewsletterMedia value)
 	{
 		campaignHTMLTemplateITCH = value;
 	}
 
 	@Override
-	public void setCampaignTextTemplateDECH(SessionContext ctx, Media value)
+	public void setCampaignTextTemplateDECH(SessionContext ctx, NewsletterMedia value)
 	{
 		campaignTextTemplateDECH = value;
 	}
 
 	@Override
-	public void setCampaignTextTemplateEN(SessionContext ctx, Media value)
+	public void setCampaignTextTemplateEN(SessionContext ctx, NewsletterMedia value)
 	{
 		campaignTextTemplateEN = value;
 	}
 
 	@Override
-	public void setCampaignTextTemplateES(SessionContext ctx, Media value)
+	public void setCampaignTextTemplateES(SessionContext ctx, NewsletterMedia value)
 	{
 		campaignTextTemplateES = value;
 	}
 
 	@Override
-	public void setCampaignTextTemplateFRCH(SessionContext ctx, Media value)
+	public void setCampaignTextTemplateFRCH(SessionContext ctx, NewsletterMedia value)
 	{
 		campaignTextTemplateFRCH = value;
 	}
 
 	@Override
-	public void setCampaignTextTemplateITCH(SessionContext ctx, Media value)
+	public void setCampaignTextTemplateITCH(SessionContext ctx, NewsletterMedia value)
 	{
 		campaignTextTemplateITCH = value;
 	}
@@ -377,6 +389,42 @@ public class CreateEMailFaxCampaignWizard extends GeneratedCreateEMailFaxCampaig
 	public void setCampaignProducts(SessionContext ctx, Collection<Product> value)
 	{
 		campaignProducts = value;
+	}
+	
+	@Override
+	public Media getIntroImage(SessionContext ctx)
+	{
+		return introImage;
+	}
+
+	@Override
+	public Collection<NewsletterText> getListContentNewsletterTextCollection(SessionContext ctx)
+	{
+		return contentNewsletterTexts;
+	}
+
+	@Override
+	public Collection<NewsletterText> getListRightNewsletterTextCollection(SessionContext ctx)
+	{
+		return rightNewsletterTexts;
+	}
+
+	@Override
+	public void setIntroImage(SessionContext ctx, Media value)
+	{
+		introImage = value;
+	}
+
+	@Override
+	public void setListContentNewsletterTextCollection(SessionContext ctx, Collection<NewsletterText> value)
+	{
+		contentNewsletterTexts = value;
+	}
+
+	@Override
+	public void setListRightNewsletterTextCollection(SessionContext ctx, Collection<NewsletterText> value)
+	{
+		rightNewsletterTexts = value;
 	}
 	
 	// ----------------------------------------------------------------------------------------
@@ -402,6 +450,8 @@ public class CreateEMailFaxCampaignWizard extends GeneratedCreateEMailFaxCampaig
 			ctx.hideTab(TAB1);
 			ctx.hideTab(TAB2);
 			ctx.hideTab(TAB3);
+			ctx.hideTab(TAB4);
+			ctx.hideTab(TAB5);
 			ctx.showSummaryTab("Die Kampanie wurde erfolgreich erstellt.");
 		}
 		catch (JaloBusinessException e)
@@ -419,7 +469,7 @@ public class CreateEMailFaxCampaignWizard extends GeneratedCreateEMailFaxCampaig
 	{
 		super.tabChanges(ctx, fromTabName, toTabName);
 
-		if (toTabName.equals(TAB3))
+		if (toTabName.equals(TAB5))
 			ctx.enableButton(START_BUTTON);
 		else
 			ctx.disableButton(START_BUTTON);
@@ -450,13 +500,16 @@ public class CreateEMailFaxCampaignWizard extends GeneratedCreateEMailFaxCampaig
 					CampaignConstants.TC.CAMPAIGNAPPROVALSTATUS,
 					CampaignConstants.Enumerations.CampaignApprovalStatus.APPROVED));
 
-		params.put(EMailFaxCampaign.FRONTENDHOSTANDPORT, "localhost");
+		params.put(EMailFaxCampaign.FRONTENDHOSTANDPORT, frontendHost);
 
 		NewsletterCollectionFilter filter = CampaignManager.getInstance().createNewsletterCollectionFilter(
 					Collections.singletonList(getCampaignNewsletter()));
 		params.put(EMailFaxCampaign.FILTER, filter);
 
 		params.put(EMailFaxCampaign.SCHEDULER, CampaignManager.getInstance().createIntervalCampaignScheduler(0, 0));
+		
+		params.put(EMailFaxCampaign.LISTNEWSLETTERTEXTCOLLECTION, getListContentNewsletterTextCollection());
+		params.put(EMailFaxCampaign.LISTRIGHTNEWSLETTERTEXTCOLLECTION, getListRightNewsletterTextCollection());
 		ArtozManager.getInstance().createEMailFaxCampaign(ctx, params);
 	}
 
@@ -492,6 +545,7 @@ public class CreateEMailFaxCampaignWizard extends GeneratedCreateEMailFaxCampaig
 		while (br.read(buffer) > 0)
 		{
 			data.append(buffer);
+			buffer = new char[4];
 		}
 
 		return data.toString();

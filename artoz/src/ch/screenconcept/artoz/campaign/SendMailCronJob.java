@@ -63,9 +63,8 @@ public class SendMailCronJob extends GeneratedSendMailCronJob
 			List<EMailFax> list = flexibleSearch.search(query.toString(), values,
 						Collections.singletonList(EMailFax.class), true, true, 0, maximumResultSize).getResult();
 
-			log.info("did query");
-			for (EMailFax mail : list)
-				log.info(mail.getRecipient() + " " + mail.getText());
+			log.info("Found " + list.size() + " mails to send");
+			
 			return list;
 		}
 

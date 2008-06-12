@@ -89,6 +89,10 @@
 			</attributes>
 		</itemtype>
 
+		<itemtype code="NewsletterMedia" extends="Media"
+			autocreate="true" generate="true"
+			jaloclass="ch.screenconcept.artoz.campaign.NewsletterMedia" />
+
 		<itemtype code="Paragraph" extends="true" autocreate="false"
 			generate="true">
 			<attributes>
@@ -615,57 +619,57 @@
 					<persistence type="jalo" />
 				</attribute>
 				<attribute qualifier="campaignImportFile"
-					type="Media">
+					type="NewsletterMedia">
 					<modifiers optional="true" />
 					<persistence type="jalo" />
 				</attribute>
 				<attribute qualifier="campaignHTMLTemplateDECH"
-					type="Media">
+					type="NewsletterMedia">
 					<modifiers optional="true" />
 					<persistence type="jalo" />
 				</attribute>
 				<attribute qualifier="campaignTextTemplateDECH"
-					type="Media">
+					type="NewsletterMedia">
 					<modifiers optional="true" />
 					<persistence type="jalo" />
 				</attribute>
 				<attribute qualifier="campaignHTMLTemplateEN"
-					type="Media">
+					type="NewsletterMedia">
 					<modifiers optional="true" />
 					<persistence type="jalo" />
 				</attribute>
 				<attribute qualifier="campaignTextTemplateEN"
-					type="Media">
+					type="NewsletterMedia">
 					<modifiers optional="true" />
 					<persistence type="jalo" />
 				</attribute>
 				<attribute qualifier="campaignHTMLTemplateFRCH"
-					type="Media">
+					type="NewsletterMedia">
 					<modifiers optional="true" />
 					<persistence type="jalo" />
 				</attribute>
 				<attribute qualifier="campaignTextTemplateFRCH"
-					type="Media">
+					type="NewsletterMedia">
 					<modifiers optional="true" />
 					<persistence type="jalo" />
 				</attribute>
 				<attribute qualifier="campaignHTMLTemplateITCH"
-					type="Media">
+					type="NewsletterMedia">
 					<modifiers optional="true" />
 					<persistence type="jalo" />
 				</attribute>
 				<attribute qualifier="campaignTextTemplateITCH"
-					type="Media">
+					type="NewsletterMedia">
 					<modifiers optional="true" />
 					<persistence type="jalo" />
 				</attribute>
 				<attribute qualifier="campaignHTMLTemplateES"
-					type="Media">
+					type="NewsletterMedia">
 					<modifiers optional="true" />
 					<persistence type="jalo" />
 				</attribute>
 				<attribute qualifier="campaignTextTemplateES"
-					type="Media">
+					type="NewsletterMedia">
 					<modifiers optional="true" />
 					<persistence type="jalo" />
 				</attribute>
@@ -677,6 +681,22 @@
 				<attribute qualifier="campaignProducts"
 					type="ProductCollection">
 					<modifiers optional="true" write="true" />
+					<persistence type="jalo" />
+				</attribute>
+				<attribute qualifier="introImage" type="Media">
+					<persistence type="jalo" />
+				</attribute>
+				<attribute
+					qualifier="listContentNewsletterTextCollection"
+					type="NewsletterTextCollection">
+					<modifiers read="true" write="true" search="true"
+						initial="true" />
+					<persistence type="jalo" />
+				</attribute>
+				<attribute qualifier="listRightNewsletterTextCollection"
+					type="NewsletterTextCollection">
+					<modifiers read="true" write="true" search="true"
+						initial="true" />
 					<persistence type="jalo" />
 				</attribute>
 			</attributes>

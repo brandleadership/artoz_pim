@@ -29,58 +29,68 @@
 		<group name="campaigngroup">
 			<typeref type="CreateEMailFaxCampaignWizard"
 				description="typeref.CreateEMailFaxCampaignWizard.description" />
+			<typeref type="NewsletterText"
+				description="typeref.NewsletterText.description" />
 		</group>
 		<group name="group.xprint">
 			<typeref type="CreateProductPlacmentWizard"
 				description="typeref.CreateProductPlacmentWizard.description" />
 		</group>
 	</explorertree>
-	
+
 	<type name="Paragraph" mode="append">
 		<organizer>
 			<editor>
-				<tab name="tab.paragraph.newslettercontent" position="2">
-					<section name="section.paragraph.newslettercontent">
+				<tab name="tab.paragraph.newslettercontent"
+					position="2">
+					<section
+						name="section.paragraph.newslettercontent">
 						<table>
 							<tr>
 								<td>
-									<attribute  name="setNewsletterHeadText">
-										<stringeditor/>
+									<attribute
+										name="setNewsletterHeadText">
+										<stringeditor />
 									</attribute>
 								</td>
 							</tr>
 							<tr>
 								<td>
-									<attribute  name="setNewsletterText">
-										<textareaeditor/>
+									<attribute
+										name="setNewsletterText">
+										<textareaeditor />
 									</attribute>
 								</td>
 							</tr>
 							<tr>
 								<td>
-									<attribute  name="setNewsletterLinkText">
-										<stringeditor/>
+									<attribute
+										name="setNewsletterLinkText">
+										<stringeditor />
 									</attribute>
 								</td>
 							</tr>
 							<tr>
 								<td>
-									<attribute  name="setNewsletterImage0">
-										<mediaeditor/>
+									<attribute
+										name="setNewsletterImage0">
+										<mediaeditor />
 									</attribute>
 								</td>
 							</tr>
 							<tr>
 								<td>
-									<attribute  name="setNewsletterImage1">
-										<mediaeditor/>
+									<attribute
+										name="setNewsletterImage1">
+										<mediaeditor />
 									</attribute>
 								</td>
 							</tr>
 							<tr>
 								<td>
-									<attribute  name="setNewsletterLayout">
-										<enumerationvalueselecteditor/>
+									<attribute
+										name="setNewsletterLayout">
+										<enumerationvalueselecteditor />
 									</attribute>
 								</td>
 							</tr>
@@ -90,7 +100,7 @@
 			</editor>
 		</organizer>
 	</type>
-	
+
 	<type name="ArtozProduct" icon="images/icons/e_product.gif"
 		mode="append">
 		<organizer>
@@ -272,6 +282,45 @@
 		</defaultreference>
 	</type>
 
+	<type name="NewsletterText" mode="append"
+		icon="ext/campaign/images/icons/e_campaign.gif">
+		<organizer>
+			<search mode="replace">
+				<condition attribute="name" operator="equal" />
+			</search>
+			<result>
+				<listview>
+					<itemlayout mode="replace">
+						<attribute name="name" width="150" />
+					</itemlayout>
+				</listview>
+			</result>
+			<editor>
+				<tab name="tab.newslettertext.properties">
+					<section name="section.newslettertext.properties">
+						<listlayout>
+							<attribute name="name" />
+							<attribute name="headtext" />
+							<attribute name="text">
+								<textareaeditor />
+							</attribute>
+							<attribute name="linktext" />
+							<attribute name="image0" />
+							<attribute name="image1" />
+							<attribute name="imagelayout" />
+							<attribute name="paragraph" />
+						</listlayout>
+					</section>
+				</tab>
+			</editor>
+		</organizer>
+		<defaultreference mode="replace">
+			<itemlayout>
+				<attribute name="name" />
+			</itemlayout>
+		</defaultreference>
+	</type>
+
 	<type name="Unit" mode="append">
 		<organizer />
 		<defaultreference mode="replace">
@@ -297,28 +346,41 @@
 					</section>
 				</tab>
 				<tab name="content" position="0" mode="append">
+					<section name="content">
+						<listlayout>
+							<attribute name="htmlText" mode="replace">
+								<textareaeditor cols="50" rows="10" />
+							</attribute>
+						</listlayout>
+					</section>
 					<section name="section.websitecontent">
 						<listlayout>
 							<attribute name="introImage">
-								<mediaeditor/>
+								<mediaeditor />
 							</attribute>
 						</listlayout>
 						<listlayout>
-							<attribute name="listNewsletterTextCollection"  editable="true">
-								<referencecollectioneditor autosave="true" resortable="true" add="true" remove="true" create="true">
+							<attribute
+								name="listNewsletterTextCollection" editable="true">
+								<referencecollectioneditor
+									autosave="true" resortable="true" add="true" remove="true"
+									create="true">
 									<itemlayout>
-										<attribute name="name"/>
-										<attribute name="headtext"/>
+										<attribute name="name" />
+										<attribute name="headtext" />
 									</itemlayout>
 								</referencecollectioneditor>
 							</attribute>
 						</listlayout>
 						<listlayout>
-							<attribute name="listRightNewsletterTextCollection"  editable="true">
-								<referencecollectioneditor autosave="true" resortable="true" add="true" remove="true" create="true">
+							<attribute
+								name="listRightNewsletterTextCollection" editable="true">
+								<referencecollectioneditor
+									autosave="true" resortable="true" add="true" remove="true"
+									create="true">
 									<itemlayout>
-										<attribute name="name"/>
-										<attribute name="headtext"/>
+										<attribute name="name" />
+										<attribute name="headtext" />
 									</itemlayout>
 								</referencecollectioneditor>
 							</attribute>
@@ -337,7 +399,7 @@
 				<tab name="tab.createEMailFaxCampaignWizard.one"
 					position="0">
 					<section
-						name="section.createwmpagecontentwizard.one.campaign">
+						name="section.createEMailFaxCampaignWizard.one.campaign">
 						<listlayout>
 							<attribute name="campaignName" />
 							<attribute name="campaignSubject" />
@@ -346,7 +408,7 @@
 						</listlayout>
 					</section>
 					<section
-						name="section.createwmpagecontentwizard.one.fax">
+						name="section.createEMailFaxCampaignWizard.one.fax">
 						<listlayout>
 							<attribute name="faxSender" />
 							<attribute name="faxServiceUser" />
@@ -358,7 +420,7 @@
 				<tab name="tab.createEMailFaxCampaignWizard.two"
 					position="1">
 					<section
-						name="section.createwmpagecontentwizard.two.template">
+						name="section.createEMailFaxCampaignWizard.two.template">
 						<listlayout>
 							<text name="nciwizard.tempalte.de" />
 							<attribute
@@ -407,14 +469,14 @@
 				<tab name="tab.createEMailFaxCampaignWizard.three"
 					position="3">
 					<section
-						name="section.createwmpagecontentwizard.three.newsletter">
+						name="section.createEMailFaxCampaignWizard.three.newsletter">
 						<listlayout>
 							<text name="nciwizard.newsletter" />
 							<attribute name="campaignNewsletter" />
 						</listlayout>
 					</section>
 					<section
-						name="section.createwmpagecontentwizard.three.import">
+						name="section.createEMailFaxCampaignWizard.three.import">
 						<listlayout>
 							<text name="nciwizard.import" />
 							<attribute name="campaignImportFile">
@@ -436,10 +498,30 @@
 				<tab name="tab.createEMailFaxCampaignWizard.four"
 					position="2">
 					<section
-						name="section.createwmpagecontentwizard.four.products">
+						name="section.createEMailFaxCampaignWizard.four.products">
 						<listlayout>
 							<text name="nciwizard.products" />
 							<attribute name="campaignProducts" />
+						</listlayout>
+					</section>
+				</tab>
+				<tab name="tab.createEMailFaxCampaignWizard.five"
+					position="4">
+					<section
+						name="section.createEMailFaxCampaignWizard.five.newslettertext">
+						<listlayout>
+							<text name="nciwizard.newslettertext" />
+							<attribute
+								name="listContentNewsletterTextCollection" />
+							<attribute
+								name="listRightNewsletterTextCollection" />
+						</listlayout>
+					</section>
+					<section
+						name="section.createEMailFaxCampaignWizard.five.introImage">
+						<listlayout>
+							<text name="nciwizard.introImage" />
+							<attribute name="introImage" />
 						</listlayout>
 					</section>
 				</tab>

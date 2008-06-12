@@ -26,9 +26,9 @@ public class NewsletterTextProxy
 	NewsletterText content;
 
 	CampaignContext campaign;
-	
+
 	Media image;
-	
+
 	User user;
 
 	public NewsletterTextProxy(NewsletterText content, CampaignContext campaign)
@@ -36,113 +36,130 @@ public class NewsletterTextProxy
 		this.content = content;
 		this.campaign = campaign;
 	}
-	
+
 	public NewsletterTextProxy(Object obj)
 	{
 		if (obj instanceof User)
 			this.user = (User) obj;
 		if (obj instanceof Media)
-			this.image = (Media)obj;
+			this.image = (Media) obj;
 	}
 
 	public String getName()
 	{
 		return content.getName();
 	}
-	
+
 	public String getUid()
 	{
 		return user.getUID();
 	}
-	
+
 	public String getUrl()
 	{
 		return campaign.getCampaign().getFrontEndHostAndPort();
 	}
+
 	/**
-	 * Gibt Url zum IntroImage beim Verkaufsnewsletter zurück
+	 * Gibt Url zum IntroImage beim Verkaufsnewsletter zurÃ¼ck
+	 * 
 	 * @return String Image url
 	 */
 	public String getSrc()
 	{
-		if(image != null)
+		if (image != null)
 			return image.getURL();
 		else
 			return "";
 	}
-	
+
 	/**
-	 * Gibt Alt-Text zum IntroImage beim Verkaufsnewsletter zurück
+	 * Gibt Alt-Text zum IntroImage beim Verkaufsnewsletter zurÃ¼ck
+	 * 
 	 * @return String Image Alt-Text
 	 */
 	public String getAlt()
 	{
-		if(image != null)
+		if (image != null)
 			return image.getAltText();
 		else
 			return "";
 	}
-	
+
 	public String getHeadtext()
 	{
 		return content.getHeadtext();
 	}
-	
+
 	public String getText()
 	{
 		return content.getText();
 	}
-	
+
+	public String getTextAsHtml()
+	{
+		String text = content.getText();
+		if (text == null)
+			return "";
+		return  text.replace("\n\r", "<br />").replace("\n", "<br />");
+	}
+
 	public String getParagraphlink()
 	{
-		Paragraph par = content.getParagraph();
-		return par.getCode();
+		return content.getParagraph() != null ? content.getParagraph().getCode() : "";
 	}
-	
+
 	public String getLayout()
 	{
 		return content.getImagelayout().getCode();
 	}
-	
+
 	public String getImage0()
 	{
-		return content.getImage0().getURL();
+		return content.getImage0() != null ? content.getImage0().getURL() : "";
 	}
-	
+
 	public String getImage1()
 	{
-		return content.getImage1().getURL();
+		return content.getImage1() != null ? content.getImage1().getURL() : "";
 	}
-	
+
 	public String getAlttext0()
 	{
-		return content.getImage0().getAltText();
+		return content.getImage0() != null ? content.getImage0().getAltText() : "";
 	}
-	
+
 	public String getAlttext1()
 	{
-		return content.getImage1().getAltText();
+		return content.getImage1() != null ? content.getImage1().getAltText() : "";
 	}
 
 	public String getLink()
 	{
-		String ret = "";
-		Paragraph par = content.getParagraph();
-		Iterator i = par.getParagraphContents().iterator();
-		ParagraphContent target = (ParagraphContent) i.next();
-		ret = "<a href=\"http://" + campaign.getCampaign().getFrontEndHostAndPort() + "/pages/index.jsf?pageid="
-					+ target.getCode() + "\" target=\"_blank\">" + content.getLinktext() + "</a>";
-		return ret;
+		String returnValue = "";
+		Paragraph paragraph = content.getParagraph();
+		if (paragraph != null)
+		{
+			Iterator iterator = paragraph.getParagraphContents().iterator();
+			ParagraphContent target = (ParagraphContent) iterator.next();
+			returnValue = "<a href=\"http://" + campaign.getCampaign().getFrontEndHostAndPort()
+						+ "/pages/index.jsf?pageid=" + target.getCode() + "\" target=\"_blank\">"
+						+ content.getLinktext() + "</a>";
+		}
+		return returnValue;
 	}
-	
+
 	public String getTextlink()
 	{
-		String ret = "";
-		Paragraph par = content.getParagraph();
-		Iterator i = par.getParagraphContents().iterator();
-		ParagraphContent target = (ParagraphContent) i.next();
-		ret = "http://" + campaign.getCampaign().getFrontEndHostAndPort() + "/pages/index.jsf?pageid="
-					+ target.getCode();
-		return ret;
+		String returnValue = "";
+		Paragraph paragraph = content.getParagraph();
+		if (paragraph != null)
+		{
+			Iterator iterator = paragraph.getParagraphContents().iterator();
+			ParagraphContent target = (ParagraphContent) iterator.next();
+			returnValue = "http://" + campaign.getCampaign().getFrontEndHostAndPort() + "/pages/index.jsf?pageid="
+						+ target.getCode();
+		}
+		return returnValue;
 	}
 }
