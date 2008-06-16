@@ -1,25 +1,13 @@
 package ch.screenconcept.artoz.campaign;
 
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import bsh.org.objectweb.asm.Constants;
-import ch.screenconcept.artoz.constants.ArtozConstants;
 
 import com.exedio.campaign.jalo.CampaignContext;
 
-import de.hybris.platform.jalo.JaloSession;
-import de.hybris.platform.jalo.SearchResult;
-import de.hybris.platform.jalo.media.Media;
-import de.hybris.platform.jalo.user.User;
-import de.hybris.platform.cms.constants.CmsConstants;
-import de.hybris.platform.cms.jalo.NavigationElement;
-import de.hybris.platform.cms.jalo.PageContent;
 import de.hybris.platform.cms.jalo.Paragraph;
 import de.hybris.platform.cms.jalo.ParagraphContent;
+import de.hybris.platform.jalo.media.Media;
+import de.hybris.platform.jalo.user.User;
 
 public class NewsletterTextProxy
 {
@@ -101,7 +89,7 @@ public class NewsletterTextProxy
 		String text = content.getText();
 		if (text == null)
 			return "";
-		return  text.replace("\n\r", "<br />").replace("\n", "<br />");
+		return text.replace("\n\r", "<br />").replace("\n", "<br />");
 	}
 
 	public String getParagraphlink()
@@ -143,7 +131,8 @@ public class NewsletterTextProxy
 			Iterator iterator = paragraph.getParagraphContents().iterator();
 			ParagraphContent target = (ParagraphContent) iterator.next();
 			returnValue = "<a href=\"http://" + campaign.getCampaign().getFrontEndHostAndPort()
-						+ "/pages/index.jsf?pageid=" + target.getCode() + "\" target=\"_blank\">"
+						+ "/pages/index.jsf?pageid=" + target.getCode() + "&partid="
+						+ campaign.getParticipation().getPK().toHexString() + "\" target=\"_blank\">"
 						+ content.getLinktext() + "</a>";
 		}
 		return returnValue;
