@@ -8,9 +8,12 @@ import java.util.Map;
 
 import javax.faces.context.FacesContext;
 
+import org.apache.commons.validator.GenericValidator;
 import org.apache.log4j.Logger;
 import org.apache.shale.tiger.managed.Bean;
 import org.apache.shale.tiger.managed.Scope;
+
+import com.exedio.campaign.jalo.EMailCampaignParticipation;
 
 import ch.screenconcept.artoz.website.constants.WebsiteConstants;
 import ch.screenconcept.artoz.website.navigation.ArtozMainNavigationElement;
@@ -20,6 +23,8 @@ import de.hybris.platform.cms.jalo.CmsManager;
 import de.hybris.platform.cms.jalo.NavigationElement;
 import de.hybris.platform.cms.jalo.PageContent;
 import de.hybris.platform.cms.jalo.Website;
+import de.hybris.platform.core.PK;
+import de.hybris.platform.jalo.JaloSession;
 import de.hybris.platform.jalo.flexiblesearch.FlexibleSearch;
 
 /**
@@ -32,6 +37,28 @@ public class CmsJSFBean
 {
 	private static final Logger log = Logger.getLogger(CmsJSFBean.class.getName());
 
+	public CmsJSFBean(){
+		final String participationID = getRequestParameter(WebsiteConstants.PARAM_PARTICIPATION);
+		if (!GenericValidator.isBlankOrNull(participationID))
+		{
+			try
+			{
+				final EMailCampaignParticipation participation = (EMailCampaignParticipation) JaloSession
+							.getCurrentSession().getItem(PK.parseHex(participationID));
+				participation.setPositiveReaction(true);
+			}
+			catch (Exception e)
+			{
+				log.error("", e);
+			}
+		}
+	}
+	
+	public String getRequestParameter(String name)
+	{
+		return (String) FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get(name);
+	}
+	
 	public static final String FRONTPAGE_CATEGORY_CODE = "home";
 
 	PageContent pageContent;
