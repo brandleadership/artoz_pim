@@ -19,4 +19,7 @@ public final class WebsiteConstants extends GeneratedWebsiteConstants
 	public static final String QUICK_NAV = "quick_nav";
 	
 	public static final String LEXIKON = "lexikon";
+	
+	public static final String PARAM_PARTICIPATION = "partid";
+
 }
