@@ -370,3 +370,31 @@ background-repeat: no-repeat;
 background-image: url(/css/images/trennlinie_blau.gif); 
 margin-bottom: 10px;
 }
+/****************************/
+/*  AJAX-OverviewContent    */
+/****************************/
+a.thickbox {
+text-decoration: none;
+color: black;
+}
+/****************************/
+/*  AJAX-Content            */
+/****************************/
+#ajaxBackground {
+float: left;
+display: block;
+width: 1024px;
+height: 396px;
+}
+#ajaxFlashMovie,
+#ajaxText {
+float: left;
+background-color: none;
+margin-top: 50px;
+}
+#ajaxFlashMovie {
+margin-left: 200px;
+}
+#ajaxText {
+margin-left: 20px;
+}

@@ -7,13 +7,11 @@
 	
 	<div class="lexikonparagraph">
 		<c:forEach items="#{ajaxParagraphJSFBean.ajaxParagraphDatas}" var="data" >
-			<a href="ajax.jsf?pageid=#{item.target.code}&amp;paragraph=#{data.code}&amp;height=369&amp;width=1024" class="thickbox">
+			<a href="ajax.jsf?pageid=#{item.target.code}&amp;paragraph=#{data.code}&amp;height=409&amp;width=1025" class="thickbox">
 				<img src="#{data.thumbImage.URL}" border="0" />
 				<br />
 				<h:outputText escape="false" value="#{data.title}" />
 			</a><br />
 		</c:forEach>
 	</div>
-	
-	test
 </ui:composition>
