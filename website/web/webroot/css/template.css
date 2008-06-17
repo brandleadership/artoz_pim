@@ -244,6 +244,7 @@ background-repeat: x-repeat;
 }
 #bottom-nav ul li ul {
 margin-left: 15px;
+width: 800px;
 }
 #bottom-nav ul li ul li {
 text-align: left;
