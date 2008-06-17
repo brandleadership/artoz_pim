@@ -292,4 +292,56 @@
 			</editor>
 		</organizer>
 	</type>
+	
+		<type name="ArtozSortOverviewParagraph" mode="append">
+		<organizer>
+			<editor>
+				<tab name="tab.paragraph.content" mode="append">
+					<section name="text">
+						<table>
+							<tr>
+								<td>
+									<listlayout>
+										<attribute name="listArtozSortParagraphDatas">
+											<referencecollectioneditor autosave="true" resortable="true" add="true" remove="true" create="true">
+												<itemlayout>
+													<attribute name="title"/>
+												</itemlayout>
+											</referencecollectioneditor>
+										</attribute>
+									</listlayout>
+								</td>
+							</tr>
+						</table>
+					</section>
+				</tab>
+			</editor>
+		</organizer>
+	</type>
+	
+	<type name="ArtozSortParagraph" mode="append">
+		<organizer>
+			<editor>
+				<tab name="tab.paragraph.content" mode="append">
+					<section name="text">
+						<listlayout>
+							<attribute name="title"/>
+							<attribute name="description">
+								<wysiwygeditor/>
+							</attribute>
+							<attribute name="thumbImage">
+								<mediaeditor/>
+							</attribute>
+							<attribute name="productInfo">
+								<mediaeditor/>
+							</attribute>
+							<attribute name="slideShow">
+								<mediaeditor/>
+							</attribute>
+						</listlayout>
+					</section>
+				</tab>
+			</editor>
+		</organizer>
+	</type>
 </configuration>
