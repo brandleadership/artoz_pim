@@ -1,7 +1,6 @@
 package ch.screenconcept.artoz.faces.beans;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
@@ -11,16 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shale.tiger.managed.Bean;
 import org.apache.shale.tiger.managed.Scope;
-import org.springframework.web.util.WebUtils;
 
 import ch.screenconcept.artoz.constants.ArtozConstants;
-import ch.screenconcept.artoz.website.constants.WebsiteConstants;
-
 import de.hybris.platform.beanlayer.beans.LanguageBean;
 import de.hybris.platform.jalo.JaloSession;
 import de.hybris.platform.jalo.c2l.C2LManager;
 import de.hybris.platform.jalo.c2l.Language;
-import de.hybris.platform.jalo.user.User;
 
 @Bean(name = "languageBean", scope = Scope.SESSION)
 public class LanguageJSFBean

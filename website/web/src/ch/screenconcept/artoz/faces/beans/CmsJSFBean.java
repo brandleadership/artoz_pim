@@ -37,7 +37,8 @@ public class CmsJSFBean
 {
 	private static final Logger log = Logger.getLogger(CmsJSFBean.class.getName());
 
-	public CmsJSFBean(){
+	public CmsJSFBean()
+	{
 		final String participationID = getRequestParameter(WebsiteConstants.PARAM_PARTICIPATION);
 		if (!GenericValidator.isBlankOrNull(participationID))
 		{
@@ -52,6 +53,8 @@ public class CmsJSFBean
 				log.error("", e);
 			}
 		}
+		
+		CmsManager.getInstance().setActiveWebsite(getWebsite());
 	}
 	
 	public String getRequestParameter(String name)

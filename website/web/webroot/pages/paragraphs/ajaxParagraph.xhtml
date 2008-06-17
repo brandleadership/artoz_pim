@@ -1,0 +1,19 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:c="http://java.sun.com/jstl/core">
+	
+	<div class="lexikonparagraph">
+		<c:forEach items="#{ajaxParagraphJSFBean.ajaxParagraphDatas}" var="data" >
+			<a href="ajax.jsf?pageid=#{item.target.code}&amp;paragraph=#{data.code}&amp;height=369&amp;width=1024" class="thickbox">
+				<img src="#{data.thumbImage.URL}" border="0" />
+				<br />
+				<h:outputText escape="false" value="#{data.title}" />
+			</a><br />
+		</c:forEach>
+	</div>
+	
+	test
+</ui:composition>
