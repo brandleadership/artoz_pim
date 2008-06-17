@@ -22,6 +22,7 @@
 		<collectiontype code="ContactFormParagraphDataCollection" elementtype="ContactFormParagraphData" autocreate="true" generate="true" type="list"/>
 		<collectiontype code="TradeFairParagraphDataCollection" elementtype="TradeFairParagraphData" autocreate="true" generate="true" type="list"/>
 		<collectiontype code="LexikonParagraphDataCollection" elementtype="LexikonParagraphData" autocreate="true" generate="true" type="list"/>
+		<collectiontype code="ArtozSortParagraphDataCollection" elementtype="ArtozSortParagraph" autocreate="true" generate="true" type="list"/>
 	</collectiontypes>
 	<enumtypes>
 		<enumtype code="NavigationColor" autocreate="true"
@@ -303,5 +304,55 @@
 			</attributes>
 		</itemtype>
 		
+		<itemtype 	code="WebMedia"
+					extends="Media" 
+					jaloclass="ch.screenconcept.artoz.website.WebMedia"
+					autocreate="true"
+					generate="true"/>
+		
+		<itemtype	code="ArtozSortParagraph"
+						extends="Paragraph"
+						jaloclass="ch.screenconcept.artoz.website.ArtozSortParagraph"
+						generate="true"
+						autocreate="true">
+			<attributes>
+				<attribute qualifier="artozSortOverviewParagraph" type="ArtozSortOverviewParagraph" >
+					<persistence type="property"/>
+					<modifiers initial="true" write="false" optional="false"/>
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="title">
+					<persistence type="property"/>
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="description">
+					<persistence type="property"/>
+				</attribute>
+				<attribute qualifier="thumbImage" type="WebMedia">
+					<persistence type="property"/>
+				</attribute>
+				<attribute qualifier="productInfo" type="WebMedia">
+					<persistence type="property"/>
+				</attribute>
+				<attribute qualifier="slideShow" type="WebMedia">
+					<persistence type="property"/>
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype	code="ArtozSortOverviewParagraph"
+						extends="Paragraph"
+						jaloclass="ch.screenconcept.artoz.website.ArtozSortOverviewParagraph"
+						generate="true"
+						autocreate="true">
+			<attributes>
+				<attribute qualifier="listArtozSortParagraphDatas" type="ArtozSortParagraphDataCollection">
+					<persistence type="property"/>
+				</attribute>
+				<attribute qualifier="target" type="PageContent">
+					<persistence type="property"/>
+					<modifiers initial="true"/>
+				</attribute>
+			</attributes>
+		</itemtype>
+					
 	</itemtypes>
 </items>
