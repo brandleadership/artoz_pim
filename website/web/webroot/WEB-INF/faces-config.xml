@@ -50,6 +50,14 @@
         </navigation-case>
     </navigation-rule>
     
+    <navigation-rule>  
+        <navigation-case>
+            <from-outcome>home</from-outcome>
+            <to-view-id>/pages/home</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
     
     <!-- ContactForm -->
     <!--

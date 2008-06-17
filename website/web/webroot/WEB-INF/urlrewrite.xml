@@ -23,8 +23,36 @@ http://tuckey.org/urlrewrite/
 		<to type="redirect">%{context-path}/pages/index.jsf</to>
 	</rule>
     -->
+    
+    <!-- 
     <rule>
         <from>^/$</from>
 		<to type="redirect">/pages/index.jsf?pageid=home</to>
 	</rule>
+	-->
+<!-- 	
+	<rule>
+        <from>^/pages/(.*)$</from>
+		<to>/pages/index.jsf?pageid=$1</to>
+		<set name="URLINSIDE">/pages/index.jsf?pageid=$1</set>
+	</rule>
+-->	
+	
+	<rule>
+        <from>^/pages/(.*)$</from>
+		<to>/pages/index.jsf?pageid=$1</to>
+	</rule>	
+	
+	<!-- Redirect to home page -->
+	<rule>
+        <from>^/$</from>
+		<to type="redirect">/pages/home</to>
+	</rule>
+	
+	<outbound-rule encodefirst="false">
+		<name>JSF_FORMACTION</name>
+		<condition type="attribute" name="URLINSIDE"/>
+		<from>pages/?(productDetail.jsf|voucherProduct.jsf|orderDetail.jsf|categories.jsf|index.jsf|popupPage.jsf|catalog.jsf|thankYou.jsf)(.*)</from>
+		<to last="true">%{attribute:URLINSIDE}</to>
+	</outbound-rule>
 </urlrewrite>
