@@ -127,9 +127,9 @@ public class EMailFaxCampaign extends GeneratedEMailFaxCampaign
 						campaignContext));
 		}
 
-		//Set optOutInfo empty because the optOutInfo is fix in the template
+		// Set optOutInfo empty because the optOutInfo is fix in the template
 		ctx.put("optOutInfo", "");
-		
+
 		String plainText = getPlainText() == null || getPlainText().trim().length() <= 20 ? null : EMailConfig
 					.evaluate(ctx, getPlainText());
 		String htmlText = getHtmlText() == null || getHtmlText().trim().length() <= 20 ? null : EMailConfig.evaluate(
@@ -148,8 +148,8 @@ public class EMailFaxCampaign extends GeneratedEMailFaxCampaign
 				attributes.put(EMailFax.SUBJECT, EMailConfig.evaluate(ctx, getSubject()));
 				attributes.put(EMailFax.TYPE, CampaignManager.getInstance().getCampaignConfig("eMailCampaign"));
 				attributes.put(EMailFax.USER, user);
-				attributes.put(EMailFax.TEXT, plainText);
-				attributes.put(EMailFax.TEXTASHTML, htmlText);
+				attributes.put(EMailFax.TEXT, EMailConfig.evaluate(ctx, plainText));
+				attributes.put(EMailFax.TEXTASHTML, EMailConfig.evaluate(ctx, htmlText));
 				attributes.put(EMailFax.FAXSERVICEUSER, getFaxUserName());
 				attributes.put(EMailFax.FAXSENDER, getFaxSender());
 				attributes.put(EMailFax.FAXSERVICEPASSWORD, getFaxPassword());
@@ -173,8 +173,8 @@ public class EMailFaxCampaign extends GeneratedEMailFaxCampaign
 			attributes.put(EMailFax.SUBJECT, EMailConfig.evaluate(ctx, getSubject()));
 			attributes.put(EMailFax.TYPE, CampaignManager.getInstance().getCampaignConfig("eMailCampaign"));
 			attributes.put(EMailFax.USER, user);
-			attributes.put(EMailFax.TEXT, plainText);
-			attributes.put(EMailFax.TEXTASHTML, htmlText);
+			attributes.put(EMailFax.TEXT, EMailConfig.evaluate(ctx, plainText));
+			attributes.put(EMailFax.TEXTASHTML, EMailConfig.evaluate(ctx, htmlText));
 			attributes.put(EMailFax.FAX, false);
 		}
 		ArtozManager.getInstance().createEMailFax(attributes);

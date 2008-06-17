@@ -67,8 +67,6 @@ public class ArtozMailProxyFactory implements MailProxyFactory
 			return new NewsletterTextProxy((NewsletterText) obj, campaigncontext);
 		if (obj instanceof Media)
 			return new NewsletterTextProxy((Media) obj);
-		if (obj instanceof User)
-			return new NewsletterTextProxy((User) obj);
 		else
 			return new JaloSystemException((new StringBuilder("Could not create MailProxy for object >")).append(
 						obj.toString()).append("< class >").append(obj.getClass().getName()).append("<").toString());

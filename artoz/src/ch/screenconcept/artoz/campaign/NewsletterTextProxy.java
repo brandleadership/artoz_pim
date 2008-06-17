@@ -7,7 +7,6 @@ import com.exedio.campaign.jalo.CampaignContext;
 import de.hybris.platform.cms.jalo.Paragraph;
 import de.hybris.platform.cms.jalo.ParagraphContent;
 import de.hybris.platform.jalo.media.Media;
-import de.hybris.platform.jalo.user.User;
 
 public class NewsletterTextProxy
 {
@@ -17,8 +16,6 @@ public class NewsletterTextProxy
 
 	Media image;
 
-	User user;
-
 	public NewsletterTextProxy(NewsletterText content, CampaignContext campaign)
 	{
 		this.content = content;
@@ -27,8 +24,6 @@ public class NewsletterTextProxy
 
 	public NewsletterTextProxy(Object obj)
 	{
-		if (obj instanceof User)
-			this.user = (User) obj;
 		if (obj instanceof Media)
 			this.image = (Media) obj;
 	}
@@ -36,11 +31,6 @@ public class NewsletterTextProxy
 	public String getName()
 	{
 		return content.getName();
-	}
-
-	public String getUid()
-	{
-		return user.getUID();
 	}
 
 	public String getUrl()
@@ -128,7 +118,7 @@ public class NewsletterTextProxy
 		Paragraph paragraph = content.getParagraph();
 		if (paragraph != null)
 		{
-			Iterator iterator = paragraph.getParagraphContents().iterator();
+			Iterator<ParagraphContent> iterator = paragraph.getParagraphContents().iterator();
 			ParagraphContent target = (ParagraphContent) iterator.next();
 			returnValue = "<a href=\"http://" + campaign.getCampaign().getFrontEndHostAndPort()
 						+ "/pages/index.jsf?pageid=" + target.getCode() + "&partid="
@@ -144,8 +134,8 @@ public class NewsletterTextProxy
 		Paragraph paragraph = content.getParagraph();
 		if (paragraph != null)
 		{
-			Iterator iterator = paragraph.getParagraphContents().iterator();
-			ParagraphContent target = (ParagraphContent) iterator.next();
+			Iterator<ParagraphContent> iterator = paragraph.getParagraphContents().iterator();
+			ParagraphContent target = iterator.next();
 			returnValue = "http://" + campaign.getCampaign().getFrontEndHostAndPort() + "/pages/index.jsf?pageid="
 						+ target.getCode();
 		}

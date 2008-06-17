@@ -22,15 +22,20 @@ public class ArtozCustomerMailProxy
 		StringBuffer fullName = new StringBuffer();
 		try
 		{
-			if (address.getAttribute("title") != null){
-				fullName.append(((Title)address.getAttribute("title")).getName());
-				fullName.append(" ");
+			if (address != null)
+			{
+				if (address.getAttribute("title") != null)
+				{
+					fullName.append(((Title) address.getAttribute("title")).getName());
+					fullName.append(" ");
+				}
+				if (address.getAttribute("firstname") != null && !address.getAttribute("firstname").equals(""))
+				{
+					fullName.append(address.getAttribute("firstname"));
+					fullName.append(" ");
+				}
+				fullName.append(address.getAttribute("lastname"));
 			}
-			if (address.getAttribute("firstname") != null && !address.getAttribute("firstname").equals("")){
-				fullName.append(address.getAttribute("firstname"));
-				fullName.append(" ");
-			}
-			fullName.append(address.getAttribute("lastname"));
 		}
 		catch (JaloInvalidParameterException e)
 		{
