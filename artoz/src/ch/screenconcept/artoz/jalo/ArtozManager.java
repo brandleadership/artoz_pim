@@ -28,116 +28,118 @@ import ch.screenconcept.artoz.constants.ArtozConstants;
  */
 public class ArtozManager extends GeneratedArtozManager
 {
-	/* edit the local|project.properties to change logging behavior (properties log4j.*) */
+	/*
+	 * edit the local|project.properties to change logging behavior (properties
+	 * log4j.*)
+	 */
 	@SuppressWarnings("unused")
-	private static final Logger log = Logger.getLogger( ArtozManager.class.getName() );
+	private static final Logger log = Logger.getLogger(ArtozManager.class.getName());
 
 	/*
-	 * uncomment this to register the sample product enhancer globally (eventsystem) 
+	 * uncomment this to register the sample product enhancer globally
+	 * (eventsystem)
 	 */
 
 	/*
-	static
-	{
-		new Registry.Init()
-		{
-			@Override
-			protected void startup()
-			{
-				registerProductSampleEnhancer();
-			}
-		};
-	}
-   */	
+	 * static { new Registry.Init() { @Override protected void startup() {
+	 * registerProductSampleEnhancer(); } }; }
+	 */
 
-   /*
-    * NOTE: If the extension.managersuperclass is set to 'PriceFactory' (i.e. you are using PriceFactory 
-    * 		as superclass of this class), then you have to REMOVE the following getInstance() Method!! 
-    *       (PriceFactory already provides an implementation of getInstance).
-    */
+	/*
+	 * NOTE: If the extension.managersuperclass is set to 'PriceFactory' (i.e.
+	 * you are using PriceFactory as superclass of this class), then you have to
+	 * REMOVE the following getInstance() Method!! (PriceFactory already
+	 * provides an implementation of getInstance).
+	 */
 	/**
 	 * get the valid instance of this manager
-    * @return   the current instance of this manager
-    */
+	 * 
+	 * @return the current instance of this manager
+	 */
 	public static ArtozManager getInstance()
-   {
-      ExtensionManager em = JaloSession.getCurrentSession().getExtensionManager();
-      return (ArtozManager)em.getExtension( ArtozConstants.EXTENSIONNAME );
-   }
+	{
+		ExtensionManager em = JaloSession.getCurrentSession().getExtensionManager();
+		return (ArtozManager) em.getExtension(ArtozConstants.EXTENSIONNAME);
+	}
 
-		
 	/**
-	 * Implement this method to create initial objects.
-	 * This method will be called by system creator during initialization and system update.
-	 * Be sure that this method can be called repeatedly.
+	 * Implement this method to create initial objects. This method will be
+	 * called by system creator during initialization and system update. Be sure
+	 * that this method can be called repeatedly.
 	 * 
-	 * An example usage of this method is to create required cronjobs or modifying the type
-	 * system (setting e.g some default values)  
+	 * An example usage of this method is to create required cronjobs or
+	 * modifying the type system (setting e.g some default values)
 	 * 
-	 * @param params the parameters provided by user for creation of objects for the extension
-	 * @param jspc the jsp context; you can use it to write progress information to the jsp
-	 *        page during creation 
+	 * @param params
+	 *            the parameters provided by user for creation of objects for
+	 *            the extension
+	 * @param jspc
+	 *            the jsp context; you can use it to write progress information
+	 *            to the jsp page during creation
 	 */
 	@Override
-	public void createEssentialData( Map params, JspContext jspc ) throws Exception
+	public void createEssentialData(Map params, JspContext jspc) throws Exception
 	{
-	
+
 	}
-	
+
 	/**
-	 * Implement this method to create data that is used in your project. 
-	 * This method will be called during the system initialization.
+	 * Implement this method to create data that is used in your project. This
+	 * method will be called during the system initialization.
 	 * 
-	 * An example use is to import initial data like currencies or languages for your project
-	 * from an csv file.
+	 * An example use is to import initial data like currencies or languages for
+	 * your project from an csv file.
 	 * 
-	 * @param params the parameters provided by user for creation of objects for the extension
-	 * @param jspc the jsp context; you can use it to write progress information to the jsp
-	 *        page during creation 
+	 * @param params
+	 *            the parameters provided by user for creation of objects for
+	 *            the extension
+	 * @param jspc
+	 *            the jsp context; you can use it to write progress information
+	 *            to the jsp page during creation
 	 */
-	@Override 
-	public void createProjectData( Map params, JspContext jspc ) throws Exception
+	@Override
+	public void createProjectData(Map params, JspContext jspc) throws Exception
 	{
-	
+
 	}
 
+	// eventsystem methods
 
-	// eventsystem methods 
-	
-	
 	public static class ItemMethodInterceptor implements MethodInterceptor, JaloObjectCreator, CallbackFilter
 	{
 		private final Class<? extends Item> itemClass;
+
 		private final Set<Method> targetMethods;
 
 		private Enhancer e;
 
-		public ItemMethodInterceptor( Class<? extends Item> itemClass, Method... methods )
+		public ItemMethodInterceptor(Class<? extends Item> itemClass, Method... methods)
 		{
 			assert itemClass != null;
 			assert methods != null && methods.length > 0;
-			
+
 			this.itemClass = itemClass;
-			targetMethods = new HashSet<Method>( Arrays.asList( methods ));
+			targetMethods = new HashSet<Method>(Arrays.asList(methods));
 		}
-		
+
 		/**
 		 * Lazy creation getter of CGLIB class {@link Enhancer enhancer}.
 		 */
 		private Enhancer getEnhancer()
 		{
-			if( e == null )
+			if (e == null)
 			{
-				synchronized(this)
+				synchronized (this)
 				{
-					if( e == null )
+					if (e == null)
 					{
 						e = new Enhancer();
-						e.setSuperclass( itemClass );
-						e.setUseCache( true );
-						e.setUseFactory( false );
-						e.setCallbackFilter( this );
-						e.setCallbacks( new Callback[]{ NoOp.INSTANCE, this } );
+						e.setSuperclass(itemClass);
+						e.setUseCache(true);
+						e.setUseFactory(false);
+						e.setCallbackFilter(this);
+						e.setCallbacks(new Callback[]
+						{ NoOp.INSTANCE, this });
 					}
 				}
 			}
@@ -145,113 +147,121 @@ public class ArtozManager extends GeneratedArtozManager
 		}
 
 		/**
-		 * Intercepts all target method calls and wraps the actual call into {@link #before(Item, Method, Object[])}
-		 * and {@link #after(Item, Method, Object[], Object[], Object)}.
+		 * Intercepts all target method calls and wraps the actual call into
+		 * {@link #before(Item, Method, Object[])} and
+		 * {@link #after(Item, Method, Object[], Object[], Object)}.
 		 */
-		public final Object intercept( Object obj, Method method, Object[] args, MethodProxy methodproxy ) throws Throwable
+		public final Object intercept(Object obj, Method method, Object[] args, MethodProxy methodproxy)
+					throws Throwable
 		{
 			Item i = (Item) obj;
-			Object[] adjustedArgs = before( i , method, args );
-			Object ret = call( i, adjustedArgs, methodproxy ) ;
-			return after( i, method, args, adjustedArgs, ret );
+			Object[] adjustedArgs = before(i, method, args);
+			Object ret = call(i, adjustedArgs, methodproxy);
+			return after(i, method, args, adjustedArgs, ret);
 		}
 
 		/**
-		 * Called before the actual method call. It is possible to return different arguments
-		 * here.
+		 * Called before the actual method call. It is possible to return
+		 * different arguments here.
 		 * 
 		 * By default this method simply returns the original arguments.
 		 * 
-		 * @param i the item
-		 * @param m the method
-		 * @param args the original arguments
+		 * @param i
+		 *            the item
+		 * @param m
+		 *            the method
+		 * @param args
+		 *            the original arguments
 		 * @return the arguments to be used for calling the actual method
 		 */
-		protected Object[] before( Item i, Method m, Object[] args )
+		protected Object[] before(Item i, Method m, Object[] args)
 		{
 			return args;
 		}
 
 		/**
-		 * Called after the actual method call. 
+		 * Called after the actual method call.
 		 * 
 		 * 
 		 * By default this method simply passes on the original result.
 		 * 
-		 * @param i the item
-		 * @param m the method
-		 * @param originalArgs the original arguments before the call
-		 * @param args the arguments used for the actual call
-		 * @param returned the result of the actual call
+		 * @param i
+		 *            the item
+		 * @param m
+		 *            the method
+		 * @param originalArgs
+		 *            the original arguments before the call
+		 * @param args
+		 *            the arguments used for the actual call
+		 * @param returned
+		 *            the result of the actual call
 		 * @return the result to be returned as method call result
 		 */
-		protected Object after( Item i, Method m, Object[] originalArgs, Object[] args,  Object returned )
+		protected Object after(Item i, Method m, Object[] originalArgs, Object[] args, Object returned)
 		{
 			return returned;
 		}
 
-		protected Object call( Item obj, Object[] args, MethodProxy proxy ) throws Throwable
+		protected Object call(Item obj, Object[] args, MethodProxy proxy) throws Throwable
 		{
-			return proxy.invokeSuper( obj, args );
+			return proxy.invokeSuper(obj, args);
 		}
-		
+
 		/**
-		 * Here we're creating a jalo item instance. Later on it will be connected
-		 * to its persistence delegate so don't try to invoke any business method
-		 * here !
+		 * Here we're creating a jalo item instance. Later on it will be
+		 * connected to its persistence delegate so don't try to invoke any
+		 * business method here !
 		 */
-		public BridgeAbstraction createInstance( Tenant tenant, BridgeInterface impl )
+		public BridgeAbstraction createInstance(Tenant tenant, BridgeInterface impl)
 		{
 			return (BridgeAbstraction) getEnhancer().create();
 		}
 
 		/**
-		 * To keep the generated class light enough we define <b>which</b> methods
-		 * we'd like to intercept here.
+		 * To keep the generated class light enough we define <b>which</b>
+		 * methods we'd like to intercept here.
 		 * 
-		 * This method maps untouched methods to 0 and all intercepted methods to
-		 * 1 according to the configured callbacks inside our {@link Enhancer}.
+		 * This method maps untouched methods to 0 and all intercepted methods
+		 * to 1 according to the configured callbacks inside our
+		 * {@link Enhancer}.
 		 */
-		public int accept( Method method )
+		public int accept(Method method)
 		{
-			return targetMethods.contains( method ) ? 1 : 0;
+			return targetMethods.contains(method) ? 1 : 0;
 		}
 	}
-	
+
 	/**
-	 * Shows how to use configure the {@link ItemMethodInterceptor} for arbitrary
-	 * item classes.
+	 * Shows how to use configure the {@link ItemMethodInterceptor} for
+	 * arbitrary item classes.
 	 */
 	protected static void registerProductSampleEnhancer()
 	{
 		try
 		{
-			JaloImplementationManager.replaceCoreJaloClass(
-				Product.class,
-				new ItemMethodInterceptor( 
-					Product.class,
-					Product.class.getMethod( "setCode", new Class[]{SessionContext.class} ),
-					Product.class.getMethod( "setName", new Class[]{SessionContext.class} ),
-					Product.class.getMethod( "setAllNames", new Class[]{SessionContext.class, Map.class} ),
-					Product.class.getMethod( "setUnit", new Class[]{SessionContext.class} )
-				)
+			JaloImplementationManager.replaceCoreJaloClass(Product.class, new ItemMethodInterceptor(Product.class,
+						Product.class.getMethod("setCode", new Class[]
+						{ SessionContext.class }), Product.class.getMethod("setName", new Class[]
+						{ SessionContext.class }), Product.class.getMethod("setAllNames", new Class[]
+						{ SessionContext.class, Map.class }), Product.class.getMethod("setUnit", new Class[]
+						{ SessionContext.class }))
+			{
+				@Override
+				protected Object[] before(Item p, Method m, Object[] args)
 				{
-					@Override
-					protected Object[] before( Item p, Method m, Object[] args )
-					{
-						System.out.println("before calling "+m+" using "+Arrays.asList( args ));
-						return args;
-					}
-					@Override
-					protected Object after( Item i, Method m, Object[] originalArgs, Object[] args, Object returned )
-					{
-						System.out.println("after calling "+m+" using "+Arrays.asList( args ) );
-						return returned;
-					}
+					System.out.println("before calling " + m + " using " + Arrays.asList(args));
+					return args;
 				}
-			);
+
+				@Override
+				protected Object after(Item i, Method m, Object[] originalArgs, Object[] args, Object returned)
+				{
+					System.out.println("after calling " + m + " using " + Arrays.asList(args));
+					return returned;
+				}
+			});
 		}
-		catch( Exception e )
+		catch (Exception e)
 		{
 			throw new JaloSystemException(e);
 		}
@@ -260,344 +270,134 @@ public class ArtozManager extends GeneratedArtozManager
 	@Override
 	public void setAllSetNewsletterHeadText(SessionContext ctx, Paragraph item, Map<Language, String> value)
 	{
-		Map attributes = new HashMap();
-		attributes.put("paragraph", item.getPK());
-		final SearchResult res = JaloSession.getCurrentSession().getFlexibleSearch()
-		.search(
-					 "SELECT {" + NewsletterText.PK + "} FROM {"
-								+ ArtozConstants.TC.NEWSLETTERTEXT + "} "+
-								" WHERE {" + NewsletterText.PARAGRAPH + "} = ?paragraph ",
-								attributes,
-								NewsletterText.class);
-		if(res.getTotalCount() > 0)
+		if (!containsJustNullValues(value))
 		{
-			List result = (List) res.getResult();
-			Iterator i = result.iterator();
-			NewsletterText newsletterText = (NewsletterText)i.next();
+			NewsletterText newsletterText = NewsletterText.getNewsletterTextByParagraph(item.getPK());
+			if (newsletterText == null)
+				newsletterText = NewsletterText.createNewsletterTextWithParagraph((Paragraph) item);
+			ctx.setLanguage(null);
 			newsletterText.setAllHeadtext(value);
 		}
-		else
-		{
-			ctx.setLanguage(null);
-			Map<String, Object> params = new HashMap<String, Object>();
-			params.put(NewsletterText.HEADTEXT, value);
-			params.put(NewsletterText.PARAGRAPH, item);
-			params.put(NewsletterText.NAME, item.getCode());
-			super.createNewsletterText(ctx, params);
-		}
 	}
-	
+
 	@Override
 	public Map<Language, String> getAllSetNewsletterHeadText(SessionContext ctx, Paragraph item)
 	{
-		NewsletterText newsletterText = new NewsletterText();
-		Map<Language, String> retValue;
-		Map attributes = new HashMap();
-		attributes.put("paragraph", item.getPK());
-		final SearchResult res = JaloSession.getCurrentSession().getFlexibleSearch()
-		.search(
-					 "SELECT {" + NewsletterText.PK + "} FROM {"
-								+ ArtozConstants.TC.NEWSLETTERTEXT + "} "+
-								" WHERE {" + NewsletterText.PARAGRAPH + "} = ?paragraph ",
-								attributes,
-								NewsletterText.class);
-		if(res.getTotalCount() > 0)
-		{
-			List result = (List) res.getResult();
-			Iterator i = result.iterator();
-			newsletterText = (NewsletterText)i.next();
-		}
-		retValue = newsletterText.getAllHeadtext(ctx);
-		return retValue;
+		NewsletterText newsletterText = NewsletterText.getNewsletterTextByParagraph(item.getPK());
+		if (newsletterText == null)
+			return null;
+		return NewsletterText.getNewsletterTextByParagraph(item.getPK()).getAllHeadtext(ctx);
 	}
-
 
 	@Override
 	public Map<Language, String> getAllSetNewsletterLinkText(SessionContext ctx, Paragraph item)
 	{
-		NewsletterText newsletterText = new NewsletterText();
-		Map<Language, String> retValue;
-		Map attributes = new HashMap();
-		attributes.put("paragraph", item.getPK());
-		final SearchResult res = JaloSession.getCurrentSession().getFlexibleSearch()
-		.search(
-					 "SELECT {" + NewsletterText.PK + "} FROM {"
-								+ ArtozConstants.TC.NEWSLETTERTEXT + "} "+
-								" WHERE {" + NewsletterText.PARAGRAPH + "} = ?paragraph ",
-								attributes,
-								NewsletterText.class);
-		if(res.getTotalCount() > 0)
-		{
-			List result = (List) res.getResult();
-			Iterator i = result.iterator();
-			newsletterText = (NewsletterText)i.next();
-		}
-		retValue = newsletterText.getAllLinktext(ctx);
-		return retValue;
+		NewsletterText newsletterText = NewsletterText.getNewsletterTextByParagraph(item.getPK());
+		if (newsletterText == null)
+			return null;
+		return NewsletterText.getNewsletterTextByParagraph(item.getPK()).getAllLinktext(ctx);
 	}
-
 
 	@Override
 	public Map<Language, String> getAllSetNewsletterText(SessionContext ctx, Paragraph item)
 	{
-		NewsletterText newsletterText = new NewsletterText();
-		Map<Language, String> retValue;
-		Map attributes = new HashMap();
-		attributes.put("paragraph", item.getPK());
-		final SearchResult res = JaloSession.getCurrentSession().getFlexibleSearch()
-		.search(
-					 "SELECT {" + NewsletterText.PK + "} FROM {"
-								+ ArtozConstants.TC.NEWSLETTERTEXT + "} "+
-								" WHERE {" + NewsletterText.PARAGRAPH + "} = ?paragraph ",
-								attributes,
-								NewsletterText.class);
-		if(res.getTotalCount() > 0)
-		{
-			List result = (List) res.getResult();
-			Iterator i = result.iterator();
-			newsletterText = (NewsletterText)i.next();
-		}
-		retValue = newsletterText.getAllText(ctx);
-		return retValue;
+		NewsletterText newsletterText = NewsletterText.getNewsletterTextByParagraph(item.getPK());
+		if (newsletterText == null)
+			return null;
+		return NewsletterText.getNewsletterTextByParagraph(item.getPK()).getAllText(ctx);
 	}
-
 
 	@Override
 	public Media getSetNewsletterImage0(SessionContext ctx, Paragraph item)
 	{
-		NewsletterText newsletterText = new NewsletterText();
-		Media retValue;
-		Map attributes = new HashMap();
-		attributes.put("paragraph", item.getPK());
-		final SearchResult res = JaloSession.getCurrentSession().getFlexibleSearch()
-		.search(
-					 "SELECT {" + NewsletterText.PK + "} FROM {"
-								+ ArtozConstants.TC.NEWSLETTERTEXT + "} "+
-								" WHERE {" + NewsletterText.PARAGRAPH + "} = ?paragraph ",
-								attributes,
-								NewsletterText.class);
-		if(res.getTotalCount() > 0)
-		{
-			List result = (List) res.getResult();
-			Iterator i = result.iterator();
-			newsletterText = (NewsletterText)i.next();
-		}
-		retValue = newsletterText.getImage0(ctx);
-		return retValue;
+		NewsletterText newsletterText = NewsletterText.getNewsletterTextByParagraph(item.getPK());
+		if (newsletterText == null)
+			return null;
+		return NewsletterText.getNewsletterTextByParagraph(item.getPK()).getImage0(ctx);
 	}
-
 
 	@Override
 	public Media getSetNewsletterImage1(SessionContext ctx, Paragraph item)
 	{
-		NewsletterText newsletterText = new NewsletterText();
-		Media retValue;
-		Map attributes = new HashMap();
-		attributes.put("paragraph", item.getPK());
-		final SearchResult res = JaloSession.getCurrentSession().getFlexibleSearch()
-		.search(
-					 "SELECT {" + NewsletterText.PK + "} FROM {"
-								+ ArtozConstants.TC.NEWSLETTERTEXT + "} "+
-								" WHERE {" + NewsletterText.PARAGRAPH + "} = ?paragraph ",
-								attributes,
-								NewsletterText.class);
-		if(res.getTotalCount() > 0)
-		{
-			List result = (List) res.getResult();
-			Iterator i = result.iterator();
-			newsletterText = (NewsletterText)i.next();
-		}
-		retValue = newsletterText.getImage1(ctx);
-		return retValue;
+		NewsletterText newsletterText = NewsletterText.getNewsletterTextByParagraph(item.getPK());
+		if (newsletterText == null)
+			return null;
+		return NewsletterText.getNewsletterTextByParagraph(item.getPK()).getImage1(ctx);
 	}
-
 
 	@Override
 	public EnumerationValue getSetNewsletterLayout(SessionContext ctx, Paragraph item)
 	{
-		NewsletterText newsletterText = new NewsletterText();
-		EnumerationValue retValue;
-		Map attributes = new HashMap();
-		attributes.put("paragraph", item.getPK());
-		final SearchResult res = JaloSession.getCurrentSession().getFlexibleSearch()
-		.search(
-					 "SELECT {" + NewsletterText.PK + "} FROM {"
-								+ ArtozConstants.TC.NEWSLETTERTEXT + "} "+
-								" WHERE {" + NewsletterText.PARAGRAPH + "} = ?paragraph ",
-								attributes,
-								NewsletterText.class);
-		if(res.getTotalCount() > 0)
-		{
-			List result = (List) res.getResult();
-			Iterator i = result.iterator();
-			newsletterText = (NewsletterText)i.next();
-		}
-		retValue = newsletterText.getImagelayout(ctx);
-		return retValue;
+		NewsletterText newsletterText = NewsletterText.getNewsletterTextByParagraph(item.getPK());
+		if (newsletterText == null)
+			return null;
+		return newsletterText.getImagelayout(ctx);
 	}
-
 
 	@Override
 	public void setAllSetNewsletterLinkText(SessionContext ctx, Paragraph item, Map<Language, String> value)
 	{
-		Map attributes = new HashMap();
-		attributes.put("paragraph", item.getPK());
-		final SearchResult res = JaloSession.getCurrentSession().getFlexibleSearch()
-		.search(
-					 "SELECT {" + NewsletterText.PK + "} FROM {"
-								+ ArtozConstants.TC.NEWSLETTERTEXT + "} "+
-								" WHERE {" + NewsletterText.PARAGRAPH + "} = ?paragraph ",
-								attributes,
-								NewsletterText.class);
-		if(res.getTotalCount() > 0)
+		if (!containsJustNullValues(value))
 		{
-			List result = (List) res.getResult();
-			Iterator i = result.iterator();
-			NewsletterText newsletterText = (NewsletterText)i.next();
-			newsletterText.setAllLinktext(value);
-		}
-		else
-		{
+			NewsletterText newsletterText = NewsletterText.getNewsletterTextByParagraph(item.getPK());
+			if (newsletterText == null)
+				newsletterText = NewsletterText.createNewsletterTextWithParagraph((Paragraph) item);
 			ctx.setLanguage(null);
-			Map<String, Object> params = new HashMap<String, Object>();
-			params.put(NewsletterText.LINKTEXT, value);
-			params.put(NewsletterText.PARAGRAPH, item);
-			params.put(NewsletterText.NAME, item.getCode());
-			super.createNewsletterText(ctx, params);
+			newsletterText.setAllLinktext(ctx, value);
 		}
 	}
-
 
 	@Override
 	public void setAllSetNewsletterText(SessionContext ctx, Paragraph item, Map<Language, String> value)
 	{
-		Map attributes = new HashMap();
-		attributes.put("paragraph", item.getPK());
-		final SearchResult res = JaloSession.getCurrentSession().getFlexibleSearch()
-		.search(
-					 "SELECT {" + NewsletterText.PK + "} FROM {"
-								+ ArtozConstants.TC.NEWSLETTERTEXT + "} "+
-								" WHERE {" + NewsletterText.PARAGRAPH + "} = ?paragraph ",
-								attributes,
-								NewsletterText.class);
-		if(res.getTotalCount() > 0)
+		if (!containsJustNullValues(value))
 		{
-			List result = (List) res.getResult();
-			Iterator i = result.iterator();
-			NewsletterText newsletterText = (NewsletterText)i.next();
-			newsletterText.setAllText(value);
-		}
-		else
-		{
+			NewsletterText newsletterText = NewsletterText.getNewsletterTextByParagraph(item.getPK());
+			if (newsletterText == null)
+				newsletterText = NewsletterText.createNewsletterTextWithParagraph((Paragraph) item);
 			ctx.setLanguage(null);
-			Map<String, Object> params = new HashMap<String, Object>();
-			params.put(NewsletterText.TEXT, value);
-			params.put(NewsletterText.PARAGRAPH, item);
-			params.put(NewsletterText.NAME, item.getCode());
-			super.createNewsletterText(ctx, params);
+			newsletterText.setAllText(ctx, value);
 		}
 	}
-
 
 	@Override
 	public void setSetNewsletterImage0(SessionContext ctx, Paragraph item, Media value)
 	{
-		Map attributes = new HashMap();
-		attributes.put("paragraph", item.getPK());
-		final SearchResult res = JaloSession.getCurrentSession().getFlexibleSearch()
-		.search(
-					 "SELECT {" + NewsletterText.PK + "} FROM {"
-								+ ArtozConstants.TC.NEWSLETTERTEXT + "} "+
-								" WHERE {" + NewsletterText.PARAGRAPH + "} = ?paragraph ",
-								attributes,
-								NewsletterText.class);
-		if(res.getTotalCount() > 0)
+		if (value != null)
 		{
-			List result = (List) res.getResult();
-			Iterator i = result.iterator();
-			NewsletterText newsletterText = (NewsletterText)i.next();
+			NewsletterText newsletterText = NewsletterText.getNewsletterTextByParagraph(item.getPK());
+			if (newsletterText == null)
+				newsletterText = NewsletterText.createNewsletterTextWithParagraph((Paragraph) item);
 			newsletterText.setImage0(value);
 		}
-		else
-		{
-			ctx.setLanguage(null);
-			Map<String, Object> params = new HashMap<String, Object>();
-			params.put(NewsletterText.IMAGE0, value);
-			params.put(NewsletterText.PARAGRAPH, item);
-			params.put(NewsletterText.NAME, item.getCode());
-			super.createNewsletterText(ctx, params);
-		}
 	}
-
 
 	@Override
 	public void setSetNewsletterImage1(SessionContext ctx, Paragraph item, Media value)
 	{
-		Map attributes = new HashMap();
-		attributes.put("paragraph", item.getPK());
-		final SearchResult res = JaloSession.getCurrentSession().getFlexibleSearch()
-		.search(
-					 "SELECT {" + NewsletterText.PK + "} FROM {"
-								+ ArtozConstants.TC.NEWSLETTERTEXT + "} "+
-								" WHERE {" + NewsletterText.PARAGRAPH + "} = ?paragraph ",
-								attributes,
-								NewsletterText.class);
-		if(res.getTotalCount() > 0)
+		if (value != null)
 		{
-			List result = (List) res.getResult();
-			Iterator i = result.iterator();
-			NewsletterText newsletterText = (NewsletterText)i.next();
+			NewsletterText newsletterText = NewsletterText.getNewsletterTextByParagraph(item.getPK());
+			if (newsletterText == null)
+				newsletterText = NewsletterText.createNewsletterTextWithParagraph((Paragraph) item);
 			newsletterText.setImage1(value);
 		}
-		else
-		{
-			ctx.setLanguage(null);
-			Map<String, Object> params = new HashMap<String, Object>();
-			params.put(NewsletterText.IMAGE1, value);
-			params.put(NewsletterText.PARAGRAPH, item);
-			params.put(NewsletterText.NAME, item.getCode());
-			super.createNewsletterText(ctx, params);
-		}
 	}
-
 
 	@Override
 	public void setSetNewsletterLayout(SessionContext ctx, Paragraph item, EnumerationValue value)
 	{
-		Map attributes = new HashMap();
-		attributes.put("paragraph", item.getPK());
-		final SearchResult res = JaloSession.getCurrentSession().getFlexibleSearch()
-		.search(
-					 "SELECT {" + NewsletterText.PK + "} FROM {"
-								+ ArtozConstants.TC.NEWSLETTERTEXT + "} "+
-								" WHERE {" + NewsletterText.PARAGRAPH + "} = ?paragraph ",
-								attributes,
-								NewsletterText.class);
-		if(res.getTotalCount() > 0)
-		{
-			List result = (List) res.getResult();
-			Iterator i = result.iterator();
-			NewsletterText newsletterText = (NewsletterText)i.next();
-			newsletterText.setImagelayout(value);
-		}
-		else
-		{
-			ctx.setLanguage(null);
-			Map<String, Object> params = new HashMap<String, Object>();
-			params.put(NewsletterText.IMAGELAYOUT, value);
-			params.put(NewsletterText.PARAGRAPH, item);
-			params.put(NewsletterText.NAME, item.getCode());
-			super.createNewsletterText(ctx, params);
-		}
+		NewsletterText newsletterText = NewsletterText.getNewsletterTextByParagraph(item.getPK());
+		if (newsletterText == null)
+			newsletterText = NewsletterText.createNewsletterTextWithParagraph((Paragraph) item);
+		newsletterText.setImagelayout(value);
 	}
-
 
 	@Override
 	public String getSetNewsletterHeadText(SessionContext ctx, Paragraph item)
 	{
 		return null;
 	}
-
 
 	@Override
 	public void setSetNewsletterHeadText(SessionContext ctx, Paragraph item, String value)
@@ -606,14 +406,12 @@ public class ArtozManager extends GeneratedArtozManager
 		// unused
 	}
 
-
 	@Override
 	public String getSetNewsletterLinkText(SessionContext ctx, Paragraph item)
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 
 	@Override
 	public String getSetNewsletterName(SessionContext ctx, Paragraph item)
@@ -622,14 +420,12 @@ public class ArtozManager extends GeneratedArtozManager
 		return null;
 	}
 
-
 	@Override
 	public String getSetNewsletterText(SessionContext ctx, Paragraph item)
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 
 	@Override
 	public void setSetNewsletterLinkText(SessionContext ctx, Paragraph item, String value)
@@ -638,7 +434,6 @@ public class ArtozManager extends GeneratedArtozManager
 		// unused
 	}
 
-
 	@Override
 	public void setSetNewsletterName(SessionContext ctx, Paragraph item, String value)
 	{
@@ -646,13 +441,21 @@ public class ArtozManager extends GeneratedArtozManager
 		// unused
 	}
 
-
 	@Override
 	public void setSetNewsletterText(SessionContext ctx, Paragraph item, String value)
 	{
 		// TODO Auto-generated method stub
 		// unused
 	}
-	
-	
+
+	private boolean containsJustNullValues(Map map)
+	{
+		Collection<String> values = map.values();
+		for (String value : values)
+		{
+			if (value != null)
+				return false;
+		}
+		return true;
+	}
 }

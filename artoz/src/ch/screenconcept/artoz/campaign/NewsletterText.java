@@ -1,29 +1,35 @@
 package ch.screenconcept.artoz.campaign;
 
-import de.hybris.platform.jalo.Item;
-import de.hybris.platform.jalo.Item.ItemAttributeMap;
-import de.hybris.platform.jalo.JaloBusinessException;
-import de.hybris.platform.jalo.SessionContext;
-import de.hybris.platform.jalo.type.ComposedType;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.log4j.Logger;
+
+import ch.screenconcept.artoz.constants.ArtozConstants;
+import ch.screenconcept.artoz.jalo.ArtozManager;
+import de.hybris.platform.cms.jalo.Paragraph;
+import de.hybris.platform.core.PK;
+import de.hybris.platform.jalo.JaloSession;
+import de.hybris.platform.jalo.SearchResult;
 
 public class NewsletterText extends GeneratedNewsletterText
 {
-	private static Logger log = Logger.getLogger( NewsletterText.class.getName() );
-	public NewsletterText()
+	private static Logger log = Logger.getLogger(NewsletterText.class.getName());
+
+	public static NewsletterText getNewsletterTextByParagraph(PK pk)
 	{
-		// empty
+		Map<String, PK> attributes = new HashMap<String, PK>();
+		attributes.put("paragraph", pk);
+		final SearchResult res = JaloSession.getCurrentSession().getFlexibleSearch().search(
+					"SELECT {" + NewsletterText.PK + "} FROM {" + ArtozConstants.TC.NEWSLETTERTEXT + "} " + " WHERE {"
+								+ NewsletterText.PARAGRAPH + "} = ?paragraph ", attributes, NewsletterText.class);
+		return res.getResult().isEmpty() ? null : (NewsletterText) res.getResult().get(0);
 	}
 	
-	@Override
-	protected Item createItem(final SessionContext ctx, final ComposedType type, final ItemAttributeMap allAttributes) throws JaloBusinessException
-	{
-		// business code placed here will be executed before the item is created
-		// then create the item
-		Item item = super.createItem( ctx, type, allAttributes );
-		// business code placed here will be executed after the item was created
-		// and return the item
-		return item;
+	public static NewsletterText createNewsletterTextWithParagraph(Paragraph paragraph){
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put(NewsletterText.PARAGRAPH, paragraph);
+		params.put(NewsletterText.NAME, paragraph.getCode());
+		return ArtozManager.getInstance().createNewsletterText(params);
 	}
-	
 }
