@@ -215,6 +215,10 @@ margin-top: 50px;
 margin-left: 625px;
 margin-top: 50px;
 }
+#content .paragraphPage div.flashparagraph {
+margin-left: 295px;
+margin-top: 25px;
+}
 #content .paragraphPage .headline-image {
 z-index: 1;
 float: left;

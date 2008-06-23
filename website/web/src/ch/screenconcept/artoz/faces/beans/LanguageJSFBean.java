@@ -47,9 +47,7 @@ public class LanguageJSFBean
 		}
 		return selectableLanguages;
 	}
-	/**
-	 * @see LanguageBean#getName()
-	 */
+	
 	public String getName()
 	{
 		return language.getName();
