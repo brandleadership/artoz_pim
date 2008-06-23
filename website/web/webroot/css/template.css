@@ -197,6 +197,22 @@ z-index: 2;
 margin-left: 250px;
 position: relative;
 }
+#content .paragraphPage div.paragraph1 {
+margin-left: 470px;
+margin-top: 50px;
+}
+#content .paragraphPage div.paragraph2 {
+margin-left: 35px;
+margin-top: 95px;
+}
+#content .paragraphPage div.paragraph3 {
+margin-left: 540px;
+margin-top: 50px;
+}
+#content .paragraphPage div.paragraph4 {
+margin-left: 625px;
+margin-top: 50px;
+}
 #content .paragraphPage .headline-image {
 z-index: 1;
 float: left;
@@ -244,7 +260,8 @@ background-repeat: x-repeat;
 }
 #bottom-nav ul li ul {
 margin-left: 15px;
-width: 800px;
+width: 700px;
+display: block;
 }
 #bottom-nav ul li ul li {
 text-align: left;
