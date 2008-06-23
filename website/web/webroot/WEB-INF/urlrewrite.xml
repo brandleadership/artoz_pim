@@ -2,57 +2,35 @@
 <!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 2.5//EN"
 "http://tuckey.org/res/dtds/urlrewrite2.5.dtd">
 <!--
-Configuration file for UrlRewriteFilter
-http://tuckey.org/urlrewrite/
+	Configuration file for UrlRewriteFilter
+	http://tuckey.org/urlrewrite/
 -->
 <urlrewrite>
 
-<!-- URLSHORTCUTS START_ARTOZ --><!-- URLSHORTCUTS END_ARTOZ -->
-
-
-<!-- RULES START_ARTOZ --><!-- RULES END_ARTOZ -->
-
-
-	<!-- Inbound Strategy 3
-	     
-	     Direct requests to xhtml files are mapped to the startpage.
-	-->
-	<!--
 	<rule>
-		<from>/(.*)xhtml(.*)</from>
-		<to type="redirect">%{context-path}/pages/index.jsf</to>
+		<from>^/pages/ajax.jsf(.*)$</from>
+		<to>/pages/ajax.jsf$1</to>
 	</rule>
-    -->
-    
-    <!-- 
-    <rule>
-        <from>^/$</from>
-		<to type="redirect">/pages/index.jsf?pageid=home</to>
-	</rule>
-	-->
-<!-- 	
+
 	<rule>
-        <from>^/pages/(.*)$</from>
-		<to>/pages/index.jsf?pageid=$1</to>
-		<set name="URLINSIDE">/pages/index.jsf?pageid=$1</set>
-	</rule>
--->	
+       <from>^/pages/index.jsf$</from>
+       <to>/pages/index.jsf</to>
+   </rule> 
 	
 	<rule>
-        <from>^/pages/(.*)$</from>
+		<from>^/pages/(.*)$</from>
 		<to>/pages/index.jsf?pageid=$1</to>
-	</rule>	
-	
+	</rule>
+
 	<!-- Redirect to home page -->
 	<rule>
-        <from>^/$</from>
+		<from>^/$</from>
 		<to type="redirect">/pages/home</to>
 	</rule>
-	
-	<outbound-rule encodefirst="false">
-		<name>JSF_FORMACTION</name>
-		<condition type="attribute" name="URLINSIDE"/>
-		<from>pages/?(productDetail.jsf|voucherProduct.jsf|orderDetail.jsf|categories.jsf|index.jsf|popupPage.jsf|catalog.jsf|thankYou.jsf)(.*)</from>
-		<to last="true">%{attribute:URLINSIDE}</to>
-	</outbound-rule>
+
+   <outbound-rule>
+       <from>^//pages/index.jsf$</from>
+       <to>/pages/index.jsf</to>
+   </outbound-rule> 
+        
 </urlrewrite>
