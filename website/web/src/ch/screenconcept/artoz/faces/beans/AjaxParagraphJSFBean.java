@@ -38,6 +38,8 @@ public class AjaxParagraphJSFBean
 	{
 		Map attributes = new HashMap();
 		Paragraph paragraph = getParagraph();
+		if(paragraph == null)
+			return new ArrayList();
 		attributes.put("code", paragraph.getPK().toString());
 		final SearchResult res = JaloSession.getCurrentSession().getFlexibleSearch().search(
 					"SELECT {" + ArtozSortParagraph.PK + "} FROM {" + WebsiteConstants.TC.ARTOZSORTPARAGRAPH + "} "

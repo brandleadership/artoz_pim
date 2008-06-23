@@ -6,7 +6,6 @@
       xmlns:c="http://java.sun.com/jstl/core">
 	
 	<div class="ajaxcontent">
-		<!-- start: paragraphPage.xhtml-->
 		<c:forEach items="#{item.paragraphs}" var="paragraph" >
 			<!-- start Paragraph: #{paragraph.code} template: #{paragraph.template.code}-->
 			<c:choose>
@@ -23,6 +22,5 @@
 			</c:choose>
 			<!-- end Paragraph: #{paragraph.code} template: #{paragraph.template.code}-->
 		</c:forEach>
-		<!-- end: paragraphPage.xhtml -->
 	</div>
 </ui:composition>

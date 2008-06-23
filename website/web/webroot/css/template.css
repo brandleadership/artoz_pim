@@ -59,11 +59,13 @@ background-repeat: no-repeat;
 }
 #help-nav li a.impressum {
 padding-left: 15px;
+background-position: 0px 3px;
 background-image: url(/css/images/nav_impressum.gif);
 background-repeat: no-repeat;
 }
 #help-nav li a.sitemap {
 padding-left: 15px;
+background-position: 0px 1px;
 background-image: url(/css/images/nav_sitemap.gif);
 background-repeat: no-repeat;
 }

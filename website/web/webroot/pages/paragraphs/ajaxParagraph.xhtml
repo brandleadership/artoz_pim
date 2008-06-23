@@ -5,7 +5,7 @@
 	xmlns:t="http://myfaces.apache.org/tomahawk"
 	xmlns:c="http://java.sun.com/jstl/core">
 	
-	<div class="lexikonparagraph">
+	<div class="ajaxparagraph">
 		<c:forEach items="#{ajaxParagraphJSFBean.ajaxParagraphDatas}" var="data" >
 			<a href="ajax.jsf?pageid=#{item.target.code}&amp;paragraph=#{data.code}&amp;height=409&amp;width=1025" class="thickbox">
 				<img src="#{data.thumbImage.URL}" border="0" />

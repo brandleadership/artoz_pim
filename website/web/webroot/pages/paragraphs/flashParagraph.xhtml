@@ -1,0 +1,16 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:c="http://java.sun.com/jstl/core">
+	
+	<div class="flashparagraph">
+		<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,29,0" width="330" height="300">
+			<param name="movie" value="#{item.picture.URL}"/>
+			<param name="quality" value="high"/>
+			<embed src="#{item.picture.URL}" quality="high" pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash" type="application/x-shockwave-flash" width="330" height="300"></embed>
+		</object>
+	</div>
+	
+</ui:composition>

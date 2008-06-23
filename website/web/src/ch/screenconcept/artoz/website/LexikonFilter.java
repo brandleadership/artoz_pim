@@ -71,7 +71,7 @@ public final class LexikonFilter implements Filter
 		PrintWriter out = response.getWriter();
 		CharResponseWrapper wrapper = new CharResponseWrapper((HttpServletResponse) response);
 		chain.doFilter(request, wrapper);
-		if (patterns != null && wrapper.getContentType().equals("text/html;charset=UTF-8"))
+		if (patterns != null && wrapper.getCharacterEncoding().equals("UTF-8"))
 		{
 			String responseText = wrapper.toString();
 			Iterator i = patterns.iterator();
