@@ -22,11 +22,11 @@
 					<tr>
 						<td>
 							<h:outputText value="#{tradefair.startdate}">
-								<f:convertDateTime type="date" pattern="dd.MM." locale="de" />
+								<f:convertDateTime type="date" pattern="dd.MM." timeZone="GMT+2" />
 							</h:outputText>
 							<h:outputText value="&#160;-&#160;"/>
 							<h:outputText value="#{tradefair.enddate}">
-								<f:convertDateTime type="date" pattern="dd.MM.yyyy" locale="en" />
+								<f:convertDateTime type="date" pattern="dd.MM.yyyy" timeZone="GMT+2" />
 							</h:outputText>
 						</td>
 						<td>#{tradefair.tradefair}	</td>

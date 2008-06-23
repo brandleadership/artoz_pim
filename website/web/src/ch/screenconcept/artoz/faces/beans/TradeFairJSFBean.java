@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,13 +33,17 @@ public class TradeFairJSFBean
 		Map attributes = new HashMap();
 		Paragraph paragraph = getParagraph();
 		attributes.put("code", paragraph.getPK().toString());
-		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd 00:00:00");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd 00:00:00");
 		Calendar cal1 = Calendar.getInstance();//new GregorianCalendar();
 		cal1.add(Calendar.DAY_OF_YEAR, -14);
-		attributes.put("end", cal1.getTime());
+		Date date1 = cal1.getTime();
+		dateFormat.format(date1);
+		attributes.put("end", date1);
 		Calendar cal2 = Calendar.getInstance();//new GregorianCalendar();
 		cal2.add(Calendar.DAY_OF_YEAR, 300);
-		attributes.put("start", cal2.getTime());
+		Date date2 = cal2.getTime();
+		dateFormat.format(date2);
+		attributes.put("start", date2);
 		final SearchResult res = JaloSession.getCurrentSession().getFlexibleSearch()
 					.search(
 								"SELECT {" + TradeFairParagraphData.PK + "} FROM {"
