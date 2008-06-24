@@ -179,7 +179,7 @@
 					<persistence type="property" />
 				</attribute>
 				<attribute qualifier="newnessCode"
-					type="java.lang.Integer">
+					type="java.lang.String">
 					<description>newness code</description>
 					<modifiers read="true" write="true" search="true"
 						initial="true" />

@@ -37,18 +37,12 @@ public class ArtozHMCExtension extends HMCExtension
 	@Override
 	public ActionResult beforeCreate(ComposedType itemType, DisplayState displayState, Map initialValues)
 	{
-		System.out.println("itemType: "+itemType.getName());
 		return super.beforeCreate(itemType, displayState, initialValues);
 	}
 
 	@Override
 	public ActionResult beforeSave(Item item, DisplayState displayState, Map currentValues, Map initialValues)
 	{
-		if(item instanceof Paragraph)
-		{
-			System.out.println("save");
-			
-		}
 		return super.beforeSave(item, displayState, currentValues, initialValues);
 	}
 

@@ -83,9 +83,9 @@ public class ProductCSVFileLine extends AbstractCSVFileLine
 		return getInteger(10);
 	}
 
-	public Integer getNewnessCode()
+	public String getNewnessCode()
 	{
-		return getInteger(11);
+		return getColumn(11);
 	}
 	
 	public String getSort()
