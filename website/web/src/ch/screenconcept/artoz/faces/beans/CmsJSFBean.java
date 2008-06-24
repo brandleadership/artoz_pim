@@ -186,7 +186,6 @@ public class CmsJSFBean
 		{
 			if (c instanceof ArtozMainNavigationElement)
 			{
-				System.out.println("subnavi: " + c.getCode());
 				results.add((ArtozMainNavigationElement) c);
 			}
 		}

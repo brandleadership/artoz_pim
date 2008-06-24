@@ -53,7 +53,6 @@ public class NewsletterJSFBean
 					try
 					{
 						fullname = address.getAttribute(Address.FIRSTNAME)+" "+address.getAttribute(Address.LASTNAME);
-						System.out.println(fullname);
 					}
 					catch (JaloSecurityException e)
 					{

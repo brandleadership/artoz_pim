@@ -55,7 +55,7 @@ public class WebsiteInitFilter extends HybrisInitFilter
 	{
 		// TODO Auto-generated method stub
 		CharResponseWrapper wrapper = new CharResponseWrapper((HttpServletResponse) response);
-		System.out.println(wrapper.getContentType());
+		
 		PrintWriter out = null;
 		
 		if(wrapper.getContentType().equals("text/html;charset=UTF-8"))
