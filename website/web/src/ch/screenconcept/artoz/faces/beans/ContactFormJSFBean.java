@@ -10,18 +10,10 @@ import javax.faces.context.FacesContext;
 import org.apache.log4j.Logger;
 import org.apache.shale.tiger.managed.Bean;
 import org.apache.shale.tiger.managed.Scope;
-import org.apache.velocity.VelocityContext;
 
-import ch.screenconcept.artoz.jalo.ArtozManager;
-import ch.screenconcept.artoz.website.constants.WebsiteConstants;
-import ch.screenconcept.artoz.website.jalo.WebsiteManager;
-import de.hybris.platform.webfoundation.util.CommerceUtils;
 import ch.screenconcept.artoz.website.ContactFormParagraph;
 import ch.screenconcept.artoz.website.ContactFormParagraphData;
-import de.hybris.platform.cms.jalo.CmsManager;
-import de.hybris.platform.cms.jalo.FormParagraph;
-import de.hybris.platform.cms.jalo.Website;
-import de.hybris.platform.jalo.JaloSession;
+import ch.screenconcept.artoz.website.jalo.WebsiteManager;
 
 /**
  * Managed bean that brigdes to the hmc extension.

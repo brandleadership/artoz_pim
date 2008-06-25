@@ -1,0 +1,41 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:c="http://java.sun.com/jstl/core">
+	
+	<div id="contactform">
+		<div id="contactform-text-top">
+			<h:outputText escape="false" value="abc"  />
+		</div>
+		<div id="contactform-content">
+			<h:form id="loginform" >
+				<div id="contactform-content-left">
+					<div class="zeile">
+						<span>
+							<h:outputText value="Name" />
+						</span>
+						<h:inputText id="customerName" required="true" />
+						<h:message for="customerName" styleClass="error" />
+					</div>
+					<div class="zeile">
+						<span>
+							<h:outputText value="Password" />
+						</span>
+						<h:inputText id="password" required="true" />
+						<h:message for="password" styleClass="error"/>
+						<input type="hidden" id="pageid" name="pageid"
+					value="#{frontPageBean.pageContent.code}" />
+					</div>
+					<div class="sendbuttons">
+						<div class="leftbutton">
+							<h:commandButton action="#{loginJSFBean.login}" value="send"/>
+						</div>
+						<h:commandButton type="reset" value="delete"/>
+					</div>
+				</div>
+			</h:form>
+		</div>
+	</div>
+</ui:composition>

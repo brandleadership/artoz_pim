@@ -7,16 +7,18 @@ import java.util.List;
 import java.util.Map;
 
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.validator.GenericValidator;
 import org.apache.log4j.Logger;
 import org.apache.shale.tiger.managed.Bean;
 import org.apache.shale.tiger.managed.Scope;
 
-import com.exedio.campaign.jalo.EMailCampaignParticipation;
-
 import ch.screenconcept.artoz.website.constants.WebsiteConstants;
 import ch.screenconcept.artoz.website.navigation.ArtozMainNavigationElement;
+
+import com.exedio.campaign.jalo.EMailCampaignParticipation;
+
 import de.hybris.platform.cms.constants.CmsConstants;
 import de.hybris.platform.cms.jalo.AbstractCMSItem;
 import de.hybris.platform.cms.jalo.CmsManager;
@@ -26,6 +28,7 @@ import de.hybris.platform.cms.jalo.Website;
 import de.hybris.platform.core.PK;
 import de.hybris.platform.jalo.JaloSession;
 import de.hybris.platform.jalo.flexiblesearch.FlexibleSearch;
+import de.hybris.platform.jalo.user.User;
 
 /**
  * Managed bean that brigdes to the CMS extension.
@@ -36,6 +39,8 @@ import de.hybris.platform.jalo.flexiblesearch.FlexibleSearch;
 public class CmsJSFBean
 {
 	private static final Logger log = Logger.getLogger(CmsJSFBean.class.getName());
+
+	public static final String FRONTPAGE_CATEGORY_CODE = "home";
 
 	public CmsJSFBean()
 	{
@@ -53,18 +58,28 @@ public class CmsJSFBean
 				log.error("", e);
 			}
 		}
-		
+
 		CmsManager.getInstance().setActiveWebsite(getWebsite());
+
+		LoginJSFBean loginBeean = (LoginJSFBean)FacesContext.getCurrentInstance().getApplication().createValueBinding("#{loginJSFBean}").getValue(
+						FacesContext.getCurrentInstance());
+		
+		User user = loginBeean.getLoginUser();
+		if (user != null)
+			JaloSession.getCurrentSession().setUser(user);
+		
+		log.info(JaloSession.getCurrentSession().getSessionContext().getUser());
+		log.info(JaloSession.getCurrentSession().getUser().getName());
+		
+		
+		HttpServletRequest h = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+		log.info(h.getSession().getId());
 	}
-	
+
 	public String getRequestParameter(String name)
 	{
 		return (String) FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get(name);
 	}
-	
-	public static final String FRONTPAGE_CATEGORY_CODE = "home";
-
-	PageContent pageContent;
 
 	public String getTemplate()
 	{
@@ -85,12 +100,12 @@ public class CmsJSFBean
 	{
 		return getActivMainNavigationElement();
 	}
-	
+
 	public AbstractCMSItem getHelpNav()
 	{
 		return getWebsite().getNavigationElement(WebsiteConstants.HELP_NAV);
 	}
-	
+
 	public AbstractCMSItem getQuickNav()
 	{
 		return getWebsite().getNavigationElement(WebsiteConstants.QUICK_NAV);
@@ -106,7 +121,7 @@ public class CmsJSFBean
 	public NavigationElement getActivMainNavigationElement()
 	{
 		final NavigationElement link = getActivNavigationElement();
-		
+
 		if (link == null)
 			return null;
 
@@ -194,7 +209,7 @@ public class CmsJSFBean
 
 	public Website getWebsite()
 	{
-		//return CmsManager.getInstance().getActiveWebsite();
+		// return CmsManager.getInstance().getActiveWebsite();
 		return CmsManager.getInstance().getWebsite("artoz");
 	}
 
