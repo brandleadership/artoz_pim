@@ -93,7 +93,6 @@ public class CMSTranslateLinksComponent extends BaseComponent
 	@Override
 	public void encodeBegin( FacesContext ctx ) throws IOException
 	{
-		//System.out.println( "replacing links encoding begining" );
       old = ctx.getResponseWriter();
       out = new StringWriter();
       ResponseWriter j = ctx.getRenderKit().createResponseWriter( out, null, null );
@@ -104,7 +103,6 @@ public class CMSTranslateLinksComponent extends BaseComponent
 	public void encodeEnd( FacesContext ctx ) throws IOException
 	{
 
-		//System.out.println( "replacing links encoding end "+out );
 		ctx.setResponseWriter( old );
 		Website website = CommerceUtils.getWebsite();
 		

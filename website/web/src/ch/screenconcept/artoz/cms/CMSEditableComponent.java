@@ -136,7 +136,6 @@ public class CMSEditableComponent extends BaseComponent
 	@Override
 	public void encodeBegin( FacesContext ctx ) throws IOException
 	{
-	  System.out.println( "encoding begining" );
       ctx.getResponseWriter().write( getStart() );
 	}
 	
@@ -146,7 +145,6 @@ public class CMSEditableComponent extends BaseComponent
 	@Override
 	public void encodeEnd( FacesContext ctx ) throws IOException
 	{
-		System.out.println( "encoding end " );
 		ctx.getResponseWriter().write( getEnd() );
 	}
 
