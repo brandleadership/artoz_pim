@@ -1,0 +1,17 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:c="http://java.sun.com/jstl/core">
+	
+	<div class="lexikonparagraph">
+		<c:forEach items="#{lexikonJSFBean.lexikonParagraphDatas}" var="lexikon" >
+			<div class="linkparagraph">
+				<h1><a id="lexikon-#{lexikon}" /><h:outputText escape="false" value="#{lexikon.name}" /></h1>
+				<h:outputText escape="false" value="#{lexikon.description}" />
+			</div>
+			<div class="line" />
+		</c:forEach>
+	</div>
+</ui:composition>

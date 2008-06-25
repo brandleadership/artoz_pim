@@ -1,0 +1,97 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:c="http://java.sun.com/jstl/core">
+	
+	<div id="contactform">
+		<div id="contactform-text-top">
+			<h:outputText escape="false" value="#{item.formHeader}"  />
+		</div>
+		<div id="contactform-content">
+			<h:form id="contactForm" >
+				<div id="contactform-content-left">
+					<div class="zeile">
+						<span>
+							<h:outputText value="#{item.firstname}" />
+						</span>
+						<h:inputText id="firstname" required="true" />
+						<h:message for="firstname" styleClass="error" />
+					</div>
+					<div class="zeile">
+						<span>
+							<h:outputText value="#{item.street}" />
+						</span>
+						<h:inputText id="street" required="true" />
+						<h:message for="street" styleClass="error"/>
+					</div>
+					<div class="zeile">
+						<span>
+							<h:outputText value="#{item.country}" required="true" />
+						</span>
+						<h:inputText id="country" required="true" />
+						<h:message for="country" styleClass="error"/>
+					</div>
+					<div class="zeile">
+						<span>
+							<h:outputText value="#{item.telephone}" required="true" />
+						</span>
+						<h:inputText id="telephone" />
+						<h:message for="telephone" styleClass="error"/>
+					</div>
+					<div class="message">
+						<span>
+							<h:outputText value="#{item.message}" />
+						</span>
+						<br />
+						<h:inputTextarea id="message" />
+					</div>
+				</div>
+				<div id="contactform-content-right">
+					<div class="zeile">
+						<span>
+							<h:outputText value="#{item.lastname}" />
+						</span>
+						<h:inputText id="lastname" required="true" />
+						<h:message for="lastname" styleClass="error"/>
+					</div>
+					<div class="zeile">
+						<span>
+							<h:outputText value="#{item.city}" />
+						</span>
+						<h:inputText id="city" required="true" />
+						<h:message for="city" styleClass="error"/>
+					</div>
+					<div class="zeile">
+						<span>
+							<h:outputText value="#{item.email}" />
+						</span>
+						<h:inputText id="email" maxlength="60" required="true">
+							<t:validateEmail />
+						</h:inputText>
+						<h:message for="email" styleClass="error"/>
+					</div>
+					<div class="zeile">
+						<span>
+							<h:outputText value="#{item.telefax}" />
+						</span>
+						<h:inputText id="telefax" />
+					</div>
+					<div class="sendbuttons">
+						<div class="leftbutton">
+							<h:commandButton action="#{contactFormJSFBean.doSubmit}" value="#{item.send}"/>
+						</div>
+						<h:commandButton type="reset" value="#{item.delete}"/>
+						<input type="hidden" id="receiverEmail" name="receiverEmail" value="#{item.emailReceiver}" />
+						<input type="hidden" id="pageid" name="pageid" value="home" />
+						<input type="hidden" id="form" name="form" value="#{item.code}" />
+					</div>
+				</div>
+			</h:form>
+		</div>
+		<div id="contactform-text-bottom">
+			<h:outputText escape="false" value="#{item.afterFormText}"  />
+		</div>	
+	</div>
+</ui:composition>

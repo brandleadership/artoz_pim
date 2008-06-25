@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 2.5//EN"
+"http://tuckey.org/res/dtds/urlrewrite2.5.dtd">
+<!--
+	Configuration file for UrlRewriteFilter
+	http://tuckey.org/urlrewrite/
+-->
+<urlrewrite>
+
+	<rule>
+		<from>^/pages/ajax.jsf(.*)$</from>
+		<to>/pages/ajax.jsf$1</to>
+	</rule>
+
+	<rule>
+       		<from>^/pages/index.jsf$</from>
+       		<to>/pages/index.jsf</to>
+   	</rule> 
+
+	<rule>
+		<from>^/pages/newsletter_admin(?:\?(.*)|)</from>
+		<to>/pages/index.jsf?pageid=newsletter_admin&amp;id=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/pages/(.*)$</from>
+		<to>/pages/index.jsf?pageid=$1</to>
+	</rule>
+
+	<!-- Redirect to home page -->
+	<rule>
+		<from>^/$</from>
+		<to type="redirect">/pages/home</to>
+	</rule>
+
+   <outbound-rule>
+       <from>^//pages/index.jsf$</from>
+       <to>/pages/index.jsf</to>
+   </outbound-rule>
+   
+   <outbound-rule>
+       <from>^//pages/newsletterUnregistrationSuccessed.jsf$</from>
+       <to>/pages/newsletterUnregistrationSuccessed</to>
+   </outbound-rule>  
+   
+   <outbound-rule>
+       <from>^//pages/newsletterUnregistrationFailed.jsf$</from>
+       <to>/pages/newsletterUnregistrationFailed</to>
+   </outbound-rule> 
+        
+</urlrewrite>

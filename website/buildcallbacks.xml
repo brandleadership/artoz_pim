@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2008 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+-->
+
+<project name="website_buildcallbacks" >
+	
+		
+
+	<!-- 
+	    called whenever 'ant ear' is used. this callback can be used to modify the content of the ear file
+	
+	     ${ear.path}: 					path to ear
+	     ${ear.libs.path}: 			path to libs inside ear (as default this comes to ear.path/libs)
+	     ${ear.resources.path}:	path to resources inside ear (as default this comes to ear.path/resources)
+	 -->
+	<macrodef name="website_before_ear">
+		<sequential>
+
+			<!-- you can do anything before the EAR file is being packed -->
+			
+		</sequential>
+	</macrodef>
+		
+		
+</project>

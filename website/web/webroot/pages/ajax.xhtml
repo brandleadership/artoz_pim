@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:cms="http://hybris.com/cms" template="/templates/ajaxLayout.xhtml">
+
+	<ui:define name="content">
+		<c:choose>
+			<c:when test="#{empty frontPageBean.pageContent.template}">
+				<span class="error">No template defined for the page (#{frontPageBean.pageContent.code})!</span>
+			</c:when>
+			<c:otherwise>
+				<!-- start:test#{frontPageBean.pageContent.code}:#{frontPageBean.pageContent.template.code} -->
+				<f:subview id="frontpage">
+					<ui:include src="#{frontPageBean.pageContent.template.code}">
+						<ui:param name="item" value="#{frontPageBean.pageContent}" />
+					</ui:include>
+				</f:subview>
+				<!-- end:test#{frontPageBean.pageContent.code}:#{frontPageBean.pageContent.template.code} -->
+			</c:otherwise>
+		</c:choose>
+	</ui:define>
+	
+</ui:composition>
