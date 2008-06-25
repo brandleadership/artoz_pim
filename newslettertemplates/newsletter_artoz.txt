@@ -17,6 +17,6 @@ Anfragen werden gerne unter marketing@artoz.ch beantwortet.
 Copyright by Artoz Papier AG, Ringstrasse West 23,
 5600 Lenzburg, Schweiz. Inhalte und Angaben ohne Gewähr.
 
-Abmelden: http://${content.url}/pages/index.jsf?pageid=unregistration&amp;uid=${user.uid}
+Abmelden: http://${content.url}/pages/newsletter_admin?uid=${costumer.id}
 
 ${optOutInfo}
