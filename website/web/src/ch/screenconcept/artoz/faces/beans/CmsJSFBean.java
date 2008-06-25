@@ -61,19 +61,12 @@ public class CmsJSFBean
 
 		CmsManager.getInstance().setActiveWebsite(getWebsite());
 
-		LoginJSFBean loginBeean = (LoginJSFBean)FacesContext.getCurrentInstance().getApplication().createValueBinding("#{loginJSFBean}").getValue(
-						FacesContext.getCurrentInstance());
-		
+		LoginJSFBean loginBeean = (LoginJSFBean) FacesContext.getCurrentInstance().getApplication().createValueBinding(
+					"#{loginJSFBean}").getValue(FacesContext.getCurrentInstance());
+
 		User user = loginBeean.getLoginUser();
 		if (user != null)
 			JaloSession.getCurrentSession().setUser(user);
-		
-		log.info(JaloSession.getCurrentSession().getSessionContext().getUser());
-		log.info(JaloSession.getCurrentSession().getUser().getName());
-		
-		
-		HttpServletRequest h = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
-		log.info(h.getSession().getId());
 	}
 
 	public String getRequestParameter(String name)
