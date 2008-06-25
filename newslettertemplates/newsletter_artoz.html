@@ -1,0 +1,205 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+* a {
+	color:#E98300;
+}
+div.left {
+	width: 400px;
+	float: left;
+}
+div.left div.images {
+	float: left;
+}
+div.left div.text {
+	float: left;
+	width: 200px;
+	display: block;
+}
+div.bottom,
+div.top {
+	width: 400px;
+	float: left;
+}
+div.bottom img.image0,
+div.top img.image0 {
+	float: left;
+}
+div.bottom img.image1
+div.top img.image1 {
+	float: left;
+}
+div.bottom div.text,
+div.top div.text {
+	float: left;
+}
+div.right {
+	float: left;
+}
+div.right img.image0 {
+	float: right;
+}
+div.right img.image1 {
+	float: right;
+}
+-->
+</style>
+</head>
+<body bgcolor="#FFFFFF" style="margin:0px;padding:0px;font-family:Arial, Helvetica, sans-serif;font-size:12pt;">
+<table width="600" border="0" cellspacing="0" cellpadding="0" style="border:1px solid #FFFFFF;">
+  <tr>
+    <td height="100" colspan="2" align="left" valign="top"><img src="http://dev.screenconcept.ch/artoz/head.jpg" width="600" border="0"></td>
+  </tr>
+  <tr>
+    <td width="400" align="left" valign="top">
+    <div style="margin:0px 10px 40px 0px;color:#666666;">
+    	Infoletter Artoz Papier AG, Ausgabe April 2008
+    </div>
+    #set($top = "top")
+    #set($left = "left")
+    #set($bottom = "bottom")
+    #set($right = "right")
+    #foreach ( $element in ${content} )
+    <table width="400" border="0" cellspacing="0" cellpadding="0" style="margin:0px 10px 25px 0px;">
+    	#if( $element.layout == $right )
+        	<tr>
+            <td rowspan="2">
+          	<strong style="font-size:14pt;margin-bottom:14px;display:block;"><a id="${element.paragraphlink}"></a>${element.headtext}</strong><br /><br />
+            ${element.textAsHtml}
+            <br />
+            ${element.link}
+            </td>
+            <td>
+            #if( $!element.image0 )
+                <img class="image0" border="0" alt="${element.alttext0}" src="${element.image0}"/>
+            #end
+            </td>
+          </tr>
+          <tr>
+            <td>
+            #if( $!element.image1 )
+                <img class="image1" border="0" alt="${element.alttext1}" src="${element.image1}"/>
+            #end
+            </td>
+          </tr>
+        #elseif( $element.layout == $top )
+          	<tr>
+            <td>
+            #if( $!element.image0 )
+                <img class="image0" border="0" alt="${element.alttext0}" src="${element.image0}"/>
+            #end
+            </td>
+            <td>
+            #if( $!element.image1 )
+                <img class="image1" border="0" alt="${element.alttext1}" src="${element.image1}"/>
+            #end
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+            <strong style="font-size:14pt;margin-bottom:14px;display:block;"><a id="${element.paragraphlink}"></a>${element.headtext}</strong><br /><br />
+            ${element.textAsHtml}
+            <br />
+            ${element.link}
+            </td>
+          </tr>
+        #elseif( $element.layout == $left )
+          	<tr>
+            <td>
+            #if( $!element.image0 )
+                <img class="image0" border="0" alt="${element.alttext0}" src="${element.image0}"/>
+            #end
+            </td>
+            <td rowspan="2">
+            <strong style="font-size:14pt;margin-bottom:14px;display:block;"><a id="${element.paragraphlink}"></a>${element.headtext}</strong><br /><br />
+            ${element.textAsHtml}
+            <br />
+            ${element.link}
+            </td>
+          </tr>
+          <tr>
+            <td>
+            #if( $!element.image1 )
+                <img class="image1" border="0" alt="${element.alttext1}" src="${element.image1}"/>
+            #end
+            </td>
+          </tr>
+        #elseif( $element.layout == $bottom )
+          	<tr>
+            <td colspan="2">
+            <strong style="font-size:14pt;margin-bottom:14px;display:block;"><a id="${element.paragraphlink}"></a>${element.headtext}</strong><br /><br />
+            ${element.textAsHtml}
+            <br />
+            ${element.link}
+            </td>
+          </tr>
+          <tr>
+            <td>
+            #if( $element.image0 )
+                <img class="image0" border="0" alt="${element.alttext0}" src="${element.image0}"/>
+            #end
+            </td>
+            <td>
+            #if( $element.image1 )
+                <img class="image1" border="0" alt="${element.alttext1}" src="${element.image1}"/>
+            #end
+            </td>
+          </tr>
+        #else
+
+        #end
+	</table>
+    #end
+<div style="float:left;padding:20px 10px 0 0;font-size:10pt;border-top:1px solid #E98300;">
+Wichtig: Bitte antworten Sie nicht auf diese Mail. Anfragen werden gerne unter <a href="mailto:marketing@artoz.ch" style="color:#E98300;">marketing@artoz.ch</a> beantwortet.<br>
+Copyright by Artoz Papier AG, Ringstrasse West 23,<br>
+5600 Lenzburg, Schweiz. Inhalte und Angaben ohne Gewähr.
+    <div style="text-align: center;margin:20px 0 0 0;font-weight:bold;"><a href="http://$%7Bcontent.url%7D/pages/newsletter_admin?uid=$%7Bcostumer.id%7D" target="_blank" style="text-decoration:none;color:#000000;">Newsletter abbestellen</a> . <a href="http://$%7Bcontent.url%7D/pages/contact" target="_blank" style="text-decoration:none;color:#000000;">Kontakt</a> . <a href="http://$%7Bcontent.url%7D/pages/agb" target="_blank" style="text-decoration:none;color:#000000;">AGB</a>    </div>
+</div>
+    </td>
+    <td width="200" align="left" valign="top" style="font-size:10pt;border-left:1px solid #E98300;">
+      <div style="margin:57px 0px 25px 9px;border-bottom:1px solid #E98300;padding-bottom:20px;font-size:12pt;">
+          <strong>Inhalt</strong>
+          <ul style="margin:5px 0 0 0;padding:0 0 0 15px;">
+          #foreach ( $paragraph in ${content} )
+            <li><a href="#${paragraph.paragraphlink}" style="text-decoration:none;color:#000000">${paragraph.headtext}</a></li>
+           #end
+        </ul>
+   	  </div>
+      #foreach ( $element in ${contentright} )
+      <div style="margin:0px 0px 25px 9px;border-bottom:1px solid #E98300;padding-bottom:10px;">
+      	#if( $element.layout == "top")
+            #if( $element.image0 )
+                <img class="image0" border="0" alt="${element.alttext0}" src="${element.image0}"/>
+            #end
+        #end
+        ${element.textAsHtml}
+        #if( $element.layout == "bottom")
+            #if( $element.image0 )
+                <img class="image0" border="0" alt="${element.alttext0}" src="${element.image0}"/>
+            #end
+        #end
+      </div>
+      #end
+      <div style="margin:0px 0px 25px 9px;border-bottom:1px solid #E98300;padding-bottom:10px;">
+        <strong>Weitersagen<br>
+        <br>
+        </strong><a href="mailto:?subject=Empfehlung%20Artoz%20Newsletter" style="color:#E98300;">Empfehlen Sie diesen Newsletter Ihren Geschäftskollegen/innen</a><br>
+        <br>
+        </div>
+      <div style="margin:0px 0px 25px 9px;padding-bottom:5px;">Impressum<br>
+        Dieser Newsletter ist ein kostenloser Service von Artoz Papier AG,<br>
+        CH-5006 Lenzburg<br>
+        Redaktion: M. Marketing<br>
+        Tel.: +41 (0)62 886 43 86<br>
+        F ax: +41 (0)62 886 43 50<br>
+      E-Mail: <a href="mailto:marketing@artoz.ch" style="color:#E98300;">marketing@artoz.ch</a></div>
+    </td>
+  </tr>
+</table>
+${optOutInfo}
+</body>
+</html>
