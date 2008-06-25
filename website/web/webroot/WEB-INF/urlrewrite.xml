@@ -11,12 +11,17 @@
 		<from>^/pages/ajax.jsf(.*)$</from>
 		<to>/pages/ajax.jsf$1</to>
 	</rule>
-
+<!--
 	<rule>
-       <from>^/pages/index.jsf$</from>
-       <to>/pages/index.jsf</to>
-   </rule> 
-	
+       		<from>^/pages/index.jsf$</from>
+       		<to>/pages/index.jsf</to>
+   	</rule> 
+-->
+	<rule>
+		<from>^/pages/newsletter_admin(?:\?(.*)|)</from>
+		<to>/pages/index.jsf?pageid=newsletter_admin&amp;id=$1</to>
+	</rule>
+
 	<rule>
 		<from>^/pages/(.*)$</from>
 		<to>/pages/index.jsf?pageid=$1</to>
@@ -31,6 +36,16 @@
    <outbound-rule>
        <from>^//pages/index.jsf$</from>
        <to>/pages/index.jsf</to>
+   </outbound-rule>
+   
+   <outbound-rule>
+       <from>^//pages/newsletterUnregistrationSuccessed.jsf$</from>
+       <to>/pages/newsletterUnregistrationSuccessed</to>
+   </outbound-rule>  
+   
+   <outbound-rule>
+       <from>^//pages/newsletterUnregistrationFailed.jsf$</from>
+       <to>/pages/newsletterUnregistrationFailed</to>
    </outbound-rule> 
         
 </urlrewrite>

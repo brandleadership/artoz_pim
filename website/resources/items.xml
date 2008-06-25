@@ -353,6 +353,35 @@
 				</attribute>
 			</attributes>
 		</itemtype>
-					
+		
+		<itemtype	code="NewsletterAdministrationParagraph"
+						extends="Paragraph"
+						jaloclass="ch.screenconcept.artoz.website.NewsletterAdministrationParagraph"
+						generate="true"
+						autocreate="true">
+			<attributes>
+				<attribute qualifier="title" type="localized:java.lang.String">
+					<persistence type="property"/>
+				</attribute>
+				<attribute qualifier="greeting" type="localized:java.lang.String">
+					<persistence type="property"/>
+				</attribute>
+				<attribute qualifier="insertemail" type="localized:java.lang.String">
+					<persistence type="property"/>
+				</attribute>
+				<attribute qualifier="button" type="localized:java.lang.String">
+					<persistence type="property"/>
+				</attribute>
+				<attribute qualifier="falsetext" type="localized:java.lang.String">
+					<persistence type="property"/>
+				</attribute>
+				<attribute qualifier="failedtext" type="localized:java.lang.String">
+					<persistence type="property"/>
+				</attribute>
+				<attribute qualifier="successedtext" type="localized:java.lang.String">
+					<persistence type="property"/>
+				</attribute>
+			</attributes>
+		</itemtype>			
 	</itemtypes>
 </items>

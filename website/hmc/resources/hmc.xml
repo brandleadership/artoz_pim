@@ -344,4 +344,24 @@
 			</editor>
 		</organizer>
 	</type>
+	
+	<type name="NewsletterAdministrationParagraph" mode="append">
+		<organizer>
+			<editor>
+				<tab name="tab.paragraph.content" mode="append">
+					<section name="text">
+						<listlayout>
+							<attribute name="title"/>
+							<attribute name="greeting"/>
+							<attribute name="insertemail"/>
+							<attribute name="button"/>
+							<attribute name="falsetext"/>
+							<attribute name="failedtext"/>
+							<attribute name="successedtext"/>
+						</listlayout>
+					</section>
+				</tab>
+			</editor>
+		</organizer>
+	</type>
 </configuration>

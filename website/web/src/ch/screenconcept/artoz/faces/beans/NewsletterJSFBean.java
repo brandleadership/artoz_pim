@@ -31,8 +31,8 @@ public class NewsletterJSFBean
 	private String email = "";
 	private User user = null;
 	private String name = "";
-	private String fullname;
-	private Address address;
+	private String fullname = "";
+	private Address address = null;
 	
 	/**
 	 *  Liest die UserID aus der URL aus.
@@ -50,17 +50,15 @@ public class NewsletterJSFBean
 					user = UserManager.getInstance().getUserByLogin( userid );
 					name = user.getName();
 					address = user.getDefaultPaymentAddress();
-					try
-					{
+					if(address != null)
 						fullname = address.getAttribute(Address.FIRSTNAME)+" "+address.getAttribute(Address.LASTNAME);
-					}
-					catch (JaloSecurityException e)
-					{
-						fullname = "";
-					}
 				}
 			}
 			catch( JaloItemNotFoundException e )
+			{
+				user = null;
+			}
+			catch( JaloSecurityException c )
 			{
 				user = null;
 			}

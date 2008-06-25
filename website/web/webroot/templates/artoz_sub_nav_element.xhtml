@@ -15,11 +15,9 @@
 					</h:outputLink>
 					<c:if test="#{!empty element.children}">
 						<!-- Sub2-Navigation -->
-						<!--[if lte IE 6]><table><tr><td><![endif]-->
 						<ui:include src="#{mainNavigation.template.code}">
 							<ui:param name="mainNav" value="#{element}" />
 						</ui:include>
-						<!--[if lte IE 6]></td></tr></table><![endif]-->
 					</c:if>
 				</c:if>
 				

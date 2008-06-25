@@ -10,13 +10,15 @@
    xmlns:hy="http://hybris.com/jsf">
 		
 	<t:div styleClass="registration">
-			<h2>Abmeldung</h2><br />		
-			<h:form id="registrationForm" rendered="#{!empty newsletterJSFBean.name}">
+		<c:choose>
+		<c:when test="#{!empty newsletterJSFBean.name}">
+			<h2>#{item.title}</h2><br />		
+			<h:form id="registrationForm">
 				<!-- The login part -->
-				Hallo #{newsletterJSFBean.fullname}<br />
+				#{item.greeting} #{newsletterJSFBean.fullname}<br />
 				<t:panelGrid columns="2" styleClass="registration" columnClasses="registration_firstColumn, registration_secondColumn">					
 					<t:panelGroup>	
-						<h:outputText value="Bitte Ihre E-Mail-Adresse eingeben*:"/>
+						<h:outputText value="#{item.insertemail}*:"/>
 					</t:panelGroup>
 					<t:panelGroup>
 						<h:inputText value="#{newsletterJSFBean.email}" id="email" required="true" styleClass="text">
@@ -27,15 +29,17 @@
 					<t:panelGroup/>
 					<t:panelGroup>
 						<div class="button">					
-							<h:commandLink id="registrationButton" action="#{newsletterJSFBean.doNewsletterUnregistration}" actionListener="#{newsletterJSFBean.doNewsletterUnregistration}">
-								<h:outputText value="Abmelden" />
+							<h:commandLink id="registrationButton" action="#{newsletterJSFBean.doNewsletterUnregistration}">
+								<h:outputText value="#{item.button}" />
 							</h:commandLink>
 						</div>
 					</t:panelGroup>
 				</t:panelGrid>
 			</h:form>
-			<c:if test="#{empty newsletterJSFBean.name}" >
-				Falsch
-			</c:if>
-		</t:div>
+		</c:when>
+		<c:when test="#{empty newsletterJSFBean.name}">
+				<h:outputText value="#{item.falsetext}" />
+		</c:when>
+		</c:choose>
+	</t:div>
 </ui:composition>
