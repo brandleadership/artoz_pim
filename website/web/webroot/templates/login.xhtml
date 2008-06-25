@@ -7,14 +7,14 @@
 	
 	<div id="contactform">
 		<div id="contactform-text-top">
-			<h:outputText escape="false" value="abc"  />
+			<h:outputText escape="false" value="Login"  />
 		</div>
 		<div id="contactform-content">
 			<h:form id="loginform" >
 				<div id="contactform-content-left">
 					<div class="zeile">
 						<span>
-							<h:outputText value="Name" />
+							<h:outputText value="User Name" />
 						</span>
 						<h:inputText id="customerName" required="true" />
 						<h:message for="customerName" styleClass="error" />
@@ -23,7 +23,7 @@
 						<span>
 							<h:outputText value="Password" />
 						</span>
-						<h:inputText id="password" required="true" />
+						<h:inputSecret redisplay="false" id="password" required="true"  />
 						<h:message for="password" styleClass="error"/>
 						<input type="hidden" id="pageid" name="pageid"
 					value="#{frontPageBean.pageContent.code}" />

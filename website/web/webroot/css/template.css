@@ -348,6 +348,7 @@ div#contactform * input,
 div#contactform * textarea {
 border: 1px solid #336699;
 }
+
 div#contactform * input {
 width: 200px;
 }
@@ -368,6 +369,14 @@ display: block;
 div#contactform-content-left .zeile,
 div#contactform-content-right .zeile {
 margin-bottom: 10px;
+}
+div#contactform .sendbuttons input {
+float: left;
+width: 80px;
+margin-left: 10px;
+}
+div#contactform .sendbuttons .leftbutton {
+margin-left: 90px;
 }
 div#contactform-content-left .zeile span,
 div#contactform-content-right .zeile span {

@@ -16,25 +16,25 @@
 		<filter-name>initfilter</filter-name>
 		<url-pattern>*.jsf</url-pattern>
 	</filter-mapping>
-<!--
+
 	<filter>
 		<filter-name>LexikonFilter</filter-name>
 		<filter-class>
 			ch.screenconcept.artoz.website.LexikonFilter
 		</filter-class>
 	</filter>
--->
+
 	<filter-mapping>
 		<filter-name>initfilter</filter-name>
 		<url-pattern>*.jsf?pageid=lexikon</url-pattern>
 	</filter-mapping>
 	
-<!--	
+	
 	<filter-mapping>
 		<filter-name>LexikonFilter</filter-name>
 		<url-pattern>*.jsf</url-pattern>
 	</filter-mapping>
--->
+
 
 <!-- 
 	<filter-mapping>
@@ -137,7 +137,7 @@
 
 	<!--  Session config and welcome files -->
 	<session-config>
-		<session-timeout>300</session-timeout>
+		<session-timeout>3600</session-timeout>
 	</session-config>
 
 	<welcome-file-list>

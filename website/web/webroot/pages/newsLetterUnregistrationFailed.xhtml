@@ -8,10 +8,14 @@
 	xmlns:c="http://java.sun.com/jstl/core"
 	xmlns:hy="http://hybris.com/jsf">
 
-	<t:div styleClass="registration">
+	<t:div styleClass="registration #{item.cssClass.code}">
 		<h2>#{item.title}</h2>
 		<br />		
 			#{item.failedtext}
-		</t:div>
+		<br />
+			<a href="#">
+				zurueck
+			</a>		
+	</t:div>
 
 </ui:composition>

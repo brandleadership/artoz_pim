@@ -11,12 +11,12 @@
 		<from>^/pages/ajax.jsf(.*)$</from>
 		<to>/pages/ajax.jsf$1</to>
 	</rule>
-<!--
+
 	<rule>
        		<from>^/pages/index.jsf$</from>
        		<to>/pages/index.jsf</to>
    	</rule> 
--->
+
 	<rule>
 		<from>^/pages/newsletter_admin(?:\?(.*)|)</from>
 		<to>/pages/index.jsf?pageid=newsletter_admin&amp;id=$1</to>
