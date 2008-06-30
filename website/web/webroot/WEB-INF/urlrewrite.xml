@@ -6,7 +6,7 @@
 	http://tuckey.org/urlrewrite/
 -->
 <urlrewrite>
-
+	
 	<rule>
 		<from>^/pages/ajax.jsf(.*)$</from>
 		<to>/pages/ajax.jsf$1</to>

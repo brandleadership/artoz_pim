@@ -25,8 +25,9 @@ public class NewsletterText extends GeneratedNewsletterText
 								+ NewsletterText.PARAGRAPH + "} = ?paragraph ", attributes, NewsletterText.class);
 		return res.getResult().isEmpty() ? null : (NewsletterText) res.getResult().get(0);
 	}
-	
-	public static NewsletterText createNewsletterTextWithParagraph(Paragraph paragraph){
+
+	public static NewsletterText createNewsletterTextWithParagraph(Paragraph paragraph)
+	{
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put(NewsletterText.PARAGRAPH, paragraph);
 		params.put(NewsletterText.NAME, paragraph.getCode());

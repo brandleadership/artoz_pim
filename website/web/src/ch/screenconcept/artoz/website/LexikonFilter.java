@@ -1,36 +1,23 @@
 package ch.screenconcept.artoz.website;
 
-import java.io.ByteArrayOutputStream;
-import java.io.CharArrayWriter;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.faces.context.FacesContext;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpServletResponseWrapper;
 
 import ch.screenconcept.artoz.website.constants.WebsiteConstants;
-
-import de.hybris.platform.cms.jalo.Paragraph;
 import de.hybris.platform.jalo.JaloSession;
 import de.hybris.platform.jalo.SearchResult;
-import de.hybris.platform.util.GZIPResponseWrapper;
 
 public final class LexikonFilter implements Filter
 {
@@ -77,10 +64,13 @@ public final class LexikonFilter implements Filter
 				while (i.hasNext())
 				{
 					LexikonParagraphData data = (LexikonParagraphData) i.next();
-					Pattern pattern = Pattern.compile(data.getName());
-					Matcher matcher = pattern.matcher(responseText);
-					responseText = matcher.replaceAll("<a href=\"index.jsf?pageid=" + this.targetPage + "#lexikon-"
-								+ data.toString() + "\">" + data.getName().toString() + "</a>");
+					if(data != null)
+					{
+						Pattern pattern = Pattern.compile(data.getName());
+						Matcher matcher = pattern.matcher(responseText);
+						responseText = matcher.replaceAll("<a href=\"" + this.targetPage + "#lexikon-"
+									+ data.toString() + "\">" + data.getName().toString() + "</a>");
+					}
 				}
 			}
 			response.setContentLength(responseText.length());
