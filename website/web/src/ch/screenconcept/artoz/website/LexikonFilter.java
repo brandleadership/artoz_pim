@@ -31,7 +31,7 @@ public final class LexikonFilter implements Filter
 	{
 		this.filterConfig = filterConfig;
 		targetPage = WebsiteConstants.LEXIKON;
-		patterns = getPatterns();
+		patterns = this.getPatterns();
 	}
 
 	private List getPatterns()
@@ -64,12 +64,16 @@ public final class LexikonFilter implements Filter
 				while (i.hasNext())
 				{
 					LexikonParagraphData data = (LexikonParagraphData) i.next();
-					if(data != null)
+
+					if (data != null)
 					{
-						Pattern pattern = Pattern.compile(data.getName());
-						Matcher matcher = pattern.matcher(responseText);
-						responseText = matcher.replaceAll("<a href=\"" + this.targetPage + "#lexikon-"
-									+ data.toString() + "\">" + data.getName().toString() + "</a>");
+						if (data.getName() != null)
+						{
+							Pattern pattern = Pattern.compile(data.getName());
+							Matcher matcher = pattern.matcher(responseText);
+							responseText = matcher.replaceAll("<a href=\"" + this.targetPage + "#lexikon-"
+										+ data.toString() + "\">" + data.getName().toString() + "</a>");
+						}
 					}
 				}
 			}

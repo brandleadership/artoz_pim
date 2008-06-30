@@ -10,6 +10,10 @@ font-size: 12px;
 * span {
 float: left;
 }
+* a {
+text-decoration: none;
+color: #2B4F8B;
+}
 body {
 background-image: url(/css/images/hg_body.jpg);
 }
@@ -461,4 +465,17 @@ margin-left: 20px;
 div.ajaxparagraph {
 margin-top: 250px;
 margin-left: 30px;
+}
+/****************************/
+/*  Lexikon                 */
+/****************************/
+#content .paragraphPage div.lexikonparagraph {
+margin-top: 10px;
+}
+#content .paragraphPage div.lexikonparagraph div.linkparagraph {
+padding-bottom: 15px;
+margin-bottom: 5px;
+background-repeat: no-repeat;
+background-image: url(/css/images/trennlinie_blau.gif); 
+background-position: left bottom;
 }
