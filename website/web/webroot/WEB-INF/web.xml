@@ -137,7 +137,7 @@
 
 	<!--  Session config and welcome files -->
 	<session-config>
-		<session-timeout>3600</session-timeout>
+		<session-timeout>60</session-timeout>
 	</session-config>
 
 	<welcome-file-list>

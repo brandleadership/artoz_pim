@@ -35,9 +35,9 @@ import de.hybris.platform.util.GZIPResponseWrapper;
 public final class LexikonFilter implements Filter
 {
 	private FilterConfig filterConfig = null;
-	
+
 	private List<Pattern> patterns;
-	
+
 	private String targetPage;
 
 	public void init(FilterConfig filterConfig) throws ServletException
@@ -46,18 +46,15 @@ public final class LexikonFilter implements Filter
 		targetPage = WebsiteConstants.LEXIKON;
 		patterns = getPatterns();
 	}
-	
+
 	private List getPatterns()
 	{
 		List pattern = null;
-		//Map attributes = new HashMap();
-		//attributes.put("code", WebsiteConstants.LEXIKON);
 		final SearchResult res = JaloSession.getCurrentSession().getFlexibleSearch()
 					.search(
-								 "SELECT {" + LexikonParagraphData.PK + "} FROM {"
-											+ WebsiteConstants.TC.LEXIKONPARAGRAPHDATA + "} "// + "WHERE {"
-											/*+ LexikonParagraphData.LEXIKONPARAGRAPH + "} = ?code", attributes*/,
-											LexikonParagraphData.class);
+								"SELECT {" + LexikonParagraphData.PK + "} FROM {"
+											+ WebsiteConstants.TC.LEXIKONPARAGRAPHDATA + "} ",
+								LexikonParagraphData.class);
 		pattern = (List) res.getResult();
 		return pattern;
 	}
@@ -66,8 +63,8 @@ public final class LexikonFilter implements Filter
 				ServletException
 	{
 		if (filterConfig == null)
-	         return;
-		
+			return;
+
 		PrintWriter out = response.getWriter();
 		CharResponseWrapper wrapper = new CharResponseWrapper((HttpServletResponse) response);
 		chain.doFilter(request, wrapper);
@@ -75,15 +72,16 @@ public final class LexikonFilter implements Filter
 		{
 			String responseText = wrapper.toString();
 			Iterator i = patterns.iterator();
-			if(patterns != null)
+			if (patterns != null)
 			{
-			while(i.hasNext())
-			{
-				LexikonParagraphData data = (LexikonParagraphData) i.next();
-				Pattern pattern = Pattern.compile(data.getName().toString());
-				Matcher matcher = pattern.matcher(responseText);
-				responseText = matcher.replaceAll("<a href=\"index.jsf?pageid=" + this.targetPage +"#lexikon-"+data.toString()+"\">" + data.getName().toString() + "</a>");
-			}
+				while (i.hasNext())
+				{
+					LexikonParagraphData data = (LexikonParagraphData) i.next();
+					Pattern pattern = Pattern.compile(data.getName());
+					Matcher matcher = pattern.matcher(responseText);
+					responseText = matcher.replaceAll("<a href=\"index.jsf?pageid=" + this.targetPage + "#lexikon-"
+								+ data.toString() + "\">" + data.getName().toString() + "</a>");
+				}
 			}
 			response.setContentLength(responseText.length());
 			out.write(responseText);
@@ -100,7 +98,7 @@ public final class LexikonFilter implements Filter
 
 	private void setPatterns()
 	{
-		
+
 	}
 
 }
