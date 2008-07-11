@@ -2,6 +2,7 @@ package ch.screenconcept.artoz.website;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -14,6 +15,10 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.myfaces.shared_impl.renderkit.html.util.HTMLEncoder;
+
+import sun.text.normalizer.UTF16;
 
 import ch.screenconcept.artoz.website.constants.WebsiteConstants;
 import de.hybris.platform.jalo.JaloSession;
@@ -55,7 +60,8 @@ public final class LexikonFilter implements Filter
 		PrintWriter out = response.getWriter();
 		CharResponseWrapper wrapper = new CharResponseWrapper((HttpServletResponse) response);
 		chain.doFilter(request, wrapper);
-		if (patterns != null && wrapper.getCharacterEncoding().equals("UTF-8"))
+		String encoding = wrapper.getCharacterEncoding();
+		if (patterns != null && encoding.equals("UTF-8") || patterns != null && encoding.equals("ISO-8859-1"))
 		{
 			String responseText = wrapper.toString();
 			Iterator i = patterns.iterator();
@@ -69,16 +75,25 @@ public final class LexikonFilter implements Filter
 					{
 						if (data.getName() != null)
 						{
-							Pattern pattern = Pattern.compile(data.getName());
+							String name = HTMLEncoder.encode(data.getName());
+							Pattern pattern = Pattern.compile(name);
 							Matcher matcher = pattern.matcher(responseText);
 							responseText = matcher.replaceAll("<a href=\"" + this.targetPage + "#lexikon-"
-										+ data.toString() + "\">" + data.getName().toString() + "</a>");
+										+ data.toString() + "\">" + name + "</a>");
+							
+							String nameUTF = URLEncoder.encode(data.getName(), "UTF-8");
+							Pattern patternUTF = Pattern.compile(nameUTF);
+							Matcher matcherUTF = patternUTF.matcher(responseText);
+							responseText = matcherUTF.replaceAll("<a href=\"" + this.targetPage + "#lexikon-"
+										+ data.toString() + "\">" + nameUTF + "</a>");
 						}
 					}
 				}
 			}
-			response.setContentLength(responseText.length());
-			out.write(responseText);
+			String text = new String(responseText.getBytes(), response.getCharacterEncoding());
+			response.setContentLength(text.length());
+			//response.setCharacterEncoding(encoding);
+			out.write(text);
 		}
 		else
 			out.write(wrapper.toString());

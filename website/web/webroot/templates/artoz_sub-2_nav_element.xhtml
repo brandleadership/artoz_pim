@@ -11,7 +11,7 @@
 				<c:if test="#{element.code == cmsJSFBean.activNavigationElement.code}">
 					<!-- Main-Navigation Activ -->
 					<h:outputLink value="#{element.content.code}" class="act">
-						<h:outputText value="#{element.name}" />
+						<h:outputText value="#{element.name}" escape="false" />
 					</h:outputLink>
 				</c:if>
 				
@@ -19,7 +19,7 @@
 					<!-- Main-Navigation Unactiv -->
 					<cms:item item="#{element}">
 						<h:outputLink value="#{element.content.code}">
-							<h:outputText value="#{element.name}" />
+							<h:outputText value="#{element.name}" escape="false" />
 						</h:outputLink>
 					</cms:item>
 				</c:if>

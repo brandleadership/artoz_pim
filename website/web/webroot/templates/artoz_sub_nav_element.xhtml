@@ -11,7 +11,7 @@
 				<c:if test="#{element.code == cmsJSFBean.activSubNavigationElement.code}">
 					<!-- Sub-Navigation Activ -->
 					<h:outputLink value="#{element.content.code}" class="act">
-						<h:outputText value="#{element.name}" />
+						<h:outputText value="#{element.name}" escape="false" />
 					</h:outputLink>
 					<c:if test="#{!empty element.children}">
 						<!-- Sub2-Navigation -->
@@ -24,7 +24,7 @@
 				<c:if test="#{element.code != cmsJSFBean.activSubNavigationElement}">
 					<!-- Sub-Navigation Unactiv -->
 					<h:outputLink value="#{element.content.code}" class="#{element.color.code}">
-						<h:outputText value="#{element.name}" />
+						<h:outputText value="#{element.name}" escape="false" />
 					</h:outputLink>
 				</c:if>
 			</li>

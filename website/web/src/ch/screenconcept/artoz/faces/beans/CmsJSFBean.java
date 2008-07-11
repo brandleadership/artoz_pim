@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.validator.GenericValidator;
 import org.apache.log4j.Logger;
@@ -27,6 +26,7 @@ import de.hybris.platform.cms.jalo.PageContent;
 import de.hybris.platform.cms.jalo.Website;
 import de.hybris.platform.core.PK;
 import de.hybris.platform.jalo.JaloSession;
+import de.hybris.platform.jalo.c2l.Language;
 import de.hybris.platform.jalo.flexiblesearch.FlexibleSearch;
 import de.hybris.platform.jalo.user.User;
 
@@ -61,12 +61,21 @@ public class CmsJSFBean
 
 		CmsManager.getInstance().setActiveWebsite(getWebsite());
 
-		LoginJSFBean loginBeean = (LoginJSFBean) FacesContext.getCurrentInstance().getApplication().createValueBinding(
+		LoginJSFBean loginBean = (LoginJSFBean) FacesContext.getCurrentInstance().getApplication().createValueBinding(
 					"#{loginJSFBean}").getValue(FacesContext.getCurrentInstance());
 
-		User user = loginBeean.getLoginUser();
+		LanguageJSFBean languageBean = (LanguageJSFBean) FacesContext.getCurrentInstance().getApplication()
+					.createValueBinding("#{languageBean}").getValue(FacesContext.getCurrentInstance());
+
+		User user = loginBean.getLoginUser();
+
+		Language lang = languageBean.getLanguage();
+
 		if (user != null)
+		{
 			JaloSession.getCurrentSession().setUser(user);
+		}
+		JaloSession.getCurrentSession().getSessionContext().setLanguage(lang);
 	}
 
 	public String getRequestParameter(String name)
@@ -154,6 +163,8 @@ public class CmsJSFBean
 					.get(WebsiteConstants.PARAM_PAGEID);
 		if (pageID == null)
 			return null;
+		if (pageID.equals(""))
+			return null;
 		final PageContent page = CmsManager.getInstance().getPageContent(pageID, getWebsite());
 		if (page == null)
 			return null;
@@ -202,7 +213,6 @@ public class CmsJSFBean
 
 	public Website getWebsite()
 	{
-		// return CmsManager.getInstance().getActiveWebsite();
 		return CmsManager.getInstance().getWebsite("artoz");
 	}
 

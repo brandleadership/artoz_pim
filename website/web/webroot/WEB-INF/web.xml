@@ -3,6 +3,7 @@
 	xmlns="http://java.sun.com/xml/ns/j2ee"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	
 
 	<!-- LiveEdit -->
 	<filter>
@@ -17,25 +18,19 @@
 		<url-pattern>*.jsf</url-pattern>
 	</filter-mapping>
 
+	<!-- Lexikon Filter -->
 	<filter>
 		<filter-name>LexikonFilter</filter-name>
 		<filter-class>
 			ch.screenconcept.artoz.website.LexikonFilter
 		</filter-class>
-	</filter>
-
-	<filter-mapping>
-		<filter-name>initfilter</filter-name>
-		<url-pattern>*.jsf?pageid=lexikon</url-pattern>
-	</filter-mapping>
-	
+	</filter>	
 	
 	<filter-mapping>
 		<filter-name>LexikonFilter</filter-name>
-		<url-pattern>*.jsf</url-pattern>
+		<url-pattern>/pages/*</url-pattern>
 	</filter-mapping>
-
-
+	
 <!-- 
 	<filter-mapping>
 		<filter-name>initfilter</filter-name>
@@ -72,7 +67,7 @@
 		<param-value>.xhtml</param-value>
 	</context-param>
 	
-	<!-- URL Rewriting--> 
+	<!-- URL Rewriting-->	 
 	<filter>
 		<filter-name>UrlRewriteFilter</filter-name>
 		<filter-class>

@@ -11,6 +11,8 @@ import de.hybris.platform.jalo.JaloInvalidParameterException;
 import de.hybris.platform.jalo.JaloItemNotFoundException;
 import de.hybris.platform.jalo.JaloSession;
 import de.hybris.platform.jalo.JaloSystemNotInitializedException;
+import de.hybris.platform.jalo.c2l.C2LManager;
+import de.hybris.platform.jalo.c2l.Language;
 import de.hybris.platform.jalo.security.JaloSecurityException;
 import de.hybris.platform.jalo.user.User;
 
@@ -38,7 +40,7 @@ public class LoginJSFBean
 			m.put("user.credentials", getPassword());
 
 			JaloSession.getCurrentSession().transfer(m, true);
-			
+
 			setLoginUser(JaloSession.getCurrentSession().getUser());
 
 			// return SUCCESSED;
@@ -102,5 +104,8 @@ public class LoginJSFBean
 		this.loginUser = loginUser;
 	}
 
-
+	public Language getLanguage()
+	{
+		return C2LManager.getInstance().getLanguageByIsoCode("en");
+	}
 }

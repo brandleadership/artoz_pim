@@ -9,7 +9,7 @@
 		<c:when test="#{!empty element.name}">
 			<li>
 				<h:outputLink value="#{element.content.code}" class="#{element.color.code}">
-					<h:outputText value="#{element.name}" />
+					<h:outputText value="#{element.name}" escape="false" />
 				</h:outputLink>
 			</li>
 		</c:when>

@@ -8,7 +8,7 @@
 	<div class="lexikonparagraph">
 		<c:forEach items="#{lexikonJSFBean.lexikonParagraphDatas}" var="lexikon" >
 			<div class="linkparagraph">
-				<h1><a id="lexikon-#{lexikon}" /><h:outputText escape="false" value="#{lexikon.name}" /></h1>
+				<h1><a id="lexikon-#{lexikon}" /><h:outputText value="#{lexikon.name}" /></h1>
 				<h:outputText escape="false" value="#{lexikon.description}" />
 			</div>
 			<div class="line" />
