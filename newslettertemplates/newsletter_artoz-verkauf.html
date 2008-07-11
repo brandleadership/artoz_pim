@@ -35,14 +35,14 @@
             ${element.link}
             </td>
             <td>
-            #if( $!element.image0 )
+            #if( $element.image0 != "" )
                 <img class="image0" border="0" alt="${element.alttext0}" src="${element.image0}"/>
             #end
             </td>
           </tr>
           <tr>
             <td>
-            #if( $!element.image1 )
+            #if( $element.image1 != "" )
                 <img class="image1" border="0" alt="${element.alttext1}" src="${element.image1}"/>
             #end
             </td>
@@ -50,12 +50,12 @@
         #elseif( $element.layout == $top )
           	<tr>
             <td>
-            #if( $!element.image0 )
+            #if( $element.image0 != "" )
                 <img class="image0" border="0" alt="${element.alttext0}" src="${element.image0}"/>
             #end
             </td>
             <td>
-            #if( $!element.image1 )
+            #if( $element.image1 != "" )
                 <img class="image1" border="0" alt="${element.alttext1}" src="${element.image1}"/>
             #end
             </td>
@@ -71,7 +71,7 @@
         #elseif( $element.layout == $left )
           	<tr>
             <td>
-            #if( $!element.image0 )
+            #if( $element.image0 != "" )
                 <img class="image0" border="0" alt="${element.alttext0}" src="${element.image0}"/>
             #end
             </td>
@@ -84,7 +84,7 @@
           </tr>
           <tr>
             <td>
-            #if( $!element.image1 )
+            #if( $element.image1 != "" )
                 <img class="image1" border="0" alt="${element.alttext1}" src="${element.image1}"/>
             #end
             </td>
@@ -100,12 +100,12 @@
           </tr>
           <tr>
             <td>
-            #if( $element.image0 )
+            #if( $element.image0 != "" )
                 <img class="image0" border="0" alt="${element.alttext0}" src="${element.image0}"/>
             #end
             </td>
             <td>
-            #if( $element.image1 )
+            #if( $element.image1 != "" )
                 <img class="image1" border="0" alt="${element.alttext1}" src="${element.image1}"/>
             #end
             </td>
@@ -134,13 +134,13 @@ Copyright by Artoz Papier AG, Ringstrasse West 23,<br>
       #foreach ( $element in ${contentright} )
       <div style="margin:0px 0px 25px 9px;border-bottom:1px solid #E98300;padding-bottom:10px;">
       	#if( $element.layout == "top")
-            #if( $element.image0 )
+            #if( $element.image0 != "" )
                 <img class="image0" border="0" alt="${element.alttext0}" src="${element.image0}"/>
             #end
         #end
         ${element.text}
         #if( $element.layout == "bottom")
-            #if( $element.image0 )
+            #if( $element.image0 != "" )
                 <img class="image0" border="0" alt="${element.alttext0}" src="${element.image0}"/>
             #end
         #end
