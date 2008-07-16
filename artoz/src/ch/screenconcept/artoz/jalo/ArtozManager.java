@@ -3,25 +3,44 @@
  */
 package ch.screenconcept.artoz.jalo;
 
-import de.hybris.platform.cms.jalo.Paragraph;
-import de.hybris.platform.core.Tenant;
-import de.hybris.platform.jalo.*;
-import de.hybris.platform.jalo.c2l.Language;
-import de.hybris.platform.jalo.enumeration.EnumerationValue;
-import de.hybris.platform.jalo.extension.ExtensionManager;
-import de.hybris.platform.jalo.media.Media;
-import de.hybris.platform.jalo.product.Product;
-import de.hybris.platform.util.*;
-
 import java.lang.reflect.Method;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
-import net.sf.cglib.proxy.*;
+import net.sf.cglib.proxy.Callback;
+import net.sf.cglib.proxy.CallbackFilter;
+import net.sf.cglib.proxy.Enhancer;
+import net.sf.cglib.proxy.MethodInterceptor;
+import net.sf.cglib.proxy.MethodProxy;
+import net.sf.cglib.proxy.NoOp;
 
 import org.apache.log4j.Logger;
 
 import ch.screenconcept.artoz.campaign.NewsletterText;
 import ch.screenconcept.artoz.constants.ArtozConstants;
+import de.hybris.platform.cms.constants.CmsConstants;
+import de.hybris.platform.cms.jalo.Paragraph;
+import de.hybris.platform.cms.jalo.Website;
+import de.hybris.platform.core.Tenant;
+import de.hybris.platform.jalo.Item;
+import de.hybris.platform.jalo.JaloImplementationManager;
+import de.hybris.platform.jalo.JaloSession;
+import de.hybris.platform.jalo.JaloSystemException;
+import de.hybris.platform.jalo.SearchResult;
+import de.hybris.platform.jalo.SessionContext;
+import de.hybris.platform.jalo.c2l.Language;
+import de.hybris.platform.jalo.enumeration.EnumerationValue;
+import de.hybris.platform.jalo.extension.ExtensionManager;
+import de.hybris.platform.jalo.media.Media;
+import de.hybris.platform.jalo.product.Product;
+import de.hybris.platform.util.BridgeAbstraction;
+import de.hybris.platform.util.BridgeInterface;
+import de.hybris.platform.util.JaloObjectCreator;
+import de.hybris.platform.util.JspContext;
 
 /**
  * This is the extension manager of the Artoz extension.
@@ -270,65 +289,60 @@ public class ArtozManager extends GeneratedArtozManager
 	@Override
 	public void setAllSetNewsletterHeadText(SessionContext ctx, Paragraph item, Map<Language, String> value)
 	{
-		if (!containsJustNullValues(value))
-		{
-			NewsletterText newsletterText = NewsletterText.getNewsletterTextByParagraph(item.getPK());
-			if (newsletterText == null)
-				newsletterText = NewsletterText.createNewsletterTextWithParagraph((Paragraph) item);
-			ctx.setLanguage(null);
-			newsletterText.setAllHeadtext(value);
-		}
+		NewsletterText newsletterText = NewsletterText.getNewsletterTextByParagraph(item);
+		ctx.setLanguage(null);
+		newsletterText.setAllHeadtext(value);
 	}
 
 	@Override
 	public Map<Language, String> getAllSetNewsletterHeadText(SessionContext ctx, Paragraph item)
 	{
-		NewsletterText newsletterText = NewsletterText.getNewsletterTextByParagraph(item.getPK());
+		NewsletterText newsletterText = NewsletterText.getNewsletterTextByParagraph(item);
 		if (newsletterText == null)
 			return null;
-		return NewsletterText.getNewsletterTextByParagraph(item.getPK()).getAllHeadtext(ctx);
+		return NewsletterText.getNewsletterTextByParagraph(item).getAllHeadtext(ctx);
 	}
 
 	@Override
 	public Map<Language, String> getAllSetNewsletterLinkText(SessionContext ctx, Paragraph item)
 	{
-		NewsletterText newsletterText = NewsletterText.getNewsletterTextByParagraph(item.getPK());
+		NewsletterText newsletterText = NewsletterText.getNewsletterTextByParagraph(item);
 		if (newsletterText == null)
 			return null;
-		return NewsletterText.getNewsletterTextByParagraph(item.getPK()).getAllLinktext(ctx);
+		return NewsletterText.getNewsletterTextByParagraph(item).getAllLinktext(ctx);
 	}
 
 	@Override
 	public Map<Language, String> getAllSetNewsletterText(SessionContext ctx, Paragraph item)
 	{
-		NewsletterText newsletterText = NewsletterText.getNewsletterTextByParagraph(item.getPK());
+		NewsletterText newsletterText = NewsletterText.getNewsletterTextByParagraph(item);
 		if (newsletterText == null)
 			return null;
-		return NewsletterText.getNewsletterTextByParagraph(item.getPK()).getAllText(ctx);
+		return NewsletterText.getNewsletterTextByParagraph(item).getAllText(ctx);
 	}
 
 	@Override
 	public Media getSetNewsletterImage0(SessionContext ctx, Paragraph item)
 	{
-		NewsletterText newsletterText = NewsletterText.getNewsletterTextByParagraph(item.getPK());
+		NewsletterText newsletterText = NewsletterText.getNewsletterTextByParagraph(item);
 		if (newsletterText == null)
 			return null;
-		return NewsletterText.getNewsletterTextByParagraph(item.getPK()).getImage0(ctx);
+		return NewsletterText.getNewsletterTextByParagraph(item).getImage0(ctx);
 	}
 
 	@Override
 	public Media getSetNewsletterImage1(SessionContext ctx, Paragraph item)
 	{
-		NewsletterText newsletterText = NewsletterText.getNewsletterTextByParagraph(item.getPK());
+		NewsletterText newsletterText = NewsletterText.getNewsletterTextByParagraph(item);
 		if (newsletterText == null)
 			return null;
-		return NewsletterText.getNewsletterTextByParagraph(item.getPK()).getImage1(ctx);
+		return NewsletterText.getNewsletterTextByParagraph(item).getImage1(ctx);
 	}
 
 	@Override
 	public EnumerationValue getSetNewsletterLayout(SessionContext ctx, Paragraph item)
 	{
-		NewsletterText newsletterText = NewsletterText.getNewsletterTextByParagraph(item.getPK());
+		NewsletterText newsletterText = NewsletterText.getNewsletterTextByParagraph(item);
 		if (newsletterText == null)
 			return null;
 		return newsletterText.getImagelayout(ctx);
@@ -337,27 +351,17 @@ public class ArtozManager extends GeneratedArtozManager
 	@Override
 	public void setAllSetNewsletterLinkText(SessionContext ctx, Paragraph item, Map<Language, String> value)
 	{
-		if (!containsJustNullValues(value))
-		{
-			NewsletterText newsletterText = NewsletterText.getNewsletterTextByParagraph(item.getPK());
-			if (newsletterText == null)
-				newsletterText = NewsletterText.createNewsletterTextWithParagraph((Paragraph) item);
-			ctx.setLanguage(null);
-			newsletterText.setAllLinktext(ctx, value);
-		}
+		NewsletterText newsletterText = NewsletterText.getNewsletterTextByParagraph(item);
+		ctx.setLanguage(null);
+		newsletterText.setAllLinktext(ctx, value);
 	}
 
 	@Override
 	public void setAllSetNewsletterText(SessionContext ctx, Paragraph item, Map<Language, String> value)
 	{
-		if (!containsJustNullValues(value))
-		{
-			NewsletterText newsletterText = NewsletterText.getNewsletterTextByParagraph(item.getPK());
-			if (newsletterText == null)
-				newsletterText = NewsletterText.createNewsletterTextWithParagraph((Paragraph) item);
-			ctx.setLanguage(null);
-			newsletterText.setAllText(ctx, value);
-		}
+		NewsletterText newsletterText = NewsletterText.getNewsletterTextByParagraph(item);
+		ctx.setLanguage(null);
+		newsletterText.setAllText(ctx, value);
 	}
 
 	@Override
@@ -365,9 +369,7 @@ public class ArtozManager extends GeneratedArtozManager
 	{
 		if (value != null)
 		{
-			NewsletterText newsletterText = NewsletterText.getNewsletterTextByParagraph(item.getPK());
-			if (newsletterText == null)
-				newsletterText = NewsletterText.createNewsletterTextWithParagraph((Paragraph) item);
+			NewsletterText newsletterText = NewsletterText.getNewsletterTextByParagraph(item);
 			newsletterText.setImage0(value);
 		}
 	}
@@ -377,9 +379,7 @@ public class ArtozManager extends GeneratedArtozManager
 	{
 		if (value != null)
 		{
-			NewsletterText newsletterText = NewsletterText.getNewsletterTextByParagraph(item.getPK());
-			if (newsletterText == null)
-				newsletterText = NewsletterText.createNewsletterTextWithParagraph((Paragraph) item);
+			NewsletterText newsletterText = NewsletterText.getNewsletterTextByParagraph(item);
 			newsletterText.setImage1(value);
 		}
 	}
@@ -387,23 +387,38 @@ public class ArtozManager extends GeneratedArtozManager
 	@Override
 	public void setSetNewsletterLayout(SessionContext ctx, Paragraph item, EnumerationValue value)
 	{
-		NewsletterText newsletterText = NewsletterText.getNewsletterTextByParagraph(item.getPK());
-		if (newsletterText == null)
-			newsletterText = NewsletterText.createNewsletterTextWithParagraph((Paragraph) item);
+		NewsletterText newsletterText = NewsletterText.getNewsletterTextByParagraph(item);
 		newsletterText.setImagelayout(value);
+	}
+
+	private boolean containsJustNullValues(Map map)
+	{
+		Collection<String> values = map.values();
+		for (String value : values)
+		{
+			if (value != null)
+				return false;
+		}
+		return true;
+	}
+
+	public static Paragraph getParagraphByCode(String code, Website website)
+	{
+		Map<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("code", code);
+		attributes.put("website", website);
+		final SearchResult res = JaloSession.getCurrentSession().getFlexibleSearch().search(
+					"SELECT {" + Paragraph.PK + "} FROM {" + CmsConstants.TC.PARAGRAPH + "} " + " WHERE {"
+								+ Paragraph.CODE + "} = ?code AND {" + Paragraph.WEBSITE + "} = ?website ", attributes,
+					Paragraph.class);
+		return res.getResult().isEmpty() ? null : (Paragraph) res.getResult().get(0);
 	}
 
 	@Override
 	public String getSetNewsletterHeadText(SessionContext ctx, Paragraph item)
 	{
-		return null;
-	}
-
-	@Override
-	public void setSetNewsletterHeadText(SessionContext ctx, Paragraph item, String value)
-	{
 		// TODO Auto-generated method stub
-		// unused
+		return null;
 	}
 
 	@Override
@@ -428,34 +443,30 @@ public class ArtozManager extends GeneratedArtozManager
 	}
 
 	@Override
+	public void setSetNewsletterHeadText(SessionContext ctx, Paragraph item, String value)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
 	public void setSetNewsletterLinkText(SessionContext ctx, Paragraph item, String value)
 	{
 		// TODO Auto-generated method stub
-		// unused
+		
 	}
 
 	@Override
 	public void setSetNewsletterName(SessionContext ctx, Paragraph item, String value)
 	{
 		// TODO Auto-generated method stub
-		// unused
+		
 	}
 
 	@Override
 	public void setSetNewsletterText(SessionContext ctx, Paragraph item, String value)
 	{
 		// TODO Auto-generated method stub
-		// unused
-	}
-
-	private boolean containsJustNullValues(Map map)
-	{
-		Collection<String> values = map.values();
-		for (String value : values)
-		{
-			if (value != null)
-				return false;
-		}
-		return true;
+		
 	}
 }

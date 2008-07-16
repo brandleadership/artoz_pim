@@ -3,8 +3,25 @@
  */
 package ch.screenconcept.artoz.hmc;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
+
+import org.apache.log4j.Logger;
+
+import ch.screenconcept.artoz.campaign.NewsletterText;
+import ch.screenconcept.artoz.constants.ArtozConstants;
+import ch.screenconcept.artoz.jalo.ArtozManager;
+import de.hybris.platform.cms.constants.CmsConstants;
 import de.hybris.platform.cms.jalo.Paragraph;
-import de.hybris.platform.hmc.*;
+import de.hybris.platform.cms.jalo.Website;
+import de.hybris.platform.hmc.AbstractEditorMenuChip;
+import de.hybris.platform.hmc.AbstractExplorerMenuTreeNodeChip;
+import de.hybris.platform.hmc.EditorTabChip;
 import de.hybris.platform.hmc.extension.HMCExtension;
 import de.hybris.platform.hmc.extension.MenuEntrySlotEntry;
 import de.hybris.platform.hmc.generic.ClipChip;
@@ -12,18 +29,11 @@ import de.hybris.platform.hmc.generic.ToolbarActionChip;
 import de.hybris.platform.hmc.util.action.ActionResult;
 import de.hybris.platform.hmc.webchips.Chip;
 import de.hybris.platform.hmc.webchips.DisplayState;
+import de.hybris.platform.jalo.ConsistencyCheckException;
 import de.hybris.platform.jalo.Item;
 import de.hybris.platform.jalo.JaloSession;
 import de.hybris.platform.jalo.SessionContext;
 import de.hybris.platform.jalo.type.ComposedType;
-import de.hybris.platform.jalo.type.Type;
-
-import java.util.*;
-
-import org.apache.log4j.Logger;
-
-import ch.screenconcept.artoz.campaign.NewsletterText;
-import ch.screenconcept.artoz.constants.ArtozConstants;
 
 
 /**
@@ -35,14 +45,72 @@ import ch.screenconcept.artoz.constants.ArtozConstants;
 public class ArtozHMCExtension extends HMCExtension
 {
 	@Override
+	public ActionResult afterSave(Item item, DisplayState displayState, Map values, ActionResult actionResult)
+	{
+		checkParagraphAfterSave(item);
+		return super.afterSave(item, displayState, values, actionResult);
+	}
+
+	private void checkParagraphAfterSave(Item item)
+	{
+		if ( item.getComposedType().getSuperType().getCode().equals(CmsConstants.TC.PARAGRAPH) ||  item.getComposedType().getCode().equals(CmsConstants.TC.PARAGRAPH) )
+		{
+			NewsletterText newsletterText = NewsletterText.getNewsletterTextByParagraph((Paragraph) item);
+			if(newsletterTextIsEmpty(newsletterText))
+			{
+				try
+				{
+					newsletterText.remove();
+				}
+				catch (ConsistencyCheckException e)
+				{
+					e.printStackTrace();
+				}
+			}
+			else
+			{
+				newsletterText.setParagraph((Paragraph) item);
+			}
+		}
+	}
+
+	@Override
+	public ActionResult afterCreate(Item item, DisplayState displayState, Map initialValues, Map values,
+				ActionResult actionResult)
+	{
+		checkParagraphAfterSave(item);
+		return super.afterCreate(item, displayState, initialValues, values, actionResult);
+	}
+
+	private boolean newsletterTextIsEmpty(NewsletterText newsletterText)
+	{
+		if(newsletterText.getAllHeadtext().isEmpty() && newsletterText.getAllText().isEmpty() && newsletterText.getAllLinktext().isEmpty())
+			return true;
+		else
+			return false;
+	}
+
+	@Override
 	public ActionResult beforeCreate(ComposedType itemType, DisplayState displayState, Map initialValues)
 	{
+		if(itemType.getSuperType().getCode().equals(CmsConstants.TC.PARAGRAPH) || itemType.getComposedType().getSuperType().getCode().equals(CmsConstants.TC.PARAGRAPH) )
+		{
+			NewsletterText newsletterText = NewsletterText.createNewsletterTextWithParagraphCode((String)initialValues.get("code"));
+		}
 		return super.beforeCreate(itemType, displayState, initialValues);
 	}
 
 	@Override
 	public ActionResult beforeSave(Item item, DisplayState displayState, Map currentValues, Map initialValues)
 	{
+		if ( item.getComposedType().getSuperType().getCode().equals(CmsConstants.TC.PARAGRAPH) ||  item.getComposedType().getCode().equals(CmsConstants.TC.PARAGRAPH) )
+		{
+			NewsletterText newsletterText = NewsletterText.getNewsletterTextByParagraph((Paragraph) item);
+			if(newsletterText == null)
+			{
+				newsletterText = NewsletterText.createNewsletterTextWithParagraph((Paragraph) item);
+			}
+		}
 		return super.beforeSave(item, displayState, currentValues, initialValues);
 	}
 

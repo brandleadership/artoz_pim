@@ -16,14 +16,24 @@ public class NewsletterText extends GeneratedNewsletterText
 {
 	private static Logger log = Logger.getLogger(NewsletterText.class.getName());
 
-	public static NewsletterText getNewsletterTextByParagraph(PK pk)
+	public static NewsletterText getNewsletterTextByParagraph(Paragraph paragraph)
 	{
-		Map<String, PK> attributes = new HashMap<String, PK>();
-		attributes.put("paragraph", pk);
-		final SearchResult res = JaloSession.getCurrentSession().getFlexibleSearch().search(
+		Map<String, PK> attributesPK = new HashMap<String, PK>();
+		attributesPK.put("paragraph", paragraph.getPK());
+		final SearchResult resPK = JaloSession.getCurrentSession().getFlexibleSearch().search(
 					"SELECT {" + NewsletterText.PK + "} FROM {" + ArtozConstants.TC.NEWSLETTERTEXT + "} " + " WHERE {"
-								+ NewsletterText.PARAGRAPH + "} = ?paragraph ", attributes, NewsletterText.class);
-		return res.getResult().isEmpty() ? null : (NewsletterText) res.getResult().get(0);
+								+ NewsletterText.PARAGRAPH + "} = ?paragraph ", attributesPK, NewsletterText.class);
+		if(resPK.getResult().isEmpty())
+		{
+			Map<String, String> attributesCode = new HashMap<String, String>();
+			attributesCode.put("name", paragraph.getCode());
+			final SearchResult resCode = JaloSession.getCurrentSession().getFlexibleSearch().search(
+						"SELECT {" + NewsletterText.PK + "} FROM {" + ArtozConstants.TC.NEWSLETTERTEXT + "} " + " WHERE {"
+									+ NewsletterText.NAME + "} = ?name ", attributesCode, NewsletterText.class);
+			return resCode.getResult().isEmpty() ? null : (NewsletterText) resCode.getResult().get(0);
+		}
+		
+		return resPK.getResult().isEmpty() ? null : (NewsletterText) resPK.getResult().get(0);
 	}
 
 	public static NewsletterText createNewsletterTextWithParagraph(Paragraph paragraph)
@@ -31,6 +41,13 @@ public class NewsletterText extends GeneratedNewsletterText
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put(NewsletterText.PARAGRAPH, paragraph);
 		params.put(NewsletterText.NAME, paragraph.getCode());
+		return ArtozManager.getInstance().createNewsletterText(params);
+	}
+
+	public static NewsletterText createNewsletterTextWithParagraphCode(String code)
+	{
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put(NewsletterText.NAME, code);
 		return ArtozManager.getInstance().createNewsletterText(params);
 	}
 }
