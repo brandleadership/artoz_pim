@@ -7,7 +7,7 @@
 	
 	<div class="ajaxparagraph">
 		<c:forEach items="#{ajaxParagraphJSFBean.ajaxParagraphDatas}" var="data" >
-			<a href="ajax.jsf?pageid=#{item.target.code}&amp;paragraph=#{data.code}&amp;height=409&amp;width=1025" class="thickbox">
+			<a href="ajax.jsf?pageid=#{item.target.code}&amp;paragraph=#{data.code}&amp;language=#{languageBean.isoCode}&amp;height=409&amp;width=988" class="thickbox">
 				<img src="#{data.thumbImage.URL}" border="0" />
 				<br />
 				<h:outputText escape="false" value="#{data.title}" />

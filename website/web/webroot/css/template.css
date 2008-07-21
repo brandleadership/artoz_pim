@@ -23,7 +23,7 @@ width: 1024px;
 display: block;
 position: relative; 
 left: 50%; 
-margin-left: -512px; 
+margin-left: -509px; 
 margin-top: 40px;
 background-color: white;
 }
@@ -234,10 +234,10 @@ z-index: 1;
 float: left;
 position: absolute;
 margin-left: 0px;
+_margin-left: -30px;
 }
-*+html #content .paragraphPage .headline-image,
-* html #content .paragraphPage .headline-image {
-margin-left: -250px;
+*+html #content .paragraphPage .headline-image {
+margin-left: -30px;
 }
 /****************************/
 /*  Zusatznavi Unten        */
@@ -449,7 +449,7 @@ color: black;
 #ajaxBackground {
 float: left;
 display: block;
-width: 1024px;
+width: 988px;
 height: 396px;
 }
 #ajaxFlashMovie,
@@ -460,9 +460,14 @@ margin-top: 50px;
 }
 #ajaxFlashMovie {
 margin-left: 200px;
+_margin-left: 100px;
 }
 #ajaxText {
 margin-left: 20px;
+/*float: left;
+position: absolute;
+left:  0px;
+top: 0px;*/
 }
 div.ajaxparagraph {
 margin-top: 250px;
