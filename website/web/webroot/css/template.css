@@ -6,6 +6,7 @@ margin: 0px 0px 0px 0px;
 padding: 0px 0px 0px 0px; 
 font-family: Verdana,Arial,Helvetica,sans-serif;
 font-size: 12px;
+line-height: 16px;
 }
 * span {
 float: left;
@@ -218,6 +219,7 @@ margin-top: 95px;
 #content .paragraphPage div.paragraph3 {
 margin-left: 540px;
 margin-top: 50px;
+margin-right: 10px;
 }
 #content .paragraphPage div.paragraph4 {
 margin-left: 625px;
