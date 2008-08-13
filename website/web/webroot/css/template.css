@@ -198,6 +198,7 @@ overflow: auto;
 float: left;
 }
 #content .paragraphPage div#contactform,
+#content .paragraphPage div.textparagraph,
 #content .paragraphPage div.tradeparagraph,
 #content .paragraphPage div.lexikonparagraph {
 z-index: 2;
@@ -234,10 +235,10 @@ z-index: 1;
 float: left;
 position: absolute;
 margin-left: 0px;
-_margin-left: -30px;
 }
-*+html #content .paragraphPage .headline-image {
-margin-left: -30px;
+*+html #content .paragraphPage .headline-image,
+* html #content .paragraphPage .headline-image {
+margin-left: -280px;
 }
 /****************************/
 /*  Zusatznavi Unten        */
@@ -460,14 +461,9 @@ margin-top: 50px;
 }
 #ajaxFlashMovie {
 margin-left: 200px;
-_margin-left: 100px;
 }
 #ajaxText {
 margin-left: 20px;
-/*float: left;
-position: absolute;
-left:  0px;
-top: 0px;*/
 }
 div.ajaxparagraph {
 margin-top: 250px;
