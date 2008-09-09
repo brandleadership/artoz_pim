@@ -1,5 +1,20 @@
 package ch.screenconcept.artoz.update;
 
+/*
+ The extension "Artoz" is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -15,6 +30,13 @@ import de.hybris.platform.jalo.c2l.Language;
 import de.hybris.platform.jalo.product.ProductManager;
 import de.hybris.platform.jalo.user.UserManager;
 
+/**
+ * This class creates some values. There are necessary that system works. This
+ * class does not include all required values.
+ * 
+ * @author pascal Naef
+ * 
+ */
 public class ArtozUpdate
 {
 	private static String[] languageISOCodes =
