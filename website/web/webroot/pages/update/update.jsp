@@ -14,6 +14,7 @@
 	ArtozUpdate.createCurrencies();
 	ArtozUpdate.createCatalog();
 	ArtozUpdate.createTitles();
+	ArtozUpdate.createUserPriceGroups();
 %>
 <body>
 </body>

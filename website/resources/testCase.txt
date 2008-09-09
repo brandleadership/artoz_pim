@@ -1,3 +1,18 @@
+# The extension "website" is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+
+
+# you can put key/value pairs here which will automatically be copied
+# to the runtime.properties which is deployed with the application
+# Use Config.getParameter(..) to retrieve the values during runtime.
+
 
 #add all your unittest classes into this directory.
 #after 'ant unittest' you can go to http://localhost:9001/test
