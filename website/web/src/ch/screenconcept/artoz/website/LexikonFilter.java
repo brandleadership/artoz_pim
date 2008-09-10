@@ -33,8 +33,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.myfaces.shared_impl.renderkit.html.util.HTMLEncoder;
 
-import sun.text.normalizer.UTF16;
-
 import ch.screenconcept.artoz.website.constants.WebsiteConstants;
 import de.hybris.platform.jalo.JaloSession;
 import de.hybris.platform.jalo.SearchResult;
