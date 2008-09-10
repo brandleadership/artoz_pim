@@ -1,3 +1,15 @@
+# This newsletter template is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ---------------------------------------------------------------------------------------------------
 #foreach ( $element in $content )
@@ -15,7 +27,7 @@ ${element.text}
 Wichtig: Bitte antworten Sie nicht auf diese Mail.
 Anfragen werden gerne unter marketing@artoz.ch beantwortet.
 Copyright by Artoz Papier AG, Ringstrasse West 23,
-5600 Lenzburg, Schweiz. Inhalte und Angaben ohne Gewähr.
+5600 Lenzburg, Schweiz. Inhalte und Angaben ohne Gewï¿½hr.
 
 Abmelden: http://${content.url}/pages/newsletter_admin?uid=${costumer.id}
 
