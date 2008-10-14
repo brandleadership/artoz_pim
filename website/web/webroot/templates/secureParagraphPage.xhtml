@@ -18,7 +18,10 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:t="http://myfaces.apache.org/tomahawk"
 	xmlns:c="http://java.sun.com/jstl/core">
-
+	
+	<div id="title">
+		<h:outputText escape="false" value="#{item.title}" />
+	</div>
 	<t:div rendered="#{!loginJSFBean.isAnonymous}">
 	<div class="paragraphPage">
 		<!-- start: paragraphPage.xhtml-->

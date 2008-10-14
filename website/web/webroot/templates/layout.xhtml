@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" [<!ENTITY nbsp "&#160;">]>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:cms="http://hybris.com/cms">
 <!-- 
  The extension "website" is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -14,20 +21,15 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  -->
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:t="http://myfaces.apache.org/tomahawk"
-	xmlns:c="http://java.sun.com/jstl/core"
-	xmlns:cms="http://hybris.com/cms">
-
 <head profile="http://www.w3.org/2000/08/w3c-synd/#">
 	<title><ui:insert name="title">Artoz Papier AG, CH-Lenzburg</ui:insert></title>
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
 	<meta http-equiv="Content-Style-Type" content="text/css" />
 	<link type="text/css" rel="stylesheet" href="/css/template.css" />
 	<link rel="stylesheet" href="/css/thickbox.css" type="text/css" media="screen" />
+	<!--[if lte IE 6]>
+		<link type="text/css" rel="stylesheet" href="/css/template_IE6.css" />
+	<![endif]-->
 	<script type="text/javascript" src="/js/jquery.js"/>
 	<script type="text/javascript" src="/js/thickbox.js"/>
 	<ui:insert name="contentCSS" />

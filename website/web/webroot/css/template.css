@@ -40,6 +40,8 @@ left: 50%;
 margin-left: -509px; 
 margin-top: 40px;
 background-color: white;
+background-position: left 155px;
+background-repeat: no-repeat;
 }
 /****************************/
 /*  Kopfbereich             */
@@ -49,6 +51,7 @@ width: 1024px;
 height: 154px;  
 display: block;
 border: 1px solid #2B4F8B;
+background-color: white;
 }
 /****************************/
 /*  Kopfbereich             */
@@ -203,10 +206,19 @@ background-image: url(/css/images/flags/flag_it_activ.gif);
 /*  Inhalt                  */
 /****************************/
 #content {
-width: 1024px; 
+width: 1026px; 
 height: 360px;  
 display: block;
 overflow: auto;
+}
+#title {
+position: absolute;
+z-index: 2;
+color: #336699;
+font-size: 24px;
+line-height: 30px;
+top: 195px;
+left: 10px;
 }
 #content .paragraphPage {
 float: left;
@@ -217,11 +229,12 @@ float: left;
 #content .paragraphPage div.lexikonparagraph {
 z-index: 2;
 margin-left: 250px;
-position: relative;
+/*position: relative;*/
 }
 #content .paragraphPage div.ajaxparagraph {
 z-index: 2;
 position: relative;
+height: 110px;
 }
 #content .paragraphPage div.paragraph1 {
 margin-left: 470px;
@@ -244,21 +257,14 @@ margin-top: 50px;
 margin-left: 295px;
 margin-top: 25px;
 }
-#content .paragraphPage .headline-image {
-z-index: 1;
-float: left;
-position: absolute;
-margin-left: 0px;
-}
-*+html #content .paragraphPage .headline-image,
-* html #content .paragraphPage .headline-image {
-margin-left: -280px;
+#content .paragraphPage div {
+background-color: transparent;	
 }
 /****************************/
 /*  Zusatznavi Unten        */
 /****************************/
 #bottom-nav {
-width: 1024px; 
+width: 1026px; 
 height: 100px;  
 display: block;
 background-color: #336699;
@@ -458,6 +464,14 @@ a.thickbox {
 text-decoration: none;
 color: black;
 }
+div.ajaxparagraph {
+margin-top: 250px;
+margin-left: 30px;
+width: 980px;
+}
+div.ajaxparagraph a {
+float: left;
+}
 /****************************/
 /*  AJAX-Content            */
 /****************************/
@@ -479,15 +493,11 @@ margin-left: 200px;
 #ajaxText {
 margin-left: 20px;
 }
-div.ajaxparagraph {
-margin-top: 250px;
-margin-left: 30px;
-}
 /****************************/
 /*  Lexikon                 */
 /****************************/
 #content .paragraphPage div.lexikonparagraph {
-margin-top: 10px;
+margin-top: 50px;
 }
 #content .paragraphPage div.lexikonparagraph div.linkparagraph {
 padding-bottom: 15px;
@@ -495,4 +505,31 @@ margin-bottom: 5px;
 background-repeat: no-repeat;
 background-image: url(/css/images/trennlinie_blau.gif); 
 background-position: left bottom;
+}
+/****************************/
+/*  Tradefair Paragraph     */
+/****************************/
+#content .paragraphPage div.tradeparagraph {
+margin-top: 50px;
+margin-left: 450px;
+}
+#content .paragraphPage div.tradeparagraph table {
+border-collapse: collapse;
+text-align: left;
+width: 560px;
+}
+#content .paragraphPage div.tradeparagraph table thead tr th,
+#content .paragraphPage div.tradeparagraph table tr td {
+padding-left: 5px;
+}
+#content .paragraphPage div.tradeparagraph table tr {
+height: 25px;
+}
+#content .paragraphPage div.tradeparagraph table tr td {
+border-bottom: 1px solid #CCCCCC;
+}
+#content .paragraphPage div.tradeparagraph thead {
+background-color: #336699;
+height: 25px;
+color: white;
 }
